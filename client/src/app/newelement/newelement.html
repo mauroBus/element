@@ -1,0 +1,78 @@
+<section class="newpatient">
+  <form class="form-horizontal" role="form">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Name</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Name"
+          ng-model="newPatient.firstName">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Last Name</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Last Name"
+          ng-model="newPatient.lastName">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">DNI</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="DNI"
+          ng-model="newPatient.dni">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Birth Day</label>
+      <div class="col-sm-9 centered">
+        <!-- <input
+          type="text"
+          class="form-control"
+          placeholder="Birthday"
+          ng-model="newPatient.dob">
+ -->
+        <datepicker
+          ng-model="newPatient.dob"
+          max-date="today"
+          show-weeks="true"
+          class="datepicker">
+        </datepicker>
+      </div>
+    </div>
+
+  </form>
+
+  <div
+    class="alert alert-success"
+    role="alert"
+    ng-show="successfulyCreated">
+    <strong>Well done!</strong> The patient has been created!
+  </div>
+
+  <div
+    class="alert alert-danger"
+    role="alert"
+    ng-show="unsuccessfulyCreated">
+    <strong>Hhoh!</strong> Got an error! check the fields and try it again...
+  </div>
+
+  <div class="well">
+    <button class="create btn btn-primary btn-block" ng-click="addPatient()">Add Patient</button>
+    <button
+      class="cancel btn btn-default btn-block"
+      go-back-btn
+      btntxt="Cancel and Go Back"></button>
+  </div>
+
+</section>

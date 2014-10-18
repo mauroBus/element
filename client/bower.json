@@ -1,0 +1,17 @@
+{
+  "name": "element trial box",
+  "private": true,
+  "version": "0.1.0",
+  "devDependencies": {
+    "angular": "~1.2.26",
+    "angular-mocks": "~1.2.26",
+    "angular-bootstrap": "~0.11.0",
+    "angular-resource": "~1.2.26",
+    "angular-route": "~1.2.26",
+    "normalize-css": "~3.0.1",
+    "bootstrap-css": "~3.2.0",
+    "d3": "~3.4.12",
+    "nvd3": "~1.1.15-beta",
+    "angularjs-nvd3-directives": "~0.0.7"
+  }
+}

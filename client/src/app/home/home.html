@@ -1,0 +1,31 @@
+<section class="home" ng-cloak>
+  <div ng-include="'home/filter/filter.html'"></div>
+
+  <ul ng-show="elements.length" class="list-unstyled list-group">
+    <li
+      ng-repeat="(id, element) in elements | filter:searchTxt"
+      class="list-group-item slide-animation"
+      go url="/element/{{element.id}}"
+      collapse="false"
+      ng-animate-children>
+      <address class="element">
+        <strong class="element-name list-group-item-heading">{{element.attr1}}</strong>
+        <div class="element-name list-group-item-text">{{element.attr2}}</div>
+        <div class="element-name list-group-item-text">{{element.attr3}}</div>
+        <div class="element-name list-group-item-text">{{element.attr4 | date:"fullDate"}}</div>
+
+        <div class="controllers">
+          <button
+            class="show-details btn btn-primary"
+            go url="/element/{{element.id}}">
+            <span class="glyphicon glyphicon-eye-open"></span>
+          </button>
+          <button class="destroy btn btn-danger" ng-click="remove($index, $event)">
+            <span class="glyphicon glyphicon-thumbs-down"></span>
+          </button>
+        </div>
+
+      </address>
+    </li>
+  </ul>
+</section>

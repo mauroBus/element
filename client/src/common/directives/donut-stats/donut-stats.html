@@ -1,0 +1,47 @@
+<nvd3-pie-chart
+    data="statistics"
+    width="{{400}}"
+    height="{{400}}"
+    x="xFunction()"
+    y="yFunction()"
+    donut="true"
+    objectequality="true"
+    description="description()"
+    showLabels="true"
+    donutLabelsOutside="true"
+    donutRatio=".4"
+    tooltips="true"
+    tooltipcontent="tooltipContent()"
+
+    transitionDuration="500">
+      <svg clas="pull-left"></svg>
+
+      <ul class="list-group pull-right">
+        <li class="list-group-item list-group-item-info">
+            <h4>Legend</h4>
+        </li>
+        <li class="list-group-item">
+            <span class="badge">{{statistics[0].y}}</span>
+            Removed
+        </li>
+        <li class="list-group-item">
+            <span class="badge">{{statistics[1].y}}</span>
+            Created
+        </li>
+        <li class="list-group-item">
+            <span class="badge">{{statistics[2].y}}</span>
+            Updated
+        </li>
+        <li class="list-group-item">
+            <span class="badge">{{statistics[3].y}}</span>
+            Total Elements
+        </li>
+      </ul>
+</nvd3-pie-chart>
+
+<!--
+
+showValues="true"
+labelType="key"
+tooltips="true"
+ -->

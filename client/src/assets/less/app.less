@@ -1,0 +1,45 @@
+@import "./mixins.less";
+
+.centered {
+  text-align: center;
+}
+
+/** Route Animation definition **/
+
+.view-animate {
+  padding:10px;
+
+  &.ng-enter,
+  &.ng-leave {
+    -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+
+    display: block;
+    width: 100%;
+
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &.ng-enter {
+    left: 100%;
+    opacity: 1;
+  }
+
+  &.ng-enter.ng-enter-active {
+    opacity: 1;
+    transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    -webkit-transition: opacity .5s ease-in-out;
+  }
+
+  &.ng-leave.ng-leave-active {
+    left: -100%;
+    opacity: 0;
+  }
+
+}
+
