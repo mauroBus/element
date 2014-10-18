@@ -7,7 +7,7 @@ angular.module('elementBoxApp')
     var scope = {
       remove: function(index, $event) {
         var elementToRem = $rootScope.elements[index];
-        Element.delete({dni: elementToRem.dni}, function() { // success cbk
+        Element.delete({id: elementToRem._id}, function() { // success cbk
           $rootScope.elements.splice(index, 1);
         });
 

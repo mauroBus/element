@@ -1,4 +1,4 @@
-<section class="newpatient">
+<section class="newelement">
   <form class="form-horizontal" role="form">
     <div class="form-group">
       <label class="col-sm-2 control-label">Name</label>
@@ -7,7 +7,7 @@
           type="text"
           class="form-control"
           placeholder="Name"
-          ng-model="newPatient.firstName">
+          ng-model="newElement.attr1">
       </div>
     </div>
 
@@ -18,7 +18,7 @@
           type="text"
           class="form-control"
           placeholder="Last Name"
-          ng-model="newPatient.lastName">
+          ng-model="newElement.attr2">
       </div>
     </div>
 
@@ -29,7 +29,7 @@
           type="text"
           class="form-control"
           placeholder="DNI"
-          ng-model="newPatient.dni">
+          ng-model="newElement.attr3">
       </div>
     </div>
 
@@ -40,10 +40,10 @@
           type="text"
           class="form-control"
           placeholder="Birthday"
-          ng-model="newPatient.dob">
+          ng-model="newElement.attr4">
  -->
         <datepicker
-          ng-model="newPatient.dob"
+          ng-model="newElement.attr4"
           max-date="today"
           show-weeks="true"
           class="datepicker">
@@ -57,7 +57,7 @@
     class="alert alert-success"
     role="alert"
     ng-show="successfulyCreated">
-    <strong>Well done!</strong> The patient has been created!
+    <strong>Well done!</strong> The element has been created!
   </div>
 
   <div
@@ -68,7 +68,7 @@
   </div>
 
   <div class="well">
-    <button class="create btn btn-primary btn-block" ng-click="addPatient()">Add Patient</button>
+    <button class="create btn btn-primary btn-block" ng-click="addElement()">Add Element</button>
     <button
       class="cancel btn btn-default btn-block"
       go-back-btn

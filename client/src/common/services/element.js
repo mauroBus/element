@@ -10,7 +10,7 @@ angular.module('elementBoxApp.services', ['ngResource'])
       $http.defaults.useXDomain = true;
     }
 
-    return $resource(Urls.elements + '/:dni', { dni: '@dni' }, {
+    return $resource(Urls.elements + '/:id', { id: '@_id' }, {
       query: {
         method: 'GET',
         isArray:true,
@@ -30,13 +30,13 @@ angular.module('elementBoxApp.services', ['ngResource'])
       save: {
         method: 'POST',
         params: {
-          dni: ''
+          // id: ''
         }
       },
       update: {
         method: 'PUT',
         params: {
-          dni: ''
+          // id: ''
         }
       },
       get: {

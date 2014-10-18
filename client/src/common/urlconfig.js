@@ -2,7 +2,7 @@
 angular.module('elementBoxApp.urlConfig', [])
 
 // mode: { 'mock' || 'dev' || 'prod' }
-.value('mode', 'prod')
+.value('mode', 'dev')
 .value('prodBaseUrl', 'http://something.com')
 
 .service('Urls', ['mode', 'prodBaseUrl',
@@ -13,7 +13,7 @@ angular.module('elementBoxApp.urlConfig', [])
       },
       dev: {
         // TODO: list of service urls...
-        elements: 'api/elements'
+        elements: 'api/todos'
       },
       prod: {
         elements: prodBaseUrl + '/api/elements'

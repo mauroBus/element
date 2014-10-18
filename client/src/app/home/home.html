@@ -5,7 +5,7 @@
     <li
       ng-repeat="(id, element) in elements | filter:searchTxt"
       class="list-group-item slide-animation"
-      go url="/element/{{element.id}}"
+      go url="/element/{{element._id}}"
       collapse="false"
       ng-animate-children>
       <address class="element">
@@ -17,7 +17,7 @@
         <div class="controllers">
           <button
             class="show-details btn btn-primary"
-            go url="/element/{{element.id}}">
+            go url="/element/{{element._id}}">
             <span class="glyphicon glyphicon-eye-open"></span>
           </button>
           <button class="destroy btn btn-danger" ng-click="remove($index, $event)">

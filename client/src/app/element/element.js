@@ -3,7 +3,7 @@ angular.module('elementBoxApp')
 
 .config([ '$routeProvider',
   function($routeProvider) {
-    $routeProvider.when('/element/:dni', {
+    $routeProvider.when('/element/:id', {
       templateUrl: 'element/element.html',
       controller: 'ElementCtrl'
       // resolve: {
