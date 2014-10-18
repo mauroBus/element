@@ -4,16 +4,16 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
     
 /**
- * Todo Schema
+ * Element Schema
  */
-var TodoSchema = new Schema({
+var ElementSchema = new Schema({
   attr1: String,
   attr2: String,
   attr3: Number,
   attr4: Date,
 });
 
-TodoSchema.pre('save', function(next, done){
+ElementSchema.pre('save', function(next, done){
   if (this.isNew) {
     this.attr4 = Date.now();
   }
@@ -21,4 +21,4 @@ TodoSchema.pre('save', function(next, done){
   next();
 });
 
-mongoose.model('Todo', TodoSchema);
+mongoose.model('Element', ElementSchema);

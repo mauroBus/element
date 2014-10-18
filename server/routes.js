@@ -1,7 +1,7 @@
 'use strict';
 
 var index = require('./controllers'),
-    todos = require('./controllers/todos');
+    elements = require('./controllers/elements');
 
 /**
  * Application routes
@@ -9,12 +9,12 @@ var index = require('./controllers'),
 module.exports = function(app) {
 
   // Server API Routes
-  app.param('todoId', todos.todo);
-  app.post('/api/todos', todos.create);
-  app.get('/api/todos', todos.query);
-  app.get('/api/todos/:todoId', todos.show);
-  app.put('/api/todos/:todoId', todos.update);
-  app.del('/api/todos/:todoId', todos.remove);
+  app.param('elementId', elements.element);
+  app.post('/api/elements', elements.create);
+  app.get('/api/elements', elements.query);
+  app.get('/api/elements/:elementId', elements.show);
+  app.put('/api/elements/:elementId', elements.update);
+  app.del('/api/elements/:elementId', elements.remove);
 
   // All other routes to use Angular routing in app/scripts/app.js
   app.get('/partials/*', index.partials);
