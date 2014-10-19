@@ -39,10 +39,10 @@ angular.module('elementBoxApp')
         Element.doLike({
             id: id
           }, {
-            dontLike: elem.dontLike - 1
+            dontLike: elem.dontLike + 1
           },
           function() { // success
-            elem.dontLike--;
+            elem.dontLike++;
           }
         );
 
