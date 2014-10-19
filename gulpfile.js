@@ -25,14 +25,14 @@ gulp.task('build-client', function() {
 gulp.task('copy-client', ['build-client'], function() {
   return gulp
     .src([config.clientDist + '/**/*.*'])
-    .pipe(gulp.dest(config.clientDest));
+    .pipe(gulp.dest(config.clientDest, {mode: 0777}));
 });
 
 /***** Task: Copy Server *****/
 gulp.task('copy-server', function() {
   return gulp
-    .src(['server/**/*'])
-    .pipe(gulp.dest(config.deploy));
+    .src(['server/**/*', 'LICENSE'])
+    .pipe(gulp.dest(config.deploy, {mode: 0777}));
 });
 
 /***** Task: Clean *****/

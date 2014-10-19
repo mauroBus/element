@@ -2,7 +2,6 @@
   "name": "element-box",
   "version": "0.1.0",
   "description": "box trial",
-  "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install": "cd client && npm install && bower install && gulp build && cd ../server && npm install"
