@@ -7,15 +7,18 @@ var mongoose = require('mongoose'),
  * Element Schema
  */
 var ElementSchema = new Schema({
-  attr1: String,
-  attr2: String,
-  attr3: Number,
-  attr4: Date,
+  title: String,
+  content: String,
+  created: Date,
+  date: Date,
+  like: Number,
+  dontLike: Number
 });
 
 ElementSchema.pre('save', function(next, done){
   if (this.isNew) {
-    this.attr4 = Date.now();
+    this.created = Date.now();
+    this.like = this.dontLike = 0;
   }
   // this.updatedAt = Date.now();
   next();

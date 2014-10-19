@@ -32,68 +32,84 @@
     role="form">
 
     <div class="form-group">
-      <label class="col-sm-2 control-label">Name</label>
+      <label class="col-sm-2 control-label">Title</label>
       <div class="col-sm-9">
         <input
           type="text"
           class="form-control"
-          placeholder="Name"
-          ng-model="element.attr1"
+          placeholder="Title"
+          ng-model="element.title"
           ng-show="editting">
 
         <div
           class="element-attr element-name list-group-item-heading"
           ng-hide="editting">
-            {{element.attr1}}
+            {{element.title}}
         </div>
       </div>
     </div>
 
     <div class="form-group">
-      <label class="col-sm-2 control-label">Last Name</label>
+      <label class="col-sm-2 control-label">Content</label>
       <div class="col-sm-9">
         <input
           type="text"
           class="form-control"
-          placeholder="Last Name"
-          ng-model="element.attr2"
+          placeholder="Content"
+          ng-model="element.content"
           ng-show="editting">
 
         <div
           class="element-attr list-group-item-text"
           ng-hide="editting">
-            {{element.attr2}}
+            {{element.content}}
         </div>
       </div>
     </div>
 
     <div class="form-group">
-      <label class="col-sm-2 control-label">DNI</label>
+      <label class="col-sm-2 control-label">like</label>
       <div class="col-sm-9">
 <!--         <input
           type="text"
           class="form-control"
-          placeholder="DNI"
-          ng-model="element.attr3"
+          placeholder="like"
+          ng-model="element.like"
           ng-show="editting">
  -->
         <div class="element-attr list-group-item-text">
-            {{element.attr3}}
+            {{element.like}}
         </div>
       </div>
     </div>
 
     <div class="form-group">
-      <label class="col-sm-2 control-label">Birth Day</label>
+      <label class="col-sm-2 control-label">Don't Like</label>
+      <div class="col-sm-9">
+<!--         <input
+          type="text"
+          class="form-control"
+          placeholder="like"
+          ng-model="element.like"
+          ng-show="editting">
+ -->
+        <div class="element-attr list-group-item-text">
+            {{element.dontLike}}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Date</label>
       <div class="col-sm-9">
         <!-- <input
           type="text"
           class="form-control"
           placeholder="Birthday"
-          ng-model="element.attr4"
+          ng-model="element.created"
           ng-show="editting"> -->
         <datepicker
-          ng-model="element.attr4"
+          ng-model="element.created"
           max-date="today"
           show-weeks="true"
           class="datepicker center-block"
@@ -102,7 +118,7 @@
         <div
           class="element-attr list-group-item-text"
           ng-hide="editting">
-            {{element.attr4 | date:"MM/dd/yyyy"}}
+            {{element.created | date:"MM/dd/yyyy"}}
         </div>
       </div>
     </div>

@@ -18,10 +18,12 @@ angular.module('elementBoxApp')
       scope.edit = function() {
         scope.editting = true;
         scope.copy = {
-          attr1: scope.element.attr1,
-          attr2: scope.element.attr2,
-          attr3: scope.element.attr3,
-          attr4: scope.element.attr4,
+          title: scope.element.title,
+          content: scope.element.content,
+          created: scope.element.created,
+          date: scope.element.date,
+          like: scope.element.like,
+          dontLike: scope.element.dontLike,
           _id: scope.element._id
         };
       };

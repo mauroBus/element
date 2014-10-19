@@ -6,10 +6,11 @@ angular.module('elementBoxApp')
   function($scope,   $rootScope,   $location,   Element,   Statistics) {
     var scope = {
       newElement: {
-        attr1: '',
-        attr2: '',
-        attr3: '',
-        attr4: ''
+        title: '',
+        content: '',
+        like: '',
+        dontLike: '',
+        date: ''
       },
 
       successfulyCreated: false,
@@ -29,10 +30,11 @@ angular.module('elementBoxApp')
             $rootScope.elements.push(newP);
             $scope.successfulyCreated = true;
             $scope.unsuccessfulyCreated = false;
-            $scope.newElement.attr1 = '';
-            $scope.newElement.attr2 = '';
-            $scope.newElement.attr3 = '';
-            $scope.newElement.attr4 = '';
+            $scope.newElement.title = '';
+            $scope.newElement.content = '';
+            $scope.newElement.like = 0;
+            $scope.newElement.dontLike = 0;
+            $scope.newElement.date = '';
 
             Statistics.elementCreated();
           },

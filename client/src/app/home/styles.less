@@ -2,13 +2,17 @@
   .list-group-item:hover {
     background-color: #eee;
   }
+  
+  address {
+    margin-bottom: 0;
+  }
 
   .controllers {
     position: absolute;
     top: 0;
     right: 0;
     margin: 15px;
-    
+
     .btn.destroy,
     .btn.show-details {
       
@@ -20,6 +24,42 @@
 
     .btn.show-details {
       // right: 25px;
+    }
+  }
+
+  .likes-container {
+    .votes {
+      display: inline-block;
+      margin-bottom: 0;
+
+      > div {
+        display: inline-block;
+      }
+    }
+
+    .alert {
+      padding: 5px;
+      margin-bottom: 0;
+    }
+
+  }
+  
+  .voted {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    margin-bottom: 0;
+
+    span.glyphicon {
+      display: inline-block;
+
+      &.label-success {
+        margin-right: 10px;
+      }
+    }
+
+    .panel-body {
+      padding: 5px;
     }
   }
 

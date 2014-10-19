@@ -3,16 +3,15 @@
 
   <ul ng-show="elements.length" class="list-unstyled list-group">
     <li
-      ng-repeat="(id, element) in elements | filter:searchTxt"
+      ng-repeat="element in elements | filter:searchTxt"
       class="list-group-item slide-animation"
-      go url="/element/{{element._id}}"
       collapse="false"
       ng-animate-children>
       <address class="element">
-        <strong class="element-name list-group-item-heading">{{element.attr1}}</strong>
-        <div class="element-name list-group-item-text">{{element.attr2}}</div>
-        <div class="element-name list-group-item-text">{{element.attr3}}</div>
-        <div class="element-name list-group-item-text">{{element.attr4 | date:"fullDate"}}</div>
+        <strong class="element-name list-group-item-heading">{{element.title}}</strong>
+        <div class="element-name list-group-item-text">{{element.content}}</div>
+        <div class="element-name list-group-item-text"><span>Created at </span>{{element.created | date:"fullDate"}}</div>
+        <div class="element-name list-group-item-text"><span>Date: </span>{{element.date | date:"fullDate"}}</div>
 
         <div class="controllers">
           <button
@@ -21,8 +20,52 @@
             <span class="glyphicon glyphicon-eye-open"></span>
           </button>
           <button class="destroy btn btn-danger" ng-click="remove($index, $event)">
-            <span class="glyphicon glyphicon-thumbs-down"></span>
+            <span class="glyphicon glyphicon-remove"></span>
           </button>
+        </div>
+
+
+        <div class="likes-container clearfix">
+          <span
+            class="pull-left alert alert-success alert-dismissible"
+            ng-show="voted(element._id)">
+            Tanks for voting!
+            <button type="button" class="close" data-dismiss="alert">
+          </span>
+          <div
+            class="votes well well-sm clearfix"
+            ng-hide="voted(element._id)">
+            <div>
+              <span class="pull-left">Vote:</span>
+              <button
+                class="element-name list-group-item-text btn btn-sm btn-info"
+                title="Likes"
+                ng-click="doLike($index, element._id)">
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+              </button>
+              <span class="pull-left badge">{{element.like}}</span>
+            </div>
+            <div>
+              <button
+                class="element-name list-group-item-text btn btn-sm btn-danger"
+                title="Don't Likes"
+                ng-click="doDontLike($index, element._id)"
+                ng-hide="voted(element._id)">
+                <span class="glyphicon glyphicon-thumbs-down"></span>
+              </button>
+              <span class="pull-left badge">{{element.dontLike}}</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="voted clearfix panel panel-default">
+          <div class="panel-body">
+            <span class="pull-left badge">{{element.like}}</span>
+            <span class="pull-left glyphicon glyphicon-thumbs-up label label-success"></span>
+            <span class="pull-left badge">{{element.dontLike}}</span>
+            <span class="pull-left glyphicon glyphicon-thumbs-down label label-warning"></span>
+          </div>
         </div>
 
       </address>
