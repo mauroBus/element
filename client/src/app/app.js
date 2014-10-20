@@ -4,7 +4,7 @@ angular.module('elementBoxApp', [
   'elementBoxApp.urlConfig',
   'elementBoxApp.footer',
   'ngRoute',
-  // 'ngAnimate',
+  'ngAnimate',
   'templates.app',
   'templates.common',
   'nvd3ChartDirectives'

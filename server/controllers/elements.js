@@ -1,7 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-  Element = mongoose.model('Element');
+  Element = mongoose.model('Element'),
+  _ = require('lodash');
 
 /**
  * Find element by id
@@ -48,7 +49,7 @@ exports.create = function(req, res) {
  * Update a element
  */
 exports.update = function(req, res) {
-  Element.update({ _id: req.element._id }, req.body, { }, function(err, updatedElement) {
+  Element.update({ _id: req.element._id }, _.omit(req.body, '_id'), { }, function(err, updatedElement) {
     if (err) return res.json(500, err);
     res.json(updatedElement);
   });

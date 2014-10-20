@@ -122,14 +122,13 @@ gulp.task('copy-static', function() {
           config.vendor + '/angular/angular.js',
           config.vendor + '/angular-route/angular-route.js',
           config.vendor + '/angular-resource/angular-resource.js',
-          config.vendor + '/ionic/js/ionic.bundle.js',
+          config.vendor + '/angular-animate/angular-animate.js',
           config.vendor + '/d3/d3.min.js',
           config.vendor + '/nvd3/nv.d3.min.js',
           config.vendor + '/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js'
         ])
         .pipe(concat('angular.js')),
-      gulp.src(config.vendor + '/angular-bootstrap/ui-bootstrap-tpls.js'),
-      gulp.src(config.vendor + '/jquery/dist/jquery.js')
+      gulp.src(config.vendor + '/angular-bootstrap/ui-bootstrap-tpls.js')
     ).pipe(gulp.dest(config.jsDist))
   );
 });
@@ -191,18 +190,9 @@ gulp.task('default', [
 
 
 gulp.task('start-server', function() {
-  shelljs.exec('node ../server/server.js');
+  shelljs.exec('node --debug ../server/server.js');
 });
 
-/***** Task: IONIC SERVE with PORT NUMBER *****/
-// alias for $ ionic serve [serverPort] [livereloadPort]
+/***** Task: Serve *****/
 gulp.task('serve', ['build', 'start-server'], function() {
-  if (!shelljs.which('ionic')) {
-    console.log(
-      '  Ionic is not installed.',
-      '\n  - Please visit http://ionicframework.com/docs/guide/installation.html for Ionic istallation steps.');
-    process.exit(1);
-  }
-
-  shelljs.exec('ionic serve ' + config.serverPort + ' ' + config.livereloadPort);
 });

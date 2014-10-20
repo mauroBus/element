@@ -34,7 +34,7 @@ module.exports = function(app) {
   });
 
   app.configure(function(){
-    // app.engine('html', require('ejs').renderFile);
+    app.engine('html', require('ejs').renderFile);
     app.set('view engine', 'html');
     app.use(express.logger('dev'));
     app.use(express.json());

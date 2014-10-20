@@ -23,14 +23,20 @@ angular.module('elementBoxApp')
           created: scope.element.created,
           date: scope.element.date,
           like: scope.element.like,
-          dontLike: scope.element.dontLike,
-          _id: scope.element._id
+          dontLike: scope.element.dontLike
         };
       };
 
       scope.save = function() {
         // scope.element.$update();
-        Element.update({id: scope.element._id}, scope.element);
+        Element.update({id: scope.element._id}, {
+          title: scope.element.title,
+          content: scope.element.content,
+          created: scope.element.created,
+          date: scope.element.date,
+          like: scope.element.like,
+          dontLike: scope.element.dontLike
+        });
         scope.editting = false;
         // angular.copy(scope.copy, scope.element);
 
