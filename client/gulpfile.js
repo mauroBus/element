@@ -22,6 +22,9 @@ var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
 
 var shelljs = require('shelljs');
+var uncss = require('gulp-uncss');
+
+var glob = require('glob');
 
 
 // General Config:
@@ -92,8 +95,21 @@ gulp.task('build-js', function() {
 });
 
 
+gulp.task('bootstrap-css', function() {
+  return gulp.src([
+      config.vendor + '/bootstrap-css/css/bootstrap.css',
+      config.vendor + '/bootstrap-css/css/bootstrap-theme.css'
+    ])
+    .pipe(uncss({
+      html: glob.sync('src/**/*.html')
+    }))
+    .pipe(concat('bootstrap-styles.css'))
+    .pipe(gulpIf( argv.production, minifyCss({keepBreaks:true}) ))
+    .pipe(gulp.dest(config.cssDist));
+});
+
 /***** Task: Less to Build Css *****/
-gulp.task('build-css', function() {
+gulp.task('build-css', ['bootstrap-css'], function() {
   return gulp.src([
       './src/assets/less/app.less',
       './src/app/**/*.less',
@@ -105,12 +121,11 @@ gulp.task('build-css', function() {
     .pipe(gulp.dest(config.cssDist));
 });
 
-
 /***** Task: Copy Static *****/
 gulp.task('copy-static', function() {
   return merge(
-    gulp.src(config.vendor + '/bootstrap-css/css/*.css')
-        .pipe(gulp.dest(config.cssDist)),
+    // gulp.src(config.vendor + '/bootstrap-css/css/*.css')
+    //     .pipe(gulp.dest(config.cssDist)),
     gulp.src(config.vendor + '/nvd3/nv.d3.css')
         .pipe(gulp.dest(config.cssDist)),
     gulp.src(config.vendor + '/bootstrap-css/fonts/*')
