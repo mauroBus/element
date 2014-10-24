@@ -1,0 +1,11 @@
+{
+  "indent": 2,
+  "globals": {
+    "require": true,
+    "process": true,
+    "__dirname": true,
+    "exports": true,
+    "module": true,
+    "globalstrict": true
+  }
+}

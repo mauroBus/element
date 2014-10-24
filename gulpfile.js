@@ -7,6 +7,9 @@ var package = require('./package.json');
 var runSequence = require('run-sequence');
 var shelljs = require('shelljs');
 
+// to execute the server.
+var server = require('gulp-express');
+
 
 // General Config:
 var config = {
@@ -53,3 +56,20 @@ gulp.task('deploy', function(cbk) {
 gulp.task('default', [
   'deploy'
 ]);
+
+
+/***** Task: Server - To Start the Server App - *****/
+gulp.task('serve', function () {
+  // start the server.
+  server.run({
+    file: './server/server.js'
+  });
+
+  // restart the server when server files change.
+  gulp.watch([
+    './server/server.js',
+    './server/routes.js',
+    './server/controllers/**/*.js',
+    './server/models/**/*.js'
+  ], [server.run]);
+});
