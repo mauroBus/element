@@ -15,8 +15,13 @@ angular.module('elementBoxApp')
 .config([ '$routeProvider', '$locationProvider',
   function($routeProvider,   $locationProvider) {
     $routeProvider
+      .when('/', {
+        templateUrl: 'home/home.html',
+        controller: 'HomeCtrl'
+        // reloadOnSearch: false
+      })
       .otherwise({
-        redirectTo: '/home'
+        redirectTo: '/404'
       });
 
     // $locationProvider.html5Mode(true);
