@@ -1,11 +1,11 @@
 
-angular.module('elementBoxApp.services', ['ngResource'])
+angular.module('elementBoxApp.services')
 
-.factory('SignUp', [
+.factory('SignIn', [
           '$resource', 'Urls',
   function($resource,   Urls) {
 
-    return $resource(Urls.signup, {}, {
+    return $resource(Urls.login, {}, {
       // save: {
       //   method: 'POST',
       //   params: {

@@ -10,18 +10,21 @@ angular.module('elementBoxApp.urlConfig', [])
     var urls = {
       mock: {
         elements: 'mocks/elements.json',
-        signin: 'mocks/elements.json',
-        signup: 'mocks/elements.json'
+        login: 'mocks/elements.json',
+        logout: 'mocks/elements.json',
+        signup: 'mocks/elements.signup'
       },
       dev: {
         elements: 'api/elements',
-        signin: 'api/singin',
-        signup: 'api/logout'
+        login: 'api/login',
+        logout: 'api/logout',
+        signup: 'api/users'
       },
       prod: {
         elements: prodBaseUrl + '/api/elements',
-        signin: prodBaseUrl + 'api/singin',
-        signup: prodBaseUrl + 'api/logout'
+        login: prodBaseUrl + 'api/login',
+        logout: prodBaseUrl + 'api/logout',
+        signup: prodBaseUrl + 'api/users'
       }
 
     };

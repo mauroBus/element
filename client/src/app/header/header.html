@@ -25,11 +25,16 @@
           About
       </button>
     </div>
-<!-- 
-    <donut-stats
-      width="50"
-      height="50">
-    </donut-stats> -->
+
+    <div class="pull-right">
+      <span ng-if="currentUser">Welcome, {{ currentUser.name }}</span>
+      <span ng-switch on="currentUser.role">
+        <span ng-switch-when="userRoles.admin">You're admin.</span>
+        <span ng-switch-when="userRoles.editor">You're editor.</span>
+        <span ng-switch-default>You're something else.</span>
+      </span>
+    </div>
+
   </div>
   <pre>{{subPageName()}}</pre>
 </header>

@@ -127,6 +127,7 @@ gulp.task('copy-static', function() {
     // gulp.src(config.vendor + '/bootstrap-css/css/*.css')
     //     .pipe(gulp.dest(config.cssDist)),
     gulp.src(config.vendor + '/nvd3/nv.d3.css')
+        // .pipe(gulpIf(argv.production, uglify('', { mangle: false })))
         .pipe(gulp.dest(config.cssDist)),
     gulp.src(config.vendor + '/bootstrap-css/fonts/*')
         .pipe(gulp.dest(config.fontsDist)),
@@ -142,8 +143,10 @@ gulp.task('copy-static', function() {
           config.vendor + '/nvd3/nv.d3.min.js',
           config.vendor + '/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js'
         ])
+        .pipe(gulpIf(argv.production, uglify('angular.js', { mangle: false })))
         .pipe(concat('angular.js')),
       gulp.src(config.vendor + '/angular-bootstrap/ui-bootstrap-tpls.js')
+          .pipe(gulpIf(argv.production, uglify('ui-bootstrap-tpls.js', { mangle: false })))
     ).pipe(gulp.dest(config.jsDist))
   );
 });
