@@ -100,9 +100,9 @@ gulp.task('bootstrap-css', function() {
       config.vendor + '/bootstrap-css/css/bootstrap.css',
       config.vendor + '/bootstrap-css/css/bootstrap-theme.css'
     ])
-    .pipe(uncss({
-      html: glob.sync('src/**/*.html')
-    }))
+    // .pipe(uncss({
+    //   html: glob.sync('src/**/*.html')
+    // }))
     .pipe(concat('bootstrap-styles.css'))
     .pipe(gulpIf( argv.production, minifyCss({keepBreaks:true}) ))
     .pipe(gulp.dest(config.cssDist));
