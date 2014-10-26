@@ -1,16 +1,18 @@
 
 angular.module('elementBoxApp')
 
-.controller('LoginCtrl', [
+.controller('RegisterCtrl', [
           '$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService',
   function($scope,   $rootScope,   AUTH_EVENTS,   AuthService) {
     $scope.credentials = {
+      username: '',
+      name: '',
       email: '',
       password: ''
     };
 
-    $scope.login = function (credentials) {
-      AuthService.login($scope.credentials)
+    $scope.register = function (credentials) {
+      AuthService.register($scope.credentials)
         .then(function(user) {
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
           $scope.setCurrentUser(user);
@@ -18,6 +20,5 @@ angular.module('elementBoxApp')
           $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         });
     };
-
   }
 ]);

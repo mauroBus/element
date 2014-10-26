@@ -1,6 +1,6 @@
-angular.module('elementBoxApp')
+angular.module('elementBoxApp.controller', [])
 
-.controller('ApplicationController', [
+.controller('AppController', [
           '$scope', 'USER_ROLES', 'AuthService',
   function($scope,   USER_ROLES,   AuthService) {
     $scope.currentUser = null;

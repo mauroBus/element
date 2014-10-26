@@ -11,6 +11,9 @@ angular.module('elementBoxApp.services')
         Session.create(res.data.id, res.data.user.id,
                        res.data.user.role);
         return res.data.user;
+      },
+      function() {
+        console.log(credentials);
       });
   };
 
@@ -18,6 +21,19 @@ angular.module('elementBoxApp.services')
     return $http
       .post(Urls.logout, Session.user)
       .then(function(res) {
+      });
+  };
+
+  authService.register = function(credentials) {
+    return $http
+      .post(Urls.signup, credentials)
+      .then(function(res) {
+        Session.create(res.data.id, res.data.user.id,
+                       res.data.user.role);
+        return res.data.user;
+      },
+      function() {
+        console.log(credentials);
       });
   };
 

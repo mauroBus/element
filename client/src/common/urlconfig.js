@@ -18,13 +18,13 @@ angular.module('elementBoxApp.urlConfig', [])
         elements: 'api/elements',
         login: 'api/login',
         logout: 'api/logout',
-        signup: 'api/users'
+        signup: 'api/register'
       },
       prod: {
         elements: prodBaseUrl + '/api/elements',
         login: prodBaseUrl + 'api/login',
         logout: prodBaseUrl + 'api/logout',
-        signup: prodBaseUrl + 'api/users'
+        signup: prodBaseUrl + 'api/register'
       }
 
     };

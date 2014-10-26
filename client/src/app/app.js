@@ -7,7 +7,8 @@ angular.module('elementBoxApp', [
   'ngAnimate',
   'templates.app',
   'templates.common',
-  'nvd3ChartDirectives'
+  'nvd3ChartDirectives',
+  'elementBoxApp.controller'
 ]);
 
 angular.module('elementBoxApp')
