@@ -136,7 +136,7 @@ gulp.task('copy-static', function() {
     merge(
       gulp.src([
           config.vendor + '/angular/angular.js',
-          config.vendor + '/angular-route/angular-route.js',
+          config.vendor + '/angular-ui-router/release/angular-ui-router.min.js',
           config.vendor + '/angular-resource/angular-resource.js',
           config.vendor + '/angular-animate/angular-animate.js',
           config.vendor + '/d3/d3.min.js',

@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp')
+angular.module('elementBoxApp.register.controller', [])
 
 .controller('RegisterCtrl', [
           '$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService',

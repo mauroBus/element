@@ -6,11 +6,11 @@ angular.module('elementBoxApp.footer', [
 ])
 
 .controller('FooterController', [
-          '$scope', '$route', '$routeParams', '$location', 'Statistics',
-  function($scope,   $route,   $routeParams,   $location,   Statistics) {
-    $scope.$route = $route;
+          '$scope', '$state', '$stateParams', '$location', 'Statistics',
+  function($scope,   $state,   $stateParams,   $location,   Statistics) {
+    $scope.$state = $state;
     $scope.$location = $location;
-    $scope.$routeParams = $routeParams;
+    $scope.$stateParams = $stateParams;
 
     $scope.statistics = Statistics.getData();
     $scope.xFunction = Statistics.xFunction;

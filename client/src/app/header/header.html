@@ -3,6 +3,14 @@
     <h1>Element Trial Box</h1>
 
     <div class="pull-right">
+      <span ng-if="!currentUser">
+        <button class="btn btn-sm btn-default">
+          <a ui-sref="login">Login</a>
+        </button>
+        <button class="btn btn-sm btn-default">
+          <a ui-sref="register">Register</a>
+        </button>
+      </span>
       <span ng-if="currentUser">Welcome, {{ currentUser.name }}</span>
       <span ng-switch on="currentUser.role">
         <span ng-switch-when="userRoles.admin">You're admin.</span>

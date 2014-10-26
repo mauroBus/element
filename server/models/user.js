@@ -12,6 +12,7 @@ var UserSchema = new Schema({
   name: String,
   email: String,
   username: String,
+  role: String,
   provider: String,
   hashed_password: String,
   salt: String,
@@ -73,6 +74,10 @@ UserSchema.path('hashed_password').validate(function(hashed_password) {
 UserSchema.pre('save', function(next) {
   if (!this.isNew) {
     return next();
+  }
+
+  if (!this.role) {
+    this.role = 'editor';
   }
 
   if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1) {

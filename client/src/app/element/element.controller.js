@@ -1,11 +1,11 @@
 
-angular.module('elementBoxApp')
+angular.module('elementBoxApp.element.controller', [])
 
 .controller('ElementCtrl', [
-          '$scope', '$routeParams', 'Element',
-  function($scope,   $routeParams,   Element) {
+          '$scope', '$stateParams', 'Element',
+  function($scope,   $stateParams,   Element) {
     var scope = {
-      element: Element.get({id: $routeParams.id})
+      element: Element.get({id: $stateParams.id})
     };
 
     angular.extend($scope, scope);

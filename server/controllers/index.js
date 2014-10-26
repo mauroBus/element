@@ -28,5 +28,6 @@ exports.index = function(req, res) {
  * Send our single page app
  */
 exports.notFound = function(req, res) {
-  res.redirect('/#/404');
+  res.status(404)
+     .send('Sorry, Not Found...');
 };

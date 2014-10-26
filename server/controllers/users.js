@@ -17,16 +17,11 @@ var mongoose = require('mongoose'),
  * Login User
  */
 exports.login = function(req, res) {
-  // var user = User.find(req.body.);
-
-  // req.logIn(user, function(err) {
-  //   if (err) return next(err);
-  //   // return res.redirect('/');
-  // });
-
-  console.log('user logged in');
+  console.log('user "' + req.user.name + '" logged in');
   res.json({
-    msg: 'logged in'
+    msg: 'logged in',
+    user: req.user,
+    sessionId: req.sessionID
   });
 };
 
@@ -93,6 +88,12 @@ exports.remove = function(req, res) {
   user.remove(function(err) {
     if (err) return res.json(500, err);
     res.json(user);
+  });
+};
+
+exports.removeAll = function(req, res, next) {
+  User.find().remove(function() {
+    next();
   });
 };
 

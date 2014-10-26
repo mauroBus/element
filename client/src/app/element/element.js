@@ -1,9 +1,12 @@
 
-angular.module('elementBoxApp')
+angular.module('elementBoxApp.element', [
+  'elementBoxApp.element.controller'
+])
 
-.config([ '$routeProvider',
-  function($routeProvider) {
-    $routeProvider.when('/element/:id', {
+.config([ '$stateProvider',
+  function($stateProvider) {
+    $stateProvider.state('element', {
+      url: '/element/:id',
       templateUrl: 'element/element.html',
       controller: 'ElementCtrl'
       // resolve: {

@@ -8,12 +8,14 @@ angular.module('elementBoxApp.services')
     return $http
       .post(Urls.login, credentials)
       .then(function(res) {
-        Session.create(res.data.id, res.data.user.id,
-                       res.data.user.role);
+        Session.create(
+          res.data.sessionId,
+          res.data.user
+        );
         return res.data.user;
       },
       function() {
-        console.log(credentials);
+        // console.log(credentials);
       });
   };
 
@@ -28,12 +30,11 @@ angular.module('elementBoxApp.services')
     return $http
       .post(Urls.signup, credentials)
       .then(function(res) {
-        Session.create(res.data.id, res.data.user.id,
-                       res.data.user.role);
+        Session.create(
+          res.data.sessionId,
+          res.data.user
+        );
         return res.data.user;
-      },
-      function() {
-        console.log(credentials);
       });
   };
 

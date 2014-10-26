@@ -29,8 +29,8 @@ module.exports = function(app, passport) {
     app.engine('html', require('ejs').renderFile);
     app.set('view engine', 'html');
     app.use(express.logger('dev'));
-    app.use(express.json());
-    app.use(express.urlencoded());
+    app.use(express.json()); // to support JSON-encoded bodies
+    app.use(express.urlencoded()); // to support URL-encoded bodies
     app.use(express.methodOverride());
     app.use(express.bodyParser());
 

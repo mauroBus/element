@@ -7,7 +7,7 @@
     "angular-mocks": "~1.2.26",
     "angular-bootstrap": "~0.11.2",
     "angular-resource": "~1.2.26",
-    "angular-route": "~1.2.26",
+    "angular-ui-router": "~0.2.11",
     "normalize-css": "~3.0.2",
     "bootstrap-css": "~3.2.0",
     "d3": "~3.3.13",

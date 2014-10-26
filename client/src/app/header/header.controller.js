@@ -1,9 +1,9 @@
 
-angular.module('elementBoxApp')
+angular.module('elementBoxApp.header', [])
 
 .controller('HeaderCtrl', [
-          '$scope', '$location', '$routeParams',
-  function($scope,   $location,   $routeParams) {
+          '$scope', '$location', '$stateParams',
+  function($scope,   $location,   $stateParams) {
     var scope = {
 
       subPageName: function() {
@@ -16,8 +16,8 @@ angular.module('elementBoxApp')
         if ($location.path() === '/about') {
           return 'About Page';
         }
-        if ($routeParams.dni) {
-          return 'Element dni:' + $routeParams.dni + ' Info';
+        if ($stateParams.dni) {
+          return 'Element dni:' + $stateParams.dni + ' Info';
         }
       },
 

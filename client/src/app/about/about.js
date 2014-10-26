@@ -1,9 +1,11 @@
+angular.module('elementBoxApp.about', [
+  'elementBoxApp.about.controller'
+])
 
-angular.module('elementBoxApp')
-
-.config([ '$routeProvider',
-  function($routeProvider) {
-    $routeProvider.when('/about', {
+.config([ '$stateProvider',
+  function($stateProvider) {
+    $stateProvider.state('about', {
+      url: '/about',
       templateUrl: 'about/about.html',
       controller: 'AboutCtrl'
     });

@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp')
+angular.module('elementBoxApp.newelement.controller', [])
 
 .controller('NewElementCtrl', [
           '$scope', '$rootScope', '$location', 'Element', 'Statistics',

@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp')
+angular.module('elementBoxApp.login.controller', [])
 
 .controller('LoginCtrl', [
           '$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService',

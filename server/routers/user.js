@@ -46,6 +46,7 @@ module.exports = function(app) {
   app.post('/api/users', users.create);
   app.get('/api/users', users.query);
   app.get('/api/users/:userId', users.show);
+  app.del('/api/users', users.removeAll);
   app.del('/api/users/:userId', users.remove);
 
   // app.post('/api/users/session', passport.authenticate('local', {

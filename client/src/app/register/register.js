@@ -1,9 +1,12 @@
 
-angular.module('elementBoxApp')
+angular.module('elementBoxApp.register', [
+  'elementBoxApp.register.controller'
+])
 
-.config([ '$routeProvider',
-  function($routeProvider) {
-    $routeProvider.when('/register', {
+.config([ '$stateProvider',
+  function($stateProvider) {
+    $stateProvider.state('register', {
+      url: '/register',
       templateUrl: 'register/register.html',
       controller: 'RegisterCtrl'
     });
