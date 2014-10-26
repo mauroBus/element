@@ -1,0 +1,70 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'isntall',
+1 verbose cli   '--save-dev',
+1 verbose cli   'modified:',
+1 verbose cli   'controllers/index.js' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose node symlink /usr/bin/node
+5 warn package.json crypto@0.0.3 crypto is also the name of a node core module.
+6 verbose readDependencies using package.json deps
+7 verbose cache add [ 'modified:', null ]
+8 verbose cache add name=undefined spec="modified:" args=["modified:",null]
+9 verbose parsed url { protocol: 'modified:',
+9 verbose parsed url   slashes: null,
+9 verbose parsed url   auth: null,
+9 verbose parsed url   host: '',
+9 verbose parsed url   port: null,
+9 verbose parsed url   hostname: '',
+9 verbose parsed url   hash: null,
+9 verbose parsed url   search: null,
+9 verbose parsed url   query: null,
+9 verbose parsed url   pathname: null,
+9 verbose parsed url   path: null,
+9 verbose parsed url   href: 'modified:' }
+10 verbose cache add [ 'controllers/index.js', null ]
+11 verbose cache add name=undefined spec="controllers/index.js" args=["controllers/index.js",null]
+12 verbose parsed url { protocol: null,
+12 verbose parsed url   slashes: null,
+12 verbose parsed url   auth: null,
+12 verbose parsed url   host: null,
+12 verbose parsed url   port: null,
+12 verbose parsed url   hostname: null,
+12 verbose parsed url   hash: null,
+12 verbose parsed url   search: null,
+12 verbose parsed url   query: null,
+12 verbose parsed url   pathname: 'controllers/index.js',
+12 verbose parsed url   path: 'controllers/index.js',
+12 verbose parsed url   href: 'controllers/index.js' }
+13 silly lockFile e4df8909-modified modified:
+14 verbose lock modified: /home/mauro/.npm/e4df8909-modified.lock
+15 silly lockFile e7ab8f9a-controllers-index-js controllers/index.js
+16 verbose lock controllers/index.js /home/mauro/.npm/e7ab8f9a-controllers-index-js.lock
+17 silly lockFile e4df8909-modified modified:
+18 silly lockFile e4df8909-modified modified:
+19 verbose addNamed [ 'modified:', '' ]
+20 verbose addNamed [ null, '*' ]
+21 silly lockFile 63239c31-modified modified:@
+22 verbose lock modified:@ /home/mauro/.npm/63239c31-modified.lock
+23 silly addNameRange { name: 'modified:', range: '*', hasData: false }
+24 error TypeError: Cannot call method 'replace' of null
+24 error     at cf (/usr/lib/node_modules/npm/node_modules/npm-cache-filename/index.js:14:22)
+24 error     at RegClient.get (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js:28:20)
+24 error     at addNameRange (/usr/lib/node_modules/npm/lib/cache/add-named.js:201:12)
+24 error     at /usr/lib/node_modules/npm/lib/cache/add-named.js:47:5
+24 error     at /usr/lib/node_modules/npm/lib/utils/locker.js:30:7
+24 error     at cb (/usr/lib/node_modules/npm/node_modules/lockfile/lockfile.js:149:38)
+24 error     at /usr/lib/node_modules/npm/node_modules/lockfile/lockfile.js:171:16
+24 error     at Object.oncomplete (fs.js:107:15)
+25 error If you need help, you may report this *entire* log,
+25 error including the npm and node versions, at:
+25 error     <http://github.com/npm/npm/issues>
+26 error System Linux 3.13.0-37-generic
+27 error command "/usr/bin/node" "/usr/bin/npm" "isntall" "--save-dev" "modified:" "controllers/index.js"
+28 error cwd /home/mauro/myprojects/element-box/server
+29 error node -v v0.10.33
+30 error npm -v 1.4.28
+31 error type non_object_property_call
+32 verbose exit [ 1, true ]

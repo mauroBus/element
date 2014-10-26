@@ -2,12 +2,15 @@
 
 var express = require('express'),
     path = require('path'),
-    config = require('./config');
+    config = require('./config'),
+    flash = require('connect-flash');
+    // mongoStore = require('connect-mongo')(express);
 
 /**
  * Express configuration
  */
-module.exports = function(app) {
+module.exports = function(app, passport) {
+
   app.configure('development', function(){
     app.use(require('connect-livereload')());
     // app.use(express.static(path.join(config.root, '.tmp')));
@@ -29,7 +32,19 @@ module.exports = function(app) {
     app.use(express.json());
     app.use(express.urlencoded());
     app.use(express.methodOverride());
+    app.use(express.bodyParser());
+
+    // connect flash for flash messages
+    app.use(flash());
+
+    app.use(express.cookieParser());
+    app.use(express.session({ secret: 'keyboard cat' }));
+
+    app.use(passport.initialize());
+    app.use(passport.session());
+
     // Router needs to be last
     app.use(app.router);
   });
+
 };
