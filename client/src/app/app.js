@@ -31,21 +31,3 @@ angular.module('elementBoxApp')
       .when('', '/home');
       // .otherwise('/error404');
 }]);
-
-
-// .config([ '$stateProvider', '$locationProvider',
-//   function($stateProvider,   $locationProvider) {
-//     $stateProvider
-//       .state('/', {
-//         url: '/',
-//         templateUrl: 'home/home.html',
-//         controller: 'HomeCtrl'
-//         // reloadOnSearch: false
-//       });
-//       // .otherwise({
-//       //   redirectTo: '/404'
-//       // });
-
-//     // $locationProvider.html5Mode(true);
-//   }
-// ]);
