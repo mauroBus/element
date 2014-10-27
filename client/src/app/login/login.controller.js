@@ -2,8 +2,8 @@
 angular.module('elementBoxApp.login.controller', [])
 
 .controller('LoginCtrl', [
-          '$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService',
-  function($scope,   $rootScope,   AUTH_EVENTS,   AuthService) {
+          '$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', '$state',
+  function($scope,   $rootScope,   AUTH_EVENTS,   AuthService,   $state) {
     $scope.credentials = {
       email: '',
       password: ''
@@ -14,6 +14,7 @@ angular.module('elementBoxApp.login.controller', [])
         .then(function(user) {
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
           $scope.setCurrentUser(user);
+          $state.go('home');
         }, function () {
           $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         });

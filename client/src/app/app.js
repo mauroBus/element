@@ -28,6 +28,6 @@ angular.module('elementBoxApp')
 .config(['$urlRouterProvider', function($urlRouterProvider){
     // when there is an empty route, redirect to /home
     $urlRouterProvider
-      .when('', '/home');
-      // .otherwise('/error404');
+      .when('', '/home')
+      .otherwise('/404');
 }]);
