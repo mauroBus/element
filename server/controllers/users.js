@@ -68,6 +68,16 @@ exports.create = function(req, res, next) {
     req.logIn(user, function(err) {
       if (err) return next(err);
       // return res.redirect('/');
+      res.json({
+        msg: 'user successfuly created',
+        user: {
+          _id: user._id,
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          role: user.role
+        }
+      });
     });
   });
 };

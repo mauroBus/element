@@ -15,6 +15,7 @@ angular.module('elementBoxApp.login.controller', [])
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
           $scope.setCurrentUser(user);
           $state.go('home');
+          // $location.url('/home');
         }, function () {
           $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         });

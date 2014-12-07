@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "gulp": "^3.8.8",
+    "gulp-nodemon": "^1.0.4",
+    "merge-stream": "^0.1.6",
     "rimraf": "^2.2.8",
     "run-sequence": "^1.0.1",
     "shelljs": "^0.3.0"

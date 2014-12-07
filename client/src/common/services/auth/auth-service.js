@@ -2,11 +2,13 @@
 angular.module('elementBoxApp.services')
 
 .factory('AuthService', ['$http', 'Session', 'Urls', function($http, Session, Urls) {
+  'use strict';
+
   var authService = {};
 
   authService.login = function(credentials) {
     return $http
-      .post(Urls.login, credentials)
+      .get(Urls.login, credentials)
       .then(function(res) {
         Session.create(
           res.data.sessionId,
@@ -21,9 +23,10 @@ angular.module('elementBoxApp.services')
 
   authService.logout = function() {
     return $http
-      .post(Urls.logout, Session.user)
-      .then(function(res) {
-      });
+      .get(Urls.logout, Session.user)
+        .then(function(res) {
+          Session.destroy();
+        });
   };
 
   authService.register = function(credentials) {
@@ -39,7 +42,7 @@ angular.module('elementBoxApp.services')
   };
 
   authService.isAuthenticated = function() {
-    return !!Session.userId;
+    return !!Session.id;
   };
 
   authService.isAuthorized = function(authorizedRoles) {

@@ -5,8 +5,8 @@ angular.module('elementBoxApp.register.controller', [])
           '$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService',
   function($scope,   $rootScope,   AUTH_EVENTS,   AuthService) {
     $scope.credentials = {
-      username: '',
-      name: '',
+      firstName: '',
+      lastName: '',
       email: '',
       password: ''
     };

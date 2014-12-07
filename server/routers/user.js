@@ -35,12 +35,12 @@ module.exports = function(app) {
 
   app.param('userId', users.user);
 
-  app.post('/api/login', passport.authenticate('local', {
+  app.get('/api/login', passport.authenticate('local', {
     // failureRedirect: '/#/login',
     failureFlash: 'Invalid email or password.'
   }), users.login);
 
-  app.post('/api/logout', users.logout);
+  app.get('/api/logout', users.logout);
   app.post('/api/register', users.create);
 
   app.post('/api/users', users.create);
@@ -48,6 +48,7 @@ module.exports = function(app) {
   app.get('/api/users/:userId', users.show);
   app.del('/api/users', users.removeAll);
   app.del('/api/users/:userId', users.remove);
+
 
   // app.post('/api/users/session', passport.authenticate('local', {
   //   // failureRedirect: '/#/login',
