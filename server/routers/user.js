@@ -12,6 +12,7 @@ module.exports = function(app) {
   // Setting up the users profile api
   app.get('/users/me', users.me);
   app.put('/users', users.update);
+  app.get('/users', users.query);
   app.delete('/users/accounts', users.removeOAuthProvider);
 
   // Setting up the users password api

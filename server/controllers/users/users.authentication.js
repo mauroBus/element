@@ -39,7 +39,10 @@ exports.signup = function(req, res) {
         if (err) {
           res.status(400).send(err);
         } else {
-          res.json(user);
+          res.json({
+            user: user,
+            sessionId: req.sessionID
+          });
         }
       });
     }
@@ -50,6 +53,7 @@ exports.signup = function(req, res) {
  * Signin after passport authentication
  */
 exports.signin = function(req, res, next) {
+  console.log(req);
   passport.authenticate('local', function(err, user, info) {
     if (err || !user) {
       res.status(400).send(info);
@@ -62,7 +66,10 @@ exports.signin = function(req, res, next) {
         if (err) {
           res.status(400).send(err);
         } else {
-          res.json(user);
+          res.json({
+            user: user,
+            sessionId: req.sessionID
+          });
         }
       });
     }

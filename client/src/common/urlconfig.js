@@ -16,9 +16,41 @@ angular.module('elementBoxApp.urlConfig', [])
       },
       dev: {
         elements: 'api/elements',
-        login: 'api/login',
-        logout: 'api/logout',
-        signup: 'api/register'
+        // Setting up the users profile api
+        users: {
+          me: '/users/me',
+          users: '/users', // to update.
+          accounts: '/users/accounts', // to delete.
+          // Users password api:
+          changePass: '/users/password',
+          forgotPass: '/auth/forgot',
+          resetPass: '/auth/reset/:token'
+        },
+        userAuth: { // Setting up the users authentication api
+          signup: '/auth/signup',
+          signin: '/auth/signin',
+          signout: '/auth/signout'
+        },
+        facebook: {// Setting the facebook oauth routes
+          url: '/auth/facebook',
+          cbk: '/auth/facebook/callback'
+        },
+        twitter: {// Setting the twitter oauth routes
+          url: '/auth/twitter',
+          cbk: '/auth/twitter/callback'
+        },
+        google: {// Setting the google oauth routes
+          url: '/auth/google',
+          cbk: '/auth/google/callback'
+        },
+        linkedin: {// Setting the linkedin oauth routes
+          url: '/auth/linkedin',
+          cbk: '/auth/linkedin/callback'
+        },
+        github: {// Setting the github oauth routes
+          url: '/auth/github',
+          cbk: '/auth/github/callback'
+        }
       },
       prod: {
         elements: prodBaseUrl + '/api/elements',

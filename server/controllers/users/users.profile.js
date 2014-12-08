@@ -54,3 +54,10 @@ exports.update = function(req, res) {
 exports.me = function(req, res) {
 	res.json(req.user || null);
 };
+
+exports.query = function(req, res) {
+	User.find().sort('-email').exec(function(err, users) {
+    if (err) return res.json(500, err);
+    res.json(users);
+  });
+};
