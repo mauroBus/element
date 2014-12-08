@@ -4,6 +4,6 @@
 module.exports = {
   editor: 'EDITOR',
   admin: 'ADMIN',
-  guest: 'GUEST',
+  user: 'USER',
   default: 'EDITOR'
 };

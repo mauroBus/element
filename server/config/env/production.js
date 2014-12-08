@@ -7,7 +7,7 @@ var rootPath = path.normalize(__dirname + '/../../public');
 module.exports = {
   root: rootPath,
   env: 'production',
-  mongo: {
+  db: { // mongodb options
     uri: process.env.OPENSHIFT_MONGODB_DB_URL
     // options: {
     //   user: process.env.OPENSHIFT_MONGODB_DB_USERNAME

@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
 /**
  * Find element by id
  */
-exports.element = function(req, res, next, id) {
+exports.elementById = function(req, res, next, id) {
   Element.findById(id, function(err, element) {
     if (err) return next(err);
     if (!element) return next(new Error('Failed to load element ' + id));
@@ -65,4 +65,16 @@ exports.remove = function(req, res) {
     if (err) return res.json(500, err);
     res.json(element);
   });
+};
+
+/**
+ * Element authorization middleware
+ */
+exports.hasAuthorization = function(req, res, next) {
+  if (req.element.user.id !== req.user.id) {
+    return res.status(403).send({
+      message: 'User is not authorized'
+    });
+  }
+  next();
 };

@@ -1,14 +1,16 @@
 'use strict';
 
-var elements = require('../controllers/elements');
+var elements = require('../controllers/elements'),
+  users = require('../controllers/users');
+
 /**
  * Application routes
  */
 module.exports = function(app) {
-  app.param('elementId', elements.element);
-  app.post('/api/elements', elements.create);
+  app.param('elementId', elements.elementById);
   app.get('/api/elements', elements.query);
+  app.post('/api/elements', users.requiresLogin, elements.create);
   app.get('/api/elements/:elementId', elements.show);
-  app.put('/api/elements/:elementId', elements.update);
-  app.del('/api/elements/:elementId', elements.remove);
+  app.put('/api/elements/:elementId', users.requiresLogin, elements.hasAuthorization, elements.update);
+  app.del('/api/elements/:elementId', users.requiresLogin, elements.hasAuthorization, elements.remove);
 };

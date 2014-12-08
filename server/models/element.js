@@ -7,9 +7,25 @@ var mongoose = require('mongoose'),
  * Element Schema
  */
 var ElementSchema = new Schema({
-  title: String,
-  content: String,
-  created: Date,
+  title: {
+    type: String,
+    default: '',
+    trim: true,
+    required: 'Title cannot be blank'
+  },
+  content: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
   date: Date,
   like: Number,
   dontLike: Number

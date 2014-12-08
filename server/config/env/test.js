@@ -2,7 +2,7 @@
 
 module.exports = {
   env: 'test',
-  mongo: {
+  db: { // mongodb options
     uri: 'mongodb://localhost/fullstack-test'
   }
 };
