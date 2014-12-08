@@ -5,5 +5,5 @@ module.exports = {
   editor: 'EDITOR',
   admin: 'ADMIN',
   user: 'USER',
-  default: 'EDITOR'
+  default: 'USER'
 };

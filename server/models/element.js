@@ -31,9 +31,8 @@ var ElementSchema = new Schema({
   dontLike: Number
 });
 
-ElementSchema.pre('save', function(next, done){
+ElementSchema.pre('save', function(next, done) {
   if (this.isNew) {
-    this.created = Date.now();
     this.like = this.dontLike = 0;
   }
   // this.updatedAt = Date.now();
