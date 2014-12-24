@@ -40,7 +40,7 @@ var config = {
 };
 
 
-/***** Task: Build Index *****/
+/***** [Private] Task: Build Index *****/
 gulp.task('build-index', function() {
   return gulp.src('src/index.html')
     .pipe(template({
@@ -53,7 +53,7 @@ gulp.task('build-index', function() {
 });
 
 
-/***** Task: Build JS *****/
+/***** [Private] Task: Build JS *****/
 gulp.task('build-js', function() {
   var now = new Date();
 
@@ -94,7 +94,7 @@ gulp.task('build-js', function() {
     .pipe(gulp.dest(config.jsDist));
 });
 
-
+/***** [Private] Task: Bootstrap Css *****/
 gulp.task('bootstrap-css', function() {
   return gulp.src([
       config.vendor + '/bootstrap-css/css/bootstrap.css',
@@ -108,7 +108,7 @@ gulp.task('bootstrap-css', function() {
     .pipe(gulp.dest(config.cssDist));
 });
 
-/***** Task: Less to Build Css *****/
+/***** [Private] Task: Less to Build Css *****/
 gulp.task('build-css', ['bootstrap-css'], function() {
   return gulp.src([
       './src/assets/less/app.less',
@@ -121,7 +121,7 @@ gulp.task('build-css', ['bootstrap-css'], function() {
     .pipe(gulp.dest(config.cssDist));
 });
 
-/***** Task: Copy Static *****/
+/***** [Private] Task: Copy Static *****/
 gulp.task('copy-static', function() {
   return merge(
     // gulp.src(config.vendor + '/bootstrap-css/css/*.css')
@@ -152,7 +152,7 @@ gulp.task('copy-static', function() {
 });
 
 
-/***** Task: Clean *****/
+/***** [Private] Task: Clean *****/
 gulp.task('clean', function(done) {
   return rimraf(config.dist, done);
 });
@@ -206,7 +206,7 @@ gulp.task('default', [
 ]);
 
 
-
+/***** [Private] Task: Start Serve *****/
 gulp.task('start-server', function() {
   shelljs.exec('node --debug ../server/server.js');
 });

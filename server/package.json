@@ -41,7 +41,9 @@
     "chalk": "~0.5.1",
     "express-session": "~1.9.3",
     "consolidate": "~0.10.0",
-    "swig": "~1.4.2"
+    "swig": "~1.4.2",
+    "gulp": "~3.8.8",
+    "gulp-nodemon": "~1.0.4"
   },
   "devDependencies": {}
 }
