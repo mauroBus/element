@@ -1,4 +1,4 @@
-<section class="login">
+<section class="signup">
   <div class="container">
     <div class="row">
       <div class="col-md-3 col-md-offset-4">
@@ -10,11 +10,34 @@
           <form class="form-signin">
             <div class="form-group">
               <input
-                type="email"
+                type="text"
+                class="form-control"
+                placeholder="First Name"
+                required autofocus
+                ng-model="credentials.firstName" />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Last Name"
+                required autofocus
+                ng-model="credentials.lastName" />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="User Name"
+                required autofocus
+                ng-model="credentials.username" />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
                 class="form-control"
                 placeholder="Email"
                 required autofocus
-                ngMinlength="3"
                 ng-model="credentials.email" />
             </div>
             <div class="form-group">
@@ -24,43 +47,25 @@
                 placeholder="Password"
                 required
                 ng-model="credentials.password"
-                ng-keyup="$event.keyCode == 13 && login()" />
+                ng-keyup="$event.keyCode == 13 && signup()" />
             </div>
-            <label class="checkbox">
-              <input
-                type="checkbox"
-                value="remember-me"
-                ng-model="keepMeSigned" />
-              Keep me signed in
-            </label>
 
             <button
               class="btn btn-lg btn-block purple-bg"
-              ng-click="login()">
-                Sign in
+              ng-click="signup()">
+                Sign Up
             </button>
           </form>
-
-          <a class="forgotLnk" ui-sref="forgetPassword">I can't access my account</a>
 
           <div class="or-box">
             <span class="or">OR</span>
             <div class="row">
-              <div class="col-md-6 row-block">
-                <a ui-sref="#" class="btn btn-facebook btn-block">Facebook</a>
-              </div>
-              <div class="col-md-6 row-block">
-                <a ui-sref="#" class="btn btn-google btn-block">Google</a>
-              </div>
-            </div>
-          </div>
-          <div class="or-box row-block">
-            <div class="row">
               <div class="col-md-12 row-block">
-                <a ui-sref="register" class="btn btn-primary btn-block">Create New Account</a>
+                <a ui-sref="signin" class="btn btn-block">Sign In</a>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>

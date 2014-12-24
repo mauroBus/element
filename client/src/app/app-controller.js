@@ -14,17 +14,25 @@ angular.module('elementBoxApp.controller', [])
         email: user.email,
         provider: user.provider,
         createdAt: user.createdAt,
-        role: user.role
+        roles: user.roles
       };
     };
 
-    $rootScope.$on(AUTH_EVENTS.loginSuccess, function(event, user) {
+    $rootScope.$on(AUTH_EVENTS.singinSuccess, function(event, user) {
       $scope.setCurrentUser(user);
       $state.go('home');
     });
 
-    $rootScope.$on(AUTH_EVENTS.loginFailed, function(event) {
+    $rootScope.$on(AUTH_EVENTS.singinFailed, function(event) {
       console.log('Login failed');
     });
+
+    var checkUserSigned = function() {
+      AuthService.me().then(function(res) { // success cbk
+        $scope.setCurrentUser(res.data);
+      });
+    };
+
+    checkUserSigned();
   }
 ]);
