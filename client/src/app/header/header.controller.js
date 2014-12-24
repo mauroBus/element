@@ -5,6 +5,7 @@ angular.module('elementBoxApp.header', [])
           '$scope', '$location', '$stateParams',
   function($scope,   $location,   $stateParams) {
     var scope = {
+      title: 'Element SandBox',
 
       subPageName: function() {
         if ($location.path() === '/home') {
