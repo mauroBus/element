@@ -44,7 +44,7 @@ gulp.task('clean', function(done) {
   return rimraf(config.deploy, done);
 });
 
-/***** Task: Build *****/
+/***** Task: Deploy *****/
 gulp.task('deploy', function(cbk) {
     return runSequence('clean', [
       'copy-client',
@@ -65,34 +65,5 @@ gulp.task('watch-client', function() {
 
 /***** Task: Server - To Start the Server App - *****/
 gulp.task('serve', function () {
-  // start the server:
-  // server.run({
-  //   file: './server/server.js'
-  // });
-
-  // // restart the server when server files change:
-  // gulp.watch([
-  //   './server/server.js',
-  //   './server/routes.js',
-  //   './server/controllers/**/*.js',
-  //   './server/models/**/*.js'
-  // ], [server.run]);
-
-  // .pipe(gulp.run('watch-client')); // do not work.
-
-  nodemon({
-    script: './server/server.js',
-    watch: [
-      './server/server.js',
-      './server/routes.js',
-      './server/controllers/**/*.js',
-      './server/models/**/*.js'
-    ],
-    ignore: ['ignored.js'],
-    nodeArgs: ['--debug']
-  })
-    .on('restart', function () {
-      console.log('restarted!');
-    });
-
+  shelljs.exec('cd server && gulp serve');
 });
