@@ -1,0 +1,23 @@
+<section class="userlist">
+  <ul class="list-unstyled list-group col-md-8 text-center">
+    <li ng-repeat="user in users" class="list-group-item clearfix">
+      <div class="row">
+        <div class="col-md-3">First Name: </div>
+        <div class="col-md-9">{{user.firstName}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">Last Name: </div>
+        <div class="col-md-9">{{user.lastName}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">Display Name: </div>
+        <div class="col-md-9">{{user.displayName}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">Email: </div>
+        <div class="col-md-9">{{user.email}}</div>
+      </div>
+      <div class="user__remove glyphicon glyphicon-remove" ng-click="deleteUser(user, $index)"></div>
+    </li>
+  </ul>
+</section>

@@ -4,7 +4,7 @@
 
     <div class="pull-right">
       <span ng-if="!currentUser">
-        <a ui-sref="login"  class="btn btn-sm btn-default">Login</a>
+        <a ui-sref="login" class="btn btn-sm btn-default">Login</a>
         <a ui-sref="register" class="btn btn-sm btn-default">Register</a>
       </span>
       <span ng-if="currentUser">Welcome, {{currentUser.firstName}} {{currentUser.lastName}}</span>

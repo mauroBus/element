@@ -2,7 +2,7 @@
 
 module.exports = {
   env: 'development',
-  mongo: {
+  db: { // mongodb options
     uri: 'mongodb://localhost/elementbox-dev'
   }
 };

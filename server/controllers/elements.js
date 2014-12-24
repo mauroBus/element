@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
 /**
  * Find element by id
  */
-exports.element = function(req, res, next, id) {
+exports.elementById = function(req, res, next, id) {
   Element.findById(id, function(err, element) {
     if (err) return next(err);
     if (!element) return next(new Error('Failed to load element ' + id));
@@ -29,7 +29,7 @@ exports.query = function(req, res) {
 /**
  * Show a element
  */
-exports.show = function(req, res) {
+exports.read = function(req, res) {
   res.json(req.element);
 };
 
@@ -49,20 +49,44 @@ exports.create = function(req, res) {
  * Update a element
  */
 exports.update = function(req, res) {
-  Element.update({ _id: req.element._id }, _.omit(req.body, '_id'), { }, function(err, updatedElement) {
-    if (err) return res.json(500, err);
-    res.json(updatedElement);
+  // Element.update({ _id: req.element._id }, _.omit(req.body, '_id'), { }, function(err, updatedElement) {
+  //   if (err) return res.json(500, err);
+  //   res.json(updatedElement);
+  // });
+  var element = req.element;
+  element = _.extend(element, req.body);
+
+  element.save(function(err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(element);
+    }
   });
 };
 
 /**
- * Remove a element
+ * Delete a element
  */
-exports.remove = function(req, res) {
+exports.delete = function(req, res) {
   var element = req.element;
 
   element.remove(function(err) {
     if (err) return res.json(500, err);
     res.json(element);
   });
+};
+
+/**
+ * Element authorization middleware
+ */
+exports.hasAuthorization = function(req, res, next) {
+  if (req.element.user.id !== req.user.id) {
+    return res.status(403).send({
+      message: 'User is not authorized'
+    });
+  }
+  next();
 };

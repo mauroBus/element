@@ -20,7 +20,8 @@ angular.module('elementBoxApp', [
   'elementBoxApp.home',
   'elementBoxApp.login',
   'elementBoxApp.newelement',
-  'elementBoxApp.register'
+  'elementBoxApp.register',
+  'elementBoxApp.userlist'
 ]);
 
 angular.module('elementBoxApp')

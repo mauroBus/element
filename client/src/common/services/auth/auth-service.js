@@ -6,9 +6,9 @@ angular.module('elementBoxApp.services')
 
   var authService = {};
 
-  authService.login = function(credentials) {
+  authService.signin = function(credentials) {
     var promise = $http({
-      url: Urls.login,
+      url: Urls.userAuth.signin,
       method: 'GET',
       params: credentials
     });
@@ -20,24 +20,24 @@ angular.module('elementBoxApp.services')
       );
       return res.data.user;
     },
-    function() {
-      console.log(credentials);
+    function(err) {
+      console.log('signin error: ' + err);
     });
 
     return promise;
   };
 
-  authService.logout = function() {
+  authService.signout = function() {
     return $http
-      .get(Urls.logout, Session.user)
+      .get(Urls.userAuth.signout, Session.user)
         .then(function(res) {
           Session.destroy();
         });
   };
 
-  authService.register = function(credentials) {
+  authService.signup = function(credentials) {
     return $http
-      .post(Urls.signup, credentials)
+      .post(Urls.userAuth.signup, credentials)
       .then(function(res) {
         Session.create(
           res.data.sessionId,

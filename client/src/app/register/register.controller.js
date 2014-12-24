@@ -2,17 +2,19 @@
 angular.module('elementBoxApp.register.controller', [])
 
 .controller('RegisterCtrl', [
-          '$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService',
-  function($scope,   $rootScope,   AUTH_EVENTS,   AuthService) {
+          '$scope', '$rootScope', '$state', 'AUTH_EVENTS', 'AuthService',
+  function($scope,   $rootScope,   $state,   AUTH_EVENTS,   AuthService) {
     $scope.credentials = {
       firstName: '',
       lastName: '',
       email: '',
-      password: ''
+      password: '',      
+      displayName: '',
+      username: ''
     };
 
     $scope.register = function (credentials) {
-      AuthService.register($scope.credentials)
+      AuthService.signup($scope.credentials)
         .then(function(user) {
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, user);
         }, function () {
