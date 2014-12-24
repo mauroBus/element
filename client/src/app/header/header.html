@@ -4,15 +4,14 @@
 
     <div class="pull-right">
       <span ng-if="!currentUser">
-        <a ui-sref="login" class="btn btn-sm btn-default">Login</a>
-        <a ui-sref="register" class="btn btn-sm btn-default">Register</a>
+        <a ui-sref="signin" class="btn btn-sm btn-default">SignIn</a>
+        <a ui-sref="signup" class="btn btn-sm btn-default">SignUp</a>
       </span>
       <span ng-if="currentUser">Welcome, {{currentUser.firstName}} {{currentUser.lastName}}</span>
-      <span ng-switch="currentUser.role">
-        <span ng-switch-when="userRoles.admin">You're admin.</span>
-        <span ng-switch-when="userRoles.editor">You're editor.</span>
-        <span ng-switch-default>You're our Guest!.</span>
-      </span>
+      <span ng-show="currentUser.roles.indexOf(userRoles.admin) >= 0">You're admin.</span>
+      <span ng-show="currentUser.roles.indexOf(userRoles.editor) >= 0">You're editor.</span>
+      <span ng-show="currentUser.roles.indexOf(userRoles.user) >= 0">You're user.</span>
+      <span ng-show="!currentUser">REGISTRATE!</span>
     </div>
 
     <div class="text-center">

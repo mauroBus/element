@@ -9,18 +9,18 @@ angular.module('elementBoxApp.services')
   authService.signin = function(credentials) {
     var promise = $http({
       url: Urls.userAuth.signin,
-      method: 'GET',
-      params: credentials
+      method: 'POST',
+      data: credentials
     });
 
-    promise.then(function(res) {
+    promise.then(function(res) { // success cbk
       Session.create(
         res.data.sessionId,
         res.data.user
       );
       return res.data.user;
     },
-    function(err) {
+    function(err) { // error cbk
       console.log('signin error: ' + err);
     });
 
@@ -28,23 +28,26 @@ angular.module('elementBoxApp.services')
   };
 
   authService.signout = function() {
-    return $http
-      .get(Urls.userAuth.signout, Session.user)
-        .then(function(res) {
-          Session.destroy();
-        });
+    var promise = $http.get(Urls.userAuth.signout, Session.user);
+
+    promise.then(function(res) {
+      Session.destroy();
+    });
+
+    return promise;
   };
 
   authService.signup = function(credentials) {
-    return $http
-      .post(Urls.userAuth.signup, credentials)
-      .then(function(res) {
-        Session.create(
-          res.data.sessionId,
-          res.data.user
-        );
-        return res.data.user;
-      });
+    var promise = $http.post(Urls.userAuth.signup, credentials);
+    promise.then(function(res) {
+      Session.create(
+        res.data.sessionId,
+        res.data.user
+      );
+      return res.data.user;
+    });
+
+    return promise;
   };
 
   authService.isAuthenticated = function() {
@@ -57,6 +60,10 @@ angular.module('elementBoxApp.services')
     }
     return (authService.isAuthenticated() &&
       authorizedRoles.indexOf(Session.userRole) !== -1);
+  };
+
+  authService.me = function() {
+    return $http.get(Urls.users.me);
   };
 
   return authService;

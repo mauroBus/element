@@ -18,9 +18,9 @@ angular.module('elementBoxApp', [
   'elementBoxApp.footer',
   'elementBoxApp.header',
   'elementBoxApp.home',
-  'elementBoxApp.login',
   'elementBoxApp.newelement',
-  'elementBoxApp.register',
+  'elementBoxApp.signin',
+  'elementBoxApp.signup',
   'elementBoxApp.userlist'
 ]);
 

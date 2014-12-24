@@ -4,19 +4,19 @@ angular.module('elementBoxApp')
 .factory('Statistics', function() {
     var statistics = [
       {
-        key: "Removed",
+        key: 'Removed',
         y: 0
       },
       {
-        key: "Created",
+        key: 'Created',
         y: 0
       },
       {
-        key: "Updated",
+        key: 'Updated',
         y: 0
       },
       {
-        key: "Total Elements",
+        key: 'Total Elements',
         y: 0
 
       }
@@ -63,7 +63,7 @@ angular.module('elementBoxApp')
       tooltipContent: function() {
         return function(key, x, y, e, graph) {
           return '<span class="label label-default"' +
-            // 'x="' + y.pos[0] + '"' + ' y="' + y.pos[1] +
+            // 'x='' + y.pos[0] + ''' + ' y='' + y.pos[1] +
             '>' + key + '</span>';
         };
       }
