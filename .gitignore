@@ -2,3 +2,5 @@ node_modules
 deploy
 npm_debug.log
 server/npm_debug.log
+access.log
+./server/access.log
