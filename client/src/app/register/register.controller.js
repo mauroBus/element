@@ -5,8 +5,8 @@ angular.module('elementBoxApp.register.controller', [])
           '$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService',
   function($scope,   $rootScope,   AUTH_EVENTS,   AuthService) {
     $scope.credentials = {
-      username: '',
-      name: '',
+      firstName: '',
+      lastName: '',
       email: '',
       password: ''
     };
@@ -14,8 +14,7 @@ angular.module('elementBoxApp.register.controller', [])
     $scope.register = function (credentials) {
       AuthService.register($scope.credentials)
         .then(function(user) {
-          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-          $scope.setCurrentUser(user);
+          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, user);
         }, function () {
           $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         });

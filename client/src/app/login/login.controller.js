@@ -11,10 +11,8 @@ angular.module('elementBoxApp.login.controller', [])
 
     $scope.login = function (credentials) {
       AuthService.login($scope.credentials)
-        .then(function(user) {
-          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-          $scope.setCurrentUser(user);
-          $state.go('home');
+        .then(function(res) {
+          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, res.data.user);
         }, function () {
           $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         });

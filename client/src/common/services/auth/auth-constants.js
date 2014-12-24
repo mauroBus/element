@@ -11,8 +11,7 @@ angular.module('elementBoxApp.services')
 })
 
 .constant('USER_ROLES', {
-  all: '*',
-  admin:  'admin',
-  editor: 'editor',
-  guest:  'guest'
+  admin:  'ADMIN',
+  editor: 'EDITOR',
+  guest:  'GUEST'
 });

@@ -2,28 +2,37 @@
 angular.module('elementBoxApp.services')
 
 .factory('AuthService', ['$http', 'Session', 'Urls', function($http, Session, Urls) {
+  'use strict';
+
   var authService = {};
 
   authService.login = function(credentials) {
-    return $http
-      .post(Urls.login, credentials)
-      .then(function(res) {
-        Session.create(
-          res.data.sessionId,
-          res.data.user
-        );
-        return res.data.user;
-      },
-      function() {
-        // console.log(credentials);
-      });
+    var promise = $http({
+      url: Urls.login,
+      method: 'GET',
+      params: credentials
+    });
+
+    promise.then(function(res) {
+      Session.create(
+        res.data.sessionId,
+        res.data.user
+      );
+      return res.data.user;
+    },
+    function() {
+      console.log(credentials);
+    });
+
+    return promise;
   };
 
   authService.logout = function() {
     return $http
-      .post(Urls.logout, Session.user)
-      .then(function(res) {
-      });
+      .get(Urls.logout, Session.user)
+        .then(function(res) {
+          Session.destroy();
+        });
   };
 
   authService.register = function(credentials) {
@@ -39,7 +48,7 @@ angular.module('elementBoxApp.services')
   };
 
   authService.isAuthenticated = function() {
-    return !!Session.userId;
+    return !!Session.id;
   };
 
   authService.isAuthorized = function(authorizedRoles) {
