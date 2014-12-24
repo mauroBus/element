@@ -3,7 +3,8 @@
 var express = require('express'),
     path = require('path'),
     config = require('./config'),
-    flash = require('connect-flash');
+    flash = require('connect-flash'),
+    errorHandler = require('../midlewares/errorHandler/errorHandler.js');
     // mongoStore = require('connect-mongo')(express);
 
 /**
@@ -15,7 +16,9 @@ module.exports = function(app, passport) {
     app.use(require('connect-livereload')());
     // app.use(express.static(path.join(config.root, '.tmp')));
     app.use(express.static(path.join(config.root, '')));
-    app.use(express.errorHandler());
+    // app.use(errorHandler.clientErrorHandler);
+    // app.use(errorHandler.errorHandler);
+    // app.use(express.errorHandler());
     app.set('views', config.root);
   });
 
@@ -42,6 +45,10 @@ module.exports = function(app, passport) {
 
     app.use(passport.initialize());
     app.use(passport.session());
+
+    app.use(errorHandler.clientErrorHandler);
+    app.use(errorHandler.errorHandler);
+    app.use(express.errorHandler());
 
     // Router needs to be last
     app.use(app.router);

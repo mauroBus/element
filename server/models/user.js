@@ -3,23 +3,52 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     crypto = require('crypto'),
-    authTypes = ['github', 'twitter', 'facebook', 'google'];
+    authTypes = ['github', 'twitter', 'facebook', 'google'],
+    Roles = require('../config/roles.js');
 
 /**
  * User Schema
  */
 var UserSchema = new Schema({
-  name: String,
-  email: String,
-  username: String,
-  role: String,
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    unique: true,
+    required: true
+  },
+  role: {
+    type: String,
+    required: true,
+    default: Roles.default
+  },
   provider: String,
-  hashed_password: String,
-  salt: String,
+  hashed_password: {
+    type: String,
+    required: true
+  },
+  salt: {
+    type: String,
+    required: true
+  },
   facebook: {},
   twitter: {},
   github: {},
-  google: {}
+  google: {},
+  createdAt: {
+    type: Date,
+    default: new Date()
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  }
 });
 
 /**
@@ -46,20 +75,15 @@ var validatePresenceOf = function(value) {
 
 // the below 4 validations only apply if you are signing up traditionally
 
-UserSchema.path('name').validate(function(name) {
+UserSchema.path('firstName').validate(function(firstName) {
   // if you are authenticating by any of the oauth strategies, don't validate
-  return (authTypes.indexOf(this.provider) !== -1) ? true : name.length;
-}, 'Name cannot be blank');
+  return (authTypes.indexOf(this.provider) !== -1) ? true : firstName.length;
+}, 'FirstName cannot be blank');
 
 UserSchema.path('email').validate(function(email) {
   // if you are authenticating by any of the oauth strategies, don't validate
   return (authTypes.indexOf(this.provider) !== -1) ? true : email.length;
 }, 'Email cannot be blank');
-
-UserSchema.path('username').validate(function(username) {
-  // if you are authenticating by any of the oauth strategies, don't validate
-  return (authTypes.indexOf(this.provider) !== -1) ? true : username.length;
-}, 'Username cannot be blank');
 
 UserSchema.path('hashed_password').validate(function(hashed_password) {
   // if you are authenticating by any of the oauth strategies, don't validate
@@ -71,28 +95,34 @@ UserSchema.path('hashed_password').validate(function(hashed_password) {
  * Pre-save hook
  */
 
-UserSchema.pre('save', function(next) {
-  if (!this.isNew) {
-    return next();
-  }
+UserSchema.pre('save', function(next, done) {
+  var self = this;
+
+  if (!this.isNew) { return next(); }
 
   if (!this.role) {
-    this.role = 'editor';
+    this.role = Roles.default;
   }
 
-  if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1) {
-    next(new Error('Invalid password'));
-  }
-  else {
-    next();
-  }
+  mongoose.models.User.findOne({ email : self.email }, function(err, results) {
+    if (err) {
+      done(err);
+    } else if (results) { // the email address is not unique.
+      // self.invalidate('email', 'email must be unique');
+      next(new Error('Email must be unique'));
+    } else if (!validatePresenceOf(self.password) && authTypes.indexOf(self.provider) === -1) {
+      next(new Error('Invalid password'));
+    } else {
+      next();
+    }
+  });
+
 });
 
 /**
  * Methods
  */
 UserSchema.methods = {
-
   /**
    * Authenticate - check if the passwords are the same
    *

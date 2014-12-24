@@ -11,7 +11,9 @@ module.exports = function(app) {
   userRouter(app);
   elementRouter(app);
 
-  // All other routes to use Angular routing in app/scripts/app.js
-  // app.get('/partials/*', index.partials);
+  // Not Found routes:
   app.get('/api/*', index.notFound);
+  app.post('/api/*', index.notFound);
+  app.put('/api/*', index.notFound);
+  app.delete('/api/*', index.notFound);
 };
