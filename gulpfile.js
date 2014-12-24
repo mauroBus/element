@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-// var merge = require('merge-stream');
+var merge = require('merge-stream');
 var rimraf = require('rimraf');
 var package = require('./package.json');
 
@@ -8,7 +8,8 @@ var runSequence = require('run-sequence');
 var shelljs = require('shelljs');
 
 // to execute the server.
-var server = require('gulp-express');
+// var server = require('gulp-express');
+var nodemon = require('gulp-nodemon');
 
 
 // General Config:
@@ -57,19 +58,41 @@ gulp.task('default', [
   'deploy'
 ]);
 
+/***** Task: Watch Client ******/
+gulp.task('watch-client', function() {
+  return shelljs.exec('cd ./client && gulp watch && cd ../');
+});
 
 /***** Task: Server - To Start the Server App - *****/
 gulp.task('serve', function () {
-  // start the server.
-  server.run({
-    file: './server/server.js'
-  });
+  // start the server:
+  // server.run({
+  //   file: './server/server.js'
+  // });
 
-  // restart the server when server files change.
-  gulp.watch([
-    './server/server.js',
-    './server/routes.js',
-    './server/controllers/**/*.js',
-    './server/models/**/*.js'
-  ], [server.run]);
+  // // restart the server when server files change:
+  // gulp.watch([
+  //   './server/server.js',
+  //   './server/routes.js',
+  //   './server/controllers/**/*.js',
+  //   './server/models/**/*.js'
+  // ], [server.run]);
+
+  // .pipe(gulp.run('watch-client')); // do not work.
+
+  nodemon({
+    script: './server/server.js',
+    watch: [
+      './server/server.js',
+      './server/routes.js',
+      './server/controllers/**/*.js',
+      './server/models/**/*.js'
+    ],
+    ignore: ['ignored.js'],
+    nodeArgs: ['--debug']
+  })
+    .on('restart', function () {
+      console.log('restarted!');
+    });
+
 });
