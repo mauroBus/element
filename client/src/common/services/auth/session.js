@@ -4,8 +4,8 @@ angular.module('elementBoxApp.services')
 .service('Session', function() {
   this.create = function(sessionId, user, role) {
     this.id = sessionId;
-    this.firstName = user.name;
-    this.lastName = user.name;
+    this.firstName = user.firstName;
+    this.lastName = user.lastName;
     this.email = user.email;
     this.role = user.role;
   };
