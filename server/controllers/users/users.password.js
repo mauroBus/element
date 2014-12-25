@@ -4,14 +4,14 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-	errorHandler = require('../../errors/errors.js'),
-	mongoose = require('mongoose'),
-	passport = require('passport'),
-	User = mongoose.model('User'),
-	config = require('../../config/config'),
-	nodemailer = require('nodemailer'),
-	async = require('async'),
-	crypto = require('crypto');
+		errorHandler = require('../../errors/errors.js'),
+		mongoose = require('mongoose'),
+		passport = require('passport'),
+		User = mongoose.model('User'),
+		config = require('../../config/config'),
+		nodemailer = require('nodemailer'),
+		async = require('async'),
+		crypto = require('crypto');
 
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
 

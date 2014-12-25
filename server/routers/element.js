@@ -1,7 +1,7 @@
 'use strict';
 
 var elements = require('../controllers/elements'),
-  users = require('../controllers/users');
+    users = require('../controllers/users');
 
 /**
  * Application routes

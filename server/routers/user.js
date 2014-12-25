@@ -56,30 +56,3 @@ module.exports = function(app) {
   // Finish by binding the user middleware
   app.param('userId', users.userByID);
 };
-
-
-
-// 'use strict';
-
-// var passport = require('passport'),
-//     users = require('../controllers/users.js');
-// /**
-//  * Application routes
-//  */
-// module.exports = function(app) {
-//   app.param('userId', users.user);
-
-//   app.get('/api/login', passport.authenticate('local', {
-//     // failureRedirect: '/#/login',
-//     failureFlash: 'Invalid email or password.'
-//   }), users.login);
-
-//   app.get('/api/logout', users.logout);
-//   app.post('/api/register', users.create);
-
-//   app.post('/api/users', users.create);
-//   app.get('/api/users', users.query);
-//   app.get('/api/users/:userId', users.show);
-//   app.del('/api/users', users.removeAll);
-//   app.del('/api/users/:userId', users.remove);
-// };

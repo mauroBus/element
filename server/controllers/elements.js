@@ -1,8 +1,9 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-  Element = mongoose.model('Element'),
-  _ = require('lodash');
+    Element = mongoose.model('Element'),
+    _ = require('lodash'),
+    errorHandler = require('../errors/errors.js');
 
 /**
  * Find element by id
