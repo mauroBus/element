@@ -38,7 +38,7 @@
           type="text"
           class="form-control"
           placeholder="Title"
-          ng-model="element.title"
+          ng-model="copy.title"
           ng-show="editting">
 
         <div
@@ -55,7 +55,7 @@
         <textarea
           class="form-control"
           placeholder="Content"
-          ng-model="element.content"
+          ng-model="copy.content"
           ng-show="editting">
         </textarea>
 
@@ -74,7 +74,7 @@
           type="text"
           class="form-control"
           placeholder="like"
-          ng-model="element.like"
+          ng-model="copy.like"
           ng-show="editting">
  -->
         <div class="element-attr list-group-item-text">
@@ -90,7 +90,7 @@
           type="text"
           class="form-control"
           placeholder="like"
-          ng-model="element.like"
+          ng-model="copy.like"
           ng-show="editting">
  -->
         <div class="element-attr list-group-item-text">
@@ -106,10 +106,10 @@
           type="text"
           class="form-control"
           placeholder="Birthday"
-          ng-model="element.created"
+          ng-model="copy.created"
           ng-show="editting"> -->
         <datepicker
-          ng-model="element.created"
+          ng-model="copy.created"
           max-date="today"
           show-weeks="true"
           class="datepicker center-block"
@@ -123,6 +123,14 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Owner</label>
+      <div class="col-sm-9">
+        <div class="element-attr list-group-item-text">
+          {{element.user.firstName}} {{element.user.lastName}}
+        </div>
+      </div>
+    </div>
   </form>
 
 </div>

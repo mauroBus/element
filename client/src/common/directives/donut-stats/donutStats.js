@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp')
+angular.module('elementBoxApp.common')
 
 .directive('donutStats', function(Statistics) {
   return {
