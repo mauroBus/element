@@ -16,16 +16,6 @@ angular.module('elementBoxApp.userlist')
       method: 'DELETE',
       transformResponse: function(data, headersGetter) {}
     }
-    // removeOAuthProvider: {
-    //   method: 'DELETE',
-    //   url: Urls.users.remove,
-    //   params: {
-    //     user: function() {
-    //       return this.user;
-    //     },
-    //     provider: 'local'
-    //   }
-    // }
   });
 
   return Users;
