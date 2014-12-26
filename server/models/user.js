@@ -22,6 +22,21 @@ var validateLocalStrategyPassword = function(password) {
   return (this.provider !== 'local' || (password && password.length > 5));
 };
 
+var validateUniqueEmail = function(email, respond) {
+  if (!this.isNew) {
+    respond(true);
+  } else {
+    mongoose.models.User.findOne({email: email}, function(err, user) {
+      if (!err && user) { // the email address is not unique.
+        respond(false);
+      } else {
+        respond(true);
+      }
+    });
+  }
+};
+
+
 /**
  * User Schema
  */
@@ -46,13 +61,15 @@ var UserSchema = new Schema({
     type: String,
     trim: true,
     unique: 'eMail already exists',
-    default: '',
-    validate: [validateLocalStrategyProperty, 'Please fill in your email'],
+    validate: [
+      { validator: validateLocalStrategyProperty, msg: 'Please fill in your email' },
+      { validator: validateUniqueEmail, msg: 'eMail already exists' }
+    ],
     match: [/.+\@.+\..+/, 'Please fill a valid email address']
   },
   username: {
     type: String,
-    unique: 'Username already exists',
+    // unique: 'Username already exists',
     required: 'Please fill in a username',
     trim: true
   },
@@ -90,6 +107,10 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 });
 
@@ -144,5 +165,22 @@ UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
     }
   });
 };
+
+
+/**
+ * Pre-save hook
+ */
+// UserSchema.pre('save', function(next, done) {
+//   var self = this;
+//   if (!this.isNew) { return next(); }
+
+//   mongoose.models.User.findOne({ email : this.email }, function(err, user) {
+//     if (err) {
+//       done(err);
+//     } else if (user) { // the email address is not unique.
+//       done.json(404, {message: 'eMail must be unique'});
+//     }
+//   });
+// });
 
 mongoose.model('User', UserSchema);

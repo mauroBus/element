@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-		errorHandler = require('../../errors/errors.js'),
+		errorHandler = require('../../errors/errors'),
 		mongoose = require('mongoose'),
 		passport = require('passport'),
 		User = mongoose.model('User'),

@@ -4,21 +4,26 @@ angular.module('elementBoxApp.signup.controller', [])
 .controller('SignupCtrl', [
           '$scope', '$rootScope', '$state', 'AUTH_EVENTS', 'AuthService',
   function($scope,   $rootScope,   $state,   AUTH_EVENTS,   AuthService) {
+
+    if (AuthService.isAuthenticated()) {
+      $state.go('home');
+    }
+
     $scope.credentials = {
       firstName: '',
       lastName: '',
       email: '',
-      password: '',      
+      password: '',
       displayName: '',
       username: ''
     };
 
-    $scope.signup = function (credentials) {
+    $scope.signup = function () {
       AuthService.signup($scope.credentials)
-        .then(function(user) {
-          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, user);
+        .then(function(res) {
+          $rootScope.$broadcast(AUTH_EVENTS.singinSuccess, {user: res.data.user, navigate: true});
         }, function () {
-          $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+          $rootScope.$broadcast(AUTH_EVENTS.singinFailed);
         });
     };
   }

@@ -47,7 +47,7 @@
                 placeholder="Password"
                 required
                 ng-model="credentials.password"
-                ng-keyup="$event.keyCode == 13 && signup()" />
+                ng-keydown="$event.keyCode === 13 && signup() && $event.stopPropagation()" />
             </div>
 
             <button

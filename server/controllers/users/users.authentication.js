@@ -4,10 +4,12 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-    errorHandler = require('../../errors/errors.js'),
+    errorHandler = require('../../errors/errors'),
     mongoose = require('mongoose'),
     passport = require('passport'),
-    User = mongoose.model('User');
+    User = mongoose.model('User'),
+    Roles = require('../../config/roles'),
+    UsersAuthorization = require('./users.authorization');
 
 /**
  * Signup
@@ -24,7 +26,7 @@ exports.signup = function(req, res) {
   user.provider = 'local';
   user.displayName = user.displayName || user.firstName + ' ' + user.lastName;
 
-  // Then save the user 
+  // Then save the user.
   user.save(function(err) {
     if (err) {
       return res.status(400).send({
@@ -215,3 +217,23 @@ exports.removeOAuthProvider = function(req, res, next) {
     });
   }
 };
+
+/**
+ * Soft delete a user.
+ */
+exports.delete = function(req, res, next) {
+  var user = req.profile;
+  user.active = false;
+  user.save(function(err) {
+    if (err) {
+      return res.json(500, {
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json({
+        message: 'User Successfuly deactivated.'
+      });
+    }
+  });
+};
+

@@ -3,17 +3,22 @@
 /**
  * Module dependencies.
  */
-var passport = require('passport');
+var passport = require('passport'),
+    Roles = require('../config/roles');
 
 module.exports = function(app) {
   // User Routes
   var users = require('../controllers/users');
+  var hasAdminAuthorization = users.hasAuthorization([Roles.admin]);
 
   // Setting up the users profile api
   app.get('/users/me', users.me);
-  app.put('/users', users.update);
+  // app.put('/users', users.update);
   app.get('/users', users.query);
   app.delete('/users/accounts', users.removeOAuthProvider);
+
+  app.put('/users/:userEmail', users.requiresLogin, hasAdminAuthorization, users.update);
+  app.delete('/users/:userEmail', users.requiresLogin, hasAdminAuthorization, users.delete);
 
   // Setting up the users password api
   app.post('/users/password', users.changePassword);
@@ -55,4 +60,5 @@ module.exports = function(app) {
 
   // Finish by binding the user middleware
   app.param('userId', users.userByID);
+  app.param('userEmail', users.userByEmail);
 };
