@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.services')
+angular.module('elementBoxApp')
 
 .factory('Session', function() {
   var Session = {},

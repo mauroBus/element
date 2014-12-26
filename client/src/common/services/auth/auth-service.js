@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.services')
+angular.module('elementBoxApp')
 
 .factory('AuthService', [
         '$http', 'Session', 'Urls', 'AUTH_EVENTS', '$rootScope',

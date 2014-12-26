@@ -1,4 +1,4 @@
-angular.module('elementBoxApp')
+angular.module('elementBoxApp.common')
 
 .directive('goBackBtn', ['$window',
   function($window) {

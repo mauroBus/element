@@ -1,4 +1,4 @@
-angular.module('elementBoxApp')
+angular.module('elementBoxApp.common')
 
 /**
  * Defines a behavior to navigate between the pages.
