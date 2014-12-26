@@ -1,25 +1,32 @@
 
 angular.module('elementBoxApp.userlist')
 
-.service('UserlistService', ['Urls', '$http', '$q',
-  function(Urls, $http, $q) {
-    
-    this.getUsers = function() {
-      var dfd = $q.defer();
-      $http.get(Urls.users.users)
-        .then(function(res) {
-          dfd.resolve(res.data);
-        });
-      return dfd.promise;
-    };
+.factory('UserlistService', ['Urls', '$resource', function(Urls, $resource) {
+  var UserlistService = {};
 
-    this.removeUser = function(user) {
-      var dfd = $q.defer();
-      $http.delete(Urls.users.accounts, user._id)
-        .then(function(res) {
-          dfd.resolve(res.data);
-        });
-      return dfd.promise;
-    };
-  }
-]);
+  var Users = $resource(Urls.users.users + '/:email', {email:'@email'}, {
+    query: {
+      method:'GET',
+      isArray:true
+    },
+    update: {
+      method: 'PUT',
+    },
+    deactivate: {
+      method: 'DELETE',
+      transformResponse: function(data, headersGetter) {}
+    }
+    // removeOAuthProvider: {
+    //   method: 'DELETE',
+    //   url: Urls.users.remove,
+    //   params: {
+    //     user: function() {
+    //       return this.user;
+    //     },
+    //     provider: 'local'
+    //   }
+    // }
+  });
+
+  return Users;
+}]);

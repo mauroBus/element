@@ -4,17 +4,21 @@ angular.module('elementBoxApp.userlist.controller', [])
 .controller('UserlistCtrl', [
           '$scope', 'UserlistService', '$location',
   function($scope,   UserlistService,   $location) {
-    $scope.users = [];
+    $scope.users = UserlistService.query();
 
-    UserlistService.getUsers()
-      .then(function(users) {
-        $scope.users = users;
+    $scope.deactivateUser = function(user, index) {
+      var u = user;
+      user.$deactivate(function() {
+        user.active = false;
       });
+    };
 
-    $scope.deleteUser = function(user, index) {
-      UserlistService.removeUser(user)
-      .then(function() {
-        $scope.users.splice(index, 1);
+    $scope.activateUser = function(user, index) {
+      user.active = true;
+      user.$update(function() { // success cbk.
+        user.active = true;
+      }, function() { // error cbk.
+        user.active = false;
       });
     };
   }

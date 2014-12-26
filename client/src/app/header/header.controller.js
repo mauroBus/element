@@ -2,8 +2,8 @@
 angular.module('elementBoxApp.header', [])
 
 .controller('HeaderCtrl', [
-          '$scope', '$location', '$stateParams',
-  function($scope,   $location,   $stateParams) {
+          '$scope', '$rootScope', '$location', '$stateParams', 'AuthService', 'AUTH_EVENTS',
+  function($scope,  $rootScope,    $location,   $stateParams,   AuthService,   AUTH_EVENTS) {
     var scope = {
       title: 'Element SandBox',
 
@@ -32,6 +32,17 @@ angular.module('elementBoxApp.header', [])
 
       showAboutLink: function() {
         return $location.path() !== '/about';
+      },
+
+      showUserListLink: function() {
+        return $location.path() !== '/userlist';
+      },
+
+      signout: function() {
+        AuthService.signout($scope.credentials)
+          .then(function(res) {
+            $rootScope.$broadcast(AUTH_EVENTS.signoutSuccess, res.data.user);
+          });
       }
     };
 

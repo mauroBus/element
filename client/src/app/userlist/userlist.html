@@ -1,6 +1,9 @@
 <section class="userlist">
-  <ul class="list-unstyled list-group col-md-8 text-center">
-    <li ng-repeat="user in users" class="list-group-item clearfix">
+  <div class="list-group col-md-8"> <!-- list-group -->
+    <a href=""
+      ng-repeat="user in users"
+      class="list-group-item clearfix"
+      ng-class="{'list-group-item-danger': !user.active}">
       <div class="row">
         <div class="col-md-3">First Name: </div>
         <div class="col-md-9">{{user.firstName}}</div>
@@ -17,7 +20,8 @@
         <div class="col-md-3">Email: </div>
         <div class="col-md-9">{{user.email}}</div>
       </div>
-      <div class="user__remove glyphicon glyphicon-remove" ng-click="deleteUser(user, $index)"></div>
-    </li>
+      <div ng-show="user.active" class="user__remove glyphicon glyphicon-remove" ng-click="deactivateUser(user, $index)"></div>
+      <div ng-show="!user.active" class="user__reactive glyphicon glyphicon-ok-sign" ng-click="activateUser(user, $index)"></div>
+    </a>
   </ul>
 </section>

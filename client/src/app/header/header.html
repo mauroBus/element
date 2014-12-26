@@ -3,15 +3,16 @@
     <h1>{{title}}</h1>
 
     <div class="pull-right">
-      <span ng-if="!currentUser">
+      <span ng-if="!currentUser.firstName">
         <a ui-sref="signin" class="btn btn-sm btn-default">SignIn</a>
         <a ui-sref="signup" class="btn btn-sm btn-default">SignUp</a>
+        <span>REGISTRATE!</span>
       </span>
-      <span ng-if="currentUser">Welcome, {{currentUser.firstName}} {{currentUser.lastName}}</span>
+      <span ng-show="currentUser.firstName">Welcome, {{currentUser.firstName}} {{currentUser.lastName}}</span>
       <span ng-show="currentUser.roles.indexOf(userRoles.admin) >= 0">You're admin.</span>
       <span ng-show="currentUser.roles.indexOf(userRoles.editor) >= 0">You're editor.</span>
       <span ng-show="currentUser.roles.indexOf(userRoles.user) >= 0">You're user.</span>
-      <span ng-show="!currentUser">REGISTRATE!</span>
+      <button ng-show="currentUser.firstName" class="btn btn-warning" ng-click="signout()">SignOut</button>
     </div>
 
     <div class="text-center">
@@ -35,6 +36,13 @@
         ng-show="showAboutLink()"
         go stateUrl="about">
           About
+      </button>
+      <button
+        type="button"
+        class="btn btn-warning"
+        ng-show="showUserListLink()"
+        go stateUrl="userlist">
+          User List
       </button>
     </div>
 
