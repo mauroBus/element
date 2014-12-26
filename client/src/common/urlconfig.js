@@ -20,7 +20,7 @@ angular.module('elementBoxApp.urlConfig', [])
         users: {
           me: '/users/me',
           users: '/users', // to update.
-          accounts: '/users/accounts', // to delete.
+          remove: '/users/accounts', // to delete.
           // Users password api:
           changePass: '/users/password',
           forgotPass: '/auth/forgot',

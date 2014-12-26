@@ -1,7 +1,9 @@
 
 angular.module('elementBoxApp.services')
 
-.factory('AuthService', ['$http', 'Session', 'Urls', function($http, Session, Urls) {
+.factory('AuthService', [
+        '$http', 'Session', 'Urls', 'AUTH_EVENTS', '$rootScope',
+function($http,   Session,   Urls,   AUTH_EVENTS,   $rootScope) {
   'use strict';
 
   var authService = {};
@@ -28,7 +30,7 @@ angular.module('elementBoxApp.services')
   };
 
   authService.signout = function() {
-    var promise = $http.get(Urls.userAuth.signout, Session.user);
+    var promise = $http.get(Urls.userAuth.signout);
 
     promise.then(function(res) {
       Session.destroy();
@@ -51,7 +53,7 @@ angular.module('elementBoxApp.services')
   };
 
   authService.isAuthenticated = function() {
-    return !!Session.id;
+    return !!Session.getSession();
   };
 
   authService.isAuthorized = function(authorizedRoles) {
@@ -63,7 +65,13 @@ angular.module('elementBoxApp.services')
   };
 
   authService.me = function() {
-    return $http.get(Urls.users.me);
+    var promise = $http.get(Urls.users.me);
+    promise.then(function(res) {
+      if (!res.data) { return; }
+      Session.create(res.data._id, res.data);
+      $rootScope.$broadcast(AUTH_EVENTS.singinSuccess, {user: res.data, navigate: false});
+    });
+    return promise;
   };
 
   return authService;

@@ -5,9 +5,9 @@ angular.module('elementBoxApp.about.controller', [])
     $scope.concepts = [];
 
     $scope.authors = {
-      backend: '',
-      frontend: '',
-      testing: ''
+      backend: 'me',
+      frontend: 'me',
+      testing: 'nobady'
     };
   }
 ]);

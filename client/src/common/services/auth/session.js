@@ -1,22 +1,34 @@
 
 angular.module('elementBoxApp.services')
 
-.service('Session', function() {
-  this.create = function(sessionId, user, role) {
-    this.id = sessionId;
-    this.firstName = user.firstName;
-    this.lastName = user.lastName;
-    this.email = user.email;
-    this.role = user.role;
+.factory('Session', function() {
+  var Session = {},
+      isActive = false,
+      data = { id: null, user: {} };
+
+  Session.create = function(sessionId, user, role) {
+    data.id = sessionId;
+    data.user.firstName = user.firstName;
+    data.user.lastName = user.lastName;
+    data.user.username = user.username;
+    data.user.email = user.email;
+    data.user.roles = user.roles;
+    isActive = true;
   };
 
-  this.destroy = function() {
-    this.id = null;
-    this.firstName = null;
-    this.lastName = null;
-    this.email = null;
-    this.role = null;
+  Session.destroy = function() {
+    data.id = null;
+    data.user.firstName = null;
+    data.user.lastName = null;
+    data.user.username = null;
+    data.user.email = null;
+    data.user.roles = null;
+    isActive = false;
   };
 
-  return this;
+  Session.getSession = function() {
+    return isActive ? data : null;
+  };
+
+  return Session;
 });
