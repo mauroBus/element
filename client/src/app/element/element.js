@@ -1,6 +1,7 @@
 
 angular.module('elementBoxApp.element', [
-  'elementBoxApp.element.controller'
+  'elementBoxApp.element.controller',
+  'elementBoxApp.common'
 ])
 
 .config([ '$stateProvider',

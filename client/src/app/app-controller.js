@@ -1,8 +1,8 @@
 angular.module('elementBoxApp.controller', [])
 
 .controller('AppController', [
-          '$scope', 'USER_ROLES', 'AuthService', '$rootScope', '$state', 'AUTH_EVENTS',
-  function($scope,   USER_ROLES,   AuthService,   $rootScope,   $state,   AUTH_EVENTS) {
+          '$scope', 'USER_ROLES', 'AuthService', '$rootScope', '$state', 'AUTH_EVENTS', 'ModalAlert',
+  function($scope,   USER_ROLES,   AuthService,   $rootScope,   $state,   AUTH_EVENTS,   ModalAlert) {
     $scope.currentUser = null;
     $scope.userRoles = USER_ROLES;
     $scope.isAuthorized = AuthService.isAuthorized;
@@ -33,5 +33,7 @@ angular.module('elementBoxApp.controller', [])
 
     // When app starts checking if user is signed in (cookies).
     AuthService.me();
+
+    ModalAlert.listen();
   }
 ]);

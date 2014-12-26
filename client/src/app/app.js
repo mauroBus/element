@@ -7,7 +7,7 @@ angular.module('elementBoxApp', [
   'templates.app', // bag with all the app templates
   'templates.common', // bag with all the common templates
   // configs:
-  'elementBoxApp.services',
+  'elementBoxApp.common',
   'elementBoxApp.urlConfig',
   // main controller:
   'elementBoxApp.controller',
@@ -26,9 +26,13 @@ angular.module('elementBoxApp', [
 
 angular.module('elementBoxApp')
 
-.config(['$urlRouterProvider', function($urlRouterProvider){
-    // when there is an empty route, redirect to /home
-    $urlRouterProvider
-      .when('', '/home')
-      .otherwise('/404');
+.config(['$urlRouterProvider', function($urlRouterProvider) {
+  // when there is an empty route, redirect to /home
+  $urlRouterProvider
+    .when('', '/home')
+    .otherwise('/404');
+}])
+
+.config(['$httpProvider', function ($httpProvider) {
+  $httpProvider.interceptors.push('httpInterceptor');
 }]);
