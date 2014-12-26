@@ -39,6 +39,9 @@ exports.read = function(req, res) {
  */
 exports.create = function(req, res) {
   var element = new Element(req.body);
+  element.user.ref = req.user._id;
+  element.user.firstName = req.user.firstName;
+  element.user.lastName = req.user.lastName;
 
   element.save(function(err) {
     if (err) return res.json(500, err);
@@ -50,10 +53,6 @@ exports.create = function(req, res) {
  * Update a element
  */
 exports.update = function(req, res) {
-  // Element.update({ _id: req.element._id }, _.omit(req.body, '_id'), { }, function(err, updatedElement) {
-  //   if (err) return res.json(500, err);
-  //   res.json(updatedElement);
-  // });
   var element = req.element;
   element = _.extend(element, req.body);
 
@@ -84,9 +83,10 @@ exports.delete = function(req, res) {
  * Element authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-  if (req.element.user.id !== req.user.id) {
+  if (req.element.user.ref.toString() !== req.user.id) {
     return res.status(403).send({
-      message: 'User is not authorized'
+      message: 'User is not authorized',
+      status: 403
     });
   }
   next();

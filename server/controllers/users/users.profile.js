@@ -30,22 +30,14 @@ exports.update = function(req, res) {
     // Merge existing user
     user = _.extend(user, newUser);
     user.updated = Date.now();
-    // user.displayName = user.firstName + ' ' + user.lastName;
 
-    // user.update({email: user.email}, user, function(err, numberAffected, rawResponse) {
     user.save(function(err) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
         });
       } else {
-        // req.login(user, function(err) {
-        //   if (err) {
-        //     res.status(400).send(err);
-        //   } else {
-            res.json(user);
-        //   }
-        // });
+        res.json(user);
       }
     });
   } else {
@@ -61,7 +53,6 @@ exports.update = function(req, res) {
 exports.me = function(req, res) {
   res.json(req.user || null);
 };
-
 
 /**
  * List users

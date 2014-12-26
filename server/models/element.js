@@ -23,8 +23,12 @@ var ElementSchema = new Schema({
     default: Date.now
   },
   user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+    ref: {
+      type: Schema.ObjectId,
+      ref: 'User'
+    },
+    firstName: String,
+    lastName: String
   },
   date: Date,
   like: Number,

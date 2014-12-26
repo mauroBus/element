@@ -28,10 +28,9 @@ angular.module('elementBoxApp.home.controller', [])
           },
           function() { // success
             elem.like++;
+            votedElems[id] = true;
           }
         );
-
-        votedElems[id] = true;
       },
 
       doDontLike: function(index, id) {
@@ -43,10 +42,9 @@ angular.module('elementBoxApp.home.controller', [])
           },
           function() { // success
             elem.dontLike++;
+            votedElems[id] = true;
           }
         );
-
-        votedElems[id] = true;
       },
 
       voted: function(id) {
