@@ -20,7 +20,7 @@ var getUniqueErrorMessage = function(err) {
 /**
  * Get the error message from error object
  */
-exports.getErrorMessage = function(err) {
+var _getErrorMessage = function(err) {
   var message = '';
 
   if (err.code) {
@@ -34,9 +34,38 @@ exports.getErrorMessage = function(err) {
     }
   } else {
     for (var errName in err.errors) {
-      if (err.errors[errName].message) message = err.errors[errName].message;
+      if (err.errors[errName].message) {
+        message += err.errors[errName].message;
+      }
     }
   }
 
   return message;
 };
+
+/**
+ * Get a custom error object from other error object
+ */
+var _getErrorObject = function(err) {
+  if (err.code) {
+    switch (err.code) {
+      case 11000:
+      case 11001:
+        return {
+          message: getUniqueErrorMessage(err)
+        };
+      default:
+        return {
+          message: 'Something went wrong'
+        };
+    }
+  } else {
+    return {
+      message: _getErrorMessage(err),
+      errors: err.errors
+    };
+  }
+};
+
+module.exports.getErrorMessage = _getErrorMessage;
+module.exports.getErrorObject = _getErrorObject;

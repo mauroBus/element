@@ -33,9 +33,7 @@ exports.update = function(req, res) {
 
     user.save(function(err) {
       if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
+        return res.status(400).send(errorHandler.getErrorObject(err));
       } else {
         res.json(user);
       }

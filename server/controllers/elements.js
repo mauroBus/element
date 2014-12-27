@@ -3,7 +3,8 @@
 var mongoose = require('mongoose'),
     Element = mongoose.model('Element'),
     _ = require('lodash'),
-    errorHandler = require('../errors/errors.js');
+    errorHandler = require('../errors/errors'),
+    Roles = require('../config/roles');
 
 /**
  * Find element by id
@@ -58,9 +59,7 @@ exports.update = function(req, res) {
 
   element.save(function(err) {
     if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
+      return res.status(400).send(errorHandler.getErrorObject(err));
     } else {
       res.json(element);
     }
@@ -83,6 +82,11 @@ exports.delete = function(req, res) {
  * Element authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
+  if (_.intersection(req.user.roles, [Roles.admin]).length > 0) { // user is admin
+    next();
+    return;
+  }
+
   if (req.element.user.ref.toString() !== req.user.id) {
     return res.status(403).send({
       message: 'User is not authorized',

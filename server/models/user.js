@@ -166,21 +166,4 @@ UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
   });
 };
 
-
-/**
- * Pre-save hook
- */
-// UserSchema.pre('save', function(next, done) {
-//   var self = this;
-//   if (!this.isNew) { return next(); }
-
-//   mongoose.models.User.findOne({ email : this.email }, function(err, user) {
-//     if (err) {
-//       done(err);
-//     } else if (user) { // the email address is not unique.
-//       done.json(404, {message: 'eMail must be unique'});
-//     }
-//   });
-// });
-
 mongoose.model('User', UserSchema);

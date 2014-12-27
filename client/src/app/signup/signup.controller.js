@@ -9,6 +9,9 @@ angular.module('elementBoxApp.signup.controller', [])
       $state.go('home');
     }
 
+    $scope.displayError = false;
+    $scope.errors = {};
+
     $scope.credentials = {
       firstName: '',
       lastName: '',
@@ -18,12 +21,19 @@ angular.module('elementBoxApp.signup.controller', [])
       username: ''
     };
 
-    $scope.signup = function () {
+    $scope.signup = function (valid) {
+      if (!valid) {
+        $scope.displayError = true;
+        return;
+      }
       AuthService.signup($scope.credentials)
-        .then(function(res) {
+        .then(function(res) { // success cbk.
           $rootScope.$broadcast(AUTH_EVENTS.singinSuccess, {user: res.data.user, navigate: true});
-        }, function () {
-          $rootScope.$broadcast(AUTH_EVENTS.singinFailed);
+          $scope.displayError = false;
+        }, function(res) { // error cbk.
+          // $rootScope.$broadcast(AUTH_EVENTS.singinFailed);
+          console.log(res.data.errors);
+          angular.extend($scope.errors, res.data.errors || {});
         });
     };
   }

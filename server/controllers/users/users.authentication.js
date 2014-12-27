@@ -30,9 +30,7 @@ exports.signup = function(req, res) {
   // Then save the user.
   user.save(function(err) {
     if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
+      return res.status(400).send(errorHandler.getErrorObject(err));
     } else {
       // Remove sensitive data before login
       user.password = undefined;
@@ -203,9 +201,7 @@ exports.removeOAuthProvider = function(req, res, next) {
 
     user.save(function(err) {
       if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
+        return res.status(400).send(errorHandler.getErrorObject(err));
       } else {
         req.login(user, function(err) {
           if (err) {
@@ -227,9 +223,7 @@ exports.delete = function(req, res, next) {
   user.active = false;
   user.save(function(err) {
     if (err) {
-      return res.json(500, {
-        message: errorHandler.getErrorMessage(err)
-      });
+      return res.json(500, errorHandler.getErrorObject(err));
     } else {
       res.json({
         message: 'User Successfuly deactivated.'
