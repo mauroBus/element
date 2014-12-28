@@ -22,20 +22,8 @@ angular.module('elementBoxApp.header', [])
         }
       },
 
-      showHomeLink: function() {
-        return $location.path() !== '/home';
-      },
-
-      showNewElementLink: function() {
-        return $location.path() !== '/newelement';
-      },
-
-      showAboutLink: function() {
-        return $location.path() !== '/about';
-      },
-
-      showUserListLink: function() {
-        return $location.path() !== '/userlist';
+      showLink: function(state) {
+        return $location.path() !== 'state';
       },
 
       signout: function() {

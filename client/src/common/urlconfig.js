@@ -50,6 +50,9 @@ angular.module('elementBoxApp.urlConfig', [])
         github: {// Setting the github oauth routes
           url: '/auth/github',
           cbk: '/auth/github/callback'
+        },
+        products: {
+          products: 'api/products'
         }
       },
       // prod: {

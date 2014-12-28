@@ -10,9 +10,6 @@ angular.module('elementBoxApp.element', [
       url: '/element/:id',
       templateUrl: 'element/element.html',
       controller: 'ElementCtrl'
-      // resolve: {
-      //   patient: $rootScope.patients[0]
-      // }
     });
   }
 ]);

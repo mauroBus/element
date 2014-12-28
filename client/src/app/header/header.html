@@ -19,30 +19,37 @@
       <button
         type="button"
         class="btn btn-primary"
-        ng-show="showHomeLink()"
+        ng-show="showLink('/home')"
         go stateUrl="home">
           Home
       </button>
       <button
         type="button"
         class="btn btn-success"
-        ng-show="showNewElementLink()"
+        ng-show="showLink('/newelement')"
         go stateUrl="newelement">
           Add New Element
       </button>
       <button
         type="button"
         class="btn btn-default"
-        ng-show="showAboutLink()"
+        ng-show="showLink('/about')"
         go stateUrl="about">
           About
       </button>
       <button
         type="button"
         class="btn btn-warning"
-        ng-show="showUserListLink()"
+        ng-show="showLink('/userlist')"
         go stateUrl="userlist">
           User List
+      </button>
+      <button
+        type="button"
+        class="btn btn-info"
+        ng-show="showLink('/products')"
+        go stateUrl="products">
+          Products
       </button>
     </div>
 

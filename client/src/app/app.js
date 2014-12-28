@@ -21,13 +21,11 @@ angular.module('elementBoxApp', [
   'elementBoxApp.newelement',
   'elementBoxApp.signin',
   'elementBoxApp.signup',
-  'elementBoxApp.userlist'
-]);
-
-angular.module('elementBoxApp')
+  'elementBoxApp.userlist',
+  'elementBoxApp.products'
+])
 
 .config(['$urlRouterProvider', function($urlRouterProvider) {
-  // when there is an empty route, redirect to /home
   $urlRouterProvider
     .when('', '/home')
     .otherwise('/404');
