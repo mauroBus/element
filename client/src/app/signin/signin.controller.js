@@ -9,19 +9,28 @@ angular.module('elementBoxApp.signin.controller', [])
       $state.go('home');
     }
 
+    $scope.displayError = false;
+    $scope.invalidCredentials = false;
+    $scope.showCredAlert = false;
     $scope.credentials = {
       email: '',
       password: ''
     };
 
-    $scope.signin = function(credentials) {
+    $scope.signin = function(valid) {
+      if (!valid) {
+        $scope.displayError = true;
+        return;
+      }
       AuthService.signin($scope.credentials)
-        .then(function(res) {
+        .then(function(res) { // success cbk.
           $rootScope.$broadcast(AUTH_EVENTS.singinSuccess, {user: res.data.user, navigate: true});
-        }, function(err) {
-          $rootScope.$broadcast(AUTH_EVENTS.singinFailed);
+        }, function(res) { // error cbk.
+          // $rootScope.$broadcast(AUTH_EVENTS.singinFailed);
+          $scope.displayError = true;
+          $scope.invalidCredentials = true;
+          $scope.showCredAlert = true;
         });
     };
-
   }
 ]);

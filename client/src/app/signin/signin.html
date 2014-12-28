@@ -4,27 +4,36 @@
       <div class="col-md-3 col-md-offset-4">
         <div class="account-box">
           <div class="logo">
-            <img src="../img/logo.png" alt=""/>
+            <img src="../imgs/logo.png" alt=""/>
           </div>
 
-          <form class="form-signin">
-            <div class="form-group">
+          <div ng-show="invalidCredentials && showCredAlert">
+            <alert type="danger" close="showCredAlert=false">Oh snap! Change a few things up and try submitting again.</alert>
+          </div>
+
+          <form
+            role="form"
+            class="form-signin"
+            name="signinForm"
+            ng-submit="signin(signinForm.$valid)">
+            <div class="form-group" ng-class="{'has-error': (signinForm.email.$error.required || signinForm.email.$error.email) && displayError}">
               <input
                 type="email"
                 class="form-control"
                 placeholder="Email"
                 required autofocus
-                ngMinlength="3"
+                email-format
+                name="email"
                 ng-model="credentials.email" />
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-error': signinForm.password.$error.required && displayError}">
               <input
                 type="password"
                 class="form-control"
                 placeholder="Password"
                 required
-                ng-model="credentials.password"
-                ng-keyup="$event.keyCode == 13 && signin()" />
+                name="password"
+                ng-model="credentials.password" />
             </div>
             <label class="checkbox">
               <input
@@ -34,11 +43,7 @@
               Keep me signed in
             </label>
 
-            <button
-              class="btn btn-lg btn-block purple-bg"
-              ng-click="signin()">
-                Sign in
-            </button>
+            <button class="btn btn-lg btn-block purple-bg">Sign In</button>
           </form>
 
           <a class="forgotLnk" ui-sref="forgetPassword">I can't access my account</a>

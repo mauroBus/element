@@ -4,10 +4,10 @@ angular.module('elementBoxApp.common')
 .factory('httpInterceptor', ['$q', '$rootScope', function($q, $rootScope) {
   return {
     //  // optional method
-    //  'request': function(config) {
-    //    // do something on success
-    //    return config;
-    //  },
+    // request: function(config) {
+    //   // do something on success
+    //   return config;
+    // },
 
     //  // optional method
     // 'requestError': function(rejection) {
