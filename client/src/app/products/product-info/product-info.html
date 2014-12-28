@@ -1,0 +1,30 @@
+<section class="product-info">
+  <h1>Product Info</h1>
+  <h3 class="product-info__title">{{product.title}}</h3>
+
+  <carousel interval="2500" class="image-slider center-block">
+    <slide ng-repeat="img in product.images" active="img.active">
+      <img ng-src="{{img.url}}" style="margin:auto;">
+      <div ng-show="img.caption" class="carousel-caption">
+        <p>{{slide.caption}}</p>
+      </div>
+    </slide>
+  </carousel>
+
+  <div class="product-info__description">{{product.description}}</div>
+
+  <h4>Categories:</h4>
+  <ul class="nav nav-pills">
+    <li ng-repeat="categ in product.categories" role="presentation" class="active">
+      <p>{{categ.name}}</p>
+    </li>
+  </ul>
+
+  <h4>Catalogs:</h4>
+  <ul class="nav nav-pills">
+    <li ng-repeat="catalog in product.catalogs" role="presentation" class="active">
+      <p>{{catalog.name}}</p>
+    </li>
+  </ul>
+
+</section>

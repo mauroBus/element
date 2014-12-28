@@ -1,0 +1,12 @@
+<section class="products">
+
+  <button ng-click="addProduct()">addProduct</button>
+  <div ng-show="products.length" class="list-group">
+    <a ui-sref="productinfo({productId: product._id})" ng-repeat="product in products" class="list-group-item clearfix">
+      <div>{{product.title}}</div>
+      <div>{{product.description}}</div>
+      <div>{{product.created}}</div>
+    </a>
+  </div>
+
+</section>
