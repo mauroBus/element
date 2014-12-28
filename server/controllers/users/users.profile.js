@@ -49,14 +49,15 @@ exports.update = function(req, res) {
  * Send Current User
  */
 exports.me = function(req, res) {
-  res.json(req.user || null);
+  var publicUser = _.omit(req.user, ['password', 'salt', '__v']);
+  res.json(publicUser);
 };
 
 /**
  * List users
  */
 exports.query = function(req, res) {
-  User.find().sort('-email').exec(function(err, users) {
+  User.find().select('-password -salt -__v').sort('-email').exec(function(err, users) {
     if (err) return res.json(500, err);
     res.json(users);
   });

@@ -56,6 +56,12 @@ exports.hasAuthorization = function(roles) {
 
   return function(req, res, next) {
     _this.requiresLogin(req, res, function() {
+      if (!req.user.active) {
+        return res.status(403).send({
+          message: 'User banned',
+          status: 403
+        });
+      }
       if (_.intersection(req.user.roles, roles).length) {
         return next();
       } else {

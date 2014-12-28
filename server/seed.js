@@ -18,7 +18,7 @@ db.once('open', function(callback) {
     firstName: 'MAURO',
     lastName: 'BUSELLI',
     displayName: 'SUPER_USER',
-    email: 'SUPER@USER.COM',
+    email: 's@u.com',
     username: 'SUPER_USER',
     password: 'aaaaaa',
     provider: 'local',

@@ -22,7 +22,7 @@ exports.elementById = function(req, res, next, id) {
  * List of elements
  */
 exports.query = function(req, res) {
-  Element.find().sort('-attr4').exec(function(err, elements) {
+  Element.find().sort('-created').exec(function(err, elements) {
     if (err) return res.json(500, err);
     res.json(elements);
   });

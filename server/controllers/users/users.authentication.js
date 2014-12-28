@@ -62,6 +62,13 @@ exports.signin = function(req, res, next) {
       user.password = undefined;
       user.salt = undefined;
 
+      if (!user.active) {
+        return res.status(403).send({
+          message: 'User banned',
+          status: 403
+        });
+      }
+
       req.login(user, function(err) {
         if (err) {
           res.status(400).send(err);

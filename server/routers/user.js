@@ -12,7 +12,7 @@ module.exports = function(app) {
   var hasAdminAuthorization = users.hasAuthorization([Roles.admin]);
 
   // Setting up the users profile api
-  app.get('/users/me', users.me);
+  app.get('/users/me', users.requiresLogin, users.me);
   // app.put('/users', users.update);
   app.get('/users', users.query);
   app.delete('/users/accounts', users.removeOAuthProvider);
