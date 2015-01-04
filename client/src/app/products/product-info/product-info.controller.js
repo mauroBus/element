@@ -8,16 +8,10 @@ angular.module('elementBoxApp.products.productInfo.controller', [])
 
     $scope.product = ProductsService.get({id: $stateParams.productId}, function(p) {
       $scope.slides = p.images;
-      $scope.slides[0].active = true;
+      if ($scope.slides.length) {
+        $scope.slides[0].active = true;
+      }
     });
-
-    $scope.next = function() {
-      console.log(arguments);
-    };
-
-    $scope.prev = function() {
-      console.log(arguments);
-    };
 
   }
 ]);
