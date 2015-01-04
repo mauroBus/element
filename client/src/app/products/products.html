@@ -1,12 +1,43 @@
 <section class="products">
 
-  <button ng-click="addProduct()">addProduct</button>
-  <div ng-show="products.length" class="list-group">
-    <a ui-sref="productinfo({productId: product._id})" ng-repeat="product in products" class="list-group-item clearfix">
-      <div>{{product.title}}</div>
-      <div>{{product.description}}</div>
-      <div>{{product.created}}</div>
-    </a>
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+      <div class="col-md-12 panel">
+        <button ng-click="addDefaultProduct()" class="btn btn-default pull-right">addProduct</button>
+        <a class="btn btn-success pull-right" ui-sref="productnew">Publish</a>
+      </div>
+
+      <div class="col-md-3">
+        <ul
+          class="nav nav-pills nav-stacked"
+          ng-show="categories.length"
+          ng-repeat="categ in categories">
+          <li role="presentation" ng-click="filterProducts(categ)" ng-class="{active: categ.name === selectedCateg}">
+            <a href="">{{categ.name}}</a>
+          </li>
+        </ul>
+
+        <!-- <div ng-show="categories.length" class="list-group">
+          <button
+            ng-repeat="categ in categories"
+            class="list-group-item bg-info"
+            ng-click="filterProducts(categ)">
+            <div>{{categ}}</div>
+          </button>
+        </div> -->
+      </div>
+
+      <div class="col-md-9">
+        <div ng-show="products.length" class="list-group">
+          <a ui-sref="productinfo({productId: product._id})" ng-repeat="product in products" class="list-group-item clearfix">
+            <div>{{product.title}}</div>
+            <div>{{product.description}}</div>
+            <div>{{product.created | date:'medium'}}</div>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 
 </section>

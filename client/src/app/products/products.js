@@ -1,7 +1,8 @@
 
 angular.module('elementBoxApp.products', [
   'elementBoxApp.products.controller',
-  'elementBoxApp.products.productInfo'
+  'elementBoxApp.products.productInfo',
+  'elementBoxApp.products.productNew'
 ])
 
 .config([ '$stateProvider',

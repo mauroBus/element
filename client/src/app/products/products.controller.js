@@ -2,12 +2,20 @@
 angular.module('elementBoxApp.products.controller', [])
 
 .controller('ProductsCtrl', [
-          '$scope', '$rootScope', 'ProductsService',
-  function($scope,   $rootScope,   ProductsService) {
+          '$scope', '$rootScope', 'ProductsService', 'Categories',
+  function($scope,   $rootScope,   ProductsService,   Categories) {
 
     $scope.products = ProductsService.query();
+    $scope.categories = Categories.getCategories();
 
-    $scope.addProduct = function() {
+    $scope.filterProducts = function(categ) {
+      $scope.products = ProductsService.query({
+        category: categ.name
+      });
+      $scope.selectedCateg = categ.name;
+    };
+
+    $scope.addDefaultProduct = function() {
       var newProd = {
         title: 'My Awesome T-shirt - ' + $scope.products.length,
         description: 'All about the details. Of course it\'s black.',

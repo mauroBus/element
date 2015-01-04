@@ -18,11 +18,21 @@ exports.productById = function(req, res, next, id) {
   });
 };
 
+var _parseFilter = function(req) {
+  var filterObj = {};
+  if (req.query) {
+    if (req.query.category) {
+      filterObj['categories.name'] = req.query.category;
+    }
+  }
+  return filterObj;
+};
+
 /**
  * List of products
  */
 exports.query = function(req, res) {
-  Product.find().sort('-created').exec(function(err, products) {
+  Product.find(_parseFilter(req)).sort('-created').exec(function(err, products) {
     if (err) return res.json(500, err);
     res.json(products);
   });

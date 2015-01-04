@@ -91,16 +91,16 @@ var Product = new Schema({
 // validation:
 
 Product.path('title').validate(function (v) {
-  return v.length > 10 && v.length < 70;
-});
+  return v.length >= 10 && v.length <= 55;
+}, 'Product description should be between 10 and 55 characters');
 
 Product.path('style').validate(function (v) {
   return v.length < 40;
 }, 'Product style attribute should be less than 40 characters');
 
 Product.path('description').validate(function (v) {
-  return v.length > 10;
-}, 'Product description should be more than 10 characters');
+  return v.length >= 10;
+}, 'Product description should be longer than 10 characters');
 
 
 var ProductModel = mongoose.model('Product', Product);

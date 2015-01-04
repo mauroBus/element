@@ -18,5 +18,4 @@ module.exports = function(app) {
 
   // app.param('categoryId', function(c) {return c;});
   // app.get('/api/products/category/:categoryId', products.queryByCategory);
-
 };
