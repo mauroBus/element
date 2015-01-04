@@ -1,0 +1,102 @@
+<section class="product-new">
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h1>Create a Product</h1>
+
+      <form
+        ng-submit="save(newProductForm.$valid)"
+        role="form"
+        name="newProductForm">
+
+        <div class="form-group"
+          ng-class="{'has-error': (newProductForm.title.$error.required && displayError) || (errors.title)}">
+          <label class="product__title" for="titleId">Title:</label>
+          <input type="text"
+            id="titleId"
+            class="form-control"
+            ng-model="product.title"
+            required
+            name="title">
+        </div>
+
+        <div class="form-group"
+          ng-class="{'has-error': (newProductForm.description.$error.required && displayError) || (errors.description)}">
+          <label class="product__description" for="descriptionId">Description:</label>
+          <textarea
+            ng-model="product.description"
+            id="descriptionId"
+            class="product-new__description form-control"
+            required
+            name="description"
+            ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="imagesId">Images:</label>
+          <input type="file" id="imagesId">
+          <p class="help-block">Insert a maximun of 10 images.</p>
+
+          <div class="row">
+            <div class="col-xs-6 col-md-3">
+              <a href="#" class="thumbnail">
+                <img data-src="holder.js/100%x180" alt="...">
+              </a>
+            </div>
+            ...
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="categoriesId">Categories:</label>
+          <!-- <select id="categoriesId" ng-model="product.categories" ng-options="categ for categ in categories">
+            <option value="">-- Choose a category --</option>
+          </select> -->
+
+          <div class="btn-group">
+            <!-- <label
+              class="btn btn-primary"
+              ng-repeat="(key, categ) in categories"
+              ng-model="product.categories[key].selected"
+              btn-checkbox>
+                {{categ}}
+            </label> -->
+
+            <label
+              class="btn btn-default"
+              ng-repeat="(key, categ) in categories"
+              ng-model="product.categories[key]"
+              btn-radio="'{{categ.name}}'"
+              uncheckable>
+                {{categ.name}}
+            </label>
+          </div>
+
+          <!-- <select class="" id="categoriesId">
+            <option ng-repeat="category in categories" role="presentation">{{category}}</option>
+          </select> -->
+        </div>
+
+        <div class="form-group">
+          <label for="catalogsId">Catalogs:</label>
+          <!-- <select class="" id="catalogsId">
+            <option ng-repeat="catalog in catalogs" role="presentation">{{catalog}}</option>
+          </select> -->
+
+          <label
+              class="btn btn-danger"
+              ng-repeat="(key, catalog) in catalogs"
+              ng-model="product.catalogs[key]"
+              btn-radio="'{{catalog.name}}'"
+              uncheckable>
+                {{catalog.name}}
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-lg btn-primary center-block">Publish</button>
+      </form>
+
+    </div>
+  </div>
+
+</section>
