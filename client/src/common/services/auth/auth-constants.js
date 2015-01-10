@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp')
+angular.module('elementBoxApp.common')
 
 .constant('AUTH_EVENTS', {
   singinSuccess: 'auth-login-success',

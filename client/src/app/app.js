@@ -8,7 +8,6 @@ angular.module('elementBoxApp', [
   'templates.common', // bag with all the common templates
   // configs:
   'elementBoxApp.common',
-  'elementBoxApp.urlConfig',
   // main controller:
   'elementBoxApp.controller',
   // sub-modules:

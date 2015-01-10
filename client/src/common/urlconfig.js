@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.urlConfig', [])
+angular.module('elementBoxApp.common')
 
 // mode: { 'mock' || 'dev' || 'prod' }
 .value('mode', 'dev')
