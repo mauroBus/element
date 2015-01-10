@@ -65,7 +65,8 @@ function($http,   Session,   Urls,   AUTH_EVENTS,   $rootScope) {
   };
 
   authService.me = function() {
-    var promise = $http.get(Urls.users.me);
+    // "SILENT_ON_ERROR" is a default param, when 'true' it avoids the default service error handler.
+    var promise = $http.get(Urls.users.me, {SILENT_ON_ERROR: true});
     promise.then(function(res) {
       if (!res.data) { return; }
       Session.create(res.data._id, res.data);

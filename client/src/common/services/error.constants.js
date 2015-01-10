@@ -7,6 +7,10 @@ angular.module('elementBoxApp')
   byDefault: 'Huhoo! An error has occurred'
 })
 
+.constant('EVENT_NAMES', {
+  errorResponse: 'ERROR_RESPONSE'
+})
+
 .factory('ErrorHandler', ['ERROR_CONSTANTS', function(ERROR_CONSTANTS) {
   return {
     translate: function(msg) {
