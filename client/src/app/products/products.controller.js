@@ -4,16 +4,37 @@ angular.module('elementBoxApp.products.controller', [])
 .controller('ProductsCtrl', [
           '$scope', '$rootScope', 'ProductsService', 'Categories',
   function($scope,   $rootScope,   ProductsService,   Categories) {
-
-    $scope.products = ProductsService.query();
+    $scope.products = [];
+    $scope.page = 1;
+    $scope.pageSize = 3;
+    $scope.totalPages = 0;
+    $scope.totalProducts = 0;
     $scope.categories = Categories.getCategories();
+    $scope.filter = '';
+    $scope.selectedCateg = $scope.categories[0].name;
 
-    $scope.filterProducts = function(categ) {
-      $scope.products = ProductsService.query({
-        category: categ.name
-      });
-      $scope.selectedCateg = categ.name;
+    $scope.fetchPage = function(categ) {
+      if (categ) {
+        $scope.selectedCateg = categ.name;
+        $scope.filter = categ.filter;
+        $scope.page = 1;
+      }
+
+      ProductsService.query({
+          category: $scope.filter,
+          page: $scope.page,
+          pageSize: $scope.pageSize
+        })
+        .$promise.then(function(res) {
+          $scope.products = res.results;
+          $scope.page = res.page;
+          $scope.totalPages = res.totalPages;
+          $scope.totalProducts = res.total;
+          $scope.pageSize = res.pageSize;
+        });
     };
+
+    $scope.fetchPage(); // fetching the first page.
 
     $scope.addDefaultProduct = function() {
       var newProd = {

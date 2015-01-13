@@ -20,6 +20,12 @@
         <div class="col-md-3">Email: </div>
         <div class="col-md-9">{{user.email}}</div>
       </div>
+      <div class="row">
+        <div class="col-md-3">Roles: </div>
+        <div class="col-md-9">
+          <span ng-repeat="(key, role) in user.roles"> {{role}} </span>
+        </div>
+      </div>
       <div ng-show="user.active" class="user__remove glyphicon glyphicon-remove" ng-click="deactivateUser(user, $index)"></div>
       <div ng-show="!user.active" class="user__reactive glyphicon glyphicon-ok-sign" ng-click="activateUser(user, $index)"></div>
     </a>

@@ -4,9 +4,10 @@ angular.module('elementBoxApp', [
   'ui.router',
   'ngAnimate',
   'nvd3ChartDirectives',
-  'templates.app', // bag with all the app templates
-  'templates.common', // bag with all the common templates
-  // configs:
+  // template bugs:
+  'templates.app', // bag with all the modules html templates
+  'templates.common', // bag with all the common html templates
+  // common components:
   'elementBoxApp.common',
   // main controller:
   'elementBoxApp.controller',

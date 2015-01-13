@@ -14,7 +14,7 @@
           class="nav nav-pills nav-stacked"
           ng-show="categories.length"
           ng-repeat="categ in categories">
-          <li role="presentation" ng-click="filterProducts(categ)" ng-class="{active: categ.name === selectedCateg}">
+          <li role="presentation" ng-click="fetchPage(categ)" ng-class="{active: categ.name === selectedCateg}">
             <a href="">{{categ.name}}</a>
           </li>
         </ul>
@@ -30,6 +30,16 @@
       </div>
 
       <div class="col-md-9">
+        <pagination
+          ng-model="page"
+          items-per-page="pageSize"
+          total-items="totalProducts"
+          ng-change="fetchPage()"
+          max-size="10"
+          previous-text="Prev"
+          next-text="Next"
+        ></pagination>
+
         <div ng-show="products.length" class="list-group">
           <a ui-sref="productinfo({productId: product._id})" ng-repeat="product in products" class="list-group-item clearfix">
             <div>{{product.title}}</div>
@@ -37,8 +47,19 @@
             <div>{{product.created | date:'medium'}}</div>
           </a>
         </div>
+
+        <pagination
+          ng-model="page"
+          items-per-page="pageSize"
+          total-items="totalProducts"
+          ng-change="fetchPage()"
+          max-size="10"
+          previous-text="Prev"
+          next-text="Next"
+        ></pagination>
       </div>
     </div>
+
   </div>
 
 </section>
