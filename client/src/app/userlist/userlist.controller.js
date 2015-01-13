@@ -4,7 +4,27 @@ angular.module('elementBoxApp.userlist.controller', [])
 .controller('UserlistCtrl', [
           '$scope', 'UserlistService', '$location',
   function($scope,   UserlistService,   $location) {
-    $scope.users = UserlistService.query();
+    $scope.page = 1;
+    $scope.pageSize = 3;
+    $scope.totalPages = 0;
+    $scope.totalProducts = 0;
+    $scope.users = []; // UserlistService.query();
+
+    $scope.fetchPage = function() {
+      UserlistService.query({
+          page: $scope.page,
+          pageSize: $scope.pageSize
+        })
+        .$promise.then(function(res) {
+          $scope.users = res.results;
+          $scope.page = res.page;
+          $scope.pageSize = res.pageSize;
+          $scope.totalPages = res.totalPages;
+          $scope.totalUsers = res.total;
+        });
+    };
+
+    $scope.fetchPage();
 
     $scope.deactivateUser = function(user, index) {
       var u = user;

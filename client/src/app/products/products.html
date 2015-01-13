@@ -14,7 +14,7 @@
           class="nav nav-pills nav-stacked"
           ng-show="categories.length"
           ng-repeat="categ in categories">
-          <li role="presentation" ng-click="fetchPage(categ)" ng-class="{active: categ.name === selectedCateg}">
+          <li role="presentation" ng-click="(categ.name !== selectedCateg) ? fetchPage(categ) : ''" ng-class="{active: categ.name === selectedCateg}">
             <a href="">{{categ.name}}</a>
           </li>
         </ul>

@@ -7,6 +7,30 @@ angular.module('elementBoxApp.home.controller', [])
 
     var votedElems = {};
 
+    $scope.page = 1;
+    $scope.pageSize = 3;
+    $scope.totalPages = 0;
+    $scope.totalProducts = 0;
+    $rootScope.elements = []; // UserlistService.query();
+    // $rootScope.elements = Element.query();
+
+
+    $scope.fetchPage = function() {
+      Element.query({
+          page: $scope.page,
+          pageSize: $scope.pageSize
+        })
+        .$promise.then(function(res) {
+          $rootScope.elements = res.results;
+          $scope.page = res.page;
+          $scope.pageSize = res.pageSize;
+          $scope.totalPages = res.totalPages;
+          $scope.totalElements = res.total;
+        });
+    };
+
+    $scope.fetchPage();
+
     var scope = {
       remove: function(index, $event) {
         var elementToRem = $rootScope.elements[index];
@@ -51,8 +75,6 @@ angular.module('elementBoxApp.home.controller', [])
         return votedElems[id];
       }
     };
-
-    $rootScope.elements = Element.query();
 
     angular.extend($scope, scope);
   }

@@ -1,5 +1,15 @@
 <section class="userlist">
   <div class="list-group col-md-8"> <!-- list-group -->
+    <pagination
+      ng-model="page"
+      items-per-page="pageSize"
+      total-items="totalUsers"
+      ng-change="fetchPage()"
+      max-size="10"
+      previous-text="Prev"
+      next-text="Next"
+    ></pagination>
+
     <a href=""
       ng-repeat="user in users"
       class="list-group-item clearfix"
@@ -29,5 +39,5 @@
       <div ng-show="user.active" class="user__remove glyphicon glyphicon-remove" ng-click="deactivateUser(user, $index)"></div>
       <div ng-show="!user.active" class="user__reactive glyphicon glyphicon-ok-sign" ng-click="activateUser(user, $index)"></div>
     </a>
-  </ul>
+  </div>
 </section>

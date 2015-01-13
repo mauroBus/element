@@ -5,7 +5,8 @@ angular.module('elementBoxApp.userlist')
   var Users = $resource(Urls.users.users + '/:email', {email:'@email'}, {
     query: {
       method:'GET',
-      isArray:true
+      // isArray:true
+      isArray: false
     },
     update: {
       method: 'PUT',

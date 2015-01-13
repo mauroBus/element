@@ -20,13 +20,13 @@ angular.module('elementBoxApp.common')
     return $resource(Urls.elements + '/:id', { id: '@_id' }, {
       query: {
         method: 'GET',
-        isArray:true,
+        // isArray: true,
         params: {
           //callback: 'JSON_CALLBACK'
         },
         transformResponse: function(data, header) {
           var jsonData = angular.fromJson(data);
-          jsonData.forEach(function(element) {
+          jsonData.results.forEach(function(element) {
             element.date = new Date(element.date);
             element.created = new Date(element.created);
           });

@@ -1,6 +1,16 @@
 <section class="home" ng-cloak>
   <div ng-include="'home/filter/filter.html'"></div>
 
+  <pagination
+    ng-model="page"
+    items-per-page="pageSize"
+    total-items="totalElements"
+    ng-change="fetchPage()"
+    max-size="10"
+    previous-text="Prev"
+    next-text="Next"
+  ></pagination>
+
   <ul ng-show="elements.length" class="list-unstyled list-group">
     <li
       ng-repeat="element in elements | filter:searchTxt"
