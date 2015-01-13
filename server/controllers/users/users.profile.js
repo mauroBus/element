@@ -4,9 +4,10 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-    errorHandler = require('../../errors/errors.js'),
+    errorHandler = require('../../response/errors.js'),
     mongoose = require('mongoose'),
     passport = require('passport'),
+    Response = require('../../response/response'),
     User = mongoose.model('User');
 
 /**
@@ -57,8 +58,11 @@ exports.me = function(req, res) {
  * List users
  */
 exports.query = function(req, res) {
-  User.find().select('-password -salt -__v').sort('-email').exec(function(err, users) {
-    if (err) return res.json(500, err);
-    res.json(users);
-  });
+  var pagination = Response.pagination(req);
+
+  User
+    .find()
+    .select('-password -salt -__v')
+    .sort('-email')
+    .paginate(pagination.page, pagination.pageSize, Response.query(req, res));
 };

@@ -3,8 +3,10 @@
 var mongoose = require('mongoose'),
     Product = mongoose.model('Product'),
     _ = require('lodash'),
-    errorHandler = require('../errors/errors'),
-    Roles = require('../config/roles');
+    errorHandler = require('../response/errors'),
+    Roles = require('../config/roles'),
+    Response = require('../response/response'),
+    pagination = require('mongoose-pagination');
 
 /**
  * Find product by id
@@ -20,10 +22,8 @@ exports.productById = function(req, res, next, id) {
 
 var _parseFilter = function(req) {
   var filterObj = {};
-  if (req.query) {
-    if (req.query.category) {
-      filterObj['categories.name'] = req.query.category;
-    }
+  if (req.query &&  req.query.category) {
+    filterObj['categories.name'] = req.query.category;
   }
   return filterObj;
 };
@@ -32,10 +32,11 @@ var _parseFilter = function(req) {
  * List of products
  */
 exports.query = function(req, res) {
-  Product.find(_parseFilter(req)).sort('-created').exec(function(err, products) {
-    if (err) return res.json(500, err);
-    res.json(products);
-  });
+  var pagination = Response.pagination(req);
+  Product
+    .find(_parseFilter(req))
+    .sort('-created')
+    .paginate(pagination.page, pagination.pageSize, Response.query(req, res));
 };
 
 /**

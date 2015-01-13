@@ -3,7 +3,8 @@
 var mongoose = require('mongoose'),
     Element = mongoose.model('Element'),
     _ = require('lodash'),
-    errorHandler = require('../errors/errors'),
+    errorHandler = require('../response/errors'),
+    Response = require('../response/response'),
     Roles = require('../config/roles');
 
 /**
@@ -22,10 +23,12 @@ exports.elementById = function(req, res, next, id) {
  * List of elements
  */
 exports.query = function(req, res) {
-  Element.find().sort('-created').exec(function(err, elements) {
-    if (err) return res.json(500, err);
-    res.json(elements);
-  });
+  var pagination = Response.pagination(req);
+
+  Element
+    .find()
+    .sort('-created')
+    .paginate(pagination.page, pagination.pageSize, Response.query(req, res));
 };
 
 /**
