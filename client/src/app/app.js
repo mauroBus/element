@@ -3,7 +3,7 @@ angular.module('elementBoxApp', [
   'ui.bootstrap',
   'ui.router',
   'ngAnimate',
-  'nvd3ChartDirectives',
+  // 'nvd3ChartDirectives',
   // template bugs:
   'templates.app', // bag with all the modules html templates
   'templates.common', // bag with all the common html templates

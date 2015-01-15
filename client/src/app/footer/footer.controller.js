@@ -1,6 +1,6 @@
 
 angular.module('elementBoxApp.footer', [
-  'nvd3ChartDirectives',
+  // 'nvd3ChartDirectives',
   'templates.app',
   'templates.common'
 ])

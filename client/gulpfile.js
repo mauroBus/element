@@ -33,6 +33,7 @@ var config = {
   dist: 'dist',
   vendor: 'vendor',
   jsDist: 'dist/js',
+  jsModulesDist: 'dist/js/modules',
   cssDist: 'dist/css',
   fontsDist: 'dist/fonts',
   serverPort: 8080,
@@ -42,20 +43,46 @@ var config = {
 
 /***** [Private] Task: Build Index *****/
 gulp.task('build-index', function() {
-  return gulp.src('src/index.html')
+  var modules = shelljs.exec('ls -d src/app/*/ | cut -f3 -d"/"').output.split('\n');
+  modules.pop();
+
+  return gulp.src('src/index.ejs')
     .pipe(template({
       pkg: package,
       year: new Date(),
       production: argv.production,
-      mainJsName: config.jsName
+      mainJsName: config.jsName,
+      jsModulesDist: config.jsModulesDist,
+      modules: modules
     }))
+    .pipe(rename('/index.html'))
     .pipe(gulp.dest(config.dist));
 });
 
+gulp.task('build-js-common', function() {
+  gulp.src('src/common/**/*.js') // all js inside the module folder.
+    .pipe(concat('common.js'))
+    .pipe(gulp.dest(config.jsDist));
+});
+
+gulp.task('build-js-modules', function() {
+  var modulesFull = shelljs.exec('ls -d src/app/*/').output.split('\n');
+  var modules = shelljs.exec('ls -d src/app/*/ | cut -f3 -d"/"').output.split('\n');
+  modulesFull.pop();
+  modules.pop();
+
+  _.forEach(modulesFull, function(module, i) {
+    gulp.src(module + '/**/*.js') // all js inside the module folder.
+      .pipe(concat(modules[i] + '.js'))
+      .pipe(gulp.dest(config.jsModulesDist));
+  });
+});
 
 /***** [Private] Task: Build JS *****/
-gulp.task('build-js', function() {
+gulp.task('build-js', ['build-js-modules', 'build-js-common'], function() {
   var now = new Date();
+  var modules = shelljs.exec('ls -d src/app/*/ | cut -f3 -d"/"').output.split('\n');
+  modules.pop();
 
   var htmlMinOpts = {
     collapseWhitespace: true,
@@ -63,7 +90,7 @@ gulp.task('build-js', function() {
   };
 
   return merge(
-      gulp.src('src/**/*.js'),
+      gulp.src('src/app/*.js'),
       gulp.src('src/app/**/*.html')
           .pipe(htmlmin(htmlMinOpts))
           .pipe(templateCache({
@@ -126,9 +153,9 @@ gulp.task('copy-static', function() {
   return merge(
     // gulp.src(config.vendor + '/bootstrap-css/css/*.css')
     //     .pipe(gulp.dest(config.cssDist)),
-    gulp.src(config.vendor + '/nvd3/nv.d3.css')
-        // .pipe(gulpIf(argv.production, uglify('', { mangle: false })))
-        .pipe(gulp.dest(config.cssDist)),
+    // gulp.src(config.vendor + '/nvd3/nv.d3.css')
+    //     // .pipe(gulpIf(argv.production, uglify('', { mangle: false })))
+    //     .pipe(gulp.dest(config.cssDist)),
     gulp.src(config.vendor + '/bootstrap-css/fonts/*')
         .pipe(gulp.dest(config.fontsDist)),
     gulp.src(['src/assets/**/*.*', '!src/assets/less/*.*'])
@@ -140,8 +167,8 @@ gulp.task('copy-static', function() {
           config.vendor + '/angular-resource/angular-resource.js',
           config.vendor + '/angular-animate/angular-animate.js',
           config.vendor + '/d3/d3.min.js',
-          config.vendor + '/nvd3/nv.d3.min.js',
-          config.vendor + '/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js'
+          // config.vendor + '/nvd3/nv.d3.min.js',
+          // config.vendor + '/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js'
         ])
         .pipe(gulpIf(argv.production, uglify('angular.js', { mangle: false })))
         .pipe(concat('angular.js')),
@@ -173,7 +200,7 @@ gulp.task('watch', ['lint', 'build'], function() {
 
   gulp.watch('src/**/*.js', ['lint', 'build-js']);
   gulp.watch(['src/**/*.html', '!src/index.html'], ['build-js']);
-  gulp.watch('src/index.html', ['build-index']);
+  gulp.watch('src/index.ejs', ['build-index']);
   gulp.watch(['src/assets/**/*.*', '!src/assets/less/*.less'], ['copy-static']);
   gulp.watch([
       'src/assets/less/*.less',
