@@ -40,12 +40,20 @@ var config = {
   livereloadPort: 12345
 };
 
+/* Returns an array with the app module names */
+var getModules = function() {
+  var modules = shelljs.ls(['src/app/']);
+  return _.filter(modules, function(entry) { return !entry.match(/\.js$/); });
+};
+/* Returns an array with the app full module names */
+var getFullModules = function() {
+  var modules = getModules();
+  return _.map(modules, function(module) { return 'src/app/' + module; });
+};
+
 
 /***** [Private] Task: Build Index *****/
 gulp.task('build-index', function() {
-  var modules = shelljs.exec('ls -d src/app/*/ | cut -f3 -d"/"').output.split('\n');
-  modules.pop();
-
   return gulp.src('src/index.ejs')
     .pipe(template({
       pkg: package,
@@ -53,36 +61,36 @@ gulp.task('build-index', function() {
       production: argv.production,
       mainJsName: config.jsName,
       jsModulesDist: config.jsModulesDist,
-      modules: modules
+      modules: getModules()
     }))
     .pipe(rename('/index.html'))
     .pipe(gulp.dest(config.dist));
 });
 
+
+/***** [Private] Task: Build Common Modules *****/
 gulp.task('build-js-common', function() {
-  gulp.src('src/common/**/*.js') // all js inside the module folder.
+  gulp.src('src/common/**/*.js')
     .pipe(concat('common.js'))
     .pipe(gulp.dest(config.jsDist));
 });
 
-gulp.task('build-js-modules', function() {
-  var modulesFull = shelljs.exec('ls -d src/app/*/').output.split('\n');
-  var modules = shelljs.exec('ls -d src/app/*/ | cut -f3 -d"/"').output.split('\n');
-  modulesFull.pop();
-  modules.pop();
+
+/***** [Private] Task: Build App Modules *****/
+gulp.task('build-app-modules', function() {
+  var modules = getModules();
+  var modulesFull = getFullModules();
 
   _.forEach(modulesFull, function(module, i) {
-    gulp.src(module + '/**/*.js') // all js inside the module folder.
+    gulp.src(module + '/**/*.js') // all js file inside the module folder.
       .pipe(concat(modules[i] + '.js'))
       .pipe(gulp.dest(config.jsModulesDist));
   });
 });
 
 /***** [Private] Task: Build JS *****/
-gulp.task('build-js', ['build-js-modules', 'build-js-common'], function() {
+gulp.task('build-js', ['build-app-modules', 'build-js-common'], function() {
   var now = new Date();
-  var modules = shelljs.exec('ls -d src/app/*/ | cut -f3 -d"/"').output.split('\n');
-  modules.pop();
 
   var htmlMinOpts = {
     collapseWhitespace: true,
