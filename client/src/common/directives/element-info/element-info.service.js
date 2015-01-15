@@ -17,7 +17,7 @@ angular.module('elementBoxApp.common')
       $http.defaults.useXDomain = true;
     }
 
-    return $resource(Urls.elements + '/:id', { id: '@_id' }, {
+    var ElementRsr = $resource(Urls.elements + '/:id', { id: '@_id' }, {
       query: {
         method: 'GET',
         // isArray: true,
@@ -26,9 +26,10 @@ angular.module('elementBoxApp.common')
         },
         transformResponse: function(data, header) {
           var jsonData = angular.fromJson(data);
-          jsonData.results.forEach(function(element) {
+          jsonData.results.forEach(function(element, i) {
             element.date = new Date(element.date);
             element.created = new Date(element.created);
+            jsonData.results[i] = new ElementRsr(element);
           });
           return jsonData;
         }
@@ -74,6 +75,8 @@ angular.module('elementBoxApp.common')
       }
 
     });
+
+    return ElementRsr;
   }
 ]);
 

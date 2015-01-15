@@ -6,9 +6,13 @@ angular.module('elementBoxApp.products')
     query: {
       method: 'GET',
       isArray: false,
-      // transformResponse: function(data, headersGetter) {
-      //   return JSON.parse(data).results;
-      // }
+      transformResponse: function(data, headersGetter) {
+        var jsonData = JSON.parse(data);
+        jsonData.results.forEach(function(res, i) {
+          jsonData.results[i] = new Products(res);
+        });
+        return jsonData;
+      }
     },
     update: {
       method: 'PUT',

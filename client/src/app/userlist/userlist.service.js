@@ -6,7 +6,14 @@ angular.module('elementBoxApp.userlist')
     query: {
       method:'GET',
       // isArray:true
-      isArray: false
+      isArray: false,
+      transformResponse: function(data, headersGetter) {
+        var jsonData = JSON.parse(data);
+        jsonData.results.forEach(function(res, i) {
+          jsonData.results[i] = new Users(res);
+        });
+        return jsonData;
+      }
     },
     update: {
       method: 'PUT',
