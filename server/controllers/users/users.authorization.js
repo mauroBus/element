@@ -62,7 +62,7 @@ exports.hasAuthorization = function(roles) {
           status: 403
         });
       }
-      if (_.intersection(req.user.roles, roles).length) {
+      if (_.intersection(req.user.roles, roles).length && req.user.email !== req.profile.email) {
         return next();
       } else {
         return res.status(403).send({

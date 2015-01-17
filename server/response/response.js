@@ -16,7 +16,7 @@ var Response = {
   NOT_AUTHENTICATED: 401,
   NOT_AUTHORIZED: 403,
 
-  status: function(err) {
+  getErrorStatus: function(err) {
     return err instanceof BadRequest ? Response.BAD_REQUEST : Response.SERVER_ERROR;
   },
 
@@ -52,7 +52,7 @@ var Response = {
 
     return function(err, results, total) {
       if (err) { console.error(err); }
-      res.status(err ? Response.status(err) : Response.FOUND);
+      res.status(err ? Response.getErrorStatus(err) : Response.FOUND);
 
       res.json(err ?
         Response.getFailureResponse(err) :
@@ -61,143 +61,38 @@ var Response = {
     };
   },
 
-  read: function(req, res, accepts) {
-    return function(err, data) {
-      res.status(err ? Response.status(err) : (data ? Response.FOUND : Response.NOT_FOUND));
-      var contentType = req.accepts(accepts);
-      switch (contentType) {
-        case 'application/json':
-          res.type(contentType);
-          res.end(JSON.stringify(err ? Response.getFailureResponse(err) : data));
-          break;
-        // case 'text/html':
-        // case 'application/xhtml+xml':
-        //   res.type(contentType);
-        //   //TODO an HTML or XHTML view
-        //   //res.render('error',{error:err});
-        //   res.end(require('nice-xml').stringify({
-        //     response: err ? new Response.getFailureResponse(err) : data
-        //   }));
-        //   break;
-        // case 'application/x-yaml':
-        // case 'text/yaml':
-        //   res.type(contentType);
-        //   res.end(require('js-yaml').dump(err ? new Response.getFailureResponse(err) : data));
-        //   break;
-        // case 'application/x-www-form-urlencoded':
-        //   res.type(contentType);
-        //   res.end(require('querystring').stringify(err ? new Response.getFailureResponse(err) : data));
-        //   break;
-        default:
-          res.type('text/plain');
-          res.end(JSON.stringify(err ? Response.getFailureResponse(err) : data));
-      }
+  create: function (req, res) {
+    return function (err, data) {
+      res.status(err ? Response.getErrorStatus(err) : (data ? Response.CREATED : Response.NOT_CREATED));
+      res.json(err ? new Response.getFailureResponse(err) : data);
     };
   },
 
-  update: function (req, res, accepts) {
-    return function (err, data) {
-      res.status(err ? Response.status(err) : (data ? Response.UPDATED : Response.NOT_UPDATED));
-      var contentType = req.accepts(accepts);
-      switch (contentType) {
-      case 'application/json':
-        res.type(contentType);
-        res.end(JSON.stringify(err ? new Response.getFailureResponse(err) : data));
-        break;
-      case 'text/html':
-      case 'application/xhtml+xml':
-        res.type(contentType);
-        //TODO an HTML or XHTML view
-        //res.render('error',{error:err});
-        res.end(require('nice-xml').stringify({
-          response: err ? new Response.getFailureResponse(err) : data
-        }));
-        break;
-      case 'application/x-yaml':
-      case 'text/yaml':
-        res.type(contentType);
-        res.end(require('js-yaml').dump(err ? new Response.getFailureResponse(err) : data));
-        break;
-      case 'application/x-www-form-urlencoded':
-        res.type(contentType);
-        res.end(require('querystring').stringify(err ? new Response.getFailureResponse(err) : data));
-        break;
-      default:
-        res.type('text/plain');
-        res.end(JSON.stringify(err ? new Response.getFailureResponse(err) : data));
-      }
+  read: function(req, res) {
+    return function(err, data) {
+      res.status(err ? Response.getErrorStatus(err) : (data ? Response.FOUND : Response.NOT_FOUND));
+      res.json(err ? Response.getFailureResponse(err) : data);
     };
   },
-  delete: function (req, res, accepts) {
+
+  update: function (req, res) {
+    return function (err, data) {
+      res.status(err ? Response.getErrorStatus(err) : (data ? Response.UPDATED : Response.NOT_UPDATED));
+      res.json(err ? new Response.getFailureResponse(err) : data);
+    };
+  },
+
+  delete: function (req, res) {
     return function (err) {
-      res.status(err ? Response.status(err) : Response.DELETED);
+      res.status(err ? Response.getErrorStatus(err) : Response.DELETED);
       if (err) {
-        var contentType = req.accepts(accepts);
-        switch (contentType) {
-        case 'application/json':
-          res.type(contentType);
-          res.end(JSON.stringify(new Response.getFailureResponse(err)));
-          break;
-        case 'text/html':
-        case 'application/xhtml+xml':
-          res.type(contentType);
-          //TODO an HTML or XHTML view
-          //res.render('error',{error:err});
-          res.end(require('nice-xml').stringify({
-            response: new Response.getFailureResponse(err)
-          }));
-          break;
-        case 'application/x-yaml':
-        case 'text/yaml':
-          res.type(contentType);
-          res.end(require('js-yaml').dump(new Response.getFailureResponse(err)));
-          break;
-        case 'application/x-www-form-urlencoded':
-          res.type(contentType);
-          res.end(require('querystring').stringify(new Response.getFailureResponse(err)));
-          break;
-        default:
-          res.type('text/plain');
-          res.end(JSON.stringify(new Response.getFailureResponse(err)));
-        }
+        res.json(new Response.getFailureResponse(err));
       } else {
         res.end();
       }
     };
-  },
-  create: function (req, res, accepts) {
-    return function (err, data) {
-      res.status(err ? Response.status(err) : (data ? Response.CREATED : Response.NOT_CREATED));
-      var contentType = req.accepts(accepts);
-      switch (contentType) {
-      case 'application/json':
-        res.type(contentType);
-        res.end(JSON.stringify(err ? new Response.getFailureResponse(err) : data));
-        break;
-      case 'text/html':
-      case 'application/xhtml+xml':
-        res.type(contentType);
-        //TODO an HTML or XHTML view
-        //res.render('error',{error:err});
-        res.end(require('nice-xml').stringify({
-          response: err ? new Response.getFailureResponse(err) : data
-        }));
-        break;
-      case 'application/x-yaml':
-      case 'text/yaml':
-        res.type(contentType);
-        res.end(require('js-yaml').dump(err ? new Response.getFailureResponse(err) : data));
-        break;
-      case 'application/x-www-form-urlencoded':
-        res.type(contentType);
-        res.end(require('querystring').stringify(err ? new Response.getFailureResponse(err) : data));
-        break;
-      default:
-        res.type('text/plain');
-        res.end(JSON.stringify(err ? new Response.getFailureResponse(err) : data));
-      }
-    };
   }
+
 };
 
 module.exports = Response;
