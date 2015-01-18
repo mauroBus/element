@@ -34,16 +34,9 @@
 
         <div class="form-group">
           <label for="imagesId">Images:</label>
-          <input type="file" id="imagesId">
-          <p class="help-block">Insert a maximun of 10 images.</p>
-
-          <div class="row">
-            <div class="col-xs-6 col-md-3">
-              <a href="#" class="thumbnail">
-                <img data-src="holder.js/100%x180" alt="...">
-              </a>
-            </div>
-            ...
+          <button class="btn btn-default btn-sm" ng-click="areImgsCollapsed = !areImgsCollapsed">Collapse Images...</button>
+          <div collapse="areImgsCollapsed">
+            <file-upload limit="4" files="product.images"></file-upload>
           </div>
         </div>
 
@@ -93,7 +86,7 @@
             </label>
         </div>
 
-        <button type="submit" class="btn btn-lg btn-primary center-block">Publish</button>
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Publish</button>
       </form>
 
     </div>

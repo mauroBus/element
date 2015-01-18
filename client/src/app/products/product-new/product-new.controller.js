@@ -6,11 +6,14 @@ angular.module('elementBoxApp.products.productNew.controller', [])
   function($scope,   $stateParams,   ProductsService,   Categories) {
     $scope.categories = Categories.getCategories();
     $scope.catalogs = [{
-        name: 'winter'
+        name: 'Winter',
+        filter: 'winter'
       }, {
-        name: 'outum'
+        name: 'Outum',
+        filter: 'outum'
       }, {
-        name: 'summer'
+        name: 'Summer',
+        filter: 'summer'
       }
     ];
 
@@ -50,13 +53,15 @@ angular.module('elementBoxApp.products.productNew.controller', [])
         ]
     };
 
+    $scope.areImgsCollapsed = true;
+
     $scope.save = function() {
       var categs = [], catags = [];
       $scope.product.categories.forEach(function(p, i) {
-        if (p) { categs.push($scope.categories[i]); }
+        if (p) { categs.push({ name: $scope.categories[i].filter }); }
       });
       $scope.product.catalogs.forEach(function(p, i) {
-        if (p) { catags.push($scope.catalogs[i]); }
+        if (p) { catags.push({ name: $scope.catalogs[i].filter }); }
       });
 
       ProductsService.save(angular.extend({}, $scope.product, {categories: categs, catalogs: catags}));
