@@ -92,7 +92,7 @@ var Product = new Schema({
 
 Product.path('title').validate(function (v) {
   return v.length >= 10 && v.length <= 55;
-}, 'Product description should be between 10 and 55 characters');
+}, 'Product title should be between 10 and 55 characters');
 
 Product.path('style').validate(function (v) {
   return v.length < 40;

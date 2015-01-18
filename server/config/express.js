@@ -23,6 +23,8 @@ var fs = require('fs'),
     config = require('./config'),
     consolidate = require('consolidate'),
     path = require('path');
+    // multer = require('multer')
+
 
 module.exports = function(db) {
   // Initialize express app
@@ -38,6 +40,12 @@ module.exports = function(db) {
   app.locals.description = config.app.description;
   app.locals.keywords = config.app.keywords;
   // app.locals.facebookAppId = config.facebook.clientID;
+
+  if (!fs.existsSync(config.uploadDir)){
+    fs.mkdirSync(config.uploadDir);
+    fs.mkdirSync(config.uploadDirTmp);
+  }
+
 
   // Passing the request url to environment locals
   app.use(function(req, res, next) {
@@ -74,6 +82,36 @@ module.exports = function(db) {
   } else if (process.env.NODE_ENV === 'production') {
     app.locals.cache = 'memory';
   }
+
+
+  // app.use(multer({
+  //   dest: './uploads/',
+  //   limits: {
+  //     files: 10,
+  //     fileSize: 2,
+  //     parts: 10
+  //   },
+  //   rename: function(fieldname, filename) {
+  //     return filename.replace(/\W+/g, '-').toLowerCase();
+  //   },
+  //   onFileUploadStart: function(file) {
+  //     console.log(file.fieldname + ' is starting ...');
+  //   },
+  //   onFileUploadComplete: function(file) {
+  //     console.log(file.fieldname + ' uploaded to  ' + file.path);
+  //   },
+  //   onError: function(error, next) {
+  //     console.log(error);
+  //     next(error);
+  //   },
+  //   onFileSizeLimit: function(file) {
+  //     console.log('Failed: ', file.originalname);
+  //     fs.unlink('./' + file.path); // delete the partially written file
+  //   },
+  //   onFilesLimit: function() {
+  //     console.log('Crossed file limit!');
+  //   }
+  // }));
 
   // Request body parsing middleware should be above methodOverride
   app.use(bodyParser.urlencoded({
