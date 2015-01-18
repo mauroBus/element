@@ -1,0 +1,51 @@
+.file-upload {
+
+  .my-drop-zone {
+    border: dotted 3px lightgray;
+  }
+  .file-over-uploader {
+    border: dotted 3px green;
+  }
+
+  .file-upload-btn { // for input type "file".
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+
+    input.upload {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+      filter: alpha(opacity=0);
+    }
+  }
+
+  .caption {
+    .img-title {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+
+  .thumbnail {
+    .upload-status {
+      position: absolute;
+      right: 23px;
+      font-size: 22px;
+      // .glyphicon-floppy-saved { }
+      // .glyphicon-floppy-saved { color: blueviolet; }
+      // .glyphicon-ban-circle { .text-warning(); }
+      // .glyphicon-floppy-remove { .text-danger(); }
+    }
+    &:hover { background-color: whitesmoke; }
+    .progress {
+      // margin-bottom: 
+    }
+  }
+}
