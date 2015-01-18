@@ -175,6 +175,7 @@ gulp.task('copy-static', function() {
           config.vendor + '/angular-resource/angular-resource.js',
           config.vendor + '/angular-animate/angular-animate.js',
           config.vendor + '/d3/d3.min.js',
+          config.vendor + '/angular-file-upload/angular-file-upload.js',
           // config.vendor + '/nvd3/nv.d3.min.js',
           // config.vendor + '/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js'
         ])
