@@ -34,9 +34,12 @@
 
         <div class="form-group">
           <label for="imagesId">Images:</label>
-          <button class="btn btn-default btn-sm" ng-click="areImgsCollapsed = !areImgsCollapsed">Collapse Images...</button>
+          <a href class="btn btn-link btn-sm" ng-click="areImgsCollapsed = !areImgsCollapsed">
+            <span ng-show="areImgsCollapsed" class="glyphicon glyphicon-plus-sign"></span>
+            <span ng-show="!areImgsCollapsed" class="glyphicon glyphicon-minus-sign"></span>
+          </a>
           <div collapse="areImgsCollapsed">
-            <file-upload limit="4" files="product.images"></file-upload>
+            <file-upload limit="10" files="product.images"></file-upload>
           </div>
         </div>
 
