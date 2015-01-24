@@ -14,6 +14,7 @@
 
     input.upload {
       position: absolute;
+      width: 100%;
       top: 0;
       right: 0;
       margin: 0;
@@ -38,14 +39,34 @@
       position: absolute;
       right: 23px;
       font-size: 22px;
-      // .glyphicon-floppy-saved { }
-      // .glyphicon-floppy-saved { color: blueviolet; }
-      // .glyphicon-ban-circle { .text-warning(); }
-      // .glyphicon-floppy-remove { .text-danger(); }
     }
-    &:hover { background-color: whitesmoke; }
-    .progress {
-      // margin-bottom: 
+
+    &:hover {
+      background-color: whitesmoke;
+      .move-options { display: block; }
+    }
+
+    .caption {
+      .caption__size {
+        margin-right: 10px;
+      }
+    }
+    .move-options {
+      display: none;
+      position: absolute;
+      color: #89878C;
+      font-size: 18px;
+      .glyphicon:hover {
+        cursor: pointer;
+        color: #B3B3B3;
+      }
+    }
+  }
+
+  .overall-progress {
+    margin-top: 10px;
+    .progress, p {
+      margin-right: 10px;
     }
   }
 }
