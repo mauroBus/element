@@ -9,14 +9,14 @@ angular.module('elementBoxApp', [
   'templates.common', // bag with all the common html templates
   // common components:
   'elementBoxApp.common',
-  // main controller:
-  'elementBoxApp.controller',
+  // main module:
+  'elementBoxApp.main',
   // sub-modules:
   'elementBoxApp.about',
   'elementBoxApp.element',
   'elementBoxApp.error404',
-  'elementBoxApp.footer',
-  'elementBoxApp.header',
+  // 'elementBoxApp.footer',
+  // 'elementBoxApp.header',
   'elementBoxApp.home',
   'elementBoxApp.newelement',
   'elementBoxApp.signin',
@@ -27,7 +27,7 @@ angular.module('elementBoxApp', [
 
 .config(['$urlRouterProvider', function($urlRouterProvider) {
   $urlRouterProvider
-    .when('', '/home')
+    // .when('', '/home')
     .otherwise('/404');
 }])
 

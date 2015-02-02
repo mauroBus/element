@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.about.controller', [])
+angular.module('elementBoxApp.about')
 
 .controller('AboutCtrl', ['$scope', function($scope) {
     $scope.concepts = [];

@@ -4,8 +4,8 @@
 
     <div class="pull-right">
       <span ng-if="!currentUser.firstName">
-        <a ui-sref="signin" class="btn btn-sm btn-default">SignIn</a>
-        <a ui-sref="signup" class="btn btn-sm btn-default">SignUp</a>
+        <a ui-sref="main.signin" class="btn btn-sm btn-default">SignIn</a>
+        <a ui-sref="main.signup" class="btn btn-sm btn-default">SignUp</a>
         <span>REGISTRATE!</span>
       </span>
       <span ng-show="currentUser.firstName">Welcome, {{currentUser.firstName}} {{currentUser.lastName}}</span>
@@ -20,35 +20,35 @@
         type="button"
         class="btn btn-primary"
         ng-show="showLink('/home')"
-        go stateUrl="home">
+        go stateUrl="main.home">
           Home
       </button>
       <button
         type="button"
         class="btn btn-success"
         ng-show="showLink('/newelement')"
-        go stateUrl="newelement">
+        go stateUrl="main.newelement">
           Add New Element
       </button>
       <button
         type="button"
         class="btn btn-default"
         ng-show="showLink('/about')"
-        go stateUrl="about">
+        go stateUrl="main.about">
           About
       </button>
       <button
         type="button"
         class="btn btn-warning"
         ng-show="showLink('/userlist')"
-        go stateUrl="userlist">
+        go stateUrl="main.userlist">
           User List
       </button>
       <button
         type="button"
         class="btn btn-info"
         ng-show="showLink('/products')"
-        go stateUrl="products">
+        go stateUrl="main.products">
           Products
       </button>
     </div>

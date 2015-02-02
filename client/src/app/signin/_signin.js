@@ -1,11 +1,9 @@
 
-angular.module('elementBoxApp.signin', [
-  'elementBoxApp.signin.controller'
-])
+angular.module('elementBoxApp.signin', [])
 
 .config([ '$stateProvider',
   function($stateProvider) {
-    $stateProvider.state('signin', {
+    $stateProvider.state('main.signin', {
       url: '/signin',
       templateUrl: 'signin/signin.html',
       controller: 'SigninCtrl'

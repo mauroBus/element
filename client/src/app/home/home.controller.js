@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.home.controller', [])
+angular.module('elementBoxApp.home')
 
 .controller('HomeCtrl', [
           '$scope', '$rootScope', '$timeout', '$location', 'Element', 'Statistics',

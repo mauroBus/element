@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.header', [])
+angular.module('elementBoxApp.main')
 
 .controller('HeaderCtrl', [
           '$scope', '$rootScope', '$location', '$stateParams', 'AuthService', 'AUTH_EVENTS',

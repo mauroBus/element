@@ -1,11 +1,9 @@
 
-angular.module('elementBoxApp.newelement', [
-  'elementBoxApp.newelement.controller'
-])
+angular.module('elementBoxApp.newelement', [])
 
 .config([ '$stateProvider',
   function($stateProvider) {
-    $stateProvider.state('newelement', {
+    $stateProvider.state('main.newelement', {
       url: '/newelement',
       templateUrl: 'newelement/newelement.html',
       controller: 'NewElementCtrl'

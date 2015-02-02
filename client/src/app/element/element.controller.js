@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.element.controller', [])
+angular.module('elementBoxApp.element')
 
 .controller('ElementCtrl', [
           '$scope', '$stateParams', 'Element',

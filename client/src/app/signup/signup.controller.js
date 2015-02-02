@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.signup.controller', [])
+angular.module('elementBoxApp.signup')
 
 .controller('SignupCtrl', [
           '$scope', '$rootScope', '$state', 'AUTH_EVENTS', 'AuthService',

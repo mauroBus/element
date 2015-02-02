@@ -1,12 +1,12 @@
 
-angular.module('elementBoxApp.signin.controller', [])
+angular.module('elementBoxApp.signin')
 
 .controller('SigninCtrl', [
           '$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', '$state',
   function($scope,   $rootScope,   AUTH_EVENTS,   AuthService,   $state) {
 
     if (AuthService.isAuthenticated()) {
-      $state.go('home');
+      $state.go('main.home');
     }
 
     $scope.displayError = false;

@@ -1,10 +1,8 @@
-angular.module('elementBoxApp.about', [
-  'elementBoxApp.about.controller'
-])
+angular.module('elementBoxApp.about', [])
 
 .config([ '$stateProvider',
   function($stateProvider) {
-    $stateProvider.state('about', {
+    $stateProvider.state('main.about', {
       url: '/about',
       templateUrl: 'about/about.html',
       controller: 'AboutCtrl'

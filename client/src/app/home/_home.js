@@ -1,11 +1,9 @@
 
-angular.module('elementBoxApp.home', [
-  'elementBoxApp.home.controller'
-])
+angular.module('elementBoxApp.home', [])
 
 .config([ '$stateProvider',
   function($stateProvider) {
-    $stateProvider.state('home', {
+    $stateProvider.state('main.home', {
       url: '/home',
       templateUrl: 'home/home.html',
       controller: 'HomeCtrl'
