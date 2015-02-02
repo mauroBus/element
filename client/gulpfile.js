@@ -133,7 +133,8 @@ gulp.task('build-js', ['build-app-modules', 'build-js-common'], function() {
 gulp.task('bootstrap-css', function() {
   return gulp.src([
       config.vendor + '/bootstrap-css/css/bootstrap.css',
-      config.vendor + '/bootstrap-css/css/bootstrap-theme.css'
+      config.vendor + '/bootstrap-css/css/bootstrap-theme.css',
+      config.vendor + '/angular-carousel/dist/angular-carousel.css'
     ])
     // .pipe(uncss({
     //   html: glob.sync('src/**/*.html')
@@ -176,6 +177,8 @@ gulp.task('copy-static', function() {
           config.vendor + '/angular-animate/angular-animate.js',
           config.vendor + '/d3/d3.min.js',
           config.vendor + '/angular-file-upload/angular-file-upload.js',
+          config.vendor + '/angular-touch/angular-touch.js',
+          config.vendor + '/angular-carousel/dist/angular-carousel.js',
           // config.vendor + '/nvd3/nv.d3.min.js',
           // config.vendor + '/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js'
         ])

@@ -2,21 +2,39 @@
   <h1>Product Info</h1>
   <h3 class="product-info__title">{{product.title}}</h3>
 
-  <carousel ng-show="product.images.length" interval="2500" class="image-slider center-block">
-    <slide ng-repeat="img in product.images" active="img.active">
-      <img ng-src="{{img.url}}" style="margin:auto;">
-      <div ng-show="img.caption" class="carousel-caption">
+<!--   <carousel ng-show="product.images.length" interval="300" class="image-slider center-block">
+    <slide ng-repeat="slide in slides" active="slide.active">
+      <img ng-src="{{slide.url}}">
+      <div class="carousel-caption">
+        <h4>Slide {{$index}}</h4>
         <p>{{slide.caption}}</p>
       </div>
     </slide>
   </carousel>
+ -->
+
+  <div ng-if="slides.length">
+    <!-- slide, zoom, hexagon, fadeAndSlide -->
+    <ul rn-carousel class="image-slider center-block" rn-carousel-transition="fadeAndSlide" rn-carousel-controls rn-carousel-buffered="3" rn-carousel-index="slidesIndex">
+      <li ng-repeat="($index, slide) in slides">
+        <div class="layer">
+          <div class="">
+            <!-- <img ng-src="{{slide.url}}" draggable="false" class="img-no-drag"> -->
+            <div class="img" style="background-image: url({{slide.url}});"></div>
+            <h4 class="img-caption">{{slide.index}}</h4>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div rn-carousel-indicators class="indicators" ng-if="slides.length > 1" slides="slides" rn-carousel-index="slidesIndex"></div>
+  </div>
 
   <div class="product-info__description">{{product.description}}</div>
 
   <h4>Categories:</h4>
   <ul class="nav nav-pills">
     <li ng-repeat="categ in product.categories" role="presentation" class="active">
-      <a href="">{{categ.name}}</a>
+      <a ui-sref="main.products.list({categ: categ.name})">{{categ.name}}</a>
     </li>
   </ul>
 

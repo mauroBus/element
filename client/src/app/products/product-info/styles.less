@@ -1,11 +1,101 @@
 .product-info {
+  @image-height: 300px;
+  @image-width: 600px;
+
   .product-info__title {}
   .product-info__description {}
 
   .image-slider {
-    width: 600px;
-    height: 300px;
-
+    width: @image-width;
+    height: @image-height;
     cursor: pointer;
+
+    .img {
+      width: 100%;
+      height: @image-height;
+
+      background-repeat: no-repeat;
+      background-size: 100% @image-height;
+
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none; /* this will work for QtWebKit in future */
+    }
+
+    .img-caption {
+      position: relative;
+      bottom: 30px;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 1px rgb(88, 88, 88);
+    }
+
+    .rn-carousel-control {
+      -webkit-transition: opacity 0.2s ease-out;
+      transition: opacity 0.2s ease-out;
+      position: absolute;
+      opacity: 0.35;
+      cursor: pointer;
+      height: 100%;
+      width: 15%;
+      top: 0;
+
+      &.rn-carousel-control-next {
+        background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,.0001) 0),color-stop(rgba(0,0,0,.5) 100%));
+        background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+        right: 0;
+        &:before {
+          content: '';
+        }
+      }
+      &.rn-carousel-control-prev {
+        background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,.5) 0),color-stop(rgba(0,0,0,.0001) 100%));
+        background-image: linear-gradient(to right,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+        left: 0;
+        &:before {
+          content: '';
+        }
+      }
+
+      &:hover {
+        outline: 0;
+        color: #fff;
+        text-decoration: none;
+        opacity: .9;
+        filter: alpha(opacity=90);
+      }
+    }
+  }
+
+  .indicators {
+    text-align: center;
+    z-index: 15;
+
+    span {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin: 1px;
+      border: 1px solid #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #000 \9;
+      background-color: cornflowerblue;
+      color: transparent;
+      font-size: 0;
+
+      &.active {
+        margin: 0;
+        width: 16px;
+        height: 16px;
+        background-color: orange;
+      }
+    }
+
+
   }
 }

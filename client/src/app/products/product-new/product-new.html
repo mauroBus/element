@@ -1,7 +1,7 @@
 <section class="product-new">
 
   <div class="panel panel-default">
-    <div class="panel-body">
+    <div ng-if="!productCreated" class="panel-body">
       <h1>Create a Product</h1>
 
       <form
@@ -92,6 +92,14 @@
         <button type="submit" class="btn btn-lg btn-primary btn-block">Publish</button>
       </form>
 
+    </div>
+
+    <div ng-if="productCreated" class="panel-body">
+      <div class="jumbotron">
+        <h1>Congratulations!!!</h1>
+        <p>Product Successfuly Created</p>
+        <p><a class="btn btn-primary btn-lg" ui-sref="main.products" role="button">Continue</a></p>
+      </div>
     </div>
   </div>
 

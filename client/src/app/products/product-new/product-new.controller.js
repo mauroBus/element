@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.products.productNew.controller', [])
+angular.module('elementBoxApp.products.productNew')
 
 .controller('ProductNewCtrl', [
           '$scope', '$stateParams', 'ProductsService', 'Categories',
@@ -16,6 +16,8 @@ angular.module('elementBoxApp.products.productNew.controller', [])
         filter: 'summer'
       }
     ];
+
+    $scope.productCreated = false;
 
     $scope.product = {
       title: '',
@@ -64,7 +66,10 @@ angular.module('elementBoxApp.products.productNew.controller', [])
         if (p) { catags.push({ name: $scope.catalogs[i].filter }); }
       });
 
-      ProductsService.save(angular.extend({}, $scope.product, {categories: categs, catalogs: catags}));
+      ProductsService
+        .save(angular.extend({}, $scope.product, {categories: categs, catalogs: catags}), function() {
+          $scope.productCreated = true;
+        });
     };
   }
 ]);
