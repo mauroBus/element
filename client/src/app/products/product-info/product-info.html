@@ -16,7 +16,7 @@
   <div ng-if="slides.length">
     <!-- slide, zoom, hexagon, fadeAndSlide -->
     <ul rn-carousel class="image-slider center-block" rn-carousel-transition="fadeAndSlide" rn-carousel-controls rn-carousel-buffered="3" rn-carousel-index="slidesIndex">
-      <li ng-repeat="($index, slide) in slides">
+      <li ng-repeat="slide in slides track by $index">
         <div class="layer">
           <div class="">
             <!-- <img ng-src="{{slide.url}}" draggable="false" class="img-no-drag"> -->
@@ -33,14 +33,14 @@
 
   <h4>Categories:</h4>
   <ul class="nav nav-pills">
-    <li ng-repeat="categ in product.categories" role="presentation" class="active">
+    <li ng-repeat="categ in product.categories track by $index" role="presentation" class="active">
       <a ui-sref="main.products.list({categ: categ.name})">{{categ.name}}</a>
     </li>
   </ul>
 
   <h4>Catalogs:</h4>
   <ul class="nav nav-pills">
-    <li ng-repeat="catalog in product.catalogs" role="presentation" class="active">
+    <li ng-repeat="catalog in product.catalogs track by $index" role="presentation" class="active">
       <a href="">{{catalog.name}}</a>
     </li>
   </ul>

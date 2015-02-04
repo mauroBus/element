@@ -1,6 +1,7 @@
 'use strict';
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    CategoryTree = mongoose.model('CategoryTree');
 
 var Sizes = new Schema({
   size: {
@@ -44,10 +45,6 @@ var Variants = new Schema({
   sizes: [Sizes]
 });
 
-var Categories = new Schema({
-  name: String
-});
-
 var Catalogs = new Schema({
   name: String
 });
@@ -67,7 +64,11 @@ var Product = new Schema({
     // unique: true
   },
   images: [Images],
-  categories: [Categories],
+  categories: {
+    type: [String],
+    default: [],
+    // enum: CategoryTree
+  },
   catalogs: [Catalogs],
   // variants: [Variants],
   modified: {
