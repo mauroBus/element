@@ -13,6 +13,7 @@ angular.module('elementBoxApp.main')
 
     $scope.setCurrentUser = function (user) {
       $scope.currentUser = {
+        id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
@@ -24,7 +25,7 @@ angular.module('elementBoxApp.main')
 
     $rootScope.$on(AUTH_EVENTS.singinSuccess, function(event, options) {
       $scope.setCurrentUser(options.user);
-      if (options.navigate) { $state.go('home'); }
+      if (options.navigate) { $state.go('main.home'); }
     });
 
     $rootScope.$on(AUTH_EVENTS.singinFailed, function() {
@@ -35,12 +36,22 @@ angular.module('elementBoxApp.main')
       $scope.currentUser = {};
     });
 
-    // When app starts checking if user is signed in (cookies).
-    AuthService.me();
-
     ModalAlert.alertOn({
       eventName: EVENT_NAMES.errorResponse,
       parseMsgCbk: ErrorHandler.translate
+    });
+
+    AuthService.me();
+
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      if ( toState.name === 'main.myadmin' && (!$scope.currentUser || angular.equals({}, $scope.currentUser) || $scope.currentUser.roles.indexOf('ADMIN') < 0) ) {
+        event.preventDefault();
+        ModalAlert
+          .alert({msg: 'You are not allowed to access to this page!'})
+          .then(function() {
+            // $state.go('main.home');
+          });
+      }
     });
 
   }

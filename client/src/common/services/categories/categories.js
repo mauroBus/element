@@ -1,7 +1,7 @@
 
 angular.module('elementBoxApp.common')
 
-.factory('Categories', [function() {
+.factory('Categories', ['Urls', '$resource', function(Urls, $resource) {
     return {
       getCategories: function() {
         // Fixed hardcoded categories for now...
@@ -37,7 +37,29 @@ angular.module('elementBoxApp.common')
             filter: 'Shirts'
           }
         ];
+      },
+
+      getCategoriesTree: function() {
+        var CategoryTree = $resource(Urls.categories.url, {}, {
+          query: {
+            method: 'GET',
+            isArray: true,
+            // transformResponse: function(data, headersGetter) {
+            //   var jsonData = JSON.parse(data);
+            //   jsonData.forEach(function(res, i) {
+            //     jsonData[i] = new CategoryTree(res);
+            //   });
+            //   return jsonData;
+            // }
+          },
+          save: {
+            method: 'POST',
+            isArray: true
+          }
+        });
+
+        return CategoryTree;
       }
+
     };
-  }
-]);
+}]);
