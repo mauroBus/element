@@ -34,7 +34,7 @@
   <h4>Categories:</h4>
   <ul class="nav nav-pills">
     <li ng-repeat="categ in product.categories track by $index" role="presentation" class="active">
-      <a ui-sref="main.products.list({categ: categ.name})">{{categ.name}}</a>
+      <a ui-sref="main.products.list({categ: categ})">{{categ}}</a>
     </li>
   </ul>
 
