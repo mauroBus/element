@@ -70,7 +70,7 @@ var insertChildCateg = function(tree, child, childPath) {
       path.shift();
       insertChildCateg(elem.children, child, ',' + path.join(',') + ',');
     } else {
-      throw new Error('path does not exists.');
+      throw new Error('Category "' + childPath + '" was not inserted.');
     }
   }
 
@@ -99,6 +99,10 @@ exports.categoryById = function(req, res, next, id) {
   });
 };
 
+exports.findById = function(id, cbk) {
+  CategoryTree.findById(id, cbk);
+};
+
 /**
  * Categories list
  */
@@ -108,7 +112,15 @@ exports.query = function(req, res) {
     .sort({ path: 1 })
     .exec(function(err, docs) {
       if (err) { return res.status(400).send(errorHandler.getErrorObject(err)); }
-      res.json(normalizeTree(docs));
+      if (req.param('flat') && req.param('flat').toLowerCase() === 'true') {
+        res.json(docs);
+      } else {
+        try {
+          res.json(normalizeTree(docs));
+        } catch (e) {
+          res.status(500).json({ message: 'Error on category tree normalization. Cause: ' + e.message });
+        }
+      }
     });
 };
 
@@ -129,17 +141,20 @@ exports.create = function(req, res) {
     tree = JSON.parse(req.param('tree'));
     denormalizeTree(_.isArray(tree) ? tree[0] : tree, ',', treeObjs);
 
-    treeObjs.forEach(function(treeObj) {
-      categ = new CategoryTree(treeObj);
+    CategoryTree.remove().exec(function(error) {
+      if (error) { return res.status(500).json(error); }
 
-      categ.save(function(err) {
-        if (err) { return res.json(500, err); }
+      treeObjs.forEach(function(treeObj) {
+        categ = new CategoryTree(treeObj);
+        categ.save(function(err) {
+          if (err) { return res.status(500).json(err); }
+        });
       });
     });
 
     res.json(treeObjs);
   } catch (e) {
-    res.json(500, { message: 'Category Tree has not been created. Cause: ' + e.message });
+    res.status(500).json({ message: 'Category Tree has not been created. Cause: ' + e.message });
   }
 };
 

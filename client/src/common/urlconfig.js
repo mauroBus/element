@@ -53,6 +53,9 @@ angular.module('elementBoxApp.common')
         },
         products: {
           products: 'api/products'
+        },
+        categories: {
+          url: 'api/categories'
         }
       },
       // prod: {
