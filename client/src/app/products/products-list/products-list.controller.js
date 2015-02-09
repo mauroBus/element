@@ -9,31 +9,25 @@ angular.module('elementBoxApp.products.productList')
     $scope.pageSize = 3;
     $scope.totalPages = 0;
     $scope.totalProducts = 0;
-    $scope.categories = Categories.getCategories();
+    // $scope.categories = Categories.getCategories();
     $scope.filter = '';
     $scope.currentCateg = {};
     var fetchingForFirstTime = true;
 
-    if ($stateParams.categ !== undefined) { // Setting the current category.
-      var categ = $filter('filter')($scope.categories, {filter: $stateParams.categ}, true),
-          currentCategNbr = categ.length ? $scope.categories.indexOf(categ[0]) : 0;
-      $scope.currentCateg = $scope.categories[currentCategNbr];
-    }
 
-    $scope.$watch('page', function(newVal, oldVal) {
-      $stateParams.pageNbr = newVal;
-      if (fetchingForFirstTime) {
-        $scope.page = ($stateParams.pageNbr) ? parseInt($stateParams.pageNbr) : 1; // Setting the current page.
-      } else {
-        $scope.fetchPage();
-      }
-    });
+    var CategoryRsr = Categories.getCategoriesTree();
+    CategoryRsr
+      .query({flat: false})
+      .$promise.then(function(res) {
+        $scope.categories = res;
+        setup();
+      });
 
     $scope.fetchPage = function(categ, toPage) {
       if (categ) {
         $scope.currentCateg = categ;
-        $scope.filter = categ.filter;
-        $stateParams.categ = categ.filter;
+        $scope.filter = categ._id;
+        $stateParams.categ = categ._id;
         $scope.page = (toPage) ? toPage : 1;
       }
 
@@ -52,7 +46,24 @@ angular.module('elementBoxApp.products.productList')
         });
     };
 
-    $scope.fetchPage($scope.currentCateg, $scope.page); // fetching the first time.
+    var setup = function() {
+      // if ($stateParams.categ !== '') { // Setting the current category.
+        var categ = $filter('filter')($scope.categories, {_id: $stateParams.categ}, true),
+            currentCategNbr = categ.length ? $scope.categories.indexOf(categ[0]) : 0;
+        $scope.currentCateg = $scope.categories[currentCategNbr];
+      // }
+
+      $scope.$watch('page', function(newVal, oldVal) {
+        $stateParams.pageNbr = newVal;
+        if (fetchingForFirstTime) {
+          $scope.page = ($stateParams.pageNbr) ? parseInt($stateParams.pageNbr) : 1; // Setting the current page.
+        } else {
+          $scope.fetchPage();
+        }
+      });
+
+      $scope.fetchPage($scope.currentCateg, $scope.page); // fetching the first time.
+    };
 
     $scope.addDefaultProduct = function() {
       var newProd = {
@@ -120,5 +131,6 @@ angular.module('elementBoxApp.products.productList')
         $scope.products.push(prod);
       });
     };
+
   }
 ]);

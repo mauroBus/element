@@ -1,63 +1,69 @@
-<section class="products">
+<section class="products-list">
 
-  <div class="panel panel-default">
-    <div class="panel-body">
+  <div class="col-md-12 panel">
+    <button ng-click="addDefaultProduct()" class="btn btn-default pull-right">addProduct</button>
+    <a class="btn btn-success pull-right" ui-sref="main.products.new">Publish</a>
+  </div>
 
-      <div class="col-md-12 panel">
-        <button ng-click="addDefaultProduct()" class="btn btn-default pull-right">addProduct</button>
-        <a class="btn btn-success pull-right" ui-sref="main.products.new">Publish</a>
+  <div class="col-md-3 menu">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Categories</h3>
       </div>
 
-      <div class="col-md-3">
-        <h3>Categories</h3>
-        <ul
-          class="nav nav-pills nav-stacked"
-          ng-show="categories.length"
-          ng-repeat="categ in categories">
-          <li role="presentation" ng-click="(categ.filter !== currentCateg.filter) ? fetchPage(categ) : ''" ng-class="{active: categ.filter === currentCateg.filter}">
-            <a href="">{{categ.name}}</a>
-          </li>
-        </ul>
-
-        <!-- <div ng-show="categories.length" class="list-group">
-          <button
-            ng-repeat="categ in categories"
-            class="list-group-item bg-info"
-            ng-click="filterProducts(categ)">
-            <div>{{categ}}</div>
-          </button>
-        </div> -->
-      </div>
-
-      <div class="col-md-9">
-        <pagination
-          ng-model="page"
-          items-per-page="pageSize"
-          total-items="totalProducts"
-          max-size="10"
-          previous-text="Prev"
-          next-text="Next"
-        ></pagination>
-
-        <div ng-show="products.length" class="list-group">
-          <a ui-sref="main.products.info({productId: product._id})" ng-repeat="product in products" class="list-group-item clearfix">
-            <div>{{product.title}}</div>
-            <div>{{product.description}}</div>
-            <div>{{product.created | date:'medium'}}</div>
-          </a>
-        </div>
-
-        <pagination
-          ng-model="page"
-          items-per-page="pageSize"
-          total-items="totalProducts"
-          max-size="10"
-          previous-text="Prev"
-          next-text="Next"
-        ></pagination>
+      <div ui-tree id="tree-root" ng-show="categories.length" data-drag-enabled="false">
+        <ol ui-tree-nodes="" ng-model="categories">
+          <li ng-repeat="node in categories" ui-tree-node ng-include="'products/products-list/partials/category.html'" data-collapsed="node.collapsed"></li>
+        </ol>
       </div>
     </div>
+    <!-- <ul
+      class="nav nav-pills nav-stacked"
+      ng-show="categories.length"
+      ng-repeat="categ in categories">
+      <li role="presentation" ng-click="(categ._id !== currentCateg._id) ? fetchPage(categ) : ''" ng-class="{active: categ._id === currentCateg._id}">
+        <a href="">{{categ.name}}</a>
+      </li>
+    </ul> -->
 
-  </div>
+    <!-- <div ng-show="categories.length" class="list-group">
+      <button
+        ng-repeat="categ in categories"
+        class="list-group-item bg-info"
+        ng-click="filterProducts(categ)">
+        <div>{{categ}}</div>
+      </button>
+    </div> -->
+  </div> <!-- panel -->
+
+  <div class="col-md-9 panel panel-default">
+    <div class="panel-body">
+      <pagination
+        ng-model="page"
+        items-per-page="pageSize"
+        total-items="totalProducts"
+        max-size="10"
+        previous-text="Prev"
+        next-text="Next"
+      ></pagination>
+
+      <div ng-show="products.length" class="list-group">
+        <a ui-sref="main.products.info({productId: product._id})" ng-repeat="product in products" class="list-group-item clearfix">
+          <div>{{product.title}}</div>
+          <div>{{product.description}}</div>
+          <div>{{product.created | date:'medium'}}</div>
+        </a>
+      </div>
+
+      <pagination
+        ng-model="page"
+        items-per-page="pageSize"
+        total-items="totalProducts"
+        max-size="10"
+        previous-text="Prev"
+        next-text="Next"
+      ></pagination>
+    </div>
+  </div> <!-- panel -->
 
 </section>

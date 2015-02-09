@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.products.productList', [])
+angular.module('elementBoxApp.products.productList', ['ui.tree'])
 
 .config([ '$stateProvider',
   function($stateProvider) {
