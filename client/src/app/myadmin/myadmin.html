@@ -1,0 +1,31 @@
+<section class="myadmin">
+  <h3 class="title">My Admin</h3>
+
+  <div class="col-md-3 menu">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Management</h3>
+      </div>
+      <div class="list-group">
+        <a class="list-group-item"
+          ui-sref="main.myadmin.categorymanag"
+          ng-class="{active: activeState === 'categorymanag'}"
+          ng-click="activeState = 'categorymanag';">Categories</a>
+        <a class="list-group-item"
+          ui-sref="main.myadmin.userlist"
+          ng-class="{active: activeState === 'userlist'}"
+          ng-click="activeState = 'userlist';">Users</a>
+        <a class="list-group-item"
+          ui-sref="main.myadmin.myitems"
+          ng-class="{active: activeState === 'myitems'}"
+          ng-click="activeState = 'myitems';">My items</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9 panel panel-default">
+    <div class="panel-body">
+      <ui-view />
+    </div>
+  </div>
+</section>

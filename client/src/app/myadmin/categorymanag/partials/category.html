@@ -1,0 +1,29 @@
+<div class="tree-node" ng-init="edditing = false;">
+  <div class="pull-left tree-handle" ui-tree-handle>
+    <span class="glyphicon glyphicon-list"></span>
+  </div>
+  <div class="tree-node-content">
+    <a ng-if="node.children && node.children.length > 0" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)">
+      <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+    </a>
+    <div class="tree-node-content__name" ng-show="!edditing">{{node.name}}</div>
+    <input type="text" ng-model="node.name" ng-show="edditing" class="form-control" placeholder="Name">
+    <input type="text" ng-model="node._id" ng-show="edditing" class="form-control" placeholder="Id">
+
+    <div class="pull-right controllers">
+      <a class="btn btn-info btn-xs edit" data-nodrag ng-click="edditing = !edditing;">
+        <span class="glyphicon glyphicon-edit"></span>
+      </a>
+      <a class="btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;">
+        <span class="glyphicon glyphicon-plus"></span>
+      </a>
+      <a class="btn btn-danger btn-xs" data-nodrag ng-click="remove(this)">
+        <span class="glyphicon glyphicon-remove"></span>
+      </a>
+    </div>
+  </div>
+</div>
+<ol ui-tree-nodes="" ng-model="node.children" ng-class="{hidden: collapsed}">
+  <li ng-repeat="node in node.children" ui-tree-node ng-include="'myadmin/categorymanag/partials/category.html'">
+  </li>
+</ol>

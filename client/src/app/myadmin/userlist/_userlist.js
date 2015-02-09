@@ -1,11 +1,11 @@
 
-angular.module('elementBoxApp.userlist', [])
+angular.module('elementBoxApp.myadmin.userlist', [])
 
 .config([ '$stateProvider',
   function($stateProvider) {
-    $stateProvider.state('main.userlist', {
+    $stateProvider.state('main.myadmin.userlist', {
       url: '/userlist',
-      templateUrl: 'userlist/userlist.html',
+      templateUrl: 'myadmin/userlist/userlist.html',
       controller: 'UserlistCtrl'
       // reloadOnSearch: false
     });

@@ -21,8 +21,9 @@ angular.module('elementBoxApp', [
   'elementBoxApp.newelement',
   'elementBoxApp.signin',
   'elementBoxApp.signup',
-  'elementBoxApp.userlist',
-  'elementBoxApp.products'
+  // 'elementBoxApp.userlist',
+  'elementBoxApp.products',
+  'elementBoxApp.myadmin'
 ])
 
 .config(['$urlRouterProvider', function($urlRouterProvider) {

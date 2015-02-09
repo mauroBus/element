@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.userlist')
+angular.module('elementBoxApp.myadmin.userlist')
 
 .factory('UserlistService', ['Urls', '$resource', function(Urls, $resource) {
   var Users = $resource(Urls.users.users + '/:email', {email:'@email'}, {

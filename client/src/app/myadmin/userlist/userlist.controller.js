@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.userlist')
+angular.module('elementBoxApp.myadmin.userlist')
 
 .controller('UserlistCtrl', [
           '$scope', 'UserlistService', '$location',

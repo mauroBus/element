@@ -1,0 +1,25 @@
+<pagination
+  ng-model="page"
+  items-per-page="pageSize"
+  total-items="totalProducts"
+  max-size="10"
+  previous-text="Prev"
+  next-text="Next">
+</pagination>
+
+<div ng-show="products.length" class="list-group">
+  <a ui-sref="main.products.info({productId: product._id})" ng-repeat="product in products" class="list-group-item clearfix">
+    <div>{{product.title}}</div>
+    <div>{{product.description}}</div>
+    <div>{{product.created | date:'medium'}}</div>
+  </a>
+</div>
+
+<pagination
+  ng-model="page"
+  items-per-page="pageSize"
+  total-items="totalProducts"
+  max-size="10"
+  previous-text="Prev"
+  next-text="Next">
+</pagination>

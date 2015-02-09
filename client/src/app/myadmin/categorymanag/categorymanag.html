@@ -1,0 +1,15 @@
+<section class="categorymanag">
+  <div class="clearfix">
+    <a href="" class="btn btn-default btn-sm pull-left" ng-click="collapse()">Collapse all</a>
+    <a href="" class="btn btn-default btn-sm pull-left" ng-click="expand()">Expand all</a>
+    <a href="" class="btn btn-success btn-sm pull-left" ng-click="save()">Save</a>
+  </div>
+
+  <div ng-if="!rootCategory.length" ng-click="createRootCategory()" class="btn btn-danger btn-sm">Create Root Category</div>
+
+  <div ui-tree id="tree-root">
+    <ol ui-tree-nodes="" ng-model="rootCategory">
+      <li ng-repeat="node in rootCategory" ui-tree-node ng-include="'myadmin/categorymanag/partials/category.html'" data-collapsed="node.collapsed"></li>
+    </ol>
+  </div>
+</section>
