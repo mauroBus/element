@@ -6,7 +6,9 @@ var mongoose = require('mongoose'),
     errorHandler = require('../response/errors'),
     Roles = require('../config/roles'),
     Response = require('../response/response'),
-    pagination = require('mongoose-pagination');
+    pagination = require('mongoose-pagination'),
+    CategoryTree = mongoose.model('CategoryTree'),
+    ObjectId = require('mongoose').Types.ObjectId;
 
 /**
  * Find product by id
@@ -20,23 +22,30 @@ exports.productById = function(req, res, next, id) {
   });
 };
 
-var _parseFilter = function(req) {
-  var filterObj = {};
-  if (req.query &&  req.query.category) {
-    filterObj['categories.name'] = req.query.category;
-  }
-  return filterObj;
-};
-
 /**
  * List of products
  */
 exports.query = function(req, res) {
   var pagination = Response.pagination(req);
-  Product
-    .find(_parseFilter(req))
-    .sort('-created')
-    .paginate(pagination.page, pagination.pageSize, Response.query(req, res));
+  var categ = (req.query &&  req.query.category) ? req.query.category : '',
+    categPath;
+  var userFilter = req.query['user.ref'] ? { 'user.ref': new ObjectId(req.query['user.ref']) } : {};
+
+  CategoryTree
+    .find({ path: new RegExp(categ) })
+    .exec(function(err, results) {
+      if (err) { return res.json(500, err); }
+      if (!results.length) { res.status(400).json({msg: 'Failed to load category ' + categ}); }
+
+      categPath = _.reduce(results, function(result, n, key) {
+        return key === 0 ? n._id : (result + '|' + n._id);
+      }, {});
+
+      Product
+        .find(_.extend({ categories: new RegExp(categPath) }, userFilter))
+        .sort('-created')
+        .paginate(pagination.page, pagination.pageSize, Response.query(req, res));
+    });
 };
 
 /**
