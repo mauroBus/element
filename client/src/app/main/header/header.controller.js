@@ -2,19 +2,24 @@
 angular.module('elementBoxApp.main')
 
 .controller('HeaderCtrl', [
-          '$scope', '$rootScope', '$location', '$stateParams', 'AuthService', 'AUTH_EVENTS',
-  function($scope,  $rootScope,    $location,   $stateParams,   AuthService,   AUTH_EVENTS) {
+          '$scope', '$rootScope', '$state', '$stateParams', 'AuthService', 'AUTH_EVENTS',
+  function($scope,  $rootScope,    $state,   $stateParams,   AuthService,   AUTH_EVENTS) {
     var scope = {
       title: 'Element SandBox',
 
-      subPageName: function() {
-        if ($location.path() === '/home') {
+      getSubStateName: function() {
+//         main.home
+// main.newelement
+// main.about
+// main.myadmin
+// main.products
+        if ($state.path() === '/home') {
           return 'Home Page';
         }
-        if ($location.path() === '/newelement') {
+        if ($state.path() === '/newelement') {
           return 'New Element Page';
         }
-        if ($location.path() === '/about') {
+        if ($state.path() === '/about') {
           return 'About Page';
         }
         if ($stateParams.dni) {
@@ -22,8 +27,16 @@ angular.module('elementBoxApp.main')
         }
       },
 
-      showLink: function(state) {
-        return $location.path() !== 'state';
+      showLink: function(state, role) {
+        var regExp = new RegExp('^' + state);
+        if (role && (!$scope.currentUser || angular.equals({}, $scope.currentUser))) {
+          return false;
+        }
+        if (role && ($scope.currentUser.roles.indexOf(role) < 0)) {
+          return false;
+        }
+        // $scope.subStateName = $scope.getSubStateName();
+        return !regExp.test($state.current.name);
       },
 
       signout: function() {
