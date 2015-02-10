@@ -1,0 +1,23 @@
+<section class="account">
+  <h3 class="title">My Account</h3>
+
+  <div class="col-md-3 menu">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Management</h3>
+      </div>
+      <div class="list-group">
+        <a class="list-group-item"
+          ui-sref="main.account.myitems"
+          ng-class="{active: activeState === 'myitems'}"
+          ng-click="activeState = 'myitems';">My items</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9 panel panel-default">
+    <div class="panel-body">
+      <ui-view />
+    </div>
+  </div>
+</section>

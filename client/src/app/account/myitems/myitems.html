@@ -1,0 +1,33 @@
+<section class="account-myitems">
+  <pagination
+    ng-model="page"
+    items-per-page="pageSize"
+    total-items="totalProducts"
+    max-size="10"
+    previous-text="Prev"
+    next-text="Next">
+  </pagination>
+
+  <div ng-show="products.length" class="list-group">
+    <div ng-repeat="product in products" class="list-group-item clearfix">
+      <div>{{product.title}}</div>
+      <div>{{product.description}}</div>
+      <div>{{product.created | date:'medium'}}</div>
+      <div class="products__remove glyphicon glyphicon-remove" ng-click="removeProduct(product, $index)"></div>
+      <!-- <div class="products__details" ui-sref="main.products.info({productId: product._id})"> -->
+      <a ui-sref="main.products.info({productId: product._id})"
+        class="products__details" class="btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-link"></span>
+      </a>
+    </div>
+  </div>
+
+  <pagination
+    ng-model="page"
+    items-per-page="pageSize"
+    total-items="totalProducts"
+    max-size="10"
+    previous-text="Prev"
+    next-text="Next">
+  </pagination>
+</section>

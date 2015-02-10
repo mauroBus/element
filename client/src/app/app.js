@@ -23,7 +23,8 @@ angular.module('elementBoxApp', [
   'elementBoxApp.signup',
   // 'elementBoxApp.userlist',
   'elementBoxApp.products',
-  'elementBoxApp.myadmin'
+  'elementBoxApp.myadmin',
+  'elementBoxApp.account'
 ])
 
 .config(['$urlRouterProvider', function($urlRouterProvider) {
