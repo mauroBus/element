@@ -1,0 +1,170 @@
+[
+  {
+    "_id": "all",
+    "name": "All",
+    "path": ",all,",
+    "children": [
+      {
+        "_id": "electronics",
+        "name": "Electronics",
+        "path": ",all,electronics,",
+        "children": [
+          {
+            "_id": "computers",
+            "name": "Computers",
+            "path": ",all,electronics,computers,",
+            "children": []
+          },
+          {
+            "_id": "tvs",
+            "name": "TV's",
+            "path": ",all,electronics,tvs,",
+            "children": []
+          }
+        ]
+      },
+      {
+        "_id": "housing",
+        "name": "Housing",
+        "path": ",all,housing,",
+        "children": [
+          {
+            "_id": "housing-rent",
+            "name": "Rent",
+            "path": ",all,housing,housing-rent,",
+            "children": [
+              {
+                "_id": "rent-appartments",
+                "name": "Appartments",
+                "path": ",all,housing,housing-rent,rent-appartments,",
+                "children": []
+              },
+              {
+                "_id": "rent-houses",
+                "name": "Hoses",
+                "path": ",all,housing,housing-rent,rent-houses,",
+                "children": []
+              }
+            ]
+          },
+          {
+            "_id": "housing-sale",
+            "name": "Sale",
+            "path": ",all,housing,housing-sale,",
+            "children": []
+          }
+        ]
+      },
+      {
+        "_id": "vehicles",
+        "name": "Vehicles",
+        "path": ",all,vehicles,",
+        "children": [
+          {
+            "_id": "bikes",
+            "name": "Bikes",
+            "path": ",all,vehicles,bikes,",
+            "children": [
+              {
+                "_id": "enduro",
+                "name": "Enduro",
+                "path": ",all,vehicles,bikes,enduro,",
+                "children": []
+              },
+              {
+                "_id": "racing",
+                "name": "Racing",
+                "path": ",all,vehicles,bikes,racing,",
+                "children": []
+              }
+            ]
+          },
+          {
+            "_id": "cars",
+            "name": "Cars",
+            "path": ",all,vehicles,cars,",
+            "children": [
+              {
+                "_id": "coupe",
+                "name": "Coupe",
+                "path": ",all,vehicles,cars,coupe,",
+                "children": []
+              },
+              {
+                "_id": "family",
+                "name": "Family",
+                "path": ",all,vehicles,cars,family,",
+                "children": []
+              },
+              {
+                "_id": "utilitaries",
+                "name": "Utilitaries",
+                "path": ",all,vehicles,cars,utilitaries,",
+                "children": []
+              }
+            ]
+          },
+          {
+            "_id": "pickups",
+            "name": "Pick Ups",
+            "path": ",all,vehicles,pickups,",
+            "children": [
+              {
+                "_id": "4x4",
+                "name": "4x4",
+                "path": ",all,vehicles,pickups,4x4,",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "products",
+    "name": "Products",
+    "path": ",products,",
+    "children": [
+      {
+        "_id": "household",
+        "name": "Household",
+        "path": ",products,household,",
+        "children": [
+          {
+            "_id": "appliance",
+            "name": "Appliance",
+            "path": ",products,household,appliance,",
+            "children": []
+          }
+        ]
+      },
+      {
+        "_id": "office",
+        "name": "Office",
+        "path": ",products,office,",
+        "children": [
+          {
+            "_id": "desk",
+            "name": "Desk",
+            "path": ",products,office,desk,",
+            "children": [
+              {
+                "_id": "pens",
+                "name": "Pens",
+                "path": ",products,office,desk,pens,",
+                "children": []
+              },
+              {
+                "_id": "stationary",
+                "name": "Stationary",
+                "path": ",products,office,desk,stationary,",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

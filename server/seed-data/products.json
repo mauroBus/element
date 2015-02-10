@@ -1,0 +1,343 @@
+[
+  {
+   "title": "My Awesome T-shirt - 1",
+   "description": "All about the details. Of course it's black.",
+    "images": [{
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/601/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/602/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/603/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/604/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/605/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/606/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/607/300"
+      }
+    ],
+    "categories": ["housing-sale"],
+    "variants": [{
+     "color": "Black",
+      "images": [{
+         "kind": "thumbnail",
+         "url": "imgs/products/1.png"
+        },
+        {
+         "kind": "catalog",
+         "url": "imgs/products/1.png"
+        }
+      ],
+      "sizes": [{
+         "size": "S",
+          "available": 10,
+         "sku": "CAT-1234-Blk-S",
+          "price": 99.99
+        },
+        {
+         "size": "M",
+          "available": 7,
+         "sku": "CAT-1234-Blk-M",
+          "price": 109.99
+        }
+      ]
+    }],
+    "catalogs": [
+      { "name": "Apparel" }
+    ]
+  },
+
+  {
+   "title": "My Awesome T-shirt - 2",
+   "description": "All about the details. Of course it's black.",
+    "images": [{
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/601/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/602/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/603/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/604/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/605/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/606/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/607/300"
+      }
+    ],
+    "categories": ["computers"],
+    "variants": [{
+     "color": "Black",
+      "images": [{
+         "kind": "thumbnail",
+         "url": "imgs/products/1.png"
+        },
+        {
+         "kind": "catalog",
+         "url": "imgs/products/1.png"
+        }
+      ],
+      "sizes": [{
+         "size": "S",
+          "available": 10,
+         "sku": "CAT-1234-Blk-S",
+          "price": 99.99
+        },
+        {
+         "size": "M",
+          "available": 7,
+         "sku": "CAT-1234-Blk-M",
+          "price": 109.99
+        }
+      ]
+    }],
+    "catalogs": [
+      { "name": "Apparel" }
+    ]
+  },
+
+  {
+   "title": "My Awesome T-shirt - 3",
+   "description": "All about the details. Of course it's black.",
+    "images": [{
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/601/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/602/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/603/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/604/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/605/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/606/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/607/300"
+      }
+    ],
+    "categories": ["rent-appartments"],
+    "variants": [{
+     "color": "Black",
+      "images": [{
+         "kind": "thumbnail",
+         "url": "imgs/products/1.png"
+        },
+        {
+         "kind": "catalog",
+         "url": "imgs/products/1.png"
+        }
+      ],
+      "sizes": [{
+         "size": "S",
+          "available": 10,
+         "sku": "CAT-1234-Blk-S",
+          "price": 99.99
+        },
+        {
+         "size": "M",
+          "available": 7,
+         "sku": "CAT-1234-Blk-M",
+          "price": 109.99
+        }
+      ]
+    }],
+    "catalogs": [
+      { "name": "Apparel" }
+    ]
+  },
+
+  {
+   "title": "My Awesome T-shirt - 4",
+   "description": "All about the details. Of course it's black.",
+    "images": [{
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/601/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/602/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/603/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/604/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/605/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/606/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/607/300"
+      }
+    ],
+    "categories": ["enduro"],
+    "variants": [{
+     "color": "Black",
+      "images": [{
+         "kind": "thumbnail",
+         "url": "imgs/products/1.png"
+        },
+        {
+         "kind": "catalog",
+         "url": "imgs/products/1.png"
+        }
+      ],
+      "sizes": [{
+         "size": "S",
+          "available": 10,
+         "sku": "CAT-1234-Blk-S",
+          "price": 99.99
+        },
+        {
+         "size": "M",
+          "available": 7,
+         "sku": "CAT-1234-Blk-M",
+          "price": 109.99
+        }
+      ]
+    }],
+    "catalogs": [
+      { "name": "Apparel" }
+    ]
+  },
+
+  {
+   "title": "My Awesome T-shirt - 5",
+   "description": "All about the details. Of course it's black.",
+    "images": [{
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/601/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/602/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/603/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/604/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/605/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/606/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/607/300"
+      }
+    ],
+    "categories": ["coupe"],
+    "variants": [{
+     "color": "Black",
+      "images": [{
+         "kind": "thumbnail",
+         "url": "imgs/products/1.png"
+        },
+        {
+         "kind": "catalog",
+         "url": "imgs/products/1.png"
+        }
+      ],
+      "sizes": [{
+         "size": "S",
+          "available": 10,
+         "sku": "CAT-1234-Blk-S",
+          "price": 99.99
+        },
+        {
+         "size": "M",
+          "available": 7,
+         "sku": "CAT-1234-Blk-M",
+          "price": 109.99
+        }
+      ]
+    }],
+    "catalogs": [
+      { "name": "Apparel" }
+    ]
+  },
+
+  {
+   "title": "My Awesome T-shirt - 6",
+   "description": "All about the details. Of course it's black.",
+    "images": [{
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/601/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/602/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/603/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/604/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/605/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/606/300"
+      }, {
+       "kind": "thumbnail",
+       "url": "http://placekitten.com/607/300"
+      }
+    ],
+    "categories": ["pickups"],
+    "variants": [{
+     "color": "Black",
+      "images": [{
+         "kind": "thumbnail",
+         "url": "imgs/products/1.png"
+        },
+        {
+         "kind": "catalog",
+         "url": "imgs/products/1.png"
+        }
+      ],
+      "sizes": [{
+         "size": "S",
+          "available": 10,
+         "sku": "CAT-1234-Blk-S",
+          "price": 99.99
+        },
+        {
+         "size": "M",
+          "available": 7,
+         "sku": "CAT-1234-Blk-M",
+          "price": 109.99
+        }
+      ]
+    }],
+    "catalogs": [
+      { "name": "Apparel" }
+    ]
+  }
+]

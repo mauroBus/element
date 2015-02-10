@@ -5,7 +5,10 @@ var mongoose = require('mongoose'),
     User = mongoose.model('User'),
     Category = require('./models/category'),
     CategoryTree = mongoose.model('CategoryTree'),
-    Roles = require('./config/roles');
+    Product = require('./models/product'),
+    ProductsModel = mongoose.model('Product'),
+    Roles = require('./config/roles'),
+    fs = require('fs');
 
 mongoose.connect(config.db.uri);
 
@@ -16,56 +19,86 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(callback) {
 
   ////////////////
-  // Super User //
+  // Users      //
   ////////////////
-  var superUser = new User({
-    firstName: 'MAURO',
-    lastName: 'BUSELLI',
-    displayName: 'SUPER_USER',
-    email: 's@u.com',
-    username: 'SUPER_USER',
-    password: 'aaaaaa',
-    provider: 'local',
-    roles: [Roles.admin, Roles.user, Roles.editor],
-    // updated: '',
-    created: new Date()
-    // active: true
-  });
-
-  superUser.save(function(err) {
+  fs.readFile('./seed-data/users.json', function(err, data) {
     if (err) {
-      console.log('Noooooooo! There were problems.');
-      console.log(err);
-    } else {
-      console.log('Super Dupper User created.');
+      console.error(err);
+      process.exit(0);
     }
-  });
+    var users = JSON.parse(data);
+
+    User.remove().exec(function(error) {
+      users.forEach(function(user) {
+        var userSchema = new User(user);
+
+        userSchema.save(function(err) {
+          if (err) {
+            console.log('Oooooops! There were problems.');
+            console.log(err);
+          } else {
+            console.log('User: '+ user.email +' created.');
+          }
+        });
+      });
+    }); // Users.remove
+  }); // fs.readFile
 
   ////////////////
   // Categories //
   ////////////////
-  var categs = [
-    {_id: 'products', name: 'Products', path: ',products,'},
-    {_id: 'household',name: 'Household', path: ',products,household,'},
-    {_id: 'appliance', name: 'Appliance', path: ',products,household,appliance,'},
-    {_id: 'electronics', name: 'Electronics', path: ',products,household,electronics,'},
-    {_id: 'office', name: 'Office', path: ',products,office,'},
-    {_id: 'computers', name: 'Computers', path: ',products,office,computers,'},
-    {_id: 'desk', name: 'Desk', path: ',products,office,desk,'},
-    {_id: 'pens', name: 'Pens', path: ',products,office,desk,pens,'},
-    {_id: 'stationary', name: 'Stationary', path: ',products,office,desk,stationary,'}
-  ];
+  fs.readFile('./seed-data/categories.json', function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(0);
+    }
+    var categs = JSON.parse(data);
 
-  categs.forEach(function(categ) {
-    var newCateg = new CategoryTree(categ);
+    CategoryTree.remove().exec(function(error) {
+      categs.forEach(function(categ) {
+        var newCateg = new CategoryTree(categ);
 
-    newCateg.save(function(err) {
-      if (err) {
-        console.log('Category "' + categ._id + '" not created.');
-        console.log(err);
-      } else {
-        console.log('Category "' + categ._id + '" created!');
-      }
-    });
-  });
+        newCateg.save(function(err) {
+          if (err) {
+            console.log('Category "' + categ._id + '" not created.');
+            console.log(err);
+          } else {
+            console.log('Category "' + categ._id + '" created!');
+          }
+        });
+      });
+      // process.exit(0);
+    }); // Category.remove
+  }); // fs.readFile
+
+
+  ////////////////
+  // Products   //
+  ////////////////
+  fs.readFile('./seed-data/products.json', function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(0);
+    }
+    var products = JSON.parse(data);
+
+    ProductsModel.remove().exec(function(error) {
+      products.forEach(function(prod) {
+        var newProd = new ProductsModel(prod);
+
+        newProd.save(function(err) {
+          if (err) {
+            console.log('Product "' + prod.title + '" not created.');
+            console.log(err);
+          } else {
+            console.log('Product "' + prod.title + '" created!');
+          }
+        });
+      });
+      // process.exit(0);
+    }); // Category.remove
+  }); // fs.readFile
+
 });
+
+console.log('Awaiting...');

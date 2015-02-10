@@ -1,0 +1,68 @@
+[
+  {
+    "firstName": "MAURO",
+    "lastName": "BUSELLI",
+    "displayName": "SUPER_USER",
+    "email": "s@u.com",
+    "username": "SUPER_USER",
+    "password": "aaaaaa",
+    "provider": "local",
+    "roles": ["ADMIN", "USER", "EDITOR"],
+    "created": "2015-02-09T22:42:39.746Z"
+  },
+  {
+    "firstName": "Mauro",
+    "lastName": "Buselli",
+    "displayName": "Mauro Buselli",
+    "email": "m@b.com",
+    "username": "maurobus",
+    "password": "aaaaaa",
+    "provider": "local",
+    "roles": ["USER"],
+    "created": "2015-02-09T22:42:39.746Z"
+  },
+  {
+    "firstName": "Leandro",
+    "lastName": "Buselli",
+    "displayName": "Leandro Buselli",
+    "email": "l@b.com",
+    "username": "Leandro Buselli",
+    "password": "aaaaaa",
+    "provider": "local",
+    "roles": ["USER"],
+    "created": "2015-02-09T22:42:39.746Z"
+  },
+  {
+    "firstName": "Roberto",
+    "lastName": "Buselli",
+    "displayName": "Roberto Buselli",
+    "email": "r@b.com",
+    "username": "RobertoBuselli",
+    "password": "aaaaaa",
+    "provider": "local",
+    "roles": ["USER"],
+    "created": "2015-02-09T22:42:39.746Z"
+  },
+  {
+    "firstName": "Mirta",
+    "lastName": "Ciancaglini",
+    "displayName": "",
+    "email": "m@c.com",
+    "username": "MirtaCiancaglini",
+    "password": "aaaaaa",
+    "provider": "local",
+    "roles": ["USER"],
+    "created": "2015-02-09T22:42:39.746Z"
+  },
+  {
+    "firstName": "Alicia",
+    "lastName": "Esther",
+    "displayName": "Marcos",
+    "email": "a@e.com",
+    "username": "AbuelaAlicia",
+    "password": "aaaaaa",
+    "provider": "local",
+    "roles": ["USER"],
+    "created": "2015-02-09T22:42:39.746Z"
+  }
+]

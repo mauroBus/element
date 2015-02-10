@@ -1,0 +1,97 @@
+[
+    {
+        "_id": "all",
+        "name": "All",
+        "path": ",all,"
+    },
+    {
+        "_id": "electronics",
+        "name": "Electronics",
+        "path": ",all,electronics,"
+    },
+    {
+        "_id": "computers",
+        "name": "Computers",
+        "path": ",all,electronics,computers,"
+    },
+    {
+        "_id": "tvs",
+        "name": "TV's",
+        "path": ",all,electronics,tvs,"
+    },
+    {
+        "_id": "housing",
+        "name": "Housing",
+        "path": ",all,housing,"
+    },
+    {
+        "_id": "housing-rent",
+        "name": "Rent",
+        "path": ",all,housing,housing-rent,"
+    },
+    {
+        "_id": "rent-appartments",
+        "name": "Appartments",
+        "path": ",all,housing,housing-rent,rent-appartments,"
+    },
+    {
+        "_id": "rent-houses",
+        "name": "Hoses",
+        "path": ",all,housing,housing-rent,rent-houses,"
+    },
+    {
+        "_id": "housing-sale",
+        "name": "Sale",
+        "path": ",all,housing,housing-sale,"
+    },
+    {
+        "_id": "vehicles",
+        "name": "Vehicles",
+        "path": ",all,vehicles,"
+    },
+    {
+        "_id": "bikes",
+        "name": "Bikes",
+        "path": ",all,vehicles,bikes,"
+    },
+    {
+        "_id": "enduro",
+        "name": "Enduro",
+        "path": ",all,vehicles,bikes,enduro,"
+    },
+    {
+        "_id": "racing",
+        "name": "Racing",
+        "path": ",all,vehicles,bikes,racing,"
+    },
+    {
+        "_id": "cars",
+        "name": "Cars",
+        "path": ",all,vehicles,cars,"
+    },
+    {
+        "_id": "coupe",
+        "name": "Coupe",
+        "path": ",all,vehicles,cars,coupe,"
+    },
+    {
+        "_id": "family",
+        "name": "Family",
+        "path": ",all,vehicles,cars,family,"
+    },
+    {
+        "_id": "utilitaries",
+        "name": "Utilitaries",
+        "path": ",all,vehicles,cars,utilitaries,"
+    },
+    {
+        "_id": "pickups",
+        "name": "Pick Ups",
+        "path": ",all,vehicles,pickups,"
+    },
+    {
+        "_id": "4x4",
+        "name": "4x4",
+        "path": ",all,vehicles,pickups,4x4,"
+    }
+]
