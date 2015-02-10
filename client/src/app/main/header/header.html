@@ -39,17 +39,24 @@
       </button>
       <button
         type="button"
+        class="btn btn-info"
+        ng-show="showLink('main.products')"
+        go stateUrl="main.products">
+          Products
+      </button>
+      <button
+        type="button"
         class="btn btn-warning"
-        ng-show="showLink('main.myadmin', 'ADMIN')"
+        ng-show="showLink('main.myadmin', Roles.admin)"
         go stateUrl="main.myadmin">
           My Admin
       </button>
       <button
         type="button"
-        class="btn btn-info"
-        ng-show="showLink('main.products')"
-        go stateUrl="main.products">
-          Products
+        class="btn btn-warning"
+        ng-hide="showLink('main.account', Roles.admin)"
+        go stateUrl="main.account">
+          Account
       </button>
     </div>
 

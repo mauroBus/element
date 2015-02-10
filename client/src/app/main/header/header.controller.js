@@ -2,8 +2,8 @@
 angular.module('elementBoxApp.main')
 
 .controller('HeaderCtrl', [
-          '$scope', '$rootScope', '$state', '$stateParams', 'AuthService', 'AUTH_EVENTS',
-  function($scope,  $rootScope,    $state,   $stateParams,   AuthService,   AUTH_EVENTS) {
+          '$scope', '$rootScope', '$state', '$stateParams', 'AuthService', 'AUTH_EVENTS', 'USER_ROLES',
+  function($scope,  $rootScope,    $state,   $stateParams,   AuthService,   AUTH_EVENTS,   Roles) {
     var scope = {
       title: 'Element SandBox',
 
@@ -44,7 +44,9 @@ angular.module('elementBoxApp.main')
           .then(function(res) {
             $rootScope.$broadcast(AUTH_EVENTS.signoutSuccess, res.data.user);
           });
-      }
+      },
+
+      Roles: Roles
     };
 
     angular.extend($scope, scope);

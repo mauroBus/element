@@ -92,10 +92,7 @@ angular.module('elementBoxApp.products.productList')
             url: 'http://placekitten.com/607/300'
           }
         ],
-        categories: [
-          { 'name': 'Clothes' },
-          { 'name': 'Shirts' }
-        ],
+        categories: ['bikes', 'racing'],
         style: Math.floor(Math.random()*10000),
         variants: [{
           color: 'Black',
