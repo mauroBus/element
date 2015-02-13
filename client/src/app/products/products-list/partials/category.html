@@ -1,5 +1,6 @@
-<div class="tree-node" ng-class="{active: node._id === currentCateg._id}">
-  <a ng-if="node.children && node.children.length > 0" class="btn btn-success btn-xs pull-right" ng-click="toggle(this)">
+<div class="tree-node"
+  ng-class="{active: node._id === currentCateg._id}">
+  <a ng-if="node.children && node.children.length > 0" class="btn btn-success btn-xs pull-right" ng-click="toggle(); setExpandedNode(node);">
     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
   </a>
 
@@ -9,7 +10,10 @@
   </div>
 </div>
 
-<ol ui-tree-nodes="" ng-model="node.children" ng-class="{hidden: collapsed}">
-  <li ng-repeat="node in node.children" ui-tree-node ng-include="'products/products-list/partials/category.html'">
+<ol ui-tree-nodes="" ng-model="node.children" ng-class="{hidden: collapsed}" ng-init="parentNode = node;">
+  <li
+    ng-repeat="node in node.children"
+    ui-tree-node ng-include="'products/products-list/partials/category.html'"
+    data-collapsed="parentNode.path.indexOf(expandedNode._id) < 0">
   </li>
 </ol>

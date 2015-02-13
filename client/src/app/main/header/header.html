@@ -54,7 +54,7 @@
       <button
         type="button"
         class="btn btn-warning"
-        ng-hide="showLink('main.account', Roles.admin)"
+        ng-show="showLink('main.account', Roles.user) && !showLink('main.account', Roles.admin)"
         go stateUrl="main.account">
           Account
       </button>

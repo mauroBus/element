@@ -25,7 +25,10 @@ angular.module('elementBoxApp.myadmin.myitems')
         });
     };
 
-    $scope.fetchPage();
+    $scope.$watch('page', function(newVal, oldVal) {
+      $scope.fetchPage();
+    });
 
+    $scope.fetchPage();
   }
 ]);

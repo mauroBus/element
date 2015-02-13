@@ -12,6 +12,7 @@ angular.module('elementBoxApp.products.productList')
     // $scope.categories = Categories.getCategories();
     $scope.filter = '';
     $scope.currentCateg = {};
+    $scope.expandedNode = {};
     var fetchingForFirstTime = true;
 
 
@@ -63,6 +64,19 @@ angular.module('elementBoxApp.products.productList')
       });
 
       $scope.fetchPage($scope.currentCateg, $scope.page); // fetching the first time.
+    };
+
+    var getRootNodesScope = function() {
+      return angular.element(document.getElementById('tree-root')).scope().$$childHead;
+    };
+
+    $scope.collapseEverything = function() {
+      var scope = getRootNodesScope();
+      scope.collapseAll();
+    };
+
+    $scope.setExpandedNode = function(node) {
+      $scope.expandedNode = node;
     };
 
     $scope.addDefaultProduct = function() {

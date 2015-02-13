@@ -2,8 +2,8 @@
 angular.module('elementBoxApp.account.myitems')
 
 .controller('MyAccountItemsCtrl', [
-          '$scope', '$rootScope', '$stateParams', '$filter', '$state', 'ProductsService', 'Categories', 'AUTH_EVENTS',
-  function($scope,   $rootScope,   $stateParams,   $filter,   $state,   ProductsService,   Categories,   AUTH_EVENTS) {
+          '$scope', '$rootScope', '$stateParams', '$filter', '$state', 'ProductsService', 'ModalAlert', 'AUTH_EVENTS',
+  function($scope,   $rootScope,   $stateParams,   $filter,   $state,   ProductsService,   ModalAlert,   AUTH_EVENTS) {
     $scope.products = [];
     $scope.page = 1;
     $scope.pageSize = 3;
@@ -25,9 +25,19 @@ angular.module('elementBoxApp.account.myitems')
         });
     };
 
+    $scope.$watch('page', function(newVal, oldVal) {
+      $scope.fetchPage();
+    });
+
     $scope.removeProduct = function(product, index) {
-      product.$remove().then(function(err) {
-        $scope.products.splice(index, 1);
+      ModalAlert.alert({
+        title: 'Delete Item',
+        msg: 'Please confirm to delete this prodct.',
+        hasCancel: true
+      }).then(function() {
+        product.$remove().then(function(err) {
+          $scope.products.splice(index, 1);
+        });
       });
     };
 
