@@ -40,6 +40,29 @@ var config = {
   livereloadPort: 12345
 };
 
+
+var cssVendors = [
+  config.vendor + '/bootstrap-css/css/bootstrap.css',
+  config.vendor + '/angular-ui-tree/dist/angular-ui-tree.min.css',
+  config.vendor + '/angular-carousel/dist/angular-carousel.css'
+];
+
+var jsVendors = [
+  config.vendor + '/angular/angular.js',
+  config.vendor + '/angular-ui-router/release/angular-ui-router.min.js',
+  config.vendor + '/angular-resource/angular-resource.js',
+  config.vendor + '/angular-animate/angular-animate.js',
+  config.vendor + '/d3/d3.min.js',
+  config.vendor + '/angular-file-upload/angular-file-upload.js',
+  config.vendor + '/angular-touch/angular-touch.js',
+  config.vendor + '/angular-carousel/dist/angular-carousel.js',
+  config.vendor + '/angular-ui-tree/dist/angular-ui-tree.js',
+  // config.vendor + '/nvd3/nv.d3.min.js',
+  // config.vendor + '/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js'
+];
+
+
+
 /* Returns an array with the app module names */
 var getModules = function() {
   var modules = shelljs.ls(['src/app/']);
@@ -71,8 +94,8 @@ gulp.task('build-index', function() {
 /***** [Private] Task: Build Common Modules *****/
 gulp.task('build-js-common', function() {
   gulp.src('src/common/**/*.js')
-    .pipe(concat('common.js'))
-    .pipe(gulp.dest(config.jsDist));
+      .pipe(concat('common.js'))
+      .pipe(gulp.dest(config.jsDist));
 });
 
 
@@ -83,8 +106,8 @@ gulp.task('build-app-modules', function() {
 
   _.forEach(modulesFull, function(module, i) {
     gulp.src(module + '/**/*.js') // all js file inside the module folder.
-      .pipe(concat(modules[i] + '.js'))
-      .pipe(gulp.dest(config.jsModulesDist));
+        .pipe(concat(modules[i] + '.js'))
+        .pipe(gulp.dest(config.jsModulesDist));
   });
 });
 
@@ -114,29 +137,24 @@ gulp.task('build-js', ['build-app-modules', 'build-js-common'], function() {
     )
     .pipe(concat(config.jsName + '.js'))
     .pipe(header(
-        '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= buildDate %>\n' +
-        '<%= pkg.homepage ? " * " + pkg.homepage + "\\n" : "" %>' +
-        ' * Copyright (c) <%= copyrightYear %> <%= pkg.author %>;\n*/',
-      {
+      '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= buildDate %>\n' +
+      '<%= pkg.homepage ? " * " + pkg.homepage + "\\n" : "" %>' +
+      ' * Copyright (c) <%= copyrightYear %> <%= pkg.author %>;\n*/', {
         pkg: package,
         buildDate: now,
         copyrightYear: now.getFullYear()
-      }))
+      }
+    ))
     .pipe(gulpIf(argv.production, uglify(config.jsName + '.js', {
-        mangle: false
-      })))
+      mangle: false
+    })))
     .pipe(gulpIf(argv.production, rename({suffix: '.min'})))
     .pipe(gulp.dest(config.jsDist));
 });
 
 /***** [Private] Task: Bootstrap Css *****/
 gulp.task('bootstrap-css', function() {
-  return gulp.src([
-      config.vendor + '/bootstrap-css/css/bootstrap.css',
-      //config.vendor + '/bootstrap-css/css/bootstrap-theme.css',
-      //config.vendor + '/angular-carousel/dist/angular-carousel.css',
-      config.vendor + '/angular-ui-tree/dist/angular-ui-tree.min.css'
-    ])
+  return gulp.src(cssVendors)
     // .pipe(uncss({
     //   html: glob.sync('src/**/*.html')
     // }))
@@ -171,19 +189,7 @@ gulp.task('copy-static', function() {
     gulp.src(['src/assets/**/*.*', '!src/assets/less/*.*'])
         .pipe(gulp.dest(config.dist)),
     merge(
-      gulp.src([
-          config.vendor + '/angular/angular.js',
-          config.vendor + '/angular-ui-router/release/angular-ui-router.min.js',
-          config.vendor + '/angular-resource/angular-resource.js',
-          config.vendor + '/angular-animate/angular-animate.js',
-          config.vendor + '/d3/d3.min.js',
-          config.vendor + '/angular-file-upload/angular-file-upload.js',
-          config.vendor + '/angular-touch/angular-touch.js',
-          config.vendor + '/angular-carousel/dist/angular-carousel.js',
-          config.vendor + '/angular-ui-tree/dist/angular-ui-tree.js',
-          // config.vendor + '/nvd3/nv.d3.min.js',
-          // config.vendor + '/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js'
-        ])
+      gulp.src(jsVendors)
         .pipe(gulpIf(argv.production, uglify('angular.js', { mangle: false })))
         .pipe(concat('angular.js')),
       gulp.src(config.vendor + '/angular-bootstrap/ui-bootstrap-tpls.js')
