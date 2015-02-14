@@ -9,7 +9,14 @@ var _ = require('lodash'),
     passport = require('passport'),
     User = mongoose.model('User'),
     Roles = require('../../config/roles'),
-    UsersAuthorization = require('./users.authorization');
+    UsersAuthorization = require('./users.authorization'),
+    async = require('async'),
+    nodemailer = require('nodemailer'),
+    config = require('../../config/config'),
+    fs = require('fs');
+
+
+var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
 /**
  * Signup
@@ -30,22 +37,67 @@ exports.signup = function(req, res) {
   // Then save the user.
   user.save(function(err) {
     if (err) {
-      return res.status(400).send(errorHandler.getErrorObject(err));
+      return res.status(400).json(errorHandler.getErrorObject(err));
     } else {
       // Remove sensitive data before login
       user.password = undefined;
       user.salt = undefined;
 
-      req.login(user, function(err) {
-        if (err) {
-          res.status(400).send(err);
-        } else {
+      async.waterfall([
+        // login user:
+        function(done) {
+          req.login(user, function(err) {
+            if (err) {
+              res.status(400).json(errorHandler.getErrorObject(err));
+            } else {
+              done(err, user);
+            }
+          });
+        },
+        // Fetching wellcome emai tpl.
+        function(user, done) {
+          fs.readFile('templates/signup-wellcome-email.html', function(err, emailTpl) {
+            var compiled = _.template(emailTpl);
+            done(err, compiled({ name: user.displayName, appName: config.app.title }), user);
+          });
+        },
+        // Sending email.
+        function(emailTpl, user, done) {
+          var mailOptions = {
+            to: user.email,
+            from: config.mailer.from,
+            subject: 'Wellcome to ' + config.app.title + '!',
+            html: emailTpl
+          };
+          smtpTransport.sendMail(mailOptions, function(err) {
+            if (!err) {
+              res.json({
+                user: user,
+                sessionId: req.sessionID,
+                message: 'An email has been sent to ' + user.email + ' with further instructions.'
+              });
+            } else {
+              return res.json({
+                user: user,
+                sessionId: req.sessionID,
+                message: 'Failure sending the email to the given address.'
+              });
+            }
+
+            done(err);
+          });
+        }
+      ], function(err) {
+        if (!err) {
           res.json({
             user: user,
             sessionId: req.sessionID
           });
+        } else {
+          return res.status(400).json(errorHandler.getErrorObject(err));
         }
-      });
+      }); // !waterfall
+
     }
   });
 };
@@ -56,7 +108,7 @@ exports.signup = function(req, res) {
 exports.signin = function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err || !user) {
-      res.status(400).send(info);
+      res.status(400).json(info);
     } else {
       // Remove sensitive data before login
       user.password = undefined;
@@ -71,7 +123,7 @@ exports.signin = function(req, res, next) {
 
       req.login(user, function(err) {
         if (err) {
-          res.status(400).send(err);
+          res.status(400).json(errorHandler.getErrorObject(err));
         } else {
           res.json({
             user: user,
@@ -208,11 +260,11 @@ exports.removeOAuthProvider = function(req, res, next) {
 
     user.save(function(err) {
       if (err) {
-        return res.status(400).send(errorHandler.getErrorObject(err));
+        return res.status(400).json(errorHandler.getErrorObject(err));
       } else {
         req.login(user, function(err) {
           if (err) {
-            res.status(400).send(err);
+            res.status(400).json(errorHandler.getErrorObject(err));
           } else {
             res.json(user);
           }
