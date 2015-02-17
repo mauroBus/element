@@ -35,8 +35,8 @@ angular.module('elementBoxApp.account.myitems')
         msg: 'Please confirm to delete this prodct.',
         hasCancel: true
       }).then(function() {
-        product.$remove().then(function(err) {
-          $scope.products.splice(index, 1);
+        product.$remove().then(function() {
+          $scope.fetchPage();
         });
       });
     };
