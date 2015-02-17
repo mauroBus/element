@@ -4,19 +4,16 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-    errorHandler = require('../../response/errors'),
+    errorHandler = require('../../utils/response/errors'),
     mongoose = require('mongoose'),
     passport = require('passport'),
     User = mongoose.model('User'),
     Roles = require('../../config/roles'),
     UsersAuthorization = require('./users.authorization'),
     async = require('async'),
-    nodemailer = require('nodemailer'),
     config = require('../../config/config'),
-    fs = require('fs');
+    mailer = require('../../utils/mailer/mailer');
 
-
-var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
 /**
  * Signup
@@ -56,36 +53,30 @@ exports.signup = function(req, res) {
         },
         // Fetching wellcome emai tpl.
         function(user, done) {
-          fs.readFile('templates/signup-wellcome-email.html', function(err, emailTpl) {
-            var compiled = _.template(emailTpl);
-            done(err, compiled({ name: user.displayName, appName: config.app.title }), user);
+          mailer.sendMail({
+            to: user.email,
+            subject: 'Wellcome to ' + config.app.title + '!',
+            templateUrl: 'templates/signup-wellcome-email.html',
+            tplData: { name: user.displayName, appName: config.app.title },
+            cb: done
           });
         },
-        // Sending email.
-        function(emailTpl, user, done) {
-          var mailOptions = {
-            to: user.email,
-            from: config.mailer.from,
-            subject: 'Wellcome to ' + config.app.title + '!',
-            html: emailTpl
-          };
-          smtpTransport.sendMail(mailOptions, function(err) {
-            if (!err) {
-              res.json({
-                user: user,
-                sessionId: req.sessionID,
-                message: 'An email has been sent to ' + user.email + ' with further instructions.'
-              });
-            } else {
-              return res.json({
-                user: user,
-                sessionId: req.sessionID,
-                message: 'Failure sending the email to the given address.'
-              });
-            }
+        function(err, done) {
+          if (!err) {
+            res.json({
+              user: user,
+              sessionId: req.sessionID,
+              message: 'An email has been sent to ' + user.email + ' with further instructions.'
+            });
+          } else {
+            return res.json({
+              user: user,
+              sessionId: req.sessionID,
+              message: 'Failure sending the email to the given address.'
+            });
+          }
 
-            done(err);
-          });
+          done(err);
         }
       ], function(err) {
         if (!err) {
