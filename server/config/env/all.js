@@ -6,7 +6,7 @@ var rootPath = path.normalize(__dirname + '/../../../client/dist');
 
 module.exports = {
   app: {
-    title: 'Element SandBox',
+    title: 'Box Labs Studios',
     description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
     keywords: ''
   },

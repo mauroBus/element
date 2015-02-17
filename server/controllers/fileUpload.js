@@ -4,7 +4,7 @@
 var formidable = require('formidable'),
     fs = require('fs'),
     path = require('path'),
-    errorHandler = require('../response/errors'),
+    errorHandler = require('../utils/response/errors'),
     config = require('../config/config'),
     imgs = ['png', 'jpg', 'jpeg', 'gif', 'bmp'];
 

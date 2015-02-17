@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'),
     CategoryTree = mongoose.model('CategoryTree'),
     _ = require('lodash'),
-    errorHandler = require('../response/errors'),
+    errorHandler = require('../utils/response/errors'),
     Roles = require('../config/roles');
     // Response = require('../response/response'),
     // pagination = require('mongoose-pagination');
@@ -158,30 +158,8 @@ exports.create = function(req, res) {
   }
 };
 
-/**
- * Update a product
- */
-exports.update = function(req, res) {
-  // var product = req.product;
-  // product = _.extend(product, req.body);
-
-  // product.save(function(err) {
-  //   if (err) {
-  //     return res.status(400).send(errorHandler.getErrorObject(err));
-  //   } else {
-  //     res.json(product);
-  //   }
-  // });
-};
-
-exports.delete = function(req, res) {
-  // var product = req.product;
-
-  // product.remove(function(err) {
-  //   if (err) return res.json(500, err);
-  //   res.json(product);
-  // });
-};
+exports.update = function(req, res) {};
+exports.delete = function(req, res) {};
 
 /**
  * Category authorization middleware

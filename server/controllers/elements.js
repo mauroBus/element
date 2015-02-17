@@ -3,8 +3,8 @@
 var mongoose = require('mongoose'),
     Element = mongoose.model('Element'),
     _ = require('lodash'),
-    errorHandler = require('../response/errors'),
-    Response = require('../response/response'),
+    errorHandler = require('../utils/response/errors'),
+    Response = require('../utils/response/response'),
     Roles = require('../config/roles');
 
 /**
