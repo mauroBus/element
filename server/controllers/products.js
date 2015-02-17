@@ -3,9 +3,9 @@
 var mongoose = require('mongoose'),
     Product = mongoose.model('Product'),
     _ = require('lodash'),
-    errorHandler = require('../response/errors'),
+    errorHandler = require('../utils/response/errors'),
     Roles = require('../config/roles'),
-    Response = require('../response/response'),
+    Response = require('../utils/response/response'),
     pagination = require('mongoose-pagination'),
     CategoryTree = mongoose.model('CategoryTree'),
     ObjectId = require('mongoose').Types.ObjectId;
@@ -42,7 +42,7 @@ exports.query = function(req, res) {
       }, {});
 
       Product
-        .find(_.extend({ categories: new RegExp(categPath) }, userFilter))
+        .find(_.extend({ categories: new RegExp(categPath) }, userFilter), { comments: 0, __v: 0 })
         .sort('-created')
         .paginate(pagination.page, pagination.pageSize, Response.query(req, res));
     });
@@ -52,7 +52,7 @@ exports.query = function(req, res) {
  * Show a product
  */
 exports.read = function(req, res) {
-  res.json(req.product);
+  res.json(_.omit(req.product, ['__v', 'comments']));
 };
 
 /**
