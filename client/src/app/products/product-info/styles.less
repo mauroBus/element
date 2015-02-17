@@ -69,7 +69,7 @@
         filter: alpha(opacity=90);
       }
     }
-  }
+  } // .image-slider
 
   .indicators {
     text-align: center;
@@ -95,7 +95,35 @@
         background-color: orange;
       }
     }
+  } // .indicators
 
-
+  .review-content {
+    .comments-count {
+      position: relative;
+      bottom: 6px;
+    }
+    .review-text {
+      p {
+        .text-overflow();
+      }
+    }
   }
+
+  .user-link {
+    cursor: pointer;
+  }
+
+  .comments-panel {
+    padding: 15px;
+  }
+
+  .add-review {
+    textarea {
+      resize: vertical;
+    }
+    .review-foot {
+      margin-top: 10px;
+    }
+  }
+
 }

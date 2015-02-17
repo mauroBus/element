@@ -1,6 +1,6 @@
 <section class="product-info">
-  <h1>Product Info</h1>
-  <h3 class="product-info__title">{{product.title}}</h3>
+  <h2>Product Info</h2>
+  <!-- <h3 class="product-info__title">{{product.title}}</h3> -->
 
 <!--   <carousel ng-show="product.images.length" interval="300" class="image-slider center-block">
     <slide ng-repeat="slide in slides" active="slide.active">
@@ -12,6 +12,8 @@
     </slide>
   </carousel>
  -->
+
+  <div ng-include="'products/product-info/fragments/summary.html'"></div>
 
   <div ng-if="slides.length">
     <!-- slide, zoom, hexagon, fadeAndSlide -->
@@ -29,20 +31,62 @@
     <div rn-carousel-indicators class="indicators" ng-if="slides.length > 1" slides="slides" rn-carousel-index="slidesIndex"></div>
   </div>
 
-  <div class="product-info__description">{{product.description}}</div>
 
-  <h4>Categories:</h4>
-  <ul class="nav nav-pills">
-    <li ng-repeat="categ in product.categories track by $index" role="presentation" class="active">
-      <a ui-sref="main.products.list({categ: categ})">{{categ}}</a>
-    </li>
-  </ul>
+  <!-- Details: -->
+  <div class="col-lg-8">
+    <div class="row-space-8 row-space-top-8">
+      <h3 class="row-space-4 text-center-sm">Details</h3>
+      <div class="product-info__description">{{product.description}}</div>
+      <p class="text-center-sm">
+        <div class="btn btn-link" ng-click="doContact();">Contact</div>
+      </p>
+    </div>
 
+    <hr>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="text-muted">Prices</div>
+      </div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-6">
+            <div>Price:<strong>{{product.price}}</strong></div>
+            <div>Deposit:<strong>{{product.deposit}}%</strong></div>
+          </div>
+          <div class="col-md-6">
+            <div>
+              Cancellation: <strong><a ui-sref="#/cancelation-policies">{{product.cancelation}}</a></strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+  </div> <!-- Details. -->
+
+
+  <!-- Categories: -->
+  <div class="col-lg-8">
+    <div class="row-space-8 row-space-top-8">
+      <h3>Categories</h3>
+      <ul class="nav nav-pills">
+        <li ng-repeat="categ in product.categories track by $index" role="presentation" class="active">
+          <a ui-sref="main.products.list({categ: categ})">{{categ}}</a>
+        </li>
+      </ul> <!-- Categories. -->
+    </div>
+  </div>
+  <!--
   <h4>Catalogs:</h4>
   <ul class="nav nav-pills">
     <li ng-repeat="catalog in product.catalogs track by $index" role="presentation" class="active">
       <a href="">{{catalog.name}}</a>
     </li>
   </ul>
+  -->
+
+  <div ng-include="'products/product-info/fragments/comments.html'" scope="this"></div>
 
 </section>
