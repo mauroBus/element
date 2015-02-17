@@ -1,9 +1,94 @@
 @import "./mixins.less";
-@import "./account-box.less";
-@import "./vars.less";
+@import "./account-box";
+@import "./vars";
+@import "./icons";
+
+body {
+  font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.43;
+  color: @base-font-color;
+  background-color: @body-bg;
+}
+
+h1 {
+  font-size: 44px;
+}
+
+// Containers:
+.page-container,.page-container-responsive {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 12.5px;
+  padding-right: 12.5px
+}
+
+.page-container:before,
+.page-container-responsive:before,
+.page-container:after,
+.page-container-responsive:after {
+  content: " ";
+  display: table
+}
+
+.page-container:after,
+.page-container-responsive:after {
+  clear: both
+}
+
+@media (min-width: 768px) {
+  .page-container,
+  .page-container-responsive {
+    padding-left:25px;
+    padding-right: 25px
+  }
+}
+
+.page-container {
+  width: 1045px
+}
+
+.page-container-full {
+  width: auto
+}
+
+.page-container-responsive {
+  width: auto
+}
+
+@media (min-width: 768px) {
+  .page-container-responsive {
+    width:745px
+  }
+}
+
+@media (min-width: 1100px) {
+  .page-container-responsive {
+    width:1045px
+  }
+}
+
+.text-muted {
+  color: @light-font-color;
+}
 
 .centered {
   text-align: center;
+}
+
+.media-photo {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+  overflow: hidden;
+  background-color: #cacccd;
+}
+
+.media-round {
+  border-radius: 50%;
+  border: 2px solid #fff;
 }
 
 /** Route Animation definition **/
