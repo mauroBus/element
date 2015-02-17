@@ -1,0 +1,60 @@
+<!-- Comments: -->
+<div class="review-content col-lg-8">
+  <h3>Comments <span class="badge comments-count">{{commentsData.totalComments}}</span></h3>
+  <div ng-show="comments.length" class="row">
+    <div class="col-lg-9 col-offset-3">
+      <pagination
+        ng-model="commentsData.page"
+        items-per-page="commentsData.pageSize"
+        total-items="commentsData.totalComments"
+        max-size="10"
+        previous-text="Prev"
+        next-text="Next">
+      </pagination>
+    </div>
+  </div>
+
+  <div class="panel comments-panel">
+    <div ng-show="!comments.length" class="no-comments">No comments yet.</div>
+
+    <div ng-show="comments.length" class="comment clearfix" ng-repeat="(key, comment) in comments track by $index">
+      <!-- User data: -->
+      <div class="col-md-3 text-center row-space-2">
+        <a ui-sref="users{id: comment.user.ref}" class="media-photo media-round row-space-1 text-center user-link">
+          <img alt="" class="lazy" src="imgs/user_pic-68x68.png">
+        </a>
+        <div class="name">
+          <a ui-sref="users{id: comment.user.ref}" class="text-muted user-link">{{comment.user.displayName || comment.user.firstName}}</a>
+        </div>
+      </div>
+      <!-- Comment data: -->
+      <div class="col-md-9">
+        <div class="review-text">
+          <p>{{comment.text}}</p>
+        </div>
+        <div class="text-muted review-subtext">
+          <div class="review-translation-language" ></div>
+          <div class="date">{{comment.createdAt | date:'mediumDate'}}</div>
+        </div>
+      </div>
+
+      <div class="row row-space-2" ng-show="key !== comments.length-1">
+        <div class="col-md-9 col-md-push-3">
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-9 row-space-2 add-review">
+      <textarea class="form-control" rows="2" ng-model="newComment" maxlength="700" minlength="2" placeholder="Write a comment">{{comment.text}}</textarea>
+      <div class="review-foot clearfix">
+        <!-- <div class="pull-left">Add a comment</div> -->
+        <div class="btn btn-info btn-sm pull-right" ng-disabled="newComment.trim() === ''" ng-click="addComment(newComment); newComment = '';">Add Comment</div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- Comments. review-content -->
