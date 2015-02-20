@@ -18,8 +18,8 @@ angular.module('elementBoxApp.common')
         elements: 'api/elements',
         // Setting up the users profile api
         users: {
-          me: '/users/me',
           users: '/users', // to update.
+          me: '/users/me',
           remove: '/users/accounts', // to delete.
           // Users password api:
           changePass: '/users/password',

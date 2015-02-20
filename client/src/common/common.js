@@ -39,7 +39,9 @@ angular.module('elementBoxApp.common', [
  * Generic Event Names Definition:
  */
 .constant('EVENT_NAMES', {
-  errorResponse: 'ERROR_RESPONSE'
+  errorResponse: 'ERROR_RESPONSE',
+  addWishList: 'NEW_WISH_LIST_ITEM',
+  addComment: 'NEW_COMMENT'
 })
 
 ;
