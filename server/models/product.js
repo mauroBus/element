@@ -1,33 +1,33 @@
 'use strict';
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    CategoryTree = mongoose.model('CategoryTree'),
+    User = require('./user').User,
     _ = require('lodash'),
     mailer = require('../utils/mailer/mailer');
 
 
-var Sizes = new Schema({
-  size: {
-    type: String,
-    required: true
-  },
-  available: {
-    type: Number,
-    required: true,
-    min: 0,
-    max: 1000
-  },
-  sku: {
-    type: String,
-    required: true,
-    validate: [/[a-zA-Z0-9]/, 'Product sku should only have letters and numbers']
-  },
-  price: {
-    type: Number,
-    required: true,
-    min: 0
-  }
-});
+// var Sizes = new Schema({
+//   size: {
+//     type: String,
+//     required: true
+//   },
+//   available: {
+//     type: Number,
+//     required: true,
+//     min: 0,
+//     max: 1000
+//   },
+//   sku: {
+//     type: String,
+//     required: true,
+//     validate: [/[a-zA-Z0-9]/, 'Product sku should only have letters and numbers']
+//   },
+//   price: {
+//     type: Number,
+//     required: true,
+//     min: 0
+//   }
+// });
 
 var Images = new Schema({
   kind: {
@@ -42,15 +42,15 @@ var Images = new Schema({
   }
 });
 
-var Variants = new Schema({
-  color: String,
-  images: [Images],
-  sizes: [Sizes]
-});
+// var Variants = new Schema({
+//   color: String,
+//   images: [Images],
+//   sizes: [Sizes]
+// });
 
-var Catalogs = new Schema({
-  name: String
-});
+// var Catalogs = new Schema({
+//   name: String
+// });
 
 
 // Product Model
@@ -63,23 +63,22 @@ var Product = new Schema({
     type: String,
     required: true
   },
-  style: {
-    type: String,
-    // unique: true
-  },
+  // style: {
+  //   type: String,
+  //   // unique: true
+  // },
   images: [Images],
   categories: {
     type: [String],
     default: [],
-    // enum: CategoryTree
   },
-  catalogs: [Catalogs],
+  // catalogs: [Catalogs],
   // variants: [Variants],
-  modified: {
+  createdAt: {
     type: Date,
     default: Date.now
   },
-  created: {
+  modifiedAt: {
     type: Date,
     default: Date.now
   },
@@ -90,6 +89,10 @@ var Product = new Schema({
     },
     firstName: String,
     lastName: String
+  },
+  price: {
+    type: Number,
+    default: 0
   },
   comments: [{
     text: {
@@ -110,7 +113,18 @@ var Product = new Schema({
       type: Date,
       default: Date.now
     }
-  }]
+  }],
+  rating: {
+    value: {
+      type: Number,
+      required: true,
+      default: 0
+    },
+    history: {
+      type: [Number],
+      default: []
+    }
+  }
 });
 
 
@@ -119,10 +133,6 @@ Product.path('title').validate(function (v) {
   return v.length >= 10 && v.length <= 55;
 }, 'Product title should be between 10 and 55 characters');
 
-Product.path('style').validate(function (v) {
-  return v.length < 40;
-}, 'Product style attribute should be less than 40 characters');
-
 Product.path('description').validate(function (v) {
   return v.length >= 10;
 }, 'Product description should be longer than 10 characters');
@@ -130,31 +140,42 @@ Product.path('description').validate(function (v) {
 
 
 Product.methods = {
-  addComment: function(user, comment, cb) {
+  addComment: function(currentUser, comment, cb) {
+    var prodUser = this.user,
+        prodId = this._id,
+        prodTitle = this.title;
+
     this.comments.push({
       text: comment,
       user: {
-        ref: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        displayName: user.displayName
+        ref: currentUser._id,
+        firstName: currentUser.firstName,
+        lastName: currentUser.lastName,
+        displayName: currentUser.displayName
       }
     });
 
-    mailer.sendMail({
-      to: this.user.email,
-      subject: 'You have a new comment!',
-      templateUrl: 'templates/new-comment-email.html',
-      tplData: {
-        name: this.user.firstName + this.user.lastName,
-        from: user.displayName,
-        comment: comment,
-        product: this.title
-      },
-      cb: function(err) {}
+    User.findById(prodUser.ref, function(err, fullProdUser) {
+      mailer.sendMail({
+        to: fullProdUser.email,
+        subject: 'You have a new comment!',
+        templateUrl: 'templates/new-comment-email.html',
+        tplData: {
+          name: fullProdUser.firstName + ' ' + fullProdUser.lastName,
+          from: currentUser.displayName,
+          comment: comment,
+          product: prodTitle
+        },
+        cb: function(err, info) {
+          console.log('Status of email sent for new comment: ', err);
+        }
+      });
     });
 
-    this.save(cb);
+    this.save(function(err) {
+      // Adding the comment to the current user.
+      currentUser.addComment(comment, prodId, cb);
+    });
   },
 
   removeComment: function(commentId, cb) {
@@ -162,8 +183,22 @@ Product.methods = {
     if (index < 0) { return cb('Comment id: ' + commentId + ' was not found'); }
     this.comments.splice(index, 1);
     this.save(cb);
+  },
+
+  // rate product.
+  rate: function(val, cb) {
+    if (1 <= val <= 5) {
+      this.rating.history.push(val);
+      var sum = _.reduce(this.rating.history, function(sum, n) {
+        return sum + n;
+      });
+      this.rating.value = sum / this.rating.history.length;
+      this.save(cb);
+    } else {
+      cb(new Error('Rate value not valid. It must be an integer between 1 and 5.'));
+    }
   }
 };
 
 
-var ProductModel = mongoose.model('Product', Product);
+exports.Product = mongoose.model('Product', Product);
