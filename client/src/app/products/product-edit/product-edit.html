@@ -1,0 +1,87 @@
+<section class="product-edit">
+
+  <div class="panel panel-default">
+    <div ng-if="!productSaved" class="panel-body">
+      <h1>Edit Product</h1>
+
+      <form
+        ng-submit="save(newProductForm.$valid)"
+        role="form"
+        name="newProductForm">
+
+        <div class="form-group"
+          ng-class="{'has-error': (newProductForm.title.$error.required && displayError) || (errors.title)}">
+          <label class="product__title" for="titleId">Title:</label>
+          <input type="text"
+            id="titleId"
+            class="form-control"
+            ng-model="product.title"
+            required
+            name="title">
+        </div>
+
+        <div class="form-group"
+          ng-class="{'has-error': (newProductForm.description.$error.required && displayError) || (errors.description)}">
+          <label class="product__description" for="descriptionId">Description:</label>
+          <textarea
+            ng-model="product.description"
+            id="descriptionId"
+            class="product-new__description form-control"
+            required
+            name="description"
+            ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="imagesId">Images:</label>
+          <a href class="btn btn-link btn-sm" ng-click="areImgsCollapsed = !areImgsCollapsed">
+            <span ng-show="areImgsCollapsed" class="glyphicon glyphicon-plus-sign"></span>
+            <span ng-show="!areImgsCollapsed" class="glyphicon glyphicon-minus-sign"></span>
+          </a>
+          <div collapse="areImgsCollapsed">
+            <file-upload limit="10" files="product.images"></file-upload>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="categoriesId">Categories:</label>
+          <div class="btn-group">
+            <label
+              class="btn btn-default"
+              ng-class="{active: hasCateg(categ)}"
+              ng-repeat="(key, categ) in categories"
+              ng-model="product.categories[key]"
+              btn-radio="'{{categ.name}}'"
+              uncheckable>
+                {{categ.name}}
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="catalogsId">Catalogs:</label>
+          <label
+              class="btn btn-danger"
+              ng-repeat="(key, catalog) in catalogs"
+              ng-model="product.catalogs[key]"
+              btn-radio="'{{catalog.name}}'"
+              uncheckable>
+                {{catalog.name}}
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Save</button>
+      </form>
+
+    </div>
+
+    <div ng-if="productSaved" class="panel-body">
+      <div class="jumbotron">
+        <h1>Congratulations!!!</h1>
+        <p>Product Successfuly Changed</p>
+        <p><a class="btn btn-primary btn-lg" ui-sref="main.products" role="button">Continue</a></p>
+      </div>
+    </div>
+  </div>
+
+</section>
