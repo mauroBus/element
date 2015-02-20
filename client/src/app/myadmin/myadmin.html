@@ -9,16 +9,20 @@
       <div class="list-group">
         <a class="list-group-item"
           ui-sref="main.myadmin.categorymanag"
-          ng-class="{active: activeState === 'categorymanag'}"
-          ng-click="activeState = 'categorymanag';">Categories</a>
+          ng-class="{active: activeState === 'main.myadmin.categorymanag' || activeState === 'main.myadmin'}"
+          ng-click="setState('main.myadmin.categorymanag')">Categories</a>
         <a class="list-group-item"
           ui-sref="main.myadmin.userlist"
-          ng-class="{active: activeState === 'userlist'}"
-          ng-click="activeState = 'userlist';">Users</a>
+          ng-class="{active: activeState === 'main.myadmin.userlist'}"
+          ng-click="setState('main.myadmin.userlist')">Users</a>
         <a class="list-group-item"
           ui-sref="main.myadmin.myitems"
-          ng-class="{active: activeState === 'myitems'}"
-          ng-click="activeState = 'myitems';">My items</a>
+          ng-class="{active: activeState === 'main.myadmin.myitems'}"
+          ng-click="setState('main.myadmin.myitems')">My Items</a>
+        <a class="list-group-item"
+          ui-sref="main.myadmin.allitems"
+          ng-class="{active: activeState === 'main.myadmin.allitems'}"
+          ng-click="setState('main.myadmin.allitems')">All Items</a>
       </div>
     </div>
   </div>
