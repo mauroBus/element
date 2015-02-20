@@ -2,11 +2,20 @@
 angular.module('elementBoxApp.products.productInfo')
 
 .controller('ProductInfoCtrl', [
-          '$scope', '$modal', '$stateParams', 'ProductsService', 'CommentsService',
-  function($scope,   $modal,   $stateParams,   ProductsService,   CommentsService) {
+          '$scope', '$rootScope', '$modal', '$stateParams', 'ProductsService', 'UserService', 'CommentsService', 'EVENT_NAMES',
+  function($scope,   $rootScope,   $modal,   $stateParams,   ProductsService,   UserService,   CommentsService,   EVENT_NAMES) {
     $scope.slides = [];
     $scope.slidesIndex = 0;
-    // $scope.newComment = '';
+    $scope.userHasRated = false;
+    $scope.rateVal = null;
+    var ratingInProcess = false;
+
+    $scope.contactFromDate = null;
+    $scope.dateOptions = {
+      formatYear: 'yy',
+      startingDay: 1
+    };
+    $scope.checkinDPOpened = false;
 
     // Comments pagination:
     $scope.comments = [];
@@ -40,17 +49,19 @@ angular.module('elementBoxApp.products.productInfo')
       p.images.forEach(function(image, index) {
         $scope.slides.push({ url: image.url, index: index+1 });
       });
+      // p.rating.value = parseInt(p.rating.value);
     });
 
-    $scope.addComment = function(newComment) {
-      newComment = newComment.trim();
-      if (newComment) {
-        CommentsService.save({
+    $scope.addComment = function(commentTxt) {
+      commentTxt = commentTxt.trim();
+      if (commentTxt) {
+        var newComment = {
           prodId: $stateParams.productId,
-          text: newComment
-        }, function() {
-          // $scope.newComment = '';
+          text: commentTxt
+        };
+        CommentsService.save(newComment, function(data) {
           $scope.fetchPage();
+          $rootScope.$emit(EVENT_NAMES.addComment, newComment);
         });
       }
     };
@@ -72,6 +83,38 @@ angular.module('elementBoxApp.products.productInfo')
         },
         // size: 'sm',
         // backdrop: 'static'
+      });
+    };
+
+    $scope.rate = function(val) {
+      if ($scope.rateVal || ratingInProcess) { return; }
+
+      ratingInProcess = true;
+
+      ProductsService.rate({_id: $scope.product._id, rating: val}, function() { // success cbk.
+        $scope.userHasRated = true;
+        $scope.rateVal = val;
+        ratingInProcess = false;
+      }, function() { // err cbk.
+        ratingInProcess = false;
+      });
+    };
+
+    // Disable weekend selection
+    $scope.disabled = function(date, mode) {
+      return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+    };
+
+    $scope.open = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope.checkinDPOpened = true;
+    };
+
+    $scope.addToWishList = function() {
+      UserService.addToWishList({ prodId: $scope.product._id }, function() {
+        $rootScope.$emit(EVENT_NAMES.addWishList, $scope.product);
       });
     };
 

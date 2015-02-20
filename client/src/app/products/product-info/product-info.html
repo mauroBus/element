@@ -17,29 +17,30 @@
 
   <div ng-if="slides.length">
     <!-- slide, zoom, hexagon, fadeAndSlide -->
-    <ul rn-carousel class="image-slider center-block" rn-carousel-transition="fadeAndSlide" rn-carousel-controls rn-carousel-buffered="3" rn-carousel-index="slidesIndex">
-      <li ng-repeat="slide in slides track by $index">
-        <div class="layer">
-          <div class="">
-            <!-- <img ng-src="{{slide.url}}" draggable="false" class="img-no-drag"> -->
-            <div class="img" style="background-image: url({{slide.url}});"></div>
-            <h4 class="img-caption">{{slide.index}}</h4>
+    <div class="image-slider-container panel col-lg-8">
+      <ul rn-carousel class="image-slider center-block" rn-carousel-transition="fadeAndSlide" rn-carousel-controls rn-carousel-buffered="3" rn-carousel-index="slidesIndex">
+        <li ng-repeat="slide in slides track by $index">
+          <div class="layer">
+            <div class="">
+              <!-- <img ng-src="{{slide.url}}" draggable="false" class="img-no-drag"> -->
+              <div class="img" style="background-image: url({{slide.url}});"></div>
+              <h4 class="img-caption">{{slide.index}}</h4>
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
-    <div rn-carousel-indicators class="indicators" ng-if="slides.length > 1" slides="slides" rn-carousel-index="slidesIndex"></div>
+        </li>
+      </ul>
+      <div rn-carousel-indicators class="indicators" ng-if="slides.length > 1" slides="slides" rn-carousel-index="slidesIndex"></div>
+    </div>
   </div>
 
 
   <!-- Details: -->
   <div class="col-lg-8">
-    <div class="row-space-8 row-space-top-8">
-      <h3 class="row-space-4 text-center-sm">Details</h3>
-      <div class="product-info__description">{{product.description}}</div>
-      <p class="text-center-sm">
-        <div class="btn btn-link" ng-click="doContact();">Contact</div>
-      </p>
+    <div>
+      <h3>Details</h3>
+      <div class="product-info__description text-overflow panel panel-dark">
+        <div class="panel-body">{{product.description}}</div>
+      </div>
     </div>
 
     <hr>
@@ -69,15 +70,16 @@
 
   <!-- Categories: -->
   <div class="col-lg-8">
-    <div class="row-space-8 row-space-top-8">
+    <div>
       <h3>Categories</h3>
       <ul class="nav nav-pills">
         <li ng-repeat="categ in product.categories track by $index" role="presentation" class="active">
           <a ui-sref="main.products.list({categ: categ})">{{categ}}</a>
         </li>
-      </ul> <!-- Categories. -->
+      </ul>
     </div>
-  </div>
+  </div> <!-- Categories. -->
+
   <!--
   <h4>Catalogs:</h4>
   <ul class="nav nav-pills">
@@ -87,6 +89,27 @@
   </ul>
   -->
 
-  <div ng-include="'products/product-info/fragments/comments.html'" scope="this"></div>
+  <div ng-include="'products/product-info/fragments/comments.html'"></div>
+
+  <!-- Rating: -->
+  <div class="product-rating col-lg-8">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-3">
+            <h4 class="text-muted">Rate:</h4>
+          </div>
+          <div class="rating col-md-9" ng-class="{ unrated: !userHasRated, rated: userHasRated }">
+            <span ng-click="rate(5)" ng-class="{rated: rateVal >= 5}">☆</span>
+            <span ng-click="rate(4)" ng-class="{rated: rateVal >= 4}">☆</span>
+            <span ng-click="rate(3)" ng-class="{rated: rateVal >= 3}">☆</span>
+            <span ng-click="rate(2)" ng-class="{rated: rateVal >= 2}">☆</span>
+            <span ng-click="rate(1)" ng-class="{rated: rateVal >= 1}">☆</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </section>

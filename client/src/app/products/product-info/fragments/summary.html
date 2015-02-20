@@ -7,329 +7,117 @@
           <div class="row">
 
             <div class="col-md-3 text-center">
-              <a href="#host-profile" class="media-photo media-round">
-                <img alt="Renata" class="host-profile-image" src="imgs/user_pic-68x68.png">
+              <a ui-sref="users{id: product.user.ref}" class="media-photo media-round row-space-1 text-center user-link">
+                <img alt="{{product.user.firstName}}" class="lazy" src="imgs/user_pic-68x68.png">
               </a>
+              <div class="name">
+                <a ui-sref="users{id: product.user.ref}" class="text-muted user-link">{{product.user.displayName || product.user.firstName}}</a>
+              </div>
             </div>
 
             <div class="col-md-9">
-              <h1 itemprop="name" class="overflow h3 row-space-1 text-center-sm" id="listing_name">
+              <h1 itemprop="name" class="text-overflow h3 row-space-1 text-center-sm" id="listing_name">
                 {{product.title}}
               </h1>
 
-              <span class="hide" itemprop="breadcrumb">
-                <span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
-                  <a href="/s/Brazil" itemprop="url"><span itemprop="title">Brazil</span>,</a>
-                </span>
-                <span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
-                  <a href="/s/Rio-de-Janeiro--Brazil" itemprop="url"><span itemprop="title">Rio de Janeiro</span>,</a>
-                </span>
-                <span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
-                  <a href="/s/Rio-de-Janeiro--Brazil" itemprop="url"><span itemprop="title">Rio de Janeiro</span></a>
-                </span>
-              </span>
-
-              <div id="display-address" class="row-space-2 text-muted hide-sm" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating" data-location="Rio de Janeiro, Rio de Janeiro, Brazil">
-
-                <a href="#neighborhood" class="link-reset">Rio de Janeiro, Rio de Janeiro, Brazil</a>
-
-                  &nbsp;
-                <a href="#reviews" class="link-reset">
-                <div class="star-rating">
-                  <div class="foreground">
-                            <i class="icon icon-beach icon-star"></i>
-                  <i class="icon icon-beach icon-star"></i>
-                  <i class="icon icon-beach icon-star"></i>
-                  <i class="icon icon-beach icon-star"></i>
-                  <i class="icon icon-beach icon-star"></i>
-                  <meta itemprop="ratingValue" content="5.0">
-
-                  </div>
-                  <div class="background">
-                    <i class="icon icon-star icon-light-gray"></i>
-                    <i class="icon icon-star icon-light-gray"></i>
-                    <i class="icon icon-star icon-light-gray"></i>
-                    <i class="icon icon-star icon-light-gray"></i>
-                    <i class="icon icon-star icon-light-gray"></i>
-                  </div>
+              <div class="product-rating col-lg-8">
+                <div class="rating rated"
+                  ng-class="{'never-rated': product.rating.value == 0}"
+                  popover-animation="false" popover="{{product.rating.value > 0 ? ('Rating: ' + (product.rating.value | number: 2)) : 'Still no rated'}}" popover-placement="right" popover-trigger="mouseenter">
+                  <span ng-class="{rated: product.rating.value >= 5}">☆</span>
+                  <span ng-class="{rated: product.rating.value >= 4}">☆</span>
+                  <span ng-class="{rated: product.rating.value >= 3}">☆</span>
+                  <span ng-class="{rated: product.rating.value >= 2}">☆</span>
+                  <span ng-class="{rated: product.rating.value >= 1}">☆</span>
                 </div>
-                (<span itemprop="reviewCount">25</span>)</a>
               </div>
 
               <div class="row row-condensed text-muted text-center">
-                  <div class="col-sm-3">
-                    <i class="icon icon-entire-place icon-size-2"></i>
-                  </div>
-                  <div class="col-sm-3">
-                    <i class="icon icon-group icon-size-2"></i>
-                  </div>
-                  <div class="col-sm-3">
-                    <i class="icon icon-rooms icon-size-2"></i>
-                  </div>
-                  <div class="col-sm-3">
-                    <i class="icon icon-double-bed icon-size-2"></i>
-                  </div>
+                <div class="col-sm-3">
+                  <i class="icon icon-entire-place icon-size-2"></i>
+                </div>
+                <div class="col-sm-3">
+                  <i class="icon icon-group icon-size-2"></i>
+                </div>
+                <div class="col-sm-3">
+                  <i class="icon icon-rooms icon-size-2"></i>
+                </div>
+                <div class="col-sm-3">
+                  <i class="icon icon-double-bed icon-size-2"></i>
+                </div>
               </div>
 
             </div>
-
           </div>
 
           <div class="row">
-            <div class="col-md-3 text-muted text-center hide-sm">
-              <a href="#host-profile" class="link-reset text-wrap">Renata</a>
-            </div>
-
+            <div class="col-md-3"></div>
             <div class="col-md-9">
               <div class="row row-condensed text-muted text-center">
-                <div class="col-sm-3">
-                  Entire home/apt
-                </div>
-                <div class="col-sm-3">
-                  2 Guests
-                </div>
-                <div class="col-sm-3">
-                  1 Bedroom
-                </div>
-                <div class="col-sm-3">
-                  1 Bed
-                </div>
+                <div class="col-sm-3">Entire home/apt</div>
+                <div class="col-sm-3">2 Guests</div>
+                <div class="col-sm-3">1 Bedroom</div>
+                <div class="col-sm-3">1 Bed</div>
               </div>
             </div>
-
           </div>
         </div>
 
       </div>
+
       <div class="col-lg-4">
-          
+        <div class="h3 product__price">{{product.price | currency:'$'}}</div>
 
-<div class="mobile-bookit-btn-container text-center row">
-  <button id="book-it-sm-trigger" class="btn btn-primary btn-large col-sm-10 col-sm-push-1">
-    Request to Book
-  </button>
-</div>
+        <div class="row">
+          <div class="col-sm-6">
+            <span>Check In</span>
+            <!-- <datepicker ng-model="" min-date="" show-weeks="true" class="well well-sm"></datepicker> -->
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="dd-MMM-yyyy" ng-model="contactFromDate" is-open="checkinDPOpened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
 
+             <!--  <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="checkinDPOpened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" /> -->
 
-
-<span id="service-fee-tip" class="tooltip tooltip-top-middle" role="tooltip" data-trigger="#service-fee-tooltip" aria-hidden="true">
-  <p class="panel-body fee-no-vat-tooltip">
-    This is the fee charged by Airbnb
-  </p>
-  <p class="panel-body hide fee-vat-tooltip">
-    This is the fee charged by Airbnb and includes VAT
-  </p>
-</span>
-
-<div id="tax-descriptions-tip" class="tooltip tooltip-top-middle" role="tooltip" data-sticky="true" data-trigger="#tax-descriptions-tooltip">
-</div>
-
-<div class="modal" role="dialog" aria-hidden="true" id="book-it-sm-modal">
-  <div class="modal-table">
-    <div class="modal-cell">
-      <div class="modal-content">
-        <div class="panel-header">
-          <a href="#" class="modal-close" data-behavior="modal-close"></a>
-          Request to Book
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-        <form accept-charset="UTF-8" action="https://www.airbnb.com/payments/book?hosting_id=935028" class="info new-o2-form-inline" id="book_it_form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="V4$.airbnb.com$ji91k808mi0$QEbU4hhAwL-by9PmdQNDiSLqFj1dVx5TsZSS9wuNeCY="></div>
-  <div id="pricing" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer" class="">
-    <div id="price_amount" itemprop="price" class="pull-left h3 text-special">$568<sup>ARS</sup></div>
-
-    <div id="payment-period-container" class="pull-right">
-      <div id="per_night" class="">
-        Per Night
-      </div>
-      <div id="per_month" class="hide">
-        Per Month
-        <i id="price-info-tooltip" class="icon icon-question hide" data-behavior="tooltip"></i>
-      </div>
-    </div>
-    <meta content="USD" itemprop="priceCurrency">
-  </div>
-  <div id="book_it" class="v2" style="top: 0px;">
-    <div class="book-it-wrapper row-space-1">
-      <div class="panel-body panel-light">
-        <div class="form-fields">
-          <div class="row row-condensed row-space-3">
-            <div class="col-md-9">
-              <div class="row row-condensed">
-                <div class="col-sm-6 row-space-1-sm">
-                  <label for="checkin">
-                    Check In
-                  </label>
-                  <input class="checkin ui-datepicker-target" id="checkin" name="checkin" placeholder="mm/dd/yyyy" type="text">
-                </div>
-                <div class="col-sm-6 row-space-1-sm">
-                  <label for="checkout">
-                    Check Out
-                  </label>
-                  <input class="checkout ui-datepicker-target" id="checkout" name="checkout" placeholder="mm/dd/yyyy" type="text">
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <label for="number_of_guests">
-                Guests
-              </label>
-              <div class="select select-block">
-                <select id="number_of_guests" name="number_of_guests"><option value="1">1</option>
-<option value="2">2</option></select>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="book_it_status">
-          <div id="book_it_enabled" class="clearfix">
-            <div id="subtotal_area" class="">
-              <span id="subtotal-label" class="text-muted hide">
-                Subtotal
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
-              <span id="total-label" class="text-muted hide">
-                Total
-              </span>
-              <div id="subtotal" class="h1 text-special row-space-1"></div>
-            </div>
-            <div id="book_it_button_container">
-              <button type="submit" class="btn btn-primary btn-large btn-block" id="book_it_button">
-
-                <span class="book-it">
-                  Request to Book
-                </span>
-
-                <span class="instant-book">
-                  <i class="icon icon-bolt icon-beach h4"></i>
-                  Instant Book
-                </span>
-
-              </button>
-            </div>
-
-            
-<div id="pf-pic-prompt-container" class="hide row-space-top-2">
-
-  <div class="signup-or-separator">
-    <h6 class="text">or</h6>
-    <hr>
-  </div>
-
-  <div class="pf-pic-prompt text-center">
-    <a href="#" class="profile-pic-upsell-launcher">Add a profile photo</a> to Instant Book this listing.
-
-    <i class="icon icon-question" data-behavior="tooltip" data-position="bottom" aria-label="Instant Book lets you book a listing instantly, without having to wait for the host's confirmation."></i>
-  </div>
-</div>
-
-          </div>
-
-          <div id="book_it_disabled" class="text-center hide">
-            <p id="book_it_disabled_message" class="icon-rausch">
-              This property is unavailable.
             </p>
-            <a href="" class="btn btn-large btn-block" id="view_other_listings_button">
-              View Other Listings
-            </a>
           </div>
+          <div class="col-sm-6 row-space-1-sm">
+            <span>Check Out</span>
+            <!-- <datepicker ng-model="" min-date="" show-weeks="true" class="well well-sm"></datepicker> -->
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="dd-MMM-yyyy" ng-model="contactFromDate" is-open="checkinDPOpened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
 
-          <div id="book-it-urgency-commitment" data-host-name="Renata">
-            <div data-hook="visitor-count-simple" class="text-center text-muted row-space-top-3 hide"></div>
-            <div data-hook="urgency-tooltip" class="tooltip tooltip-layout tooltip-no-border tooltip-urgency-commitment row-space-top-3 hide">
-              <div class="panel-body panel-light-beach">
+             <!--  <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="checkinDPOpened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" /> -->
 
-                <div class="media">
-                  <div class="pull-left">
-                    <i class="icon icon-time icon-babu icon-size-2"></i>
-                  </div>
-                  <div class="media-body" data-hook="urgency-tooltip-content">
-                  </div>
-                </div>
-              </div>
-            </div>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="wishlist-wrapper hide-sm">
-      <div class="rich-toggle wish_list_button row-space-2 not_saved" data-hosting_id="935028" data-img="https://a0.muscache.com/pictures/14182805/large.jpg" data-name="Copacabana Beach:  Ocean View!" data-address="Rua Miguel Lemos, Rio de Janeiro (Copacabana)" data-behavior="tooltip" data-position="bottom" aria-label="Saved 1342 times">
-  <input type="checkbox" name="wishlist-button" id="wishlist-button">
-  <label for="wishlist-button" class="btn btn-block btn-large">
-    <span class="rich-toggle-checked">
-      <i class="icon icon-heart icon-rausch"></i>
-      Saved to Wish List
-    </span>
-    <span class="rich-toggle-unchecked">
-      <i class="icon icon-heart-alt icon-light-gray"></i>
-      Save to Wish List
-    </span>
-  </label>
-</div>
+        <div class="col-md-3">
+          <label for="number_of_guests">Guests</label>
+          <div class="select select-block">
+            <select id="number_of_guests" name="number_of_guests">
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          </div>
+        </div>
 
-    </div>
+        <div class="row">
+          <button class="btn btn-primary pull-left" ng-click="doContact()">Contact</button>
 
-    <div class="other-actions hide-sm">
-      <div class="row-space-4 text-center">
-        <div class="row-space-2">
-        <div class="social-share-widget">
-  <span class="share-title">
-    Share:
-  </span>
-  <span class="share-triggers">
-
-      <a class="share-btn" data-email-share-link="/rooms/935028/email_listing" data-network="email" rel="nofollow" data-behavior="tooltip" href="#" aria-label="Email">
-        <i class="icon icon-envelope icon-gray social-icon-size"></i>
-      </a>
-
-
-
-
-      <a class="share-btn" data-network="facebook" rel="nofollow" data-behavior="tooltip" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.airbnb.com%2Frooms%2F935028%3Fs%3D3" target="_blank" aria-label="Facebook">
-         <i class="icon icon-facebook icon-gray social-icon-size"></i>
-      </a>
-
-      <a class="share-btn" data-network="twitter" rel="nofollow" data-behavior="tooltip" href="https://twitter.com/intent/tweet?source=tweetbutton&amp;text=Love+this%21+%22Copacabana+Beach%3A++Ocean+View%21+in+Rio+de+Janeiro%22+%40airbnb+%23Travel&amp;url=https%3A%2F%2Fwww.airbnb.com%2Frooms%2F935028%3Fs%3D4&amp;related=airbnb" target="_blank" aria-label="Twitter">
-        <i class="icon icon-twitter icon-gray social-icon-size"></i>
-      </a>
-
-      <a class="share-btn embedly-btn link-reset text-muted" data-network="embedly" data-embedly-locale="en" rel="nofollow" data-behavior="tooltip" href="#" aria-label="Embed This Listing">
-        <i class="icon icon-code icon-gray social-icon-size"></i>
-      </a>
-
-      
-
-      
-
-    <a class="more-btn" href="#">
-      ···
-    </a>
-  </span>
-  
-</div>
+          <div class="btn btn-link pull-right" ng-click="addToWishList()">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+            Add to Wish List
+          </div>
+        </div>
 
       </div>
-      <div class="row-space-2">
-        <a href="#" id="flag-for-listing-935028" class="flag-trigger link-reset text-muted hide">
-          <i class="icon icon-flag h4"></i>
-          Report this listing
-        </a>
-        <div class="already-flagged text-muted row-space-top-2 hide">
-  You have reported this listing.
-      <a href="#" class="undo_flag">
-        Undo?
-      </a>
-</div>
 
-      </div>
-      </div>
     </div>
   </div>
-  <input id="hosting_id" name="hosting_id" type="hidden" value="935028">
-</form></div>
-      </div>
-    </div>
-  </div>
+</div>

@@ -1,18 +1,27 @@
 .product-info {
-  @image-height: 300px;
-  @image-width: 600px;
+  @image-height: 400px;
+  @image-width: 615px;
 
   .product-info__title {}
-  .product-info__description {}
+
+  .product-info__description {
+    white-space: pre-line;
+  }
+
+  .image-slider-container {
+    // background-color: #FFF;
+    padding: 20px;
+  }
 
   .image-slider {
     width: @image-width;
     height: @image-height;
     cursor: pointer;
+    border-radius: 4px;
 
-    > li {
-      border-radius: 8px;
-    }
+    -webkit-box-shadow: 4px 4px 19px -3px @gray-light;
+       -moz-box-shadow: 4px 4px 19px -3px @gray-light;
+            box-shadow: 4px 4px 19px -3px @gray-light;
 
     .img {
       width: 100%;
@@ -30,7 +39,7 @@
       position: relative;
       bottom: 30px;
       text-align: center;
-      color: white;
+      color: #FFF;
       text-shadow: 2px 2px 1px rgb(88, 88, 88);
     }
 
@@ -67,7 +76,7 @@
 
       &:hover {
         outline: 0;
-        color: #fff;
+        color: #FFF;
         text-decoration: none;
         opacity: .9;
         filter: alpha(opacity=90);
@@ -88,7 +97,7 @@
       border-radius: 10px;
       cursor: pointer;
       background-color: #000 \9;
-      background-color: cornflowerblue;
+      background-color: @cornflowerblue-color;
       color: transparent;
       font-size: 0;
 
@@ -96,7 +105,7 @@
         margin: 0;
         width: 16px;
         height: 16px;
-        background-color: orange;
+        background-color: @tomato-color;
       }
     }
   } // .indicators
@@ -107,9 +116,21 @@
       bottom: 6px;
     }
     .review-text {
+      white-space: pre-line;
+      max-height: 7em;
+      overflow-y: hidden;
+
       p {
         .text-overflow();
       }
+
+      &.expanded {
+        max-height: none;
+      }
+
+    }
+    .expandable-trigger {
+      cursor: pointer;
     }
   }
 
@@ -127,6 +148,43 @@
     }
     .review-foot {
       margin-top: 10px;
+    }
+  }
+
+  .product-rating {
+    text-align: left;
+    font-size: 24px;
+
+    .rating {
+      unicode-bidi: bidi-override;
+      direction: rtl;
+      display: inline-block;
+    }
+    .rating > span {
+      display: inline-block;
+      position: relative;
+      width: 0.75em;
+    }
+
+    .never-rated {
+      color: @gray-light;
+    }
+
+    .rated {
+      span.rated:before {
+        content: "\2605";
+        position: absolute;
+        color: @cornflowerblue-color;
+      }
+    }
+    .unrated {
+      > span:hover:before,
+      > span:hover ~ span:before {
+        content: "\2605";
+        position: absolute;
+        cursor: pointer;
+        color: @tomato-color;
+      }
     }
   }
 
