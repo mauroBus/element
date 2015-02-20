@@ -9,6 +9,8 @@ angular.module('elementBoxApp', [
   'templates.common', // bag with all the common html templates
   // common components:
   'elementBoxApp.common',
+  // app controller:
+  'elementBoxApp.controller',
   // main module:
   'elementBoxApp.main',
   // sub-modules:
@@ -24,7 +26,8 @@ angular.module('elementBoxApp', [
   // 'elementBoxApp.userlist',
   'elementBoxApp.products',
   'elementBoxApp.myadmin',
-  'elementBoxApp.account'
+  'elementBoxApp.account',
+  'elementBoxApp.userdetails',
 ])
 
 .config(['$urlRouterProvider', function($urlRouterProvider) {

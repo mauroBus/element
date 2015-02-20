@@ -11,9 +11,7 @@ angular.module('elementBoxApp.home')
     $scope.pageSize = 3;
     $scope.totalPages = 0;
     $scope.totalProducts = 0;
-    $rootScope.elements = []; // UserlistService.query();
-    // $rootScope.elements = Element.query();
-
+    $rootScope.elements = [];
 
     $scope.fetchPage = function() {
       Element.query({
