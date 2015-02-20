@@ -10,15 +10,24 @@
 
   <div ng-show="products.length" class="list-group">
     <div ng-repeat="product in products" class="list-group-item clearfix">
+      <a href=""
+        popover="Remove" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
+        class="products__remove pull-right btn btn-link" ng-click="removeProduct(product, $index)">
+        <span class="glyphicon glyphicon-remove"></span>
+      </a>
+      <a href=""
+        popover="Edit" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
+        class="products__edit pull-right btn btn-link" ui-sref="main.products.edit({productId: product._id})">
+        <span class="glyphicon glyphicon-edit"></span>
+      </a>
+      <a ui-sref="main.products.info({productId: product._id})"
+        popover="View" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
+        class="products__details pull-right btn btn-link">
+        <span class="glyphicon glyphicon-link"></span>
+      </a>
       <div>{{product.title}}</div>
       <div>{{product.description}}</div>
       <div>{{product.created | date:'medium'}}</div>
-      <div class="products__remove glyphicon glyphicon-remove" ng-click="removeProduct(product, $index)"></div>
-      <!-- <div class="products__details" ui-sref="main.products.info({productId: product._id})"> -->
-      <a ui-sref="main.products.info({productId: product._id})"
-        class="products__details" class="btn btn-default btn-lg">
-        <span class="glyphicon glyphicon-link"></span>
-      </a>
     </div>
   </div>
 
