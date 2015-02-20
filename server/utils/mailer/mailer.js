@@ -26,10 +26,12 @@ module.exports = {
           to: options.to,
           from: config.mailer.from,
           subject: options.subject,
-          html: emailTpl
+          html: tpl
         };
 
-        smtpTransport.sendMail(mailOptions, options.cb);
+        smtpTransport.sendMail(mailOptions, function(err, info) {
+          options.cb(err, info);
+        });
       }
     });
   }
