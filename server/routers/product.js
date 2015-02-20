@@ -17,11 +17,14 @@ module.exports = function(app) {
   app.put('/api/products/:productId', users.requiresLogin, hasDefaultAuthorization, products.hasAuthorization, products.update);
   app.del('/api/products/:productId', users.requiresLogin, hasDefaultAuthorization, products.hasAuthorization, products.delete);
 
-  // comment routes
+  // Comments routes
   app.param('commentId', Comments.commentById);
   app.post('/api/products/:productId/comments', users.requiresLogin, Comments.create);
-  app.get('/api/products/:productId/comments', users.requiresLogin, Comments.query);
+  app.get('/api/products/:productId/comments', Comments.query);
   app.delete('/api/products/:productId/comments/:commentId', users.requiresLogin, Comments.hasDeleteAuthorization, Comments.delete);
+
+  // Rating routes:
+  app.put('/api/products/:productId/rate', users.requiresLogin, products.rate);
 
   // app.param('categoryId', function(c) {return c;});
   // app.get('/api/products/category/:categoryId', products.queryByCategory);
