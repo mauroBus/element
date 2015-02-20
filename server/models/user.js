@@ -6,7 +6,8 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     crypto = require('crypto'),
-    Roles = require('../config/roles.js');
+    Roles = require('../config/roles.js'),
+    _ = require('lodash');
 
 /**
  * A Validation function for local strategy properties
@@ -111,7 +112,27 @@ var UserSchema = new Schema({
   active: {
     type: Boolean,
     default: true
-  }
+  },
+  wishList: {
+    type: [{
+      type: Schema.ObjectId,
+      ref: 'Product'
+    }]
+  },
+  comments: {
+    type: [{
+      text: {
+        type: String,
+        required: true,
+      },
+      product: {
+        type: Schema.ObjectId,
+        ref: 'Product',
+        required: true
+      }
+    }],
+    default: []
+  },
 });
 
 /**
@@ -144,6 +165,25 @@ UserSchema.methods.authenticate = function(password) {
   return this.password === this.hashPassword(password);
 };
 
+UserSchema.methods.addToWishList = function(productId, cb) {
+  var prod = _.find(this.wishList, function(item) {
+    return item.toString() === productId.toString();
+  });
+  if (prod) {
+    return cb('Product id already exists on wish list.');
+  }
+  this.wishList.push(productId);
+  this.save(cb);
+};
+
+UserSchema.methods.addComment = function(commentTxt, product, cb) {
+  this.comments.push({
+    text: commentTxt,
+    product: product
+  });
+  this.save(cb);
+};
+
 /**
  * Find possible not used username
  */
@@ -166,4 +206,4 @@ UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
   });
 };
 
-mongoose.model('User', UserSchema);
+exports.User = mongoose.model('User', UserSchema);
