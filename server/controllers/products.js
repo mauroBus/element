@@ -1,14 +1,15 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Product = mongoose.model('Product'),
     _ = require('lodash'),
-    errorHandler = require('../utils/response/errors'),
+    Product = mongoose.model('Product'),
     Roles = require('../config/roles'),
     Response = require('../utils/response/response'),
-    pagination = require('mongoose-pagination'),
     CategoryTree = mongoose.model('CategoryTree'),
-    ObjectId = require('mongoose').Types.ObjectId;
+    ObjectId = require('mongoose').Types.ObjectId,
+    errorHandler = require('../utils/response/errors'),
+    pagination = require('mongoose-pagination'),
+    User = mongoose.model('User');
 
 /**
  * Find product by id
@@ -59,10 +60,18 @@ exports.read = function(req, res) {
  * Create a product
  */
 exports.create = function(req, res) {
-  var product = new Product(req.body);
-  product.user.ref = req.user._id;
-  product.user.firstName = req.user.firstName;
-  product.user.lastName = req.user.lastName;
+  var product = new Product({
+    title: req.body.title,
+    description: req.body.description,
+    images: req.body.images,
+    categories: req.body.categories,
+    user: {
+      ref: req.user._id,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName
+    },
+    price: req.body.price,
+  });
 
   product.save(function(err) {
     if (err) return res.json(500, err);
@@ -75,7 +84,14 @@ exports.create = function(req, res) {
  */
 exports.update = function(req, res) {
   var product = req.product;
-  product = _.extend(product, req.body);
+  product = _.extend(product, {
+    title: req.body.title,
+    description: req.body.description,
+    images: req.body.images,
+    categories: req.body.categories,
+    price: req.body.price,
+    modifiedAt: new Date()
+  });
 
   product.save(function(err) {
     if (err) {
@@ -107,11 +123,27 @@ exports.hasAuthorization = function(req, res, next) {
     return;
   }
 
-  if (req.product.user.ref.toString() !== req.user.id) { // user is the creator.
+  if (req.product.user.ref.toString() !== req.user.id) { // user is not the creator.
     return res.status(403).send({
       message: 'User is not authorized',
       status: 403
     });
   }
   next();
+};
+
+exports.rate = function(req, res) {
+  if (req.product.user.ref.toString() === req.user.id) { // user is the creator.
+    return res.status(403).send({
+      message: 'User is not authorized to rate its own product',
+      status: 403
+    });
+  }
+  req.product.rate(req.body.rating, function(err) {
+    if (err) {
+      res.status(400).json({ message: 'Could not rate.', error: err });
+    } else {
+      res.json({ message: 'Successfuly rated.', rate: req.product.rating.value });
+    }
+  });
 };
