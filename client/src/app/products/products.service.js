@@ -7,16 +7,24 @@ angular.module('elementBoxApp.products')
     query: {
       method: 'GET',
       isArray: false,
-      transformResponse: function(data, headersGetter) {
+      transformResponse: function(data, headersGetter, status) {
         var jsonData = JSON.parse(data);
-        jsonData.results.forEach(function(res, i) {
-          jsonData.results[i] = new Products(res);
-        });
+        if (status >= 200 && status < 300) {
+          jsonData.results.forEach(function(res, i) {
+            jsonData.results[i] = new Products(res);
+          });
+        } else {
+          jsonData.results = [];
+        }
         return jsonData;
       }
     },
     update: {
+      method: 'PUT'
+    },
+    rate: {
       method: 'PUT',
+      url: Urls.products.products + '/:id/rate'
     }
   });
 

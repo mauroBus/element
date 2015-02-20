@@ -2,16 +2,16 @@
 angular.module('elementBoxApp.myadmin.userlist')
 
 .controller('UserlistCtrl', [
-          '$scope', 'UserlistService', '$location',
-  function($scope,   UserlistService,   $location) {
+          '$scope', 'UserService', '$location',
+  function($scope,   UserService,   $location) {
     $scope.page = 1;
     $scope.pageSize = 3;
     $scope.totalPages = 0;
     $scope.totalProducts = 0;
-    $scope.users = []; // UserlistService.query();
+    $scope.users = [];
 
     $scope.fetchPage = function() {
-      UserlistService.query({
+      UserService.query({
           page: $scope.page,
           pageSize: $scope.pageSize
         })
@@ -27,7 +27,6 @@ angular.module('elementBoxApp.myadmin.userlist')
     $scope.fetchPage();
 
     $scope.deactivateUser = function(user, index) {
-      var u = user;
       user.$deactivate(function() {
         user.active = false;
       });

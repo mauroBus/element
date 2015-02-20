@@ -2,7 +2,8 @@
 angular.module('elementBoxApp.products', [
   'elementBoxApp.products.productInfo',
   'elementBoxApp.products.productNew',
-  'elementBoxApp.products.productList'
+  'elementBoxApp.products.productList',
+  'elementBoxApp.products.productEdit'
 ])
 
 .run(['$rootScope', '$state', function($rootScope, $state) {
