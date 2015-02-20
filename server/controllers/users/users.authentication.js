@@ -24,12 +24,18 @@ exports.signup = function(req, res) {
   delete req.body.active;
 
   // Init Variables
-  var user = new User(req.body);
-  var message = null;
-
-  // Add missing user fields
-  user.provider = 'local';
-  user.displayName = user.displayName || user.firstName + ' ' + user.lastName;
+  var user = new User({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    displayName: req.body.displayName || req.body.firstName + ' ' + req.body.lastName,
+    email: req.body.email,
+    username: req.body.username,
+    password: req.body.password,
+    provider: 'local',
+    roles: req.body.roles,
+    updated: new Date(),
+    wishList: []
+  });
 
   // Then save the user.
   user.save(function(err) {
@@ -62,31 +68,19 @@ exports.signup = function(req, res) {
           });
         },
         function(err, done) {
-          if (!err) {
-            res.json({
-              user: user,
-              sessionId: req.sessionID,
-              message: 'An email has been sent to ' + user.email + ' with further instructions.'
-            });
-          } else {
-            return res.json({
-              user: user,
-              sessionId: req.sessionID,
-              message: 'Failure sending the email to the given address.'
-            });
-          }
-
-          done(err);
+          var msg = !err ? 'An email has been sent to ' + user.email + ' with further instructions.' : 'Failure sending the email to the given address.';
+          done(err, msg);
         }
-      ], function(err) {
-        if (!err) {
+      ], function(err, msg) {
+        // if (!err) {
           res.json({
             user: user,
-            sessionId: req.sessionID
+            sessionId: req.sessionID,
+            message: msg
           });
-        } else {
-          return res.status(400).json(errorHandler.getErrorObject(err));
-        }
+        // } else {
+        //   return res.status(400).json(errorHandler.getErrorObject(err));
+        // }
       }); // !waterfall
 
     }
