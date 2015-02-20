@@ -3,7 +3,7 @@ var _ = require('lodash'),
     Response = require('../utils/response/response');
 
 exports.commentById = function(req, res, next, id) {
-  var comment = req.product.comments.id(id);
+  var comment = _.findWhere(req.product.comments, { _id: id });
   if (!comment) return next(new Error('Comment with id: "' + id + '" does not exist.'));
   req.comment = comment;
   next();
@@ -18,11 +18,11 @@ exports.create = function(req, res) {
     return res.status(400).json({message: 'Comment is null.'});
   }
 
-  product.addComment(user, commentTxt, function (err) {
+  product.addComment(user, commentTxt, function(err) {
     if (err) {
       return res.status(500).json({message: 'The comment was not created.'});
     }
-    res.json({ message: 'Comment successfuly added.' });
+    res.status(200).json({ message: 'Comment successfuly added.' });
   });
 };
 
@@ -30,9 +30,9 @@ exports.delete = function(req, res) {
   var product = req.product;
   product.removeComment(req.param('commentId'), function (err) {
     if (err) {
-      res.sttaus(400).json({message: 'The comment was not found.'});
+      res.status(400).json({message: 'The comment was not found.'});
     } else {
-      res.json({message: 'Comment removed.'});
+      res.status.json({message: 'Comment removed.'});
     }
   });
 };
