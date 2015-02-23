@@ -1,0 +1,37 @@
+<!-- User data: -->
+<section class="comment">
+  <div class="col-md-3 text-center">
+    <a ui-sref="main.userdetails({id: comment.user.ref})" class="media-photo media-round text-center user-link">
+      <img alt="" class="lazy" src="imgs/user_pic-68x68.png">
+    </a>
+    <div class="name">
+      <a ui-sref="main.userdetails({id: comment.user.ref})" class="text-muted user-link">{{comment.user.displayName || comment.user.firstName}}</a>
+    </div>
+  </div>
+  <!-- Comment data: -->
+  <div class="col-md-9">
+    <div class="review-text review-text-container" ng-class="{expanded: expanded}">
+      <p class="review-text-content">{{comment.text}}</p>
+    </div>
+    <div ng-transclude=""></div>
+    <a class="expandable-trigger text-muted pull-left"
+      ng-hide="expanded"
+      ng-click="expanded = true;">
+      <strong>+ More</strong>
+    </a>
+    <a class="expandable-trigger text-muted pull-left"
+      ng-show="expanded"
+      ng-click="expanded = false;">
+      <strong>- Less</strong>
+    </a>
+    <div class="text-muted review-subtext pull-right">
+      <div class="date">{{comment.createdAt | date:'mediumDate'}}</div>
+    </div>
+  </div>
+
+  <div class="row" ng-show="separator">
+    <div class="col-md-9 col-md-push-3">
+      <hr>
+    </div>
+  </div>
+</section>
