@@ -51,8 +51,8 @@
 
       <div ng-show="products.length" class="list-group">
         <a ui-sref="main.products.info({productId: product._id})" ng-repeat="product in products" class="list-group-item clearfix">
-          <div>{{product.title}}</div>
-          <div>{{product.description}}</div>
+          <div class="text-overflow">{{product.title}}</div>
+          <div class="text-overflow">{{product.description}}</div>
           <div>{{product.created | date:'medium'}}</div>
         </a>
       </div>
