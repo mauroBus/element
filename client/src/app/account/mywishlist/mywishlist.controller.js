@@ -2,13 +2,15 @@
 angular.module('elementBoxApp.account.mywishlist')
 
 .controller('MyWishListCtrl', [
-          '$scope', '$rootScope', 'UserService', 'ModalAlert', 'AUTH_EVENTS',
-  function($scope,   $rootScope,   UserService,   ModalAlert,   AUTH_EVENTS) {
+          '$scope', '$rootScope', '$state', 'UserService', 'ModalAlert', 'AUTH_EVENTS',
+  function($scope,   $rootScope,   $state,   UserService,   ModalAlert,   AUTH_EVENTS) {
     $scope.wishList = [];
     $scope.page = 1;
     $scope.pageSize = 3;
     $scope.totalPages = 0;
     $scope.totalItems = 0;
+
+    $scope.$parent.activeState = $state.current.name;
 
     $scope.fetchPage = function() {
       UserService.queryWishList({

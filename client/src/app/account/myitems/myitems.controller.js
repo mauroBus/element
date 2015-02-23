@@ -10,6 +10,8 @@ angular.module('elementBoxApp.account.myitems')
     $scope.totalPages = 0;
     $scope.totalProducts = 0;
 
+    $scope.$parent.activeState = $state.current.name;
+
     $scope.fetchPage = function() {
       ProductsService.query({
           'user.ref': $scope.currentUser.id,
