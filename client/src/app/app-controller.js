@@ -55,6 +55,7 @@ angular.module('elementBoxApp.controller', [])
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       if ( toState.name === 'main.myadmin' && (!$scope.currentUser || angular.equals({}, $scope.currentUser) || $scope.currentUser.roles.indexOf('ADMIN') < 0) ) {
+        // Restricting access to My Admin.
         event.preventDefault();
         ModalAlert
           .alert({msg: 'You are not allowed to access to this page!'})
@@ -62,6 +63,10 @@ angular.module('elementBoxApp.controller', [])
             // $state.go('main.home');
           });
       }
+    });
+
+    $rootScope.$on('$stateChangeSuccess', function(event, toState) {
+      window.scrollTo(0, 0);
     });
 
     $rootScope.$on(EVENT_NAMES.addWishList, function(product) {
