@@ -20,6 +20,7 @@ module.exports = function(app) {
 
   app.put('/users/:userId', users.requiresLogin, hasAdminAuthorization, users.update);
   app.delete('/users/:userId', users.requiresLogin, hasAdminAuthorization, users.delete);
+  app.get('/users/:userId', users.requiresLogin, users.read);
 
   // Setting up the users password api
   app.post('/users/password', users.changePassword);
@@ -61,11 +62,30 @@ module.exports = function(app) {
 
   // Wishlist:
   app.param('wishItemId', WishList.getById);
-  app.get('/users/wishlist', users.requiresLogin, WishList.query);
-  app.post('/users/wishlist/:productId', users.requiresLogin, WishList.create);
-  app.delete('/users/wishlist/:wishItemId', users.requiresLogin, WishList.delete);
+  app.get('/users/me/wishlist', users.requiresLogin, WishList.query);
+  app.post('/users/me/wishlist/:productId', users.requiresLogin, WishList.create);
+  app.delete('/users/me/wishlist/:wishItemId', users.requiresLogin, WishList.delete);
 
   // Finish by binding the user middleware
-  app.param('userId', users.userByID);
+  app.param('userId', users.findById);
   app.param('userEmail', users.userByEmail);
 };
+
+/**
+ * -
+ * - Ian webster
+ *    textbelt
+ *    asterank
+ *    inflation calculation
+ *
+ *
+ * 1. chose an idea (no need to be a tech idea)
+ *   in the are that you love.
+ * 2. start where you love
+ *    look for gaps.
+ * 3. never stop. you build for yourself, you earn. allways.
+ * 4. Make it small.!!
+ * 5.
+ * 6.
+ *
+ */

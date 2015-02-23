@@ -45,15 +45,15 @@ angular.module('elementBoxApp.common')
 
     // User wish list:
     addToWishList: {
-      url: Urls.users.users + '/wishlist/:prodId',
+      url: Urls.users.me + '/wishlist/:prodId',
       method: 'POST',
     },
     removeFromWishList: {
-      url: Urls.users.users + '/wishlist/:itemId',
+      url: Urls.users.me + '/wishlist/:itemId',
       method: 'DELETE',
     },
-    queryWishList : {
-      url: Urls.users.users + '/wishlist',
+    queryWishList: {
+      url: Urls.users.me + '/wishlist',
       method: 'GET',
     }
   });

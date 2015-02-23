@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     crypto = require('crypto'),
     Roles = require('../config/roles.js'),
+    Config = require('../config/config'),
     _ = require('lodash');
 
 /**
@@ -133,6 +134,13 @@ var UserSchema = new Schema({
     }],
     default: []
   },
+  phone: {
+    type: String
+  },
+  description: {
+    type: String,
+    default: 'I\'m a happy ' + Config.app.title + ' user.'
+  }
 });
 
 /**
@@ -146,6 +154,11 @@ UserSchema.pre('save', function(next) {
 
   next();
 });
+
+UserSchema.path('phone').validate(function (v) {
+  return v.length === 0 || (v.length > 6 && v.length <= 20);
+}, 'Phone number should has between 7 and 20 characters');
+
 
 /**
  * Create instance method for hashing a password

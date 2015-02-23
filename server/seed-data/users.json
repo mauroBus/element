@@ -1,5 +1,6 @@
 [
   {
+    "_id": "1",
     "firstName": "MAURO",
     "lastName": "BUSELLI",
     "displayName": "SUPER_USER",
@@ -8,9 +9,12 @@
     "password": "aaaaaa",
     "provider": "local",
     "roles": ["ADMIN", "USER", "EDITOR"],
-    "created": "2015-02-09T22:42:39.746Z"
+    "created": "2015-02-09T22:42:39.746Z",
+    "phone": "02262437665",
+    "description": "Some description here regarding the user and its characteristics."
   },
   {
+    "_id": "2",
     "firstName": "Mauro",
     "lastName": "Buselli",
     "displayName": "Mauro Buselli",
@@ -19,9 +23,12 @@
     "password": "aaaaaa",
     "provider": "local",
     "roles": ["USER"],
-    "created": "2015-02-09T22:42:39.746Z"
+    "created": "2015-02-09T22:42:39.746Z",
+    "phone": "02262437665",
+    "description": "Some description here regarding the user and its characteristics."
   },
   {
+    "_id": "3",
     "firstName": "Leandro",
     "lastName": "Buselli",
     "displayName": "Leandro Buselli",
@@ -30,9 +37,12 @@
     "password": "aaaaaa",
     "provider": "local",
     "roles": ["USER"],
-    "created": "2015-02-09T22:42:39.746Z"
+    "created": "2015-02-09T22:42:39.746Z",
+    "phone": "02262437665",
+    "description": "Some description here regarding the user and its characteristics."
   },
   {
+    "_id": "4",
     "firstName": "Roberto",
     "lastName": "Buselli",
     "displayName": "Roberto Buselli",
@@ -41,9 +51,12 @@
     "password": "aaaaaa",
     "provider": "local",
     "roles": ["USER"],
-    "created": "2015-02-09T22:42:39.746Z"
+    "created": "2015-02-09T22:42:39.746Z",
+    "phone": "02262437665",
+    "description": "Some description here regarding the user and its characteristics."
   },
   {
+    "_id": "5",
     "firstName": "Mirta",
     "lastName": "Ciancaglini",
     "displayName": "",
@@ -52,9 +65,12 @@
     "password": "aaaaaa",
     "provider": "local",
     "roles": ["USER"],
-    "created": "2015-02-09T22:42:39.746Z"
+    "created": "2015-02-09T22:42:39.746Z",
+    "phone": "02262437665",
+    "description": "Some description here regarding the user and its characteristics."
   },
   {
+    "_id": "6",
     "firstName": "Alicia",
     "lastName": "Esther",
     "displayName": "Marcos",
@@ -63,6 +79,8 @@
     "password": "aaaaaa",
     "provider": "local",
     "roles": ["USER"],
-    "created": "2015-02-09T22:42:39.746Z"
+    "created": "2015-02-09T22:42:39.746Z",
+    "phone": "02262437665",
+    "description": "Some description here regarding the user and its characteristics."
   }
 ]
