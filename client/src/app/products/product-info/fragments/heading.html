@@ -1,0 +1,82 @@
+<div class="panel">
+  <div class="page-container-responsive">
+
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="">
+          <div class="row">
+
+            <div class="col-md-3 text-center">
+              <a ui-sref="main.userdetails({id: product.user.ref})" class="media-photo media-round text-center user-link">
+                <img alt="{{product.user.firstName}}" class="lazy" src="imgs/user_pic-68x68.png">
+              </a>
+              <div class="name">
+                <a ui-sref="main.userdetails({id: product.user.ref})" class="text-muted user-link">{{product.user.displayName || product.user.firstName}}</a>
+              </div>
+            </div>
+
+            <div class="col-md-9">
+              <h1 itemprop="name" class="text-overflow h3">
+                {{product.title}}
+              </h1>
+
+              <div class="product-rating col-lg-8">
+                <div class="rating rated"
+                  ng-class="{'never-rated': product.rating.value == 0}"
+                  popover-animation="false" popover="{{product.rating.value > 0 ? ('Rating: ' + (product.rating.value | number: 2)) : 'Still no rated'}}" popover-placement="right" popover-trigger="mouseenter">
+                  <span ng-class="{rated: product.rating.value >= 5}">☆</span>
+                  <span ng-class="{rated: product.rating.value >= 4}">☆</span>
+                  <span ng-class="{rated: product.rating.value >= 3}">☆</span>
+                  <span ng-class="{rated: product.rating.value >= 2}">☆</span>
+                  <span ng-class="{rated: product.rating.value >= 1}">☆</span>
+                </div>
+              </div>
+
+              <div class="row row-condensed text-muted text-center">
+                <div class="col-sm-3">
+                  <i class="icon icon-entire-place"></i>
+                </div>
+                <div class="col-sm-3">
+                  <i class="icon icon-group"></i>
+                </div>
+                <div class="col-sm-3">
+                  <i class="icon icon-rooms"></i>
+                </div>
+                <div class="col-sm-3">
+                  <i class="icon icon-double-bed"></i>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+              <div class="row row-condensed text-muted text-center">
+                <div class="col-sm-3">Entire home/apt</div>
+                <div class="col-sm-3">2 Guests</div>
+                <div class="col-sm-3">1 Bedroom</div>
+                <div class="col-sm-3">1 Bed</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-lg-4">
+        <div class="h3 product__price" ng-show="product.price != 0">{{product.price | currency:'$'}}</div>
+        <div class="h3 product__price" ng-show="product.price == 0">No price</div>
+
+        <div class="row">
+          <div class="btn btn-link pull-right" ng-click="addToWishList()">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+            Add to Wish List
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
