@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.products')
+angular.module('elementBoxApp.common')
 
 .factory('ProductsService', ['Urls', '$resource', function(Urls, $resource) {
 
