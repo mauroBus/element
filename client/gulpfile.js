@@ -42,7 +42,7 @@ var config = {
 
 
 var cssVendors = [
-  config.vendor + '/bootstrap-css/css/bootstrap.css',
+  config.vendor + '/bootstrap/dist/css/bootstrap.css',
   config.vendor + '/angular-ui-tree/dist/angular-ui-tree.min.css',
   config.vendor + '/angular-carousel/dist/angular-carousel.css'
 ];
