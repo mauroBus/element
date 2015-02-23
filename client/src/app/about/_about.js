@@ -5,7 +5,7 @@ angular.module('elementBoxApp.about', [])
     $stateProvider.state('main.about', {
       url: '/about',
       templateUrl: 'about/about.html',
-      controller: 'AboutCtrl'
+      controller: function() {}
     });
   }
 ]);
