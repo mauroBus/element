@@ -156,6 +156,9 @@ Product.methods = {
     });
 
     User.findById(prodUser.ref, function(err, fullProdUser) {
+      if (err || !fullProdUser) {
+        return cb('Could not find the product user.');
+      }
       mailer.sendMail({
         to: fullProdUser.email,
         subject: 'You have a new comment!',

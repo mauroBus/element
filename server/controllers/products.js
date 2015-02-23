@@ -35,7 +35,7 @@ exports.query = function(req, res) {
   CategoryTree
     .find({ path: new RegExp(categ) })
     .exec(function(err, results) {
-      if (err) { return res.json(500, err); }
+      if (err) { return res.status(500).json(err); }
       if (!results.length) { res.status(400).json({msg: 'Failed to load category ' + categ}); }
 
       categPath = _.reduce(results, function(result, n, key) {
@@ -53,7 +53,7 @@ exports.query = function(req, res) {
  * Show a product
  */
 exports.read = function(req, res) {
-  res.json(_.omit(req.product, ['__v', 'comments']));
+  res.status(200).json(_.omit(req.product, ['__v', 'comments']));
 };
 
 /**
@@ -74,8 +74,8 @@ exports.create = function(req, res) {
   });
 
   product.save(function(err) {
-    if (err) return res.json(500, err);
-    res.json(product);
+    if (err) return res.status(500).json(err);
+    res.status(200).json(product);
   });
 };
 
@@ -97,7 +97,7 @@ exports.update = function(req, res) {
     if (err) {
       return res.status(400).send(errorHandler.getErrorObject(err));
     } else {
-      res.json(product);
+      res.status(200).json(product);
     }
   });
 };
@@ -109,8 +109,8 @@ exports.delete = function(req, res) {
   var product = req.product;
 
   product.remove(function(err) {
-    if (err) return res.json(500, err);
-    res.json(product);
+    if (err) return res.status(500).json(err);
+    res.status(200).json(product);
   });
 };
 
@@ -143,7 +143,7 @@ exports.rate = function(req, res) {
     if (err) {
       res.status(400).json({ message: 'Could not rate.', error: err });
     } else {
-      res.json({ message: 'Successfuly rated.', rate: req.product.rating.value });
+      res.status(200).json({ message: 'Successfuly rated.', rate: req.product.rating.value });
     }
   });
 };

@@ -66,3 +66,34 @@ exports.query = function(req, res) {
     .sort('-email')
     .paginate(pagination.page, pagination.pageSize, Response.query(req, res));
 };
+
+/**
+ * Find user by id.
+ */
+exports.findById = function(req, res, next, id) {
+  var objId;
+  try {
+    objId = new mongoose.Types.ObjectId(id);
+  } catch(e) {
+    return res.status(404).json({ message: 'The user id is not a valid id.' });
+  }
+
+  User.findById(objId, function(err, userById) {
+    if (err) return next(err);
+    if (!userById) return res.status(404).json({ message: 'Failed to load user with id: ' + id });
+    req.userFoundById = userById;
+    next();
+  });
+};
+
+/**
+ * Get a user data.
+ */
+exports.read = function(req, res) {
+  if (req.userFoundById.active) {
+    var omitions = ['__v', 'email', 'password', 'salt', 'provider', 'providerData', 'additionalProvidersData', 'roles', 'resetPasswordToken', 'resetPasswordExpires', 'active'];
+    return res.status(200).json(_.omit(req.userFoundById.toJSON(), omitions));
+  } else {
+    return res.status(404).json({ message: 'User not found.', error: 'User not found.' });
+  }
+};
