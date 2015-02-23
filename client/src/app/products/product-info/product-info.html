@@ -13,11 +13,11 @@
   </carousel>
  -->
 
-  <div ng-include="'products/product-info/fragments/summary.html'"></div>
+  <div ng-include="'products/product-info/fragments/heading.html'"></div>
 
-  <div ng-if="slides.length">
+  <div ng-if="slides.length" class="col-lg-8">
     <!-- slide, zoom, hexagon, fadeAndSlide -->
-    <div class="image-slider-container panel col-lg-8">
+    <div class="image-slider-container panel">
       <ul rn-carousel class="image-slider center-block" rn-carousel-transition="fadeAndSlide" rn-carousel-controls rn-carousel-buffered="3" rn-carousel-index="slidesIndex">
         <li ng-repeat="slide in slides track by $index">
           <div class="layer">
@@ -31,6 +31,10 @@
       </ul>
       <div rn-carousel-indicators class="indicators" ng-if="slides.length > 1" slides="slides" rn-carousel-index="slidesIndex"></div>
     </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div ng-include="'products/product-info/fragments/contact-segment.html'"></div>
   </div>
 
 
@@ -80,15 +84,7 @@
     </div>
   </div> <!-- Categories. -->
 
-  <!--
-  <h4>Catalogs:</h4>
-  <ul class="nav nav-pills">
-    <li ng-repeat="catalog in product.catalogs track by $index" role="presentation" class="active">
-      <a href="">{{catalog.name}}</a>
-    </li>
-  </ul>
-  -->
-
+  <!-- Comments: -->
   <div ng-include="'products/product-info/fragments/comments.html'"></div>
 
   <!-- Rating: -->
