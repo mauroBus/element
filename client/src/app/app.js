@@ -15,6 +15,7 @@ angular.module('elementBoxApp', [
   'elementBoxApp.main',
   // sub-modules:
   'elementBoxApp.about',
+  'elementBoxApp.terms',
   'elementBoxApp.element',
   'elementBoxApp.error404',
   // 'elementBoxApp.footer',
