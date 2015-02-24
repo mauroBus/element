@@ -1,4 +1,5 @@
 'use strict';
+var privateKeys = require('./private.keys');
 
 module.exports = {
   env: 'test',
@@ -6,13 +7,14 @@ module.exports = {
     uri: 'mongodb://localhost/fullstack-test'
   },
   mailer: {
-    from: process.env.MAILER_FROM || 'MAILER_FROM',
+    from: privateKeys.mailer.from,
     options: {
-      service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+      service: privateKeys.mailer.service,
       auth: {
-        user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-        pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+        user: privateKeys.mailer.user,
+        pass: privateKeys.mailer.pass
       }
     }
-  }
+  },
+  cloudinaryAccounts: privateKeys.cloudinaryAccounts
 };

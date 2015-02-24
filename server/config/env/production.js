@@ -1,6 +1,7 @@
 'use strict';
 
-var path = require('path');
+var path = require('path'),
+    privateKeys = require('./private.keys');
 
 var rootPath = path.normalize(__dirname + '/../../public');
 
@@ -15,13 +16,14 @@ module.exports = {
     // }
   },
   mailer: {
-    from: process.env.MAILER_FROM || 'MAILER_FROM',
+    from: privateKeys.mailer.from,
     options: {
-      service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+      service: privateKeys.mailer.service,
       auth: {
-        user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-        pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+        user: privateKeys.mailer.user,
+        pass: privateKeys.mailer.pass
       }
     }
-  }
+  },
+  cloudinaryAccounts: privateKeys.cloudinaryAccounts
 };
