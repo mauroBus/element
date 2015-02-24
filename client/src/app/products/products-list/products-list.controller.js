@@ -13,6 +13,7 @@ angular.module('elementBoxApp.products.productList')
     $scope.filter = '';
     $scope.currentCateg = {};
     $scope.expandedNode = {};
+    $scope.isLoading = false;
     var fetchingForFirstTime = true;
 
 
@@ -32,6 +33,8 @@ angular.module('elementBoxApp.products.productList')
         $scope.page = (toPage) ? toPage : 1;
       }
 
+      $scope.isLoading = true;
+
       ProductsService.query({
           category: $scope.filter,
           page: $scope.page,
@@ -44,6 +47,7 @@ angular.module('elementBoxApp.products.productList')
           $scope.totalPages = res.totalPages;
           $scope.totalProducts = res.total;
           $scope.pageSize = res.pageSize;
+          $scope.isLoading = false;
         });
     };
 
