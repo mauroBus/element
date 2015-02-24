@@ -7,12 +7,16 @@
   next-text="Next">
 </pagination>
 
-<div ng-show="products.length" class="list-group">
+<!-- <div ng-show="products.length" class="list-group">
   <a ui-sref="main.products.info({productId: product._id})" ng-repeat="product in products" class="list-group-item clearfix">
     <div>{{product.title}}</div>
     <div>{{product.description}}</div>
     <div>{{product.created | date:'medium'}}</div>
   </a>
+</div> -->
+
+<div ng-show="products.length" class="list-group">
+  <product-item ng-repeat="product in products" product="product" class="list-group-item" remove="true" edit="true" fetch-method="fetchPage()"></product-item>
 </div>
 
 <pagination

@@ -1,9 +1,7 @@
 
 angular.module('elementBoxApp.myadmin.allitems')
 
-.controller('AllItemsCtrl', [
-          '$scope', '$rootScope', '$stateParams', '$filter', 'ProductsService', 'Categories',
-  function($scope,   $rootScope,   $stateParams,   $filter,   ProductsService,   Categories) {
+.controller('AllItemsCtrl', ['$scope', 'ProductsService', function($scope, ProductsService) {
     $scope.products = [];
     $scope.page = 1;
     $scope.pageSize = 3;
@@ -27,12 +25,6 @@ angular.module('elementBoxApp.myadmin.allitems')
     $scope.$watch('page', function(newVal, oldVal) {
       $scope.fetchPage();
     });
-
-    $scope.removeProduct = function(prod) {
-      prod.$remove(function() {
-        $scope.fetchPage();
-      });
-    };
 
     $scope.fetchPage();
   }

@@ -1,9 +1,7 @@
 
 angular.module('elementBoxApp.myadmin.myitems')
 
-.controller('MyItemsCtrl', [
-          '$scope', '$rootScope', '$stateParams', '$filter', 'ProductsService', 'Categories',
-  function($scope,   $rootScope,   $stateParams,   $filter,   ProductsService,   Categories) {
+.controller('MyItemsCtrl', ['$scope', 'ProductsService', function($scope, ProductsService) {
     $scope.products = [];
     $scope.page = 1;
     $scope.pageSize = 3;
@@ -11,6 +9,7 @@ angular.module('elementBoxApp.myadmin.myitems')
     $scope.totalProducts = 0;
 
     $scope.fetchPage = function() {
+      debugger;
       ProductsService.query({
           'user.ref': $scope.currentUser.id,
           page: $scope.page,
