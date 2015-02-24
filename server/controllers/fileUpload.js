@@ -1,4 +1,4 @@
-// Options: formidable | Busboy | 
+// Options: formidable | Busboy |
 'use strict';
 
 var formidable = require('formidable'),

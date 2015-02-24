@@ -38,7 +38,19 @@ var Images = new Schema({
   },
   url: {
     type: String,
-    required: true
+    required: true,
+  },
+  publicId: {
+    type: String,
+    require: true
+  },
+  width: {
+    type: Number,
+    default: 600
+  },
+  height: {
+    type: Number,
+    default: 400
   }
 });
 
@@ -124,6 +136,10 @@ var Product = new Schema({
       type: [Number],
       default: []
     }
+  },
+  cloudImgAccountNbr: {
+    type: Number,
+    default: 0
   }
 });
 

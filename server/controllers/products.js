@@ -9,7 +9,8 @@ var mongoose = require('mongoose'),
     ObjectId = require('mongoose').Types.ObjectId,
     errorHandler = require('../utils/response/errors'),
     pagination = require('mongoose-pagination'),
-    User = mongoose.model('User');
+    User = mongoose.model('User'),
+    Cloud = require('../utils/cloud/cloud');
 
 /**
  * Find product by id
@@ -44,7 +45,7 @@ exports.query = function(req, res) {
 
       Product
         .find(_.extend({ categories: new RegExp(categPath) }, userFilter), { comments: 0, __v: 0 })
-        .sort('-created')
+        .sort('-createdAt')
         .paginate(pagination.page, pagination.pageSize, Response.query(req, res));
     });
 };
@@ -63,7 +64,7 @@ exports.create = function(req, res) {
   var product = new Product({
     title: req.body.title,
     description: req.body.description,
-    images: req.body.images,
+    images: [], // empty!
     categories: req.body.categories,
     user: {
       ref: req.user._id,
@@ -75,8 +76,30 @@ exports.create = function(req, res) {
 
   product.save(function(err) {
     if (err) return res.status(500).json(err);
-    res.status(200).json(product);
+
+    Cloud.uploadImgs(_.pluck(req.body.images, 'url'), function(err, result) {
+      // TODO: remove old local files.
+      // req.body.images <- remove them.
+      if (!err) {
+        _.each(result.images, function(img) {
+          product.images.push({
+            url: img.url,
+            publicId: img.public_id,
+            width: img.width,
+            height: img.height
+          });
+        });
+        product.cloudImgAccountNbr = result.cloudAccNbr;
+        product.save(function(err) {
+          return res.status(200).json(product);
+        });
+      } else {
+        res.status(200).json(product);
+      }
+    });
   });
+
+
 };
 
 /**
@@ -87,7 +110,7 @@ exports.update = function(req, res) {
   product = _.extend(product, {
     title: req.body.title,
     description: req.body.description,
-    images: req.body.images,
+    // images: req.body.images, // TODO: Handle the update of images.
     categories: req.body.categories,
     price: req.body.price,
     modifiedAt: new Date()
@@ -107,6 +130,10 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
   var product = req.product;
+
+  var cloudImgs = product.images;
+
+  Cloud.removeImgs(cloudImgs, product.cloudImgAccountNbr, function(result) {});
 
   product.remove(function(err) {
     if (err) return res.status(500).json(err);
