@@ -9,26 +9,7 @@
   </pagination>
 
   <div ng-show="products.length" class="list-group">
-    <div ng-repeat="product in products" class="list-group-item clearfix">
-      <a href=""
-        popover="Remove" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
-        class="products__remove pull-right btn btn-link" ng-click="removeProduct(product, $index)">
-        <span class="glyphicon glyphicon-remove"></span>
-      </a>
-      <a href=""
-        popover="Edit" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
-        class="products__edit pull-right btn btn-link" ui-sref="main.products.edit({productId: product._id})">
-        <span class="glyphicon glyphicon-edit"></span>
-      </a>
-      <a ui-sref="main.products.info({productId: product._id})"
-        popover="View" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
-        class="products__details pull-right btn btn-link">
-        <span class="glyphicon glyphicon-link"></span>
-      </a>
-      <div class="text-overflow">{{product.title}}</div>
-      <div class="text-overflow">{{product.description}}</div>
-      <div>{{product.created | date:'medium'}}</div>
-    </div>
+    <product-item ng-repeat="product in products" product="product" class="list-group-item" remove="true" edit="true" fetch-method="fetchPage()"></product-item>
   </div>
 
   <pagination

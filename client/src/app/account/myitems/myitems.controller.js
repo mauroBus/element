@@ -31,18 +31,6 @@ angular.module('elementBoxApp.account.myitems')
       $scope.fetchPage();
     });
 
-    $scope.removeProduct = function(product, index) {
-      ModalAlert.alert({
-        title: 'Delete Item',
-        msg: 'Please confirm to delete this prodct.',
-        hasCancel: true
-      }).then(function() {
-        product.$remove().then(function() {
-          $scope.fetchPage();
-        });
-      });
-    };
-
     if (!$scope.currentUser || angular.equals({}, $scope.currentUser)) { // no current user.
       $rootScope.$on(AUTH_EVENTS.singinSuccess, function(event, options) {
         $scope.fetchPage();
