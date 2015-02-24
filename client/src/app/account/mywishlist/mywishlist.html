@@ -9,22 +9,22 @@
   </pagination>
 
   <div ng-show="wishList.length" class="list-group">
-    <div ng-repeat="wishItem in wishList" class="list-group-item clearfix">
-      <a href=""
-        popover="Remove" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
-        class="products__remove pull-right btn btn-link" ng-click="removeFromWishList(wishItem, $index)">
-        <span class="glyphicon glyphicon-remove"></span>
-      </a>
-      <a ui-sref="main.products.info({productId: wishItem._id})"
-        popover="View" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
-        class="products__details pull-right btn btn-link">
-        <span class="glyphicon glyphicon-link"></span>
-      </a>
-      <div>{{wishItem.title}}</div>
-      <div>{{wishItem.created | date:'medium'}}</div>
-    </div>
+    <product-item ng-repeat="wishItem in wishList" product="wishItem" class="list-group-item" remove="true" fetch-method="fetchPage()" remove-method="removeFromWishList(wishItem)"></product-item>
   </div>
-
+<!--       <div class="col-md-12">
+        <a href=""
+          popover="Remove" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
+          class="products__remove pull-right btn btn-link"
+          ng-click="removeFromWishList(wishItem, $index)">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+        <a ui-sref="main.products.info({productId: wishItem._id})"
+          popover="View" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
+          class="products__details pull-right btn btn-link">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+      </div>
+ -->
   <pagination
     ng-model="page"
     items-per-page="pageSize"

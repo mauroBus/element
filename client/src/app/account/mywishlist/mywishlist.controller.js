@@ -32,8 +32,8 @@ angular.module('elementBoxApp.account.mywishlist')
 
     $scope.removeFromWishList = function(wishItem, index) {
       ModalAlert.alert({
-        title: 'Delete Item',
-        msg: 'Please confirm to delete this wish item.',
+        title: 'Delete Wish List item',
+        msg: 'Do you want to delete it from Wish List?',
         hasCancel: true
       }).then(function() {
         UserService
