@@ -65,8 +65,12 @@ angular.module('elementBoxApp.controller', [])
       }
     });
 
-    $rootScope.$on('$stateChangeSuccess', function(event, toState) {
-      window.scrollTo(0, 0);
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+      var substateTo = toState.name.split('.')[1];
+      var substateFrom = fromState.name.split('.')[1];
+      if (substateTo !== substateFrom) {
+        window.scrollTo(0, 0);
+      }
     });
 
     $rootScope.$on(EVENT_NAMES.addWishList, function(product) {
