@@ -31,8 +31,8 @@ angular.module('elementBoxApp.products.productNew')
       // });
 
       ProductsService
-        .save(angular.extend({}, $scope.product, {categories: categs}), function() {
-          $scope.productCreated = true;
+        .save(angular.extend({}, $scope.product, {categories: categs}), function(newProduct, headers) {
+          $scope.productCreated = newProduct;
         });
     };
   }

@@ -110,7 +110,10 @@
       <div class="jumbotron">
         <h1>Congratulations!!!</h1>
         <p>Product Successfuly Created</p>
-        <p><a class="btn btn-primary btn-lg" ui-sref="main.products" role="button">Continue</a></p>
+        <p>
+          <a class="btn btn-default btn-lg pull-left" ui-sref="main.products.info({productId: productCreated._id})" role="button">View</a>
+          <a class="btn btn-primary btn-lg pull-left" ui-sref="main.products" role="button">Continue</a>
+        </p>
       </div>
     </div>
   </div>
