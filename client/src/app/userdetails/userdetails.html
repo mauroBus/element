@@ -1,132 +1,127 @@
-<section class="user-details">
+<section class="user-details-section">
 
-  <!-- <div class="row"> -->
-    <div class="col-lg-3 col-md-3 col-sm-5 hidden-xs">
-      <!-- <img alt="{{user.firstName}}" src="{{user.image}}" title="{{user.firstName}}" width="225" height="225"> -->
-      <img class="user-lg-img center-block" alt="{{user.firstName}}" src="imgs/user_pic-225x225.png" title="{{user.firstName}}" width="225" height="225">
+  <div class="col-lg-3 col-md-3 col-sm-5 hidden-xs">
+    <!-- <img alt="{{user.firstName}}" ng-src="{{user.image}}" title="{{user.firstName}}" width="225" height="225"> -->
+    <img class="user-lg-img center-block" alt="{{user.firstName}}" ng-src="imgs/user_pic-225x225.png" title="{{user.firstName}}" width="225" height="225">
 
-      <div class="panel panel-info verifications">
-        <div class="panel-heading">Verifications</div>
-        <div class="panel-body">
-          <ul class="list-unstyled">
-            <li class="media">
-              <span class="glyphicon glyphicon-check pull-left"></span>
-              <div class="media-body">
-                <strong>Email Address</strong>
-                <div class="text-muted">Verified</div>
-              </div>
-            </li>
-            <li class="media">
-              <span class="glyphicon glyphicon-check pull-left"></span>
-              <div class="media-body">
-                <strong>Phone Number</strong>
-                <div class="text-muted">{{user.phone | hidePhone}}</div>
-              </div>
-            </li>
-            <li class="media">
-              <span class="glyphicon glyphicon-check pull-left"></span>
-              <div class="media-body">
-                <strong>Comments</strong>
-                <div class="text-muted">{{user.comments.length}} Comments</div>
-              </div>
-            </li>
-          </ul>
-
-        </div>
-      </div>
-
-      <div class="panel panel-info">
-        <div class="panel-heading">About Me</div>
-        <div class="panel-body">
-          <dl>
-            <dt>Description</dt>
-            <dd>{{user.description}}</dd>
-          </dl>
-        </div>
-      </div>
-
-    </div> <!-- col-lg-3 col-md-3 -->
-
-
-    <div class="col-lg-9 col-md-9 col-sm-7">
-      <div class="row">
-        <div class="col-sm-4 visible-xs">
-          <div class="media-photo media-photo-block media-round">
-            <img alt="{{user.firstName}}" class="img-responsive" height="225" src="imgs/user_pic-225x225.png" title="{{user.firstName}}" width="225">
-          </div>
-        </div>
-        <div class="col-sm-8 col-md-12 col-lg-12">
-          <div class="h1">{{user.firstName}}'s Profile</div>
-          <div class="h5">
-            <!-- <a href="/s/Brasil-" class="link-reset">Brasil</a>· -->
-            <span class="text-normal">Member since {{user.created | date: 'longDate'}}</span>
-          </div>
-          <!-- <div class="edit-profile-container "></div> -->
-        </div>
-      </div> <!-- row -->
-
-      <div class="flag-controls pull-right">
-        <button class="btn btn-link report-user" ng-click="reportUser()" ng-show="!userReported">
-          Report this user
-          <span class="glyphicon glyphicon-warning-sign text-danger pull-left"></span>
-        </button>
-        <div class="already-flagged text-muted" ng-show="userReported">
-          You have reported this user.
-          <button class="btn btn-link" class="undo-flag text-muted" ng-click="undoReportUser()">Undo?</button>
-        </div>
-      </div>
-
-      <div class="short-description">
-        <p>{{user.description}}</p>
-      </div>
-
-      <div class="listings">
-        <h2>Products <span class="badge">{{totalProducts}}</span></h2>
-
-        <ul class="products-list list-unstyled clearfix">
-          <li class="product col-sm-6  col-md-4" ng-repeat="(key, product) in ownProducts">
-            <a ui-sref="main.products.info({productId: product._id})" class="thumbnail">
-              <img alt="{{product.title}}" class="img-responsive" src="https://a2.muscache.com/pictures/13689294/small.jpg" title="{{product.title}}">
-
-              <div class="caption text-center">
-                <div class="text-overflow text-muted" title="{{product.title}}">{{product.title}}</div>
-                <!-- <div class="text-normal">Rua Constante Ramos, Rio de Janeiro</div> -->
-              </div>
-            </a>
+    <div class="panel panel-info verifications">
+      <div class="panel-heading">Verifications</div>
+      <div class="panel-body">
+        <ul class="list-unstyled">
+          <li class="media">
+            <span class="glyphicon glyphicon-check pull-left"></span>
+            <div class="media-body">
+              <strong>Email Address</strong>
+              <div class="text-muted">Verified</div>
+            </div>
+          </li>
+          <li class="media">
+            <span class="glyphicon glyphicon-check pull-left"></span>
+            <div class="media-body">
+              <strong>Phone Number</strong>
+              <div class="text-muted">{{user.phone | hidePhone}}</div>
+            </div>
+          </li>
+          <li class="media">
+            <span class="glyphicon glyphicon-check pull-left"></span>
+            <div class="media-body">
+              <strong>Comments</strong>
+              <div class="text-muted">{{user.comments.length}} Comments</div>
+            </div>
           </li>
         </ul>
 
-        <button class="btn btn-link col-md-12 col-sm-12 col-lg-12"
-          ng-click="showMoreProducts()"
-          ng-hide="ownProducts.length === totalProducts">
-          <strong>More&nbsp;»</strong>
-        </button>
       </div>
+    </div>
+
+    <div class="panel panel-info">
+      <div class="panel-heading">About Me</div>
+      <div class="panel-body">
+        <dl>
+          <dt>Description</dt>
+          <dd>{{user.description}}</dd>
+        </dl>
+      </div>
+    </div>
+
+  </div> <!-- col-lg-3 col-md-3 -->
 
 
-      <div class="social-connections">
-        <div class="reviews">
-          <h2>Comments <span class="badge">{{user.comments.length}}</span></h2>
-          <!-- <h4 class="">Reviews From Guests</h4> -->
-          <div ng-show="user.comments.length" class="comment clearfix"
-            ng-repeat="(key, comment) in user.comments track by $index"
-            ng-init="expanded = false;">
-              <comment comment="comment" separator="key !== user.comments.length-1" >
-                <strong>Comment on product: </strong>
-                <a class="btn btn-link" ui-sref="main.products.info({productId: comment.product})">link</a>
-              </comment>
-          </div>
+  <div class="col-lg-9 col-md-9 col-sm-7">
+    <div class="row">
+      <div class="col-sm-4 visible-xs">
+        <div class="media-photo media-photo-block media-round">
+          <img alt="{{user.firstName}}" class="img-responsive" height="225" src="imgs/user_pic-225x225.png" title="{{user.firstName}}" width="225">
+        </div>
+      </div>
+      <div class="col-sm-8 col-md-12 col-lg-12">
+        <div class="h1">{{user.firstName}}'s Profile</div>
+        <div class="h5 text-muted">Member since {{user.created | date: 'longDate'}}</div>
+          <!-- <a href="/s/Brasil-" class="link-reset">Brasil</a>· -->
+        <!-- <div class="edit-profile-container "></div> -->
+      </div>
+    </div> <!-- row -->
 
-          <!--
-          <div class="pull-right">
-            <a href="javascript:void(0)" class="load-more">See more</a>
-          </div>
-          -->
+    <div class="flag-controls pull-right">
+      <button class="btn btn-link report-user" ng-click="reportUser()" ng-show="!userReported">
+        Report this user
+        <span class="glyphicon glyphicon-warning-sign text-danger pull-left"></span>
+      </button>
+      <div class="already-flagged text-muted" ng-show="userReported">
+        You have reported this user.
+        <button class="btn btn-link" class="undo-flag text-muted" ng-click="undoReportUser()">Undo?</button>
+      </div>
+    </div>
+
+    <div class="short-description">
+      <p>{{user.description}}</p>
+    </div>
+
+    <div class="listings">
+      <h2>Products <span class="badge">{{totalProducts}}</span></h2>
+
+      <ul class="products-container list-unstyled clearfix">
+        <li class="product col-sm-6 col-md-4" ng-repeat="(key, product) in ownProducts">
+          <a ui-sref="main.products.info({productId: product._id})" class="thumbnail">
+            <img alt="{{product.title}}" ng-src="{{getProdThumbnail(product)}}" title="{{product.title}}" alt="{{product.title}}">
+
+            <div class="caption text-center">
+              <div class="text-overflow text-muted" title="{{product.title}}">{{product.title}}</div>
+              <!-- <div class="text-normal">Rua Constante Ramos, Rio de Janeiro</div> -->
+            </div>
+          </a>
+        </li>
+      </ul>
+
+      <button class="btn btn-link col-md-12 col-sm-12 col-lg-12"
+        ng-click="showMoreProducts()"
+        ng-hide="ownProducts.length === totalProducts">
+        <strong>More&nbsp;»</strong>
+      </button>
+    </div>
+
+
+    <div class="social-connections">
+      <div class="reviews">
+        <h2>Comments <span class="badge">{{user.comments.length}}</span></h2>
+        <!-- <h4 class="">Reviews From Guests</h4> -->
+        <div ng-show="user.comments.length" class="comment clearfix"
+          ng-repeat="(key, comment) in user.comments track by $index"
+          ng-init="expanded = false;">
+            <comment comment="comment" separator="key !== user.comments.length-1" >
+              <strong>Comment on product: </strong>
+              <a class="btn btn-link" ui-sref="main.products.info({productId: comment.product})">link</a>
+            </comment>
         </div>
 
+        <!--
+        <div class="pull-right">
+          <a href="javascript:void(0)" class="load-more">See more</a>
+        </div>
+        -->
       </div>
+    </div>
 
-    </div> <!-- col-lg-9 col-md-8 col-sm-12 -->
-  <!-- </div> -->
+  </div> <!-- col-lg-9 col-md-8 col-sm-12 -->
 
 </section>

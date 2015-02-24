@@ -34,6 +34,11 @@ angular.module('elementBoxApp.userdetails')
       $scope.userReported = false;
     };
 
+    $scope.getProdThumbnail = function(product) {
+      var url = product.images.length ? product.images[0].url : 'imgs/no-picture-medium.png';
+      return url.replace('image/upload', 'image/upload/c_fill,h_140,w_210');
+    };
+
     fetchProducts(page, pageSize);
   }
 ])
