@@ -73,11 +73,17 @@ angular.module('elementBoxApp.controller', [])
       }
     });
 
-    $rootScope.$on(EVENT_NAMES.addWishList, function(product) {
+    $rootScope.$on(EVENT_NAMES.addWishList, function(event, product) {
       $scope.currentUser.wishList.push(product._id);
     });
 
-    $rootScope.$on(EVENT_NAMES.addComment, function(comment) {
+    $rootScope.$on(EVENT_NAMES.removeWishList, function(event, product) {
+      var list = $scope.currentUser.wishList,
+          index = list.indexOf(product._id);
+      list.splice(index, 1);
+    });
+
+    $rootScope.$on(EVENT_NAMES.addComment, function(event, comment) {
       $scope.currentUser.comments.push(comment);
     });
 
