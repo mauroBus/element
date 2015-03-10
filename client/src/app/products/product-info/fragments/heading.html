@@ -1,5 +1,5 @@
 <div class="panel">
-  <div class="page-container-responsive">
+  <div class="page-container-responsive product__heading">
 
     <div class="row">
       <div class="col-lg-8">
@@ -70,9 +70,27 @@
         <div class="h3 product__price" ng-show="product.price == 0">No price</div>
 
         <div class="row">
-          <div class="btn btn-link pull-right" ng-click="addToWishList()">
-            <span class="glyphicon glyphicon-shopping-cart"></span>
-            Add to Wish List
+          <div
+            ng-hide="hasWishListedProduct()"
+            class="btn btn-link pull-right add-to-wishlist"
+            popover="Add product to Wish List" popover-trigger="mouseenter" popover-placement="bottom" Popover-animation="false"
+            ng-click="addToWishList()">
+              <span class="glyphicon glyphicon-heart"></span>
+              Add to Wish List
+          </div>
+
+          <div ng-show="hasWishListedProduct()" class="pull-right on-wishlist">
+            <!-- <span popover="Product is on Wish List" popover-trigger="mouseenter" popover-placement="top" > -->
+            <span class="glyphicon glyphicon-ok-sign"></span>
+            On WishList
+            <!-- </span> -->
+            <span
+              class="btn btn-link remove-from-wishlist"
+              popover="Remove from Wish List" popover-trigger="mouseenter" popover-placement="bottom" Popover-animation="false"
+              ng-click="removeFromWishList()">
+                <!-- <span class="glyphicon glyphicon-heart-empty"></span> -->
+                (Remove)
+            </span>
           </div>
         </div>
       </div>

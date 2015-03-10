@@ -2,20 +2,13 @@
 angular.module('elementBoxApp.products.productInfo')
 
 .controller('ProductInfoCtrl', [
-          '$scope', '$rootScope', '$modal', '$stateParams', 'ProductsService', 'UserService', 'CommentsService', 'EVENT_NAMES',
-  function($scope,   $rootScope,   $modal,   $stateParams,   ProductsService,   UserService,   CommentsService,   EVENT_NAMES) {
+          '$scope', '$rootScope', '$modal', '$stateParams', '$timeout', 'ProductsService', 'UserService', 'CommentsService', 'EVENT_NAMES',
+  function($scope,   $rootScope,   $modal,   $stateParams,   $timeout,   ProductsService,   UserService,   CommentsService,   EVENT_NAMES) {
     $scope.slides = [];
     $scope.slidesIndex = 0;
     $scope.userHasRated = false;
     $scope.rateVal = null;
     var ratingInProcess = false;
-
-    $scope.contactFromDate = null;
-    $scope.dateOptions = {
-      formatYear: 'yy',
-      startingDay: 1
-    };
-    $scope.checkinDPOpened = false;
 
     // Comments pagination:
     $scope.comments = [];
@@ -28,6 +21,14 @@ angular.module('elementBoxApp.products.productInfo')
 
     // $scope.myInterval = 5000;
     // $scope.slides2 = [];
+
+    // Fetching product:
+    $scope.product = ProductsService.get({id: $stateParams.productId}, function(p) {
+      p.images.forEach(function(image, index) {
+        $scope.slides.push({ url: image.url, index: index+1 });
+      });
+      // p.rating.value = parseInt(p.rating.value);
+    });
 
     $scope.fetchPage = function() {
       CommentsService.query({
@@ -43,14 +44,6 @@ angular.module('elementBoxApp.products.productInfo')
           $scope.commentsData.pageSize = res.pageSize;
         });
     };
-
-    // Fetching products:
-    $scope.product = ProductsService.get({id: $stateParams.productId}, function(p) {
-      p.images.forEach(function(image, index) {
-        $scope.slides.push({ url: image.url, index: index+1 });
-      });
-      // p.rating.value = parseInt(p.rating.value);
-    });
 
     $scope.addComment = function(commentTxt) {
       commentTxt = commentTxt.trim();
@@ -70,22 +63,6 @@ angular.module('elementBoxApp.products.productInfo')
       $scope.fetchPage();
     });
 
-    var sendContact = function(text) {
-      console.log(text);
-    };
-
-    $scope.doContact = function() {
-      $modal.open({
-        templateUrl: 'products/product-info/fragments/contact.modal.html',
-        controller: function($scope) {
-          $scope.contactText = '';
-          $scope.send = sendContact;
-        },
-        // size: 'sm',
-        // backdrop: 'static'
-      });
-    };
-
     $scope.rate = function(val) {
       if ($scope.rateVal || ratingInProcess) { return; }
 
@@ -100,24 +77,25 @@ angular.module('elementBoxApp.products.productInfo')
       });
     };
 
-    // Disable weekend selection
-    $scope.disabled = function(date, mode) {
-      return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-    };
-
-    $scope.open = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope.checkinDPOpened = true;
-    };
-
     $scope.addToWishList = function() {
       UserService.addToWishList({ prodId: $scope.product._id }, function() {
         $rootScope.$emit(EVENT_NAMES.addWishList, $scope.product);
       });
     };
 
-    $scope.fetchPage(); // fetching first page.
+    $scope.removeFromWishList = function() {
+      UserService.removeFromWishList({ itemId: $scope.product._id }, function() {
+        $rootScope.$emit(EVENT_NAMES.removeWishList, $scope.product);
+      });
+    };
+
+    $scope.hasWishListedProduct = function() {
+      if (!$scope.currentUser || !$scope.product) {
+        return false;
+      }
+      return $scope.currentUser.wishList.indexOf($scope.product._id) >= 0;
+    };
+
+    // $scope.fetchPage(); // fetching first page.
   }
 ]);
