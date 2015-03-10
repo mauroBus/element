@@ -2,10 +2,22 @@
   @image-height: 400px;
   @image-width: 615px;
 
-  .product-info__title {}
+  .product__heading {
+    .product-info__title {}
 
-  .product-info__description {
-    white-space: pre-line;
+    .product-info__description {
+      white-space: pre-line;
+    }
+    .add-to-wishlist {
+      color: @green-color;
+    }
+    .remove-from-wishlist {
+      color: @tomato-color;
+      font-size: 13px;
+    }
+    .on-wishlist {
+      color: @brand-info;
+    }
   }
 
   .image-slider-container {
@@ -196,4 +208,10 @@
     opacity: 0.8;
   }
 
+  .product-contact {
+    .btn-default[disabled] {
+      background-color: @gray-lighter;
+      color: @gray-light;
+    }
+  }
 }
