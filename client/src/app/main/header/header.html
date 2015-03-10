@@ -6,13 +6,11 @@
       <span ng-if="!currentUser.firstName">
         <a ui-sref="main.signin" class="btn btn-sm btn-default">SignIn</a>
         <a ui-sref="main.signup" class="btn btn-sm btn-default">SignUp</a>
-        <span>REGISTRATE!</span>
       </span>
-      <span ng-show="currentUser.firstName">Welcome, {{currentUser.firstName}} {{currentUser.lastName}}</span>
-      <span ng-show="currentUser.roles.indexOf(userRoles.admin) >= 0">You're admin.</span>
-      <span ng-show="currentUser.roles.indexOf(userRoles.editor) >= 0">You're editor.</span>
-      <span ng-show="currentUser.roles.indexOf(userRoles.user) >= 0">You're user.</span>
-      <button ng-show="currentUser.firstName" class="btn btn-warning" ng-click="signout()">SignOut</button>
+      <span ng-show="currentUser.firstName">Welcome, {{currentUser.firstName}}</span>
+      <span ng-show="currentUser.roles.indexOf(userRoles.admin) >= 0"> Admin </span>
+      <span ng-show="currentUser.roles.indexOf(userRoles.editor) >= 0"> Editor </span>
+      <button ng-show="currentUser.firstName" class="btn btn-link btn-sm" ng-click="signout()">SignOut</button>
     </div>
 
     <div class="text-center">
