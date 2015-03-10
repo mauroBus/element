@@ -18,7 +18,8 @@ var mongoose = require('mongoose'),
 exports.productById = function(req, res, next, id) {
   Product.findById(id, function(err, product) {
     if (err) return next(err);
-    if (!product) return next(new Error('Failed to load product ' + id));
+    // if (!product) return next(new Error('Failed to load product ' + id));
+    if (!product) return res.status(404).json({ message: 'Failed to load product with id: ' + id });
     req.product = product;
     next();
   });
