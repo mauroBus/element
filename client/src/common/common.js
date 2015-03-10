@@ -41,6 +41,7 @@ angular.module('elementBoxApp.common', [
 .constant('EVENT_NAMES', {
   errorResponse: 'ERROR_RESPONSE',
   addWishList: 'NEW_WISH_LIST_ITEM',
+  removeWishList: 'REMOVE_WISH_LIST_ITEM',
   addComment: 'NEW_COMMENT'
 })
 
