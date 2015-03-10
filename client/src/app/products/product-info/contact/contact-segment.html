@@ -1,0 +1,68 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Contact</h3>
+  </div>
+
+  <div class="panel-body">
+
+    <form>
+      <div class="form-group">
+        <label for="checkinField">Check In</label>
+        <p class="input-group">
+          <input type="text" class="form-control"
+            id="checkinField" placeholder="Enter date"
+            datepicker-popup="dd-MMM-yyyy" ng-model="checkinDate"
+            is-open="checkinOpened" min-date="checkinMinDate"
+            datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+            ng-required="true" close-text="Close"
+            show-button-bar="false"
+            show-weeks="false"
+            />
+
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openCheckin($event)">
+              <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+          </span>
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label for="checkoutField">Check Out</label>
+        <p class="input-group">
+          <input type="text" class="form-control"
+            id="checkoutField" placeholder="Enter date"
+            datepicker-popup="dd-MMM-yyyy" ng-model="checkoutDate"
+            is-open="checkoutOpened" min-date="checkinDate"
+            datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+            ng-required="true" close-text="Close"
+            show-button-bar="false"
+            show-weeks="false"
+            />
+
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openCheckout($event)">
+              <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+          </span>
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label for="guestsField">Guests</label>
+        <select id="guestsField" class="form-control">
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <p class="help-block">Write a comment:</p>
+        <textarea ng-model="commentText" class="form-control" rows="3" ng-required="true"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block pull-left" ng-click="doContact()">Contact</button>
+    </form>
+
+  </div> <!-- panel-body -->
+</div>
