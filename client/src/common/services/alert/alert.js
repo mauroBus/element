@@ -4,6 +4,7 @@ angular.module('elementBoxApp.common')
 .factory('ModalAlert', ['$rootScope', '$modal',
   function($rootScope, $modal) {
     var modalInstance, defaultConfig = {
+      type: 'default', // only allows one modal opened within a given type.
       title: 'Woops!', // modal title.
       msg: 'A custom msg to display.', // modal msg.
       eventName: '', // event to listen to.
@@ -12,6 +13,10 @@ angular.module('elementBoxApp.common')
     };
 
     var showModal = function(config) {
+      if (modalInstance && config.type === modalInstance.type) {
+        modalInstance.close();
+      }
+
       modalInstance = $modal.open({
         templateUrl: 'services/alert/alert.html',
         controller: function($scope) {
@@ -22,6 +27,8 @@ angular.module('elementBoxApp.common')
         size: 'sm',
         backdrop: 'static'
       });
+
+      modalInstance.type = config.type;
 
       // returning the modal promise resolved when it's closed and rejected when it's dismissed.
       return modalInstance.result;
