@@ -26,7 +26,7 @@ angular.module('elementBoxApp.common')
 
     // default error handler, only applied if "SILENT_ON_ERROR" has not been setted.
     responseError: function(rejection) {
-      if (!rejection.config.SILENT_ON_ERROR) {
+      if (!rejection.config.params.SILENT_ON_ERROR) {
         // by default, it shows an alert modal to treat the error.
         $rootScope.$broadcast(EVENT_NAMES.errorResponse, rejection);
       }

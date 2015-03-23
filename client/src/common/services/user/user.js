@@ -40,7 +40,8 @@ angular.module('elementBoxApp.common')
 
     me: {
       url: Urls.users.me,
-      method: 'GET'
+      method: 'GET',
+      params: { SILENT_ON_ERROR: true }
     },
 
     // User wish list:

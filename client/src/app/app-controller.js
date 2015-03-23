@@ -41,12 +41,13 @@ angular.module('elementBoxApp.controller', [])
     });
 
     ModalAlert.alertOn({
+      type: 'errorResponse',
       eventName: EVENT_NAMES.errorResponse,
       parseMsgCbk: ErrorHandler.translate
     });
 
     UserService
-      .me({ SILENT_ON_ERROR: true })
+      .me()
       .$promise.then(function(myData) {
         if (!myData) { return; }
         Session.create(myData._id, myData);
