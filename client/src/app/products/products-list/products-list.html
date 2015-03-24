@@ -13,29 +13,33 @@
         <h3 class="panel-title">Categories</h3>
       </div>
 
-      <div ui-tree id="tree-root" ng-show="categories.length" data-drag-enabled="false">
+      <!-- <div ui-tree id="tree-root" ng-show="categories.length" data-drag-enabled="false">
         <ol ui-tree-nodes="" ng-model="categories">
           <li ng-repeat="node in categories" ui-tree-node ng-include="'products/products-list/partials/category.html'" data-collapsed="node.collapsed"></li>
         </ol>
-      </div>
-    </div>
-    <!-- <ul
-      class="nav nav-pills nav-stacked"
-      ng-show="categories.length"
-      ng-repeat="categ in categories">
-      <li role="presentation" ng-click="(categ._id !== currentCateg._id) ? fetchPage(categ) : ''" ng-class="{active: categ._id === currentCateg._id}">
-        <a href="">{{categ.name}}</a>
-      </li>
-    </ul> -->
+      </div> -->
 
-    <!-- <div ng-show="categories.length" class="list-group">
-      <button
-        ng-repeat="categ in categories"
-        class="list-group-item bg-info"
-        ng-click="filterProducts(categ)">
-        <div>{{categ}}</div>
-      </button>
-    </div> -->
+      <!--
+      <accordion class="products-accordion">
+        <accordion-group is-open="true" ng-repeat="node in categories">
+          <accordion-heading>
+            <div class="heading-inner-title col-xs-12" ng-click="(node._id !== currentCateg._id) ? fetchPage(node); $event.stopPropagation(); : ''">{{node.name}}</div>
+          </accordion-heading>
+          <div ng-include="'products/products-list/partials/category-accordion.html'"></div>
+        </accordion-group>
+      </accordion>
+      -->
+
+      <!-- <categ-tree-node ng-repeat="node in categories" node="node"></categ-tree-node> -->
+
+      <categ-tree class="category-tree" selectcbk="onSelectCateg">
+        <categ-tree-node ng-repeat="node in categories" is-open="true">
+          <div ng-include="'products/products-list/partials/category-tree.html'"></div>
+        </categ-tree-node>
+      </categ-tree>
+
+    </div>
+
   </div> <!-- panel -->
 
   <div class="col-md-9 panel panel-default">

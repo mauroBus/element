@@ -14,6 +14,7 @@ angular.module('elementBoxApp.products.productList')
     $scope.currentCateg = {};
     $scope.expandedNode = {};
     $scope.isLoading = false;
+    $scope.categories = [];
     var fetchingForFirstTime = true;
 
 
@@ -81,6 +82,10 @@ angular.module('elementBoxApp.products.productList')
 
     $scope.setExpandedNode = function(node) {
       $scope.expandedNode = node;
+    };
+
+    $scope.onSelectCateg = function(categ) {
+      $scope.fetchPage(categ);
     };
 
     $scope.addDefaultProduct = function() {

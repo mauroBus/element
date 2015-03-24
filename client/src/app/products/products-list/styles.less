@@ -51,4 +51,144 @@
     // background-color: darken(@background-color, 15%);
   }
 
+
+
+
+
+  .products-accordion {
+
+    .panel {
+      background-color: transparent;
+    }
+    .panel-default {
+      border: none;
+    }
+    .panel-group {
+      margin-bottom: 0;
+      // padding-left: 15px;
+      color: #FFF;
+      background-color: @gray;
+
+      .panel {
+        border-radius: 0;
+      }
+      .panel + .panel {
+        margin-top: 0;
+      }
+
+      .panel-heading {
+        color: #FFF;
+        background-color: transparent;
+        border: none !important;
+        cursor: pointer;
+        padding: 0;
+        padding-left: 15px;
+
+        .panel-title {
+          a {
+            .clearfix();
+            padding: 10px 0;
+            display: block;
+          }
+        }
+
+        + .panel-collapse > .panel-body,
+        + .panel-collapse > .list-group {
+          border-top: none;
+        }
+      }
+
+      .active {
+        background-color: @brand-warning;
+      }
+    }
+
+    .panel-body {
+      padding: 0;
+    }
+
+    .panel-collapse {
+      // opacity: 0.2;
+
+      &.in {
+        // opacity: 1;
+        .panel-heading {
+          // background-color: @gray;
+        }
+      }
+    }
+
+  }
+
+
+
+  .category-tree {
+    background-color: @gray;
+
+    .category-tree-node {
+      .categ-tree__heading {
+        h4.categ-tree__heading__title {
+          margin: 0;
+          cursor: pointer;
+          background-color: @gray;
+          color: #FFF;
+          transition: background-color 0.3s, color: 0.3s;
+
+          &:hover {
+            background-color: lighten(@gray, 3%);
+          }
+          &.open {
+            background-color: lighten(@gray, 8%);
+          }
+          &.active {
+            background-color: #FFF;
+            color: @gray;
+          }
+
+          .categ-tree__heading__selector {
+            padding: 10px 0 10px 10px;
+          }
+          .categ-tree__heading__toggle {
+            padding: 10px 0 10px 0;
+            &:hover {
+              color: @brand-warning;
+            }
+          }
+        }
+
+      } // .categ-tree__heading
+
+      .panel-collapse {
+        &.in {
+          border-top: 1px solid #FFF;
+        }
+        .categ-tree__body {
+          h4 { padding-left: 15px; }
+
+          .categ-tree__body {
+            h4 { padding-left: 30px; }
+            .categ-tree__body {
+              h4 { padding-left: 45px; }
+            }
+          }
+        }
+      }
+    }
+
+    .full-width {
+      width: 100%;
+    }
+    .width-1-4 {
+      width: 21%;
+    }
+    .width-3-4 {
+      width: 75%;
+    }
+    .full-width,
+    .width-1-4,
+    .width-3-4 {
+      display: inline-block;
+    }
+
+  }
 }
