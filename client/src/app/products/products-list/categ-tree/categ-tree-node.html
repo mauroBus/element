@@ -1,0 +1,26 @@
+<div class="category-tree-node">
+
+  <div class="categ-tree__heading">
+    <h4
+      class="categ-tree__heading__title"
+      ng-class="{ active: node._id === currentCateg._id, 'open': isOpen }">
+      <div
+        class="categ-tree__heading__selector"
+        ng-class="{'full-width': !node.children.length, 'width-3-4': node.children.length}"
+        ng-click="select(node);">
+          <span>{{node.name}}</span>
+      </div>
+      <i
+        ng-show="node.children.length"
+        class="categ-tree__heading__toggle glyphicon width-1-4"
+        ng-class="{'glyphicon-chevron-down': isOpen, 'glyphicon-chevron-right': !isOpen}"
+        ng-click="toggleOpen(node)">
+      </i>
+    </h4>
+  </div>
+
+  <div class="panel-collapse" collapse="!isOpen">
+    <div class="categ-tree__body" ng-transclude></div>
+  </div>
+
+</div>

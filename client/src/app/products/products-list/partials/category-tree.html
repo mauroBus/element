@@ -1,0 +1,5 @@
+<categ-tree selectcbk="onSelectCateg">
+  <categ-tree-node ng-repeat="node in node.children">
+    <div ng-include="'products/products-list/partials/category-tree.html'"></div>
+  </categ-tree-node>
+</categ-tree>
