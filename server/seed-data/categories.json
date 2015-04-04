@@ -2,96 +2,115 @@
     {
         "_id": "all",
         "name": "All",
+        "thumb": "glyphicon-tree-conifer",
         "path": ",all,"
     },
     {
         "_id": "electronics",
         "name": "Electronics",
+        "thumb": "glyphicon-erase",
         "path": ",all,electronics,"
     },
     {
         "_id": "computers",
         "name": "Computers",
+        "thumb": "glyphicon-phone",
         "path": ",all,electronics,computers,"
     },
     {
         "_id": "tvs",
         "name": "TVs",
+        "thumb": "glyphicon-blackboard",
         "path": ",all,electronics,tvs,"
     },
     {
         "_id": "housing",
         "name": "Housing",
+        "thumb": "glyphicon-home",
         "path": ",all,housing,"
     },
     {
         "_id": "housing-rent",
         "name": "Rent",
+        "thumb": "glyphicon-tent",
         "path": ",all,housing,housing-rent,"
     },
     {
         "_id": "rent-appartments",
         "name": "Appartments",
+        "thumb": "glyphicon-tower",
         "path": ",all,housing,housing-rent,rent-appartments,"
     },
     {
         "_id": "rent-houses",
         "name": "Hoses",
+        "thumb": "glyphicon-trash",
         "path": ",all,housing,housing-rent,rent-houses,"
     },
     {
         "_id": "housing-sale",
         "name": "Sale",
+        "thumb": "icon-computer",
         "path": ",all,housing,housing-sale,"
     },
     {
         "_id": "vehicles",
         "name": "Vehicles",
+        "thumb": "glyphicon-shopping-cart",
         "path": ",all,vehicles,"
     },
     {
         "_id": "bikes",
         "name": "Bikes",
+        "thumb": "glyphicon-plane",
         "path": ",all,vehicles,bikes,"
     },
     {
         "_id": "enduro",
         "name": "Enduro",
+        "thumb": "glyphicon-road",
         "path": ",all,vehicles,bikes,enduro,"
     },
     {
         "_id": "racing",
         "name": "Racing",
+        "thumb": "icon-computer",
         "path": ",all,vehicles,bikes,racing,"
     },
     {
         "_id": "cars",
         "name": "Cars",
+        "thumb": "icon-computer",
         "path": ",all,vehicles,cars,"
     },
     {
         "_id": "coupe",
         "name": "Coupe",
+        "thumb": "icon-computer",
         "path": ",all,vehicles,cars,coupe,"
     },
     {
         "_id": "family",
         "name": "Family",
+        "thumb": "icon-computer",
         "path": ",all,vehicles,cars,family,"
     },
     {
         "_id": "utilitaries",
         "name": "Utilitaries",
+        "thumb": "icon-computer",
         "path": ",all,vehicles,cars,utilitaries,"
     },
     {
         "_id": "pickups",
         "name": "Pick Ups",
+        "thumb": "icon-computer Ups",
         "path": ",all,vehicles,pickups,"
     },
     {
         "_id": "4x4",
         "name": "4x4",
+        "thumb": "icon-computer",
         "path": ",all,vehicles,pickups,4x4,"
     }
 ]

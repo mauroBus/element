@@ -28,6 +28,8 @@ db.once('open', function(callback) {
     }
     var users = JSON.parse(data);
 
+    console.log('Fetching Users');
+
     User.remove().exec(function(error) {
       users.forEach(function(user) {
         var userSchema = new User(user);
@@ -53,6 +55,8 @@ db.once('open', function(callback) {
       process.exit(0);
     }
     var categs = JSON.parse(data);
+
+    console.log('Fetching Categories');
 
     CategoryTree.remove().exec(function(error) {
       categs.forEach(function(categ) {
@@ -81,6 +85,8 @@ db.once('open', function(callback) {
       process.exit(0);
     }
     var products = JSON.parse(data);
+
+    console.log('Fetching Products');
 
     ProductsModel.remove().exec(function(error) {
       products.forEach(function(prod) {
