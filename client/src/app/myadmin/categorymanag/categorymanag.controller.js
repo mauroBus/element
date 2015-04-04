@@ -29,6 +29,7 @@ angular.module('elementBoxApp.myadmin.categorymanag')
       nodeData.children.push({
         _id: nodeData._id + (nodeData.children.length + 1),
         name: nodeData.name + '-' + (nodeData.children.length + 1),
+        thumb: '',
         children: []
       });
     };
@@ -48,7 +49,7 @@ angular.module('elementBoxApp.myadmin.categorymanag')
     };
 
     $scope.save = function() {
-      CategoryRsr.save({tree: JSON.stringify($scope.rootCategory)}, function() {
+      CategoryRsr.save({ tree: JSON.stringify($scope.rootCategory) }, function() {
         console.log(arguments);
       });
     };

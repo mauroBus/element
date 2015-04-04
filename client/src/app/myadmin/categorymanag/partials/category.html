@@ -9,6 +9,7 @@
     <div class="tree-node-content__name" ng-show="!edditing">{{node.name}}</div>
     <input type="text" ng-model="node.name" ng-show="edditing" class="form-control" placeholder="Name">
     <input type="text" ng-model="node._id" ng-show="edditing" class="form-control" placeholder="Id">
+    <input type="text" ng-model="node.thumb" ng-show="edditing" class="form-control" placeholder="Thumb">
 
     <div class="pull-right controllers">
       <a class="btn btn-info btn-xs edit" data-nodrag ng-click="edditing = !edditing;">
