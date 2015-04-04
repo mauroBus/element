@@ -184,7 +184,7 @@ gulp.task('copy-static', function() {
     // gulp.src(config.vendor + '/nvd3/nv.d3.css')
     //     // .pipe(gulpIf(argv.production, uglify('', { mangle: false })))
     //     .pipe(gulp.dest(config.cssDist)),
-    gulp.src(config.vendor + '/bootstrap-css/fonts/*')
+    gulp.src(config.vendor + '/bootstrap/fonts/*')
         .pipe(gulp.dest(config.fontsDist)),
     gulp.src(['src/assets/**/*.*', '!src/assets/less/*.*'])
         .pipe(gulp.dest(config.dist)),
