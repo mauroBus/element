@@ -8,7 +8,8 @@
         class="categ-tree__heading__selector"
         ng-class="{'full-width': !node.children.length, 'width-3-4': node.children.length}"
         ng-click="select(node);">
-          <span>{{node.name}}</span>
+          <span class="categ-ico glyphicon {{node.thumb}}"></span>
+          <span class="categ-name">{{node.name}}</span>
       </div>
       <i
         ng-show="node.children.length"

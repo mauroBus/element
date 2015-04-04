@@ -89,9 +89,101 @@ angular.module('elementBoxApp.products.productList')
     };
 
     $scope.addDefaultProduct = function() {
+      // var newProd = {
+      //   title: 'My Awesome T-shirt - ' + $scope.products.length,
+      //   description: 'All about the details. Of course it\'s black.',
+      //   images: [{
+      //       kind: 'thumbnail',
+      //       url: 'http://placekitten.com/601/300'
+      //     }, {
+      //       kind: 'thumbnail',
+      //       url: 'http://placekitten.com/602/300'
+      //     }, {
+      //       kind: 'thumbnail',
+      //       url: 'http://placekitten.com/603/300'
+      //     }, {
+      //       kind: 'thumbnail',
+      //       url: 'http://placekitten.com/604/300'
+      //     }, {
+      //       kind: 'thumbnail',
+      //       url: 'http://placekitten.com/605/300'
+      //     }, {
+      //       kind: 'thumbnail',
+      //       url: 'http://placekitten.com/606/300'
+      //     }, {
+      //       kind: 'thumbnail',
+      //       url: 'http://placekitten.com/607/300'
+      //     }
+      //   ],
+      //   categories: ['bikes', 'racing'],
+      //   style: Math.floor(Math.random()*10000),
+      //   variants: [{
+      //     color: 'Black',
+      //     images: [{
+      //         kind: 'thumbnail',
+      //         url: 'imgs/products/1.png'
+      //       },
+      //       {
+      //         kind: 'catalog',
+      //         url: 'imgs/products/1.png'
+      //       }
+      //     ],
+      //     sizes: [{
+      //         size: 'S',
+      //         available: 10,
+      //         sku: 'CAT-1234-Blk-S',
+      //         price: 99.99
+      //       },
+      //       {
+      //         size: 'M',
+      //         available: 7,
+      //         sku: 'CAT-1234-Blk-M',
+      //         price: 109.99
+      //       }
+      //     ]
+      //   }],
+      //   catalogs: [
+      //     { 'name': 'Apparel' }
+      //   ]
+      // };
+
+      // var newProd = {
+      //   title: 'Default added product',
+      //   description: 'products-list.controller.js partials/ added/cloudImgAccountNbr a diqxddkxmukwdqoslhqk CAT-1234-Blk-M pageNbr element setExpandedNode',
+      //   // 'cloudImgAccountNbr': 0,
+      //   // 'rating': {
+      //   //   'history': [10],
+      //   //   'value': 10
+      //   // },
+      //   // 'comments': [
+      //   //   {
+      //   //     'text': 'AAAAAAAAAAAAAAAHHHHHHHHHH',
+      //   //     'createdAt': '2015-04-03T01:09:00.243Z',
+      //   //     'user': {
+      //   //       'ref': '5511a81ca66a00875e67bf67',
+      //   //       'firstName': 'MAURO',
+      //   //       'lastName': 'BUSELLI',
+      //   //       'displayName': 'SUPER_USER'
+      //   //     }
+      //   //   }
+      //   // ],
+      //   'price': 599.99,
+      //   // 'user': {
+      //   //   'ref': '5511a81ca66a00875e67bf67',
+      //   //   'firstName': 'MAURO',
+      //   //   'lastName': 'BUSELLI'
+      //   // },
+      //   // 'modifiedAt': '2015-04-03T01:07:17.588Z',
+      //   // 'createdAt': '2015-04-03T01:07:17.588Z',
+      //   'categories': [
+      //     'coupe'
+      //   ],
+      //   'images': []
+      // };
+
       var newProd = {
-        title: 'My Awesome T-shirt - ' + $scope.products.length,
-        description: 'All about the details. Of course it\'s black.',
+        'title': 'Default added product',
+        description: 'products-list.controller.js partials/ added/cloudImgAccountNbr a diqxddkxmukwdqoslhqk CAT-1234-Blk-M pageNbr element setExpandedNode',
         images: [{
             kind: 'thumbnail',
             url: 'http://placekitten.com/601/300'
@@ -115,36 +207,7 @@ angular.module('elementBoxApp.products.productList')
             url: 'http://placekitten.com/607/300'
           }
         ],
-        categories: ['bikes', 'racing'],
-        style: Math.floor(Math.random()*10000),
-        variants: [{
-          color: 'Black',
-          images: [{
-              kind: 'thumbnail',
-              url: 'imgs/products/1.png'
-            },
-            {
-              kind: 'catalog',
-              url: 'imgs/products/1.png'
-            }
-          ],
-          sizes: [{
-              size: 'S',
-              available: 10,
-              sku: 'CAT-1234-Blk-S',
-              price: 99.99
-            },
-            {
-              size: 'M',
-              available: 7,
-              sku: 'CAT-1234-Blk-M',
-              price: 109.99
-            }
-          ]
-        }],
-        catalogs: [
-          { 'name': 'Apparel' }
-        ]
+        'categories': ['coupe'],
       };
 
       ProductsService.save(newProd, function(prod) {

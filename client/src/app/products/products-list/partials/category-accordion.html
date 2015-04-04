@@ -1,0 +1,33 @@
+<accordion>
+  <accordion-group ng-repeat="node in node.children" ng-init="collapsed = false;">
+    <div ng-if="!node.children.length">
+      <accordion-heading>
+        <div
+          class="heading-inner-title col-xs-12"
+          ng-click="(node._id !== currentCateg._id) ? fetchPage(node) : ''">
+            {{node.name}}
+        </div>
+      </accordion-heading>
+    </div>
+
+    <div ng-if="node.children.length">
+      <div ng-class="{active: node._id === currentCateg._id}">
+        <accordion-heading>
+          <div
+            class="heading-inner-title col-xs-9"
+            ng-click="(node._id !== currentCateg._id) ? fetchPage(node) : ''">
+              {{node.name}}
+          </div>
+          <i
+            class="pull-right glyphicon col-xs-3"
+            ng-class="{'glyphicon-chevron-down': collapsed, 'glyphicon-chevron-right': !collapsed}">
+          </i>
+        </accordion-heading>
+      </div>
+
+      <div ng-include="'products/products-list/partials/category-accordion.html'"></div>
+
+    </div>
+
+  </accordion-group>
+</accordion>

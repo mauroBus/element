@@ -132,7 +132,7 @@
           cursor: pointer;
           background-color: @gray;
           color: #FFF;
-          transition: background-color 0.3s, color: 0.3s;
+          transition: background-color 0.3s, color 0.3s;
 
           &:hover {
             background-color: lighten(@gray, 3%);
@@ -143,10 +143,17 @@
           &.active {
             background-color: #FFF;
             color: @gray;
+
+            .categ-tree__heading__selector .categ-ico {
+              color: @tomato-color;
+            }
           }
 
           .categ-tree__heading__selector {
             padding: 10px 0 10px 10px;
+            .categ-name {
+              padding-left: 6px;
+            }
           }
           .categ-tree__heading__toggle {
             padding: 10px 0 10px 0;
