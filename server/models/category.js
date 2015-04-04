@@ -10,6 +10,10 @@ var CategoyTreeSchema = new Schema({
     type: String,
     unique: true
   },
+  thumb: {
+    type: String,
+    default: ''
+  }
   // children: String
 });
 

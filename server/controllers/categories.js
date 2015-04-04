@@ -13,22 +13,26 @@ var mongoose = require('mongoose'),
 //   {
 //      "_id": "products",
 //      "name": "Products",
+//      "thumb": "thumb-icon-name",
 //      "path": ",products,",
 //      "children": [
 //        {
 //          "_id": "household",
 //          "name": "Household",
+//          "thumb": "thumb-icon-name",
 //          "path": ",products,household,",
 //          "children": [
 //             {
 //               "_id": "appliance",
 //               "name": "Appliance",
+//               "thumb": "thumb-icon-name",
 //               "path": ",products,household,appliance,",
 //               "children": []
 //             },
 //             {
 //               "_id": "electronics",
 //               "name": "Electronics",
+//               "thumb": "thumb-icon-name",
 //               "path": ",products,household,electronics,",
 //               "children": []
 //             }
@@ -41,6 +45,7 @@ var denormalizeTree = function(tree, path, matches) {
   matches.push({
     _id: tree._id,
     name: tree.name,
+    thumb: tree.thumb,
     path: path + tree._id + ','
   });
 
@@ -61,6 +66,7 @@ var insertChildCateg = function(tree, child, childPath) {
     tree.push({
       _id: child._id,
       name: child.name,
+      thumb: child.thumb,
       path: child.path,
       children: []
     });
