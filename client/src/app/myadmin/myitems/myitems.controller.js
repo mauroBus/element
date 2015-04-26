@@ -1,7 +1,7 @@
 
 angular.module('elementBoxApp.myadmin.myitems')
 
-.controller('MyItemsCtrl', ['$scope', 'ProductsService', function($scope, ProductsService) {
+.controller('MyItemsCtrl', ['$scope', '$timeout', 'ProductsService', function($scope, $timeout, ProductsService) {
     $scope.products = [];
     $scope.page = 1;
     $scope.pageSize = 3;
@@ -9,7 +9,10 @@ angular.module('elementBoxApp.myadmin.myitems')
     $scope.totalProducts = 0;
 
     $scope.fetchPage = function() {
-      debugger;
+      if (!$scope.currentUser || !$scope.currentUser.id) {
+        $timeout($scope.fetchPage, 500); // waiting for fetching the user data.
+        return;
+      }
       ProductsService.query({
           'user.ref': $scope.currentUser.id,
           page: $scope.page,
