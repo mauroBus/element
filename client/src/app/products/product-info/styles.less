@@ -30,10 +30,7 @@
     height: @image-height;
     cursor: pointer;
     border-radius: 4px;
-
-    -webkit-box-shadow: 4px 4px 19px -3px @gray-light;
-       -moz-box-shadow: 4px 4px 19px -3px @gray-light;
-            box-shadow: 4px 4px 19px -3px @gray-light;
+    .box-shadow(4px 4px 19px -3px @gray4);
 
     .img {
       width: 100%;
@@ -56,8 +53,7 @@
     }
 
     .rn-carousel-control {
-      -webkit-transition: opacity 0.2s ease-out;
-      transition: opacity 0.2s ease-out;
+      .transition(opacity 0.2s ease-out);
       position: absolute;
       opacity: 0.35;
       cursor: pointer;
@@ -179,7 +175,7 @@
     }
 
     .never-rated {
-      color: @gray-light;
+      color: @gray4;
     }
 
     .rated {
@@ -201,7 +197,7 @@
   }
 
   .product__price {
-    background-color: @gray-dark;
+    background-color: @gray2;
     padding: 10px 20px;
     color: #FFF;
     .border-radius(4px);
@@ -210,8 +206,8 @@
 
   .product-contact {
     .btn-default[disabled] {
-      background-color: @gray-lighter;
-      color: @gray-light;
+      background-color: @gray9;
+      color: @gray4;
     }
   }
 }
