@@ -39,4 +39,22 @@ angular.module('elementBoxApp', [
 
 .config(['$httpProvider', function ($httpProvider) {
   $httpProvider.interceptors.push('httpInterceptor');
-}]);
+}])
+
+
+// /*** To Refresh URL without reloading the controllers: ***/
+// .config(['$urlRouterProvider', function ($urlRouterProvider) {
+//   $urlRouterProvider.deferIntercept();
+// }])
+// .run(['$rootScope', '$urlRouter', '$location', '$state', function ($rootScope, $urlRouter, $location, $state) {
+//   $rootScope.$on('$locationChangeSuccess', function(e, newUrl, oldUrl) {
+//     e.preventDefault();
+//     if ($state.current.name !== 'main.products.list') {
+//       $urlRouter.sync();
+//     }
+//   });
+
+//   $urlRouter.listen();
+// }])
+
+;
