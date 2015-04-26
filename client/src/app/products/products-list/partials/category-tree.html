@@ -1,5 +1,5 @@
-<categ-tree selectcbk="onSelectCateg">
-  <categ-tree-node ng-repeat="node in node.children">
+<categ-tree on-select="onSelectCateg">
+  <categ-tree-node ng-repeat="node in node.children" is-open="node._id === currentCategory._id">
     <div ng-include="'products/products-list/partials/category-tree.html'"></div>
   </categ-tree-node>
 </categ-tree>

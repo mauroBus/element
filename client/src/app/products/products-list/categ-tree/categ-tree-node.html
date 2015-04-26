@@ -3,18 +3,20 @@
   <div class="categ-tree__heading">
     <h4
       class="categ-tree__heading__title"
-      ng-class="{ active: node._id === currentCateg._id, 'open': isOpen }">
+      ng-class="{ active: node._id === currentCateg._id, 'open': isOpen }" >
       <div
         class="categ-tree__heading__selector"
-        ng-class="{'full-width': !node.children.length, 'width-3-4': node.children.length}"
+        ng-class="{'full-width': !node.children.length, 'width-3-4': node.children.length}" 
         ng-click="select(node);">
           <span class="categ-ico glyphicon {{node.thumb}}"></span>
           <span class="categ-name">{{node.name}}</span>
+          <span ng-class="{ loader: isLoading && currentCateg._id === node._id }">
+          </span>
       </div>
       <i
         ng-show="node.children.length"
         class="categ-tree__heading__toggle glyphicon width-1-4"
-        ng-class="{'glyphicon-chevron-down': isOpen, 'glyphicon-chevron-right': !isOpen}"
+        ng-class="{ 'glyphicon-chevron-down': isOpen, 'glyphicon-chevron-right': !isOpen }"
         ng-click="toggleOpen(node)">
       </i>
     </h4>

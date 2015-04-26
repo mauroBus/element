@@ -1,5 +1,5 @@
 .products-list-section {
-  @background-color: @gray-lighter;
+  @background-color: @gray9;
 
   .tree-node {
     border: 1px solid #dae2ea;
@@ -67,7 +67,7 @@
       margin-bottom: 0;
       // padding-left: 15px;
       color: #FFF;
-      background-color: @gray;
+      background-color: @gray3;
 
       .panel {
         border-radius: 0;
@@ -113,7 +113,7 @@
       &.in {
         // opacity: 1;
         .panel-heading {
-          // background-color: @gray;
+          // background-color: @gray3;
         }
       }
     }
@@ -123,26 +123,26 @@
 
 
   .category-tree {
-    background-color: @gray;
+    background-color: @gray3;
 
     .category-tree-node {
       .categ-tree__heading {
         h4.categ-tree__heading__title {
           margin: 0;
           cursor: pointer;
-          background-color: @gray;
+          background-color: @gray3;
           color: #FFF;
           transition: background-color 0.3s, color 0.3s;
 
           &:hover {
-            background-color: lighten(@gray, 3%);
+            background-color: lighten(@gray4, 3%);
           }
           &.open {
-            background-color: lighten(@gray, 8%);
+            background-color: lighten(@gray4, 8%);
           }
           &.active {
             background-color: #FFF;
-            color: @gray;
+            color: @gray3;
 
             .categ-tree__heading__selector .categ-ico {
               color: @tomato-color;
@@ -154,11 +154,26 @@
             .categ-name {
               padding-left: 6px;
             }
+            .loader {
+              display: inline-block;
+              position: relative;
+              width: 20px;
+              height: 20px;
+              background: transparent;
+
+              svg {
+                fill: red;
+              }
+            }
           }
           .categ-tree__heading__toggle {
             padding: 10px 0 10px 0;
+            .transition(all .5s cubic-bezier(.23,1,.32,1));
             &:hover {
               color: @brand-warning;
+              &.glyphicon-chevron-right {
+                .translate(8px);
+              }
             }
           }
         }

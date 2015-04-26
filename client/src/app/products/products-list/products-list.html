@@ -2,7 +2,7 @@
 
   <h2>Products</h2>
 
-  <div class="col-md-12 panel">
+  <div class="col-md-12 panel clearfix">
     <button ng-click="addDefaultProduct()" class="btn btn-default pull-right">addProduct</button>
     <a class="btn btn-success pull-right" ui-sref="main.products.new">Publish</a>
   </div>
@@ -32,7 +32,7 @@
 
       <!-- <categ-tree-node ng-repeat="node in categories" node="node"></categ-tree-node> -->
 
-      <categ-tree class="category-tree" selectcbk="onSelectCateg">
+      <categ-tree class="category-tree" on-select="onSelectCateg">
         <categ-tree-node ng-repeat="node in categories" is-open="true">
           <div ng-include="'products/products-list/partials/category-tree.html'"></div>
         </categ-tree-node>

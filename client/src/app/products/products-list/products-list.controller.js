@@ -2,15 +2,13 @@
 angular.module('elementBoxApp.products.productList')
 
 .controller('ProductsListCtrl', [
-          '$scope', '$rootScope', '$stateParams', '$filter', 'ProductsService', 'Categories',
-  function($scope,   $rootScope,   $stateParams,   $filter,   ProductsService,   Categories) {
+          '$scope', '$rootScope', '$state', '$stateParams', '$filter', '$location', 'ProductsService', 'Categories',
+  function($scope,   $rootScope,   $state,   $stateParams,   $filter,   $location,   ProductsService,   Categories) {
     $scope.products = [];
-    $scope.page = ($stateParams.pageNbr) ? parseInt($stateParams.pageNbr) : 1; // Setting the current page.
+    $scope.page = ($stateParams.page) ? parseInt($stateParams.page) : 1; // Setting the current page.
     $scope.pageSize = 3;
     $scope.totalPages = 0;
     $scope.totalProducts = 0;
-    // $scope.categories = Categories.getCategories();
-    $scope.filter = '';
     $scope.currentCateg = {};
     $scope.expandedNode = {};
     $scope.isLoading = false;
@@ -18,26 +16,46 @@ angular.module('elementBoxApp.products.productList')
     var fetchingForFirstTime = true;
 
 
-    var CategoryRsr = Categories.getCategoriesTree();
-    CategoryRsr
-      .query({flat: false})
-      .$promise.then(function(res) {
-        $scope.categories = res;
-        setup();
-      });
+    var init = function() {
+      var CategoryRsr = Categories.getCategoriesTree();
 
-    $scope.fetchPage = function(categ, toPage) {
-      if (categ) {
-        $scope.currentCateg = categ;
-        $scope.filter = categ._id;
-        $stateParams.categ = categ._id;
-        $scope.page = (toPage) ? toPage : 1;
+      CategoryRsr
+        .query({flat: false})
+        .$promise.then(function(res) {
+          $scope.categories = res;
+          setup();
+        });
+    };
+
+    var setup = function() {
+      var flatCategs = parseFlatCategs($scope.categories[0]),
+          categ = $filter('filter')(flatCategs, {_id: $stateParams.categ}, true),
+          currentCategNbr = categ.length ? flatCategs.indexOf(categ[0]) : 0;
+
+      $scope.currentCateg = flatCategs[currentCategNbr];
+
+      if (fetchingForFirstTime) {
+        $scope.page = ($stateParams.page) ? parseInt($stateParams.page) : 1; // Setting the current page.
       }
 
+      $scope.$watch('page', function(newVal, oldVal) {
+        if (newVal !== oldVal && !$scope.isLoading) {
+          $scope.fetchPage($scope.currentCateg, $scope.page);
+        }
+      });
+
+      $scope.fetchPage($scope.currentCateg, $scope.page); // fetching the first time.
+    };
+
+    $scope.fetchPage = function(categ, toPage) {
+      $scope.currentCateg = categ ? categ : $scope.currentCateg;
+      $scope.page = (toPage) ? toPage : 1;
+
+      // updateUrl();
       $scope.isLoading = true;
 
       ProductsService.query({
-          category: $scope.filter,
+          category: $scope.currentCateg._id,
           page: $scope.page,
           pageSize: $scope.pageSize
         })
@@ -52,27 +70,58 @@ angular.module('elementBoxApp.products.productList')
         });
     };
 
-    var setup = function() {
-      // if ($stateParams.categ !== '') { // Setting the current category.
-        var categ = $filter('filter')($scope.categories, {_id: $stateParams.categ}, true),
-            currentCategNbr = categ.length ? $scope.categories.indexOf(categ[0]) : 0;
-        $scope.currentCateg = $scope.categories[currentCategNbr];
-      // }
-
-      $scope.$watch('page', function(newVal, oldVal) {
-        $stateParams.pageNbr = newVal;
-        if (fetchingForFirstTime) {
-          $scope.page = ($stateParams.pageNbr) ? parseInt($stateParams.pageNbr) : 1; // Setting the current page.
-        } else {
-          $scope.fetchPage();
-        }
-      });
-
-      $scope.fetchPage($scope.currentCateg, $scope.page); // fetching the first time.
+    var parseFlatCategs = function(categ) {
+      var res = [];
+      res.push(categ);
+      if (categ.children) {
+        categ.children.forEach(function(child) {
+          res.push.apply(res, parseFlatCategs(child));
+        });
+      }
+      return res;
     };
 
     var getRootNodesScope = function() {
       return angular.element(document.getElementById('tree-root')).scope().$$childHead;
+    };
+
+    var updateUrl = function() {
+      // $state.transitionTo('main.products.list', $stateParams, {
+      //   location: true, // 'replace', //  update url and replace
+      //   inherit: true,
+      //   notify: true,
+      //   relative: $state.$current
+      // });
+      // $location.search();
+
+      // $location.$$replace = true;
+
+      // $location.search({
+      //   categ: $stateParams.categ,
+      //   page: $stateParams.page
+      // });
+
+      // $stateParams.categ = $scope.currentCateg._id;
+      // $stateParams.page = $scope.page;
+      // $state.params.categ = $scope.currentCateg._id;
+      // $state.params.page = $scope.page;
+
+      $state.go('main.products.list', {
+        categ: $scope.currentCateg._id,
+        page: $scope.page
+      // }, {
+      //   location: true,
+      //   inherit: true,
+      //   notify: false,
+      //   // relative: $state.$current
+      });
+
+      $state.reload();
+
+      // }, {
+      //   location: 'replace',
+      //   // replace: true,
+      //   inherit: false
     };
 
     $scope.collapseEverything = function() {
@@ -85,7 +134,13 @@ angular.module('elementBoxApp.products.productList')
     };
 
     $scope.onSelectCateg = function(categ) {
-      $scope.fetchPage(categ);
+      if (categ !== $scope.currentCateg && !$scope.isLoading) {
+        // For now let it update the url (not local fetch).
+        //  Waiting for angular team to add watch to stateParams to chage the url accordingly...
+        // $state.go('main.products.list', { categ: categ._id, page: 1 });
+        // For the moment lets comment it.
+        $scope.fetchPage(categ, 1);
+      }
     };
 
     $scope.addDefaultProduct = function() {
@@ -214,6 +269,8 @@ angular.module('elementBoxApp.products.productList')
         $scope.products.push(prod);
       });
     };
+
+    init();
 
   }
 ]);

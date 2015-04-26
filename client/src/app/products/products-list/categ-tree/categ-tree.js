@@ -7,13 +7,13 @@ angular.module('elementBoxApp.products.productList')
     transclude: true,
     replace: false,
     scope: {
-      selectcbk: '='
+      onSelect: '='
     },
     template: '<div class="category-tree" ng-transclude></div>',
     controller: ['$scope', function ($scope) {
       this.groups = [];
 
-      this.selectcbk = $scope.selectcbk ? $scope.selectcbk : this.selectcbk;
+      this.onSelect = $scope.onSelect ? $scope.onSelect : this.onSelect;
 
       this.closeOthers = function(openGroup) {
         angular.forEach(this.groups, function (group) {
@@ -40,8 +40,8 @@ angular.module('elementBoxApp.products.productList')
       };
 
       this.select = function(node) {
-        if (this.selectcbk && angular.isFunction(this.selectcbk)) {
-          this.selectcbk(node);
+        if (this.onSelect && angular.isFunction(this.onSelect)) {
+          this.onSelect(node);
         }
       };
 
@@ -56,16 +56,10 @@ angular.module('elementBoxApp.products.productList')
     transclude: true,
     // replace: true,
     templateUrl: 'products/products-list/categ-tree/categ-tree-node.html',
-    link: function(scope, element, attrs, accordionCtrl) {
-      accordionCtrl.addGroup(scope);
+    link: function(scope, element, attrs, categTreeCtrl) {
+      categTreeCtrl.addGroup(scope);
 
       scope.isOpen = (attrs.isOpen && attrs.isOpen === 'true') ? true : false;
-
-      scope.$watch('isOpen', function(value) {
-        if ( value ) {
-          accordionCtrl.closeOthers(scope);
-        }
-      });
 
       scope.toggleOpen = function() {
         if ( !scope.isDisabled ) {
@@ -74,9 +68,26 @@ angular.module('elementBoxApp.products.productList')
       };
 
       scope.select = function(node) {
-        accordionCtrl.select(node);
+        categTreeCtrl.select(node);
       };
+
+      scope.isChildSelected = function() {
+        var cmp = new RegExp('^' + scope.node.path);
+        return cmp.test(scope.currentCateg.path);
+      };
+
+      var init = function() {
+        scope.isOpen = (attrs.isOpen && attrs.isOpen === 'true') || scope.isChildSelected();
+      };
+
+      init();
+
+      scope.$watch('isOpen', function(value) {
+        if ( value ) {
+          categTreeCtrl.closeOthers(scope);
+        }
+      });
+
     }
   };
-})
-;
+});
