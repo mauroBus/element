@@ -69,7 +69,7 @@ angular.module('elementBoxApp.controller', [])
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
       var substateTo = toState.name.split('.')[1];
       var substateFrom = fromState.name.split('.')[1];
-      if (substateTo !== substateFrom) {
+      if (substateTo !== substateFrom || toState.name === 'main.products.info') {
         window.scrollTo(0, 0);
       }
     });
