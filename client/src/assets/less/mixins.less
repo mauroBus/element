@@ -12,7 +12,7 @@
   }
 }
 
-.text-overflow() {
+.text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   // white-space: nowrap;
@@ -132,6 +132,7 @@
   -moz-transform:    rotate(@deg);
   -ms-transform:     rotate(@deg);
   -o-transform:      rotate(@deg);
+  transform:         rotate(@deg);
 }
 
 .skew (@deg, @deg2) {
@@ -167,4 +168,10 @@
   -moz-transform-origin:    @x @y;
   -ms-transform-origin:     @x @y;
   -o-transform-origin:      @x @y;
+}
+
+.keyframes(@name, @arguments) {
+  @-moz-keyframes @name { @arguments(); }
+  @-webkit-keyframes @name { @arguments(); }
+  @keyframes @name { @arguments(); }
 }
