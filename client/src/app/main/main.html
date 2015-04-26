@@ -1,5 +1,10 @@
-<div ng-include="'main/header/header.html'" class="container"></div>
+<div ng-include="'main/header/header.html'" class="container blur-effect" ng-class="{'blurred': menuOpened}"></div>
+
 <!-- Application content: -->
 <!-- <div class="container view-animate" ui-view=""></div> -->
-<div class="container" ui-view=""></div>
-<div ng-include="'main/footer/footer.html'" class="container"></div>
+<div class="container main-app-content blur-effect" ui-view ng-class="{'blurred': menuOpened}"></div>
+
+<div ng-include="'main/footer/footer.html'" class="container blur-effect" ng-class="{'blurred': menuOpened}"></div>
+
+<!-- Main menu: -->
+<div ng-include="'main/menu/menu.html'"></div>
