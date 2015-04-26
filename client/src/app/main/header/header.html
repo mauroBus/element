@@ -1,110 +1,122 @@
 <header ng-controller="HeaderCtrl">
   <div class="page-header">
 
-    <div class="options-menu" ng-click="toggleMenu()" ng-class="{'is-open': isMenuOpen, 'is-closed': !isMenuOpen}">
-      <div class="menu-item menu-main">
-        <button type="button" class="btn btn-primary">
-          <span class="glyphicon glyphicon-menu-hamburger" ng-show="!isMenuOpen"></span>
-          <span class="glyphicon glyphicon-remove" ng-show="isMenuOpen"></span>
-        </button>
-        <span class="menu-item__name">Menu</span>
+    <div class="col-md-2">
+
+<!--
+      <div class="options-menu" ng-click="toggleMenu()" ng-class="{'is-open': isMenuOpen, 'is-closed': !isMenuOpen}">
+       <div class="menu-item menu-main">
+          <button type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-menu-hamburger" ng-show="!isMenuOpen"></span>
+            <span class="glyphicon glyphicon-remove" ng-show="isMenuOpen"></span>
+          </button>
+          <span class="menu-item__name">Menu</span>
+        </div>
+
+        <!-- Sub items list: - ->
+        <ul class="menu-list" role="menu">
+
+          <!-- home - ->
+          <li role="menuitem" class="menu-list-item"
+              ng-if="showLink('main.home')"
+              ng-class="{ active: isActive('main.home') }">
+            <div class="options-menu">
+              <div class="menu-item menu-home">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  ng-click="goto('main.home')" >
+                    <span class="glyphicon glyphicon-home"></span>
+                </button>
+                <span class="menu-item__name">Home</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- products - ->
+          <li role="menuitem" class="menu-list-item"
+              ng-if="showLink('main.products')"
+              ng-class="{ active: isActive('main.products') }">
+            <div class="options-menu">
+              <div class="menu-item menu-products">
+                <button
+                  type="button"
+                  class="btn btn-info"
+                  ng-click="goto('main.products')" >
+                    <span class="glyphicon glyphicon-th-list"></span>
+                </button>
+                <span class="menu-item__name">Products</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- new - ->
+          <li role="menuitem" class="menu-list-item"
+              ng-if="showLink('main.newelement')"
+              ng-class="{ active: isActive('main.newelement') }">
+            <div class="options-menu">
+              <div class="menu-item menu-new">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  ng-click="goto('main.newelement')" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <span class="menu-item__name">Publish</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- my admin - ->
+          <li role="menuitem" class="menu-list-item"
+              ng-if="showLink('main.myadmin', Roles.admin)"
+              ng-class="{ active: isActive('main.myadmin') }">
+            <div class="options-menu">
+              <div class="menu-item menu-myadmin">
+                <button
+                  type="button"
+                  class="btn btn-warning"
+                  ng-click="goto('main.myadmin')" >
+                    <span class="glyphicon glyphicon-cog"></span>
+                </button>
+                <span class="menu-item__name">My Admin</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- account - ->
+          <li role="menuitem" class="menu-list-item"
+              ng-if="showLink('main.account', Roles.user) && !showLink('main.account', Roles.admin)"
+              ng-class="{ active: isActive('main.account') }">
+            <div class="options-menu">
+              <div class="menu-item menu-account">
+                <button
+                  type="button"
+                  class="btn btn-warning"
+                  ng-click="goto('main.account')" >
+                    <span class="glyphicon glyphicon-cog"></span>
+                </button>
+                <span class="menu-item__name">Account</span>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+
+      </div> <!-- options-menu - ->
+-->
+      <div class="main-menu-btn" ng-click="toggleMenu()" ng-show="!menuOpened">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+        <!-- <span class="glyphicon glyphicon-remove" ng-show="menuOpened"></span> -->
       </div>
+      <!-- <a class="menu-main-btn" ng-click="toggleMenu()"></a> -->
 
-      <!-- Sub items list: -->
-      <ul class="menu-list" role="menu">
+    </div> <!-- col-md-2 -->
 
-        <!-- home -->
-        <li role="menuitem" class="menu-list-item"
-            ng-if="showLink('main.home')"
-            ng-class="{ active: isActive('main.home') }">
-          <div class="options-menu">
-            <div class="menu-item menu-home">
-              <button
-                type="button"
-                class="btn btn-primary"
-                ng-click="goto('main.home')" >
-                  <span class="glyphicon glyphicon-home"></span>
-              </button>
-              <span class="menu-item__name">Home</span>
-            </div>
-          </div>
-        </li>
 
-        <!-- products -->
-        <li role="menuitem" class="menu-list-item"
-            ng-if="showLink('main.products')"
-            ng-class="{ active: isActive('main.products') }">
-          <div class="options-menu">
-            <div class="menu-item menu-products">
-              <button
-                type="button"
-                class="btn btn-info"
-                ng-click="goto('main.products')" >
-                  <span class="glyphicon glyphicon-th-list"></span>
-              </button>
-              <span class="menu-item__name">Products</span>
-            </div>
-          </div>
-        </li>
+    <h1 class="col-md-6">{{title}}</h1>
 
-        <!-- new -->
-        <li role="menuitem" class="menu-list-item"
-            ng-if="showLink('main.newelement')"
-            ng-class="{ active: isActive('main.newelement') }">
-          <div class="options-menu">
-            <div class="menu-item menu-new">
-              <button
-                type="button"
-                class="btn btn-success"
-                ng-click="goto('main.newelement')" >
-                  <span class="glyphicon glyphicon-plus"></span>
-              </button>
-              <span class="menu-item__name">Add New Element</span>
-            </div>
-          </div>
-        </li>
-
-        <!-- my admin -->
-        <li role="menuitem" class="menu-list-item"
-            ng-if="showLink('main.myadmin', Roles.admin)"
-            ng-class="{ active: isActive('main.myadmin') }">
-          <div class="options-menu">
-            <div class="menu-item menu-myadmin">
-              <button
-                type="button"
-                class="btn btn-warning"
-                ng-click="goto('main.myadmin')" >
-                  <span class="glyphicon glyphicon-cog"></span>
-              </button>
-              <span class="menu-item__name">My Admin</span>
-            </div>
-          </div>
-        </li>
-
-        <!-- account -->
-        <li role="menuitem" class="menu-list-item"
-            ng-if="showLink('main.account', Roles.user) && !showLink('main.account', Roles.admin)"
-            ng-class="{ active: isActive('main.account') }">
-          <div class="options-menu">
-            <div class="menu-item menu-account">
-              <button
-                type="button"
-                class="btn btn-warning"
-                ng-click="goto('main.account')" >
-                  <span class="glyphicon glyphicon-cog"></span>
-              </button>
-              <span class="menu-item__name">Account</span>
-            </div>
-          </div>
-        </li>
-
-      </ul>
-
-    </div> <!-- options-menu -->
-
-    <h1>{{title}}</h1>
-
-    <div class="pull-right">
+    <div class="pull-right col-md-4">
       <span ng-if="!currentUser.firstName">
         <a ui-sref="main.signin" class="btn btn-sm btn-default">SignIn</a>
         <a ui-sref="main.signup" class="btn btn-sm btn-default">SignUp</a>
@@ -116,4 +128,5 @@
     </div>
 
   </div>
+
 </header>
