@@ -10,7 +10,7 @@ angular.module('elementBoxApp.products', [
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
     if (toState.name === 'main.products') {
       event.preventDefault();
-      $state.go('main.products.list', { categ: '', pageNbr: 0 });
+      $state.go('main.products.list', { categ: 'all', page: '1' });
     }
   });
 }])
@@ -21,7 +21,10 @@ angular.module('elementBoxApp.products', [
       .state('main.products', {
         url: '/products',
         // abstract: true,
-        template: '<ui-view />'
+        template: '<ui-view />',
+        // controller: ['$state', '$stateParams', function($state, $stateParams) {
+        //   $state.go('main.products.list', { categ: $stateParams.categ || 'all', pageNbr: $stateParams.pageNbr || 1 });
+        // }]
       });
 
     // $stateProvider.state('products.fastInfo', {
