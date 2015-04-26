@@ -1,0 +1,31 @@
+
+<section class="menu" ng-controller="MenuCtrl">
+
+  <div class="menu__wrapper" ng-class="{ active: menuOpened }">
+    <div class="menu__panel" ng-class="{ active: menuOpened }">
+      <div class="menu__inner-panel">
+
+        <div class="main-menu-btn" ng-click="toggleMenu()">
+          <span class="glyphicon glyphicon-remove" ng-show="menuOpened"></span>
+        </div>
+
+        <!-- Sub items list: -->
+        <ul class="menu__list" role="menu">
+          <li ng-repeat="(key, item) in menuItems"
+              class="menu__item"
+              ng-if="item.displayIf()"
+              ng-class="{ 'menu__item--active': menuOpened, 'active': isActive( '{{item.goTo}}' ) }"
+              ng-click="goto( '{{item.goTo}}' )" >
+            <div class="menu-item__name {{item.class}}" >
+              <span class="glyphicon {{item.icon}}"></span>
+              <span class="menu-item__name__txt">{{item.text}}</span>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+      <div class="hidePanel" ng-click="toggleMenu()"></div>
+    </div>
+  </div>
+
+</section>
