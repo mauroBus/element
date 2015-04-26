@@ -8,15 +8,11 @@
 
   <div class="col-md-9 product__details_container">
     <a ui-sref="main.products.info({productId: product._id})">
-      <h4 class="text-overflow">{{product.title}}</h4>
+      <h4 class="text-overflow" title="{{product.title}}">{{product.title}}</h4>
     </a>
     <!-- <div class="text-overflow">{{product.description}}</div> -->
     <h5 class="text-muted pull-right">{{product.createdAt | date:'mediumDate'}}</h5>
     <div class="text-muted pull-left">in {{product.categories | json}}</div>
-    <div class="text-muted product__price">
-      <span class="currency" ng-show="{{product.price > 0}}">$</span>
-      <span class="price">{{(product.price > 0) ? (product.price | number:0) : 'No Price'}}</span>
-    </div>
 
     <div class="col-md-12" ng-show="remove || edit || info">
       <a ng-show="remove" href=""
@@ -38,6 +34,11 @@
     </div>
 
     <div ng-transclude=""></div>
+  </div>
+
+  <div class="text-muted product__price">
+    <span class="currency" ng-show="{{product.price > 0}}">$</span>
+    <span class="price">{{(product.price > 0) ? (product.price | number:0) : 'No Price'}}</span>
   </div>
 
 </div>
