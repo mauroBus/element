@@ -1,0 +1,47 @@
+.loader {
+  .translate3d(0, 0, 20px);
+  background: rgba(0,0,0,0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999999;
+}
+
+.loader:before,.loader:after {
+  .transform(translateZ(1px));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  content: " ";
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.loader:before {
+  .animation(rotateOuterLoader, 0.7s, infinite, linear);
+  background-image: url("../imgs/spin/loader-outer.svg");
+  // -webkit-mask: url("../imgs/spin/loader-outer.svg");
+  // mask:         url("../imgs/spin/loader-outer.svg");
+}
+
+.loader:after {
+  .animation(rotateInnerLoader, 3s, infinite, linear);
+  background-image: url("../imgs/spin/loader-inner.svg");
+}
+
+// @keyframes:
+.keyframes(rotateOuterLoader, {
+  0% { .rotate(0deg) }
+  100% { .rotate(-360deg) }
+});
+
+.keyframes(rotateInnerLoader, {
+  0% { .rotate(0deg) }
+  100% { .rotate(360deg) }
+});
