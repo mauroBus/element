@@ -44,6 +44,7 @@ angular.module('elementBoxApp.common')
           query: {
             method: 'GET',
             isArray: true,
+            cache: true,
             // transformResponse: function(data, headersGetter) {
             //   var jsonData = JSON.parse(data);
             //   jsonData.forEach(function(res, i) {

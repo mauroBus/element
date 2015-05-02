@@ -1,0 +1,90 @@
+<div class="modal-header">
+  <h3 class="modal-title">Edit Category</h3>
+</div>
+<div class="modal-body category-edit">
+  <!-- '_id', 'name', '///path', 'thumb', 'img', 'large', 'displayOnHome' -->
+  <form
+    ng-submit="applyCategChanges(categForm.$valid, categ)"
+    role="form"
+    name="categForm" >
+
+    <div class="form-group"
+      ng-class="{'has-error': categForm.Id.$error.required }">
+      <label class="col-lg-2 col-md-2 col-sm-2" for="idField">Id:</label>
+      <div class="col-lg-10 col-md-10 col-sm-10">
+        <input type="text"
+          id="idField"
+          class="form-control"
+          ng-model="categ._id"
+          required
+          name="Id">
+      </div>
+    </div>
+
+    <div class="form-group"
+      ng-class="{'has-error': categForm.name.$error.required }">
+      <label class="categ__name col-lg-2 col-md-2 col-sm-2" for="nameField">Name:</label>
+      <div class="col-lg-10 col-md-10 col-sm-10">
+        <input type="text"
+          id="nameField"
+          ng-model="categ.name"
+          class="form-control"
+          required
+          name="name">
+      </div>
+    </div>
+
+    <div class="form-group"
+      ng-class="{'has-error': categForm.thumb.$error.required }">
+      <label class="categ__thumb col-lg-2 col-md-2 col-sm-2" for="thumbField">Thumb:</label>
+      <div class="col-lg-10 col-md-10 col-sm-10">
+        <input type="text"
+          id="thumbField"
+          class="form-control"
+          ng-model="categ.thumb"
+          required
+          name="thumb">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <!-- ng-class="{'has-error': categForm.img.$error.required }"> -->
+      <label class="categ__img col-lg-2 col-md-2 col-sm-2" for="imgField">Image:</label>
+      <div class="col-lg-10 col-md-10 col-sm-10">
+        <input type="text"
+          id="imgField"
+          class="form-control"
+          ng-model="categ.img"
+          name="img">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="categ__large col-lg-2 col-md-2 col-sm-2" for="largeField">Is large:</label>
+      <div class="col-lg-10 col-md-10 col-sm-10">
+        <div class="form-control">
+          <input
+            id="largeField"
+            type="checkbox"
+            ng-model="categ.large" >
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="categ__displayOnHome col-lg-2 col-md-2 col-sm-2" for="displayOnHomeField">Display On Home:</label>
+      <div class="col-lg-10 col-md-10 col-sm-10">
+        <div class="form-control">
+          <input
+            id="displayOnHomeField"
+            type="checkbox"
+            ng-model="categ.displayOnHome" >
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Save</button>
+    <button class="btn btn-warning btn-block" ng-click="cancelEdditing()">Cancel</button>
+  </form>
+
+</div>
