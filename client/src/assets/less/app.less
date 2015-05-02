@@ -205,3 +205,38 @@ h2, h3 {
   -webkit-filter: blur(3px);
   filter: url('/imgs/blur.svg#blur-effect');
 }
+
+.panel,
+.modal-dialog {
+  &.panel-info,
+  .modal-content {
+    border-color: @pink1-color;
+    .panel-heading,
+    .modal-header {
+      background-color: @pink2-color;
+      border-color: @pink1-color;
+      color: white;
+      text-align: center;
+      padding: 7px 0;
+      h3 {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+.modal-dialog {
+  .modal-content {
+    border-color: @pink3-color;
+  }
+}
+
+.va-container {
+  display: table;
+  position: relative;
+  .va-middle {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+

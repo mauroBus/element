@@ -22,7 +22,7 @@
   text-shadow: @string;
 }
 
-.box-shadow (@string) {
+.box-shadow (@string: 0 1px 3px rgba(0,0,0,.25)) {
   -webkit-box-shadow: @string;
   -moz-box-shadow:    @string;
   box-shadow:         @string;
@@ -112,6 +112,28 @@
   -ms-transition:     @transition;
   -o-transition:      @transition;
 }
+.transition-property(@transition-property) {
+  -webkit-transition-property: @transition-property;
+          transition-property: @transition-property;
+}
+.transition-delay(@transition-delay) {
+  -webkit-transition-delay: @transition-delay;
+          transition-delay: @transition-delay;
+}
+.transition-duration(@transition-duration) {
+  -webkit-transition-duration: @transition-duration;
+          transition-duration: @transition-duration;
+}
+.transition-timing-function(@timing-function) {
+  -webkit-transition-timing-function: @timing-function;
+          transition-timing-function: @timing-function;
+}
+.transition-transform(@transition) {
+  -webkit-transition: -webkit-transform @transition;
+     -moz-transition: -moz-transform @transition;
+       -o-transition: -o-transform @transition;
+          transition: transform @transition;
+}
 
 .transform(@string){
   -webkit-transform: @string;
@@ -133,6 +155,16 @@
   -ms-transform:     rotate(@deg);
   -o-transform:      rotate(@deg);
   transform:         rotate(@deg);
+}
+.rotateX(@degrees) {
+  -webkit-transform: rotateX(@degrees);
+      -ms-transform: rotateX(@degrees); // IE9 only
+          transform: rotateX(@degrees);
+}
+.rotateY(@degrees) {
+  -webkit-transform: rotateY(@degrees);
+      -ms-transform: rotateY(@degrees); // IE9 only
+          transform: rotateY(@degrees);
 }
 
 .skew (@deg, @deg2) {
@@ -161,6 +193,17 @@
   -moz-perspective:   @value;
   -ms-perspective:  @value;
   perspective:    @value;
+}
+.perspective-origin(@perspective) {
+  -webkit-perspective-origin: @perspective;
+     -moz-perspective-origin: @perspective;
+          perspective-origin: @perspective;
+}
+.transform-origin(@origin) {
+  -webkit-transform-origin: @origin;
+     -moz-transform-origin: @origin;
+      -ms-transform-origin: @origin; // IE9 only
+          transform-origin: @origin;
 }
 
 .transform-origin (@x:center, @y:center) {
