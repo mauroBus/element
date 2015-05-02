@@ -2,8 +2,8 @@
 angular.module('elementBoxApp.myadmin.categorymanag')
 
 .controller('CategoryManagCtrl', [
-          '$scope', '$rootScope', '$location', 'Categories',
-  function($scope,   $rootScope,   $location,   Categories) {
+          '$scope', '$rootScope', '$location', '$modal', 'Categories',
+  function($scope,   $rootScope,   $location,   $modal,   Categories) {
     $scope.rootCategory = {};
     var CategoryRsr = Categories.getCategoriesTree();
 
@@ -52,6 +52,27 @@ angular.module('elementBoxApp.myadmin.categorymanag')
       CategoryRsr.save({ tree: JSON.stringify($scope.rootCategory) }, function() {
         console.log(arguments);
       });
+    };
+
+    $scope.edit = function(categ) {
+      var modalInstance = $modal.open({
+        templateUrl: 'myadmin/categorymanag/partials/category-edit.html',
+        controller: function($scope) {
+          $scope.categ = angular.copy(categ);
+          $scope.applyCategChanges = function(valid, changedCateg) {
+            if (valid) {
+              angular.copy($scope.categ, categ);
+              modalInstance.close();
+            }
+          };
+          $scope.cancelEdditing = function() {
+            modalInstance.close();
+          };
+        },
+        size: 'lg',
+        backdrop: 'static'
+      });
+
     };
 
     $scope.createRootCategory = function() {
