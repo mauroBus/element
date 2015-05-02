@@ -1,4 +1,5 @@
-<section class="home" ng-cloak>
+<section class="home-section" ng-cloak>
+<!--
   <div ng-include="'home/filter/filter.html'"></div>
 
   <pagination
@@ -75,4 +76,41 @@
       </div>
     </li>
   </ul>
+-->
+
+
+  <div class="panel panel-dark">
+    <!-- <div class="page-container-responsive"> -->
+    <div class="clearfix">
+      <div class="logo center-text col-md-4 col-lg-4 col-sm-12">
+        <img src="imgs/logo.png" alt="{{appTitle}}" title="{{appTitle}}">
+      </div>
+
+      <div class="section-intro text-center col-md-8 col-lg-8 col-sm-12">
+        <h2>Explore Categories:</h2>
+        <p>See what people are looking.</p>
+      </div>
+    </div>
+
+    <div class="categ-list clearfix">
+      <div class="categ col-md-12ZZ"
+           ng-repeat="(key, categ) in categs"
+           ng-class="{'col-lg-8 col-md-8 col-sm-8': categ.large, 'col-lg-4 col-md-4 col-sm-4': !categ.large }"
+           ng-show="categ.displayOnHome" >
+        <div class="categ-img"
+             style="background-image: url('imgs/categs/{{categ.img}}');" >
+          <a class="categ__link" ui-sref="main.products.list({ categ: categ._id, page: 1 })" >
+            <div class="va-container categ__link__bkg">
+              <div class="va-middle text-center">
+                <h2>{{categ.name}}</h2>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- </div> -->
+  </div>
+
 </section>

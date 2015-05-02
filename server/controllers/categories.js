@@ -42,13 +42,9 @@ var mongoose = require('mongoose'),
 // ]
 
 var denormalizeTree = function(tree, path, matches) {
-  matches.push({
-    _id: tree._id,
-    name: tree.name,
-    thumb: tree.thumb,
-    path: path + tree._id + ','
-  });
-
+  var node = _.pick(tree, ['_id', 'name', 'path', 'thumb', 'img', 'large', 'displayOnHome']);
+  node.path = path + tree._id + ',';
+  matches.push(node);
   if (!tree.children.length) { return; }
 
   tree.children.forEach(function(child) {
@@ -63,13 +59,7 @@ var insertChildCateg = function(tree, child, childPath) {
   path.pop();   // ''
 
   if (path.length === 1) {
-    tree.push({
-      _id: child._id,
-      name: child.name,
-      thumb: child.thumb,
-      path: child.path,
-      children: []
-    });
+    tree.push( _.assign({}, child.toJSON(), { children: [] }) );
   } else {
     var elem = _.findWhere(tree, { _id: path[0] });
     if (elem) {

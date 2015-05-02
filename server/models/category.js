@@ -13,6 +13,18 @@ var CategoyTreeSchema = new Schema({
   thumb: {
     type: String,
     default: ''
+  },
+  img: {
+    type: String,
+    default: ''
+  },
+  large: {
+    type: Boolean,
+    default: false
+  },
+  displayOnHome: {
+    type: Boolean,
+    default: false
   }
   // children: String
 });
