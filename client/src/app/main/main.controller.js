@@ -5,6 +5,8 @@ angular.module('elementBoxApp.main')
       $state.go('main.home');
     }
 
+    $scope.appTitle = 'Element SandBox';
+
     $scope.menuOpened = false;
 
     $scope.toggleMenu = function() {
