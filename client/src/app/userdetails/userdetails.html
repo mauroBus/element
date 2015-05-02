@@ -103,7 +103,7 @@
 
     <div class="social-connections">
       <div class="reviews">
-        <h2>Comments <span class="badge">{{user.comments.length}}</span></h2>
+        <h2>Comments <span class="badge">{{user.comments.length || 0}}</span></h2>
         <!-- <h4 class="">Reviews From Guests</h4> -->
         <div ng-show="user.comments.length" class="comment clearfix"
           ng-repeat="(key, comment) in user.comments track by $index"

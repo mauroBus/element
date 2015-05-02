@@ -2,8 +2,8 @@
 angular.module('elementBoxApp.products.productInfo')
 
 .controller('ProductInfoCtrl', [
-          '$scope', '$rootScope', '$modal', '$stateParams', '$timeout', 'ProductsService', 'UserService', 'CommentsService', 'EVENT_NAMES',
-  function($scope,   $rootScope,   $modal,   $stateParams,   $timeout,   ProductsService,   UserService,   CommentsService,   EVENT_NAMES) {
+          '$scope', '$rootScope', '$stateParams', '$timeout', 'ProductsService', 'UserService', 'CommentsService', 'EVENT_NAMES',
+  function($scope,   $rootScope,   $stateParams,   $timeout,   ProductsService,   UserService,   CommentsService,   EVENT_NAMES) {
     $scope.slides = [];
     $scope.slidesIndex = 0;
     $scope.userHasRated = false;
