@@ -4,7 +4,6 @@ angular.module('elementBoxApp.main')
 .controller('HeaderCtrl', [
           '$scope', '$rootScope', '$state', '$stateParams', 'AuthService', 'AUTH_EVENTS',
   function($scope,  $rootScope,    $state,   $stateParams,   AuthService,   AUTH_EVENTS) {
-    $scope.title = 'Element SandBox';
     // $scope.isMenuOpen = false;
 
     // $scope.getSubStateName = function() {
