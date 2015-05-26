@@ -21,7 +21,7 @@ angular.module('elementBoxApp.main')
       },
       {
         text: 'Publish',
-        goTo: 'main.newelement',
+        goTo: 'main.products.new',
         icon: 'glyphicon-plus',
         class: 'menu-new',
         displayIf: function() { return $scope.showLink('main.newelement'); },
