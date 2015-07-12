@@ -1,0 +1,36 @@
+<div class="categ-selector clearfix" ng-class="{ 'categ-selector--succeed': done }">
+  <ul class="selected-path nav nav-pills">
+    <li
+      role="presentation"
+      class="selected-path__item"
+      ng-repeat="(key, path) in selectedPath"
+      ng-click="onPathRestore(path, key)">
+      <a href="javascript:void(0);">{{path.name}}</a>
+    </li>
+  </ul>
+
+  <div class="categ-selector__back">
+    <div
+      class="btn btn-lg"
+      ng-click="goBack()"
+      ng-show="selectedPath.length > 1">
+      <span ng-show="!done" class="glyphicon glyphicon-menu-left" title="Back"></span>
+      <span ng-show="done" class="glyphicon glyphicon-pencil reselect-category" title="Change"></span>
+    </div>
+  </div>
+
+  <div class="categ-chooser">
+    <ul
+      class="categ-chooser__list list-group">
+      <li
+        class="categ-chooser__list__item list-group-item clearfix"
+        ng-repeat="(key, categ) in currentOpts"
+        ng-click="onSelectNode(categ)"
+        ng-class="{ 'selected': selectedPath.indexOf(categ) >= 0 }">
+        <span class="categ-name">{{categ.name}}</span>
+        <span class="categ-plus glyphicon glyphicon-chevron-right" ng-show="categ.children.length > 0"></span>
+      </li>
+    </ul>
+  </div>
+
+</div>
