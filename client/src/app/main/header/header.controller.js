@@ -26,6 +26,12 @@ angular.module('elementBoxApp.main')
     //   }
     // };
 
+    $scope.currentState = $state.current.name;
+
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+        $scope.currentState = toState.name;
+    });
+
     $scope.signout = function() {
       AuthService.signout($scope.credentials)
         .then(function(res) {
