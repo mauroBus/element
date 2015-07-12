@@ -5,7 +5,9 @@ angular.module('elementBoxApp.terms', [])
     $stateProvider.state('main.terms', {
       url: '/terms',
       templateUrl: 'terms/terms.html',
-      controller: function() {}
+      controller: ['$rootScope', function($rootScope) {
+        $rootScope.$emit('title', 'Terms of Service');
+      }]
     });
   }
 ]);

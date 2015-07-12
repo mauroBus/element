@@ -2,14 +2,16 @@
 angular.module('elementBoxApp.userdetails')
 
 .controller('UserDetailsCtrl', [
-          '$scope', '$stateParams', 'UserService', 'ProductsService',
-  function($scope,   $stateParams,   UserService,   ProductsService) {
+          '$scope', '$rootScope', '$stateParams', 'UserService', 'ProductsService',
+  function($scope,   $rootScope,   $stateParams,   UserService,   ProductsService) {
     var page = 1;
     var pageSize = 6;
     $scope.user = UserService.get({ id: $stateParams.id });
     $scope.ownProducts = [];
     $scope.totalProducts = 0;
     $scope.userReported = false;
+
+    $rootScope.$emit('title', 'User Details');
 
     var fetchProducts = function(page, pageSize) {
       ProductsService.get({ userId: $stateParams.id, page: page, pageSize: pageSize }, function(data) {
