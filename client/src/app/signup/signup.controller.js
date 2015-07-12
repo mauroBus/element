@@ -7,7 +7,10 @@ angular.module('elementBoxApp.signup')
 
     if (AuthService.isAuthenticated()) {
       $state.go('main.home');
+      return;
     }
+
+    $rootScope.$emit('title', 'Sign Up');
 
     $scope.displayError = false;
     $scope.errors = {};
