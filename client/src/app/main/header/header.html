@@ -1,7 +1,7 @@
 <header ng-controller="HeaderCtrl">
   <div class="page-header">
 
-    <div class="col-md-2">
+    <div class="col-md-2 page-header__menu">
 
 <!--
       <div class="options-menu" ng-click="toggleMenu()" ng-class="{'is-open': isMenuOpen, 'is-closed': !isMenuOpen}">
@@ -114,17 +114,17 @@
     </div> <!-- col-md-2 -->
 
 
-    <h1 class="col-md-6">{{appTitle}}</h1>
+    <h1 class="col-md-6 page-header__title">{{appTitle}}</h1>
 
-    <div class="pull-right col-md-4">
+    <div class="pull-right col-md-4 page-header__user">
       <span ng-if="!currentUser.firstName">
-        <a ui-sref="main.signin" class="btn btn-sm btn-default">SignIn</a>
-        <a ui-sref="main.signup" class="btn btn-sm btn-default">SignUp</a>
+        <a ui-sref="main.signin" class="btn btn-sm btn-default btn-sign-in">Sign In</a>
+        <a ui-sref="main.signup" class="btn btn-sm btn-default btn-sign-up">Sign Up</a>
       </span>
       <span ng-show="currentUser.firstName">Welcome, {{currentUser.firstName}}</span>
       <span ng-show="currentUser.roles.indexOf(userRoles.admin) >= 0"> Admin </span>
       <span ng-show="currentUser.roles.indexOf(userRoles.editor) >= 0"> Editor </span>
-      <button ng-show="currentUser.firstName" class="btn btn-link btn-sm" ng-click="signout()">SignOut</button>
+      <button ng-show="currentUser.firstName" class="btn btn-link btn-sm" ng-click="signout()">Sign Out</button>
     </div>
 
   </div>

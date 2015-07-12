@@ -14,6 +14,27 @@ header .page-header {
     text-align: center;
   }
 
+  &__menu {}
+  &__title {}
+  &__user {
+    text-align: right;
+    .btn-sign-in {
+      background-color: @pink2-color;
+      color: #FFFFFF;
+      &:hover, &:active {
+        background-color: darken(@pink2-color, 15%);
+      }
+    }
+    .btn-sign-up {
+      background-color: @cornflowerblue-color;
+      color: #FFFFFF;
+      &:hover, &:active {
+        background-color: darken(@cornflowerblue-color, 15%);
+      }
+    }
+
+  }
+
   // .options-menu {
   //   left: @pos-left;
   //   top: @pos-top;
