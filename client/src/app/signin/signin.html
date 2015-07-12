@@ -1,16 +1,17 @@
 <section class="signin">
   <div class="container">
-    <div class="row">
-      <div class="col-md-3 col-md-offset-4">
-        <div class="account-box">
-          <div class="logo">
-            <img src="../imgs/logo.png" alt=""/>
-          </div>
+
+    <div class="panel panel-default signin-container account-box">
+      <!-- <div class="account-box"> -->
+        <div class="logo col-md-4 col-lg-4">
+          <img src="../imgs/logo.png" alt=""/>
+        </div>
+
+        <div class="col-md-8 col-lg-8">
 
           <div ng-show="invalidCredentials && showCredAlert">
             <alert type="danger" close="showCredAlert=false">Oh snap! Change a few things up and try submitting again.</alert>
           </div>
-
           <form
             role="form"
             class="form-signin"
@@ -43,31 +44,36 @@
               Keep me signed in
             </label>
 
-            <button class="btn btn-lg btn-block purple-bg">Sign In</button>
+            <button class="btn btn-lg btn-block btn-purple">Sign In</button>
           </form>
 
-          <a class="forgotLnk" ui-sref="main.forgetPassword">I can't access my account</a>
+          <div class="forgot-link">
+            <a ui-sref="main.forgetPassword">I can't access my account</a>
+          </div>
 
           <div class="or-box">
             <span class="or">OR</span>
-            <div class="row">
-              <div class="col-md-6 row-block">
+            <div class="clearfix">
+              <div class="col-md-6">
                 <a ui-sref="#" class="btn btn-facebook btn-block">Facebook</a>
               </div>
-              <div class="col-md-6 row-block">
+              <div class="col-md-6">
                 <a ui-sref="#" class="btn btn-google btn-block">Google</a>
               </div>
             </div>
           </div>
-          <div class="or-box row-block">
-            <div class="row">
-              <div class="col-md-12 row-block">
-                <a ui-sref="main.signup" class="btn btn-primary btn-block">Create New Account</a>
+
+          <div class="or-box">
+            <!-- <div class="row"> -->
+              <div class="col-md-12">
+                <a ui-sref="main.signup" class="btn btn-info btn-block">Create New Account</a>
               </div>
-            </div>
+            <!-- </div> -->
           </div>
         </div>
-      </div>
+
+      <!-- </div> -->
     </div>
+
   </div>
 </section>

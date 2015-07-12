@@ -7,7 +7,10 @@ angular.module('elementBoxApp.signin')
 
     if (AuthService.isAuthenticated()) {
       $state.go('main.home');
+      return;
     }
+
+    $rootScope.$emit('title', 'Sign In');
 
     $scope.displayError = false;
     $scope.invalidCredentials = false;
