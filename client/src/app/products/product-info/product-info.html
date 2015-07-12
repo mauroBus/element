@@ -56,8 +56,8 @@
       <div class="col-md-9">
         <div class="row">
           <div class="col-md-6">
-            <div>Price:<strong>{{product.price}}</strong></div>
-            <div>Deposit:<strong>{{product.deposit}}%</strong></div>
+            <div>Price:<strong>{{ product.price | currency:$:0 }}</strong></div>
+            <div>Deposit:<strong>{{ product.deposit }}%</strong></div>
           </div>
           <div class="col-md-6">
             <div>
