@@ -15,7 +15,7 @@
       ng-click="goBack()"
       ng-show="selectedPath.length > 1">
       <span ng-show="!done" class="glyphicon glyphicon-menu-left" title="Back"></span>
-      <span ng-show="done" class="glyphicon glyphicon-pencil reselect-category" title="Change"></span>
+      <span ng-show="done" class="glyphicon glyphicon-pencil reselect-category" title="Edit"></span>
     </div>
   </div>
 
@@ -23,7 +23,7 @@
     <ul
       class="categ-chooser__list list-group">
       <li
-        class="categ-chooser__list__item list-group-item clearfix"
+        class="categ-chooser__list__item list-group-item clearfix slide"
         ng-repeat="(key, categ) in currentOpts"
         ng-click="onSelectNode(categ)"
         ng-class="{ 'selected': selectedPath.indexOf(categ) >= 0 }">

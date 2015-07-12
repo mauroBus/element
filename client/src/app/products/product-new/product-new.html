@@ -6,8 +6,16 @@
       <div class="field-set">
 
         <div class="field-set__item field-set__item--category"> <!-- clearfix -->
-          <div class="field-set__item__heading"> <!-- col-md-2 col-lg-2 col-sm-12 col-xs-12 -->
+          <div class="field-set__item__heading"
+              ng-class="{ 'bg-danger': error.category }"
+            > <!-- col-md-2 col-lg-2 col-sm-12 col-xs-12 -->
             <span>Category</span>
+            <h5 class="alert alert-danger"
+              role="alert"
+              ng-show="error.category">
+                <span class="glyphicon glyphicon-alert"></span>
+                Please select a category!
+            </h5>
           </div>
 
           <div class="field-set__item__content"> <!-- col-md-9 col-lg-9 col-sm-12 col-xs-12 -->
@@ -27,31 +35,43 @@
         </div>
 
         <div class="field-set__item field-set__item--title"
-          ng-class="{ 'has-error': errors.title.hasError, 'required': errors.title.required }">
+            ng-class="{ 'has-error': error.title }">
           <div class="field-set__item__heading">
             <span>Title</span>
           </div>
 
           <div class="field-set__item__content">
-            <input type="text" class="form-control" ng-model="product.title" placeholder="Product title">
+            <input type="text"
+              class="form-control"
+              ng-model="product.title"
+              tooltip="Title is required."
+              tooltip-placement="top"
+              tooltip-trigger="mouseenter"
+              tooltip-enable="error.title && (!product.title || !(product.title.length >= 10 && product.title.length <= 55))"
+              placeholder="Product title">
           </div>
         </div> <!-- field-set__item -->
 
         <div class="field-set__item field-set__item--price"
-          ng-class="{ 'has-error': errors.price.hasError, 'required': errors.price.required }">
+          ng-class="{ 'has-error': error.price }">
           <div class="field-set__item__heading">
             <span>Price</span>
           </div>
 
-          <div class="field-set__item__content">
+          <div class="field-set__item__content input-group">
+            <div class="input-group-addon">$</div>
             <input type="text"
               class="form-control"
-              ng-model="product.price">
+              ng-model="product.price"
+              tooltip="Price is required."
+              tooltip-placement="top"
+              tooltip-trigger="mouseenter"
+              tooltip-enable="error.price">
           </div>
         </div> <!-- field-set__item -->
 
         <div class="field-set__item field-set__item--description"
-          ng-class="{ 'has-error': errors.description.hasError, 'required': errors.description.required }">
+          ng-class="{ 'has-error': error.description }">
           <div class="field-set__item__heading">
             <span>Description</span>
           </div>
@@ -61,12 +81,16 @@
               ng-model="product.description"
               class="form-control"
               placeholder="Product description"
-              rows="5">
+              rows="5"
+              tooltip="Description is required."
+              tooltip-placement="top"
+              tooltip-trigger="mouseenter"
+              tooltip-enable="error.description">
             </textarea>
           </div>
         </div> <!-- field-set__item -->
 
-        <div class="field-set__item field-set__item--images">
+        <div class="field-set__item field-set__item--images panel panel-info">
           <div class="field-set__item__heading">
             <span>Images</span>
             <a href class="btn btn-link btn-sm" ng-click="areImgsCollapsed = !areImgsCollapsed">
@@ -82,7 +106,7 @@
           </div>
         </div> <!-- field-set__item -->
 
-        <button type="submit" class="btn btn-lg btn-block btn-purple">Publish</button>
+        <button ng-click="save();" class="btn btn-lg btn-block btn-purple">Publish</button>
 
       </div> <!-- field-set -->
     </div> <!-- panel-body -->

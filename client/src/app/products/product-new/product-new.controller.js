@@ -5,7 +5,7 @@ angular.module('elementBoxApp.products.productNew')
           '$scope', '$rootScope', '$stateParams', 'ProductsService', 'Categories',
   function($scope,   $rootScope,   $stateParams,   ProductsService,   Categories) {
     $scope.productCreated = false;
-    $scope.areImgsCollapsed = true;
+    $scope.areImgsCollapsed = false;
     $scope.isCategSelected = false;
     $scope.selectedCateg = null;
 
@@ -27,8 +27,24 @@ angular.module('elementBoxApp.products.productNew')
         $scope.categories = res;
       });
 
+    var checkError = function(prod) {
+      var errors = {};
+      errors.category = !$scope.selectedCateg;
+      errors.title = !prod.title || !(prod.title.length >= 10 && prod.title.length <= 55);
+      errors.price = prod.price === '' || prod.price < 0;
+      errors.description = !prod.description;
+      errors.images = !prod.images;
+
+      return errors;
+    };
+
     $scope.save = function() {
-      var categs = [];
+      $scope.error = checkError($scope.product);
+
+      if ($scope.error.category || $scope.error.title || $scope.error.price || $scope.error.description || $scope.error.images) {
+        return;
+      }
+
       // $scope.product.categories.forEach(function(p, i) {
         // if (p) { categs.push($scope.categories[i]._id); }
       // });
@@ -37,8 +53,10 @@ angular.module('elementBoxApp.products.productNew')
       //   if (p) { catags.push({ name: $scope.catalogs[i].filter }); }
       // });
 
+      var data = angular.extend({}, $scope.product, { categories: [ $scope.selectedCateg._id ] });
+
       ProductsService
-        .save(angular.extend({}, $scope.product, {categories: categs}), function(newProduct, headers) {
+        .save(data, function(newProduct, headers) {
           $scope.productCreated = newProduct;
         });
     };
@@ -46,6 +64,7 @@ angular.module('elementBoxApp.products.productNew')
     $scope.onCategSelected = function(path, categName) {
       $scope.isCategSelected = true;
       $scope.selectedCateg = path[path.length-1];
+      $scope.error.category = false;
     };
 
     $scope.onCategUnselected = function(path, categName) {
