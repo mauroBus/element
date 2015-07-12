@@ -45,3 +45,115 @@
   0% { .rotate(0deg) }
   100% { .rotate(360deg) }
 });
+
+
+
+
+
+
+
+
+// .animate-enter,
+// .animate-leave {
+//   -webkit-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+//   -moz-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+//   -ms-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+//   -o-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+//   transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+// }
+// .animate-enter {
+//   left: 100%;
+// }
+// .animate-enter.animate-enter-active {
+//   left: 0;
+// }
+// .animate-leave {
+//   left: 0;
+// }
+// .animate-leave.animate-leave-active {
+//   left: -100%;
+// }
+
+
+
+/**
+ * Slide animation for ng-show / ng-if elements:
+ */
+.slide {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.slide.ng-enter,
+.slide.ng-leave {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.slide.ng-enter {
+  left: 100%;
+}
+.slide.ng-enter-active {
+  left: 0;
+}
+.slide.ng-leave {
+  position: absolute;
+  left: 0;
+  // display: none;
+}
+.slide.ng-leave-active {
+  left: -100%;
+}
+
+/**
+ * Slide animation for ui-view elements:
+ */
+.slide-view {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.slide-view.ng-enter,
+.slide-view.ng-leave {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.slide-view.ng-enter {
+  left: 100%;
+}
+.slide-view.ng-enter-active {
+  left: 0;
+}
+.slide-view.ng-leave {
+  // left: 0;
+  opacity: 0;
+}
+.slide-view.ng-leave-active {
+  // left: -100%;
+  opacity: 0;
+}
+
+/**
+ * Fade animation for ng-repeat items:
+ */
+.fade-anim-repeat.ng-move,
+.fade-anim-repeat.ng-enter,
+.fade-anim-repeat.ng-leave {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.fade-anim-repeat.ng-leave.ng-leave-active,
+.fade-anim-repeat.ng-move,
+.fade-anim-repeat.ng-enter {
+  opacity:0;
+}
+
+.fade-anim-repeat.ng-leave,
+.fade-anim-repeat.ng-move.ng-move-active,
+.fade-anim-repeat.ng-enter.ng-enter-active {
+  opacity:1;
+}

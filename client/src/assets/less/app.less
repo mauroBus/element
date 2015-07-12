@@ -4,6 +4,9 @@
 @import "./icons";
 @import "./anims";
 
+@import "../../../vendor/bootstrap/less/variables.less";
+@import "../../../vendor/bootstrap/less/mixins/grid.less";
+
 body {
   font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 14px;
@@ -240,3 +243,15 @@ h2, h3 {
   }
 }
 
+
+
+
+// Button
+.btn-purple {
+  background-color: #6E329D;
+  color: #fff;
+  &:hover {
+    background-color: darken(#6E329D, 10%);
+    color: #fff;
+  }
+}
