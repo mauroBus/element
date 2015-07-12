@@ -1,9 +1,11 @@
 
 angular.module('elementBoxApp.home')
 
-.controller('HomeCtrl', ['$scope', 'Categories', function($scope, Categories) {
+.controller('HomeCtrl', ['$scope', '$rootScope', 'Categories', function($scope, $rootScope, Categories) {
 
     $scope.categs = [];
+
+    $rootScope.$emit('title', $scope.defaultTitle);
 
     var init = function() {
       var CategoryRsr = Categories.getCategoriesTree();
