@@ -2,12 +2,14 @@
 angular.module('elementBoxApp.products.productEdit')
 
 .controller('ProductEditCtrl', [
-          '$scope', '$stateParams', 'ProductsService', 'Categories',
-  function($scope,   $stateParams,   ProductsService,   Categories) {
+          '$scope', '$rootScope', '$stateParams', 'ProductsService', 'Categories',
+  function($scope,   $rootScope,   $stateParams,   ProductsService,   Categories) {
     $scope.slides = [];
     $scope.slidesIndex = 0;
     $scope.categories = [];
     $scope.productSaved = false;
+
+    $rootScope.$emit('title', 'Edit Product');
 
     // Fetching product:
     $scope.product = ProductsService.get({ id: $stateParams.productId }, function(p) {

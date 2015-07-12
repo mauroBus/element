@@ -1,8 +1,11 @@
 
 angular.module('elementBoxApp.myadmin')
 
-.controller('MyAdminCtrl', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
+.controller('MyAdminCtrl', ['$scope', '$rootScope', '$state', '$stateParams',
+                    function($scope,   $rootScope,   $state,   $stateParams) {
   $scope.activeState = $state.current.name;
+
+  $rootScope.$emit('title', 'My Admin');
 
   if ($state.current.name === 'main.myadmin') {
     $state.go('main.myadmin.categorymanag');

@@ -15,6 +15,7 @@ angular.module('elementBoxApp.products.productList')
     $scope.categories = [];
     var fetchingForFirstTime = true;
 
+    $rootScope.$emit('title', 'Products');
 
     var init = function() {
       var CategoryRsr = Categories.getCategoriesTree();

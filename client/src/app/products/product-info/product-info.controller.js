@@ -10,6 +10,8 @@ angular.module('elementBoxApp.products.productInfo')
     $scope.rateVal = null;
     var ratingInProcess = false;
 
+    $rootScope.$emit('title', 'Product Info');
+
     // Comments pagination:
     $scope.comments = [];
     $scope.commentsData = {
