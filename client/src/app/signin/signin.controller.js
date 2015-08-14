@@ -2,8 +2,8 @@
 angular.module('elementBoxApp.signin')
 
 .controller('SigninCtrl', [
-          '$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', '$state',
-  function($scope,   $rootScope,   AUTH_EVENTS,   AuthService,   $state) {
+          '$scope', '$rootScope', '$timeout', 'AUTH_EVENTS', 'AuthService', '$state',
+  function($scope,   $rootScope,   $timeout,   AUTH_EVENTS,   AuthService,   $state) {
 
     if (AuthService.isAuthenticated()) {
       $state.go('main.home');
@@ -25,14 +25,22 @@ angular.module('elementBoxApp.signin')
         $scope.displayError = true;
         return;
       }
+
       AuthService.signin($scope.credentials)
         .then(function(res) { // success cbk.
           $rootScope.$broadcast(AUTH_EVENTS.singinSuccess, {user: res.data.user, navigate: true});
+          $scope.displayError = false;
+          $scope.invalidCredentials = false;
         }, function(res) { // error cbk.
           // $rootScope.$broadcast(AUTH_EVENTS.singinFailed);
+          $scope.invalidCredentials = false;
+          $scope.showCredAlert = false;
           $scope.displayError = true;
-          $scope.invalidCredentials = true;
-          $scope.showCredAlert = true;
+
+          $timeout(function() {
+            $scope.invalidCredentials = true;
+            $scope.showCredAlert = true;
+          }, 1);
         });
     };
   }

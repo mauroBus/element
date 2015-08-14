@@ -9,8 +9,15 @@
 
         <div class="col-md-8 col-lg-8">
 
-          <div ng-show="invalidCredentials && showCredAlert">
-            <alert type="danger" close="showCredAlert=false">Oh snap! Change a few things up and try submitting again.</alert>
+          <div >
+            <alert type="danger"
+              ng-show="invalidCredentials && showCredAlert"
+              close="showCredAlert=false">
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+                <span>Oh snap!</span>
+                <div>The email and password you entered don't match.</div>
+                <!-- <div>Change a few things up and try submitting again.</div> -->
+            </alert>
           </div>
           <form
             role="form"
