@@ -10,34 +10,73 @@
       next-text="Next"
     ></pagination>
 
-    <a href=""
-      ng-repeat="user in users"
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+      <div class="input-group user-search">
+        <input type="text"
+          class="form-control"
+          placeholder="firstName | lastName | email"
+          ng-model="searchField">
+        <span class="input-group-btn">
+          <button class="btn btn-purple"
+            type="button"
+            ng-click="fetchPage()">
+              Search!
+          </button>
+        </span>
+      </div><!-- /input-group -->
+    </div>
+
+    <div ng-repeat="user in users"
       class="list-group-item clearfix"
       ng-class="{'list-group-item-danger': !user.active}">
-      <div class="row">
-        <div class="col-md-3">First Name: </div>
-        <div class="col-md-9">{{user.firstName}}</div>
-      </div>
-      <div class="row">
-        <div class="col-md-3">Last Name: </div>
-        <div class="col-md-9">{{user.lastName}}</div>
-      </div>
-      <div class="row">
-        <div class="col-md-3">Display Name: </div>
-        <div class="col-md-9">{{user.displayName}}</div>
-      </div>
-      <div class="row">
-        <div class="col-md-3">Email: </div>
-        <div class="col-md-9">{{user.email}}</div>
-      </div>
-      <div class="row">
-        <div class="col-md-3">Roles: </div>
-        <div class="col-md-9">
-          <span ng-repeat="(key, role) in user.roles"> {{role}} </span>
+
+      <div class="col-md-3 text-center clearfix">
+        <a ui-sref="main.userdetails({id: user._id})" class="media-photo media-round text-center user-link">
+          <img alt="" class="lazy" src="imgs/user_pic-68x68.png">
+        </a>
+        <div class="name">
+          <a ui-sref="main.userdetails({id: user._id})" class="text-muted user-link">{{user.firstName}}</a>
         </div>
       </div>
-      <div ng-show="user.active" class="user__remove glyphicon glyphicon-remove" ng-click="deactivateUser(user, $index)"></div>
-      <div ng-show="!user.active" class="user__reactive glyphicon glyphicon-ok-sign" ng-click="activateUser(user, $index)"></div>
-    </a>
+
+      <div class="col-md-9 clearfix">
+        <strong class="">{{user.firstName}} {{user.lastName}} ({{user.displayName}})</strong>
+
+        <div class="text-muted">{{user.email}}</div>
+        <div class="label label-info" ng-repeat="(key, role) in user.roles">
+            {{role}}
+        </div>
+
+        <div ng-show="user.active"
+          class="user__remove btn btn-default btn-sm"
+          ng-click="deactivateUser(user, $index)"
+          popover-placement="bottom"
+          popover-trigger="mouseenter"
+          popover="Deactivate">
+            <span class="glyphicon glyphicon-remove text-danger"></span>
+        </div>
+
+        <div ng-show="!user.active"
+          class="user__reactive btn btn-default btn-sm"
+          ng-click="activateUser(user, $index)"
+          popover-placement="bottom"
+          popover-trigger="mouseenter"
+          popover="Activate">
+            <span class="glyphicon glyphicon-ok-sign text-success"></span>
+        </div>
+      </div>
+
+    </div>
+
+    <pagination
+      ng-model="page"
+      items-per-page="pageSize"
+      total-items="totalUsers"
+      ng-change="fetchPage()"
+      max-size="10"
+      previous-text="Prev"
+      next-text="Next"
+    ></pagination>
+
   </div>
 </section>

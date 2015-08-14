@@ -9,11 +9,13 @@ angular.module('elementBoxApp.myadmin.userlist')
     $scope.totalPages = 0;
     $scope.totalProducts = 0;
     $scope.users = [];
+    $scope.searchField = '';
 
     $scope.fetchPage = function() {
       UserService.query({
           page: $scope.page,
-          pageSize: $scope.pageSize
+          pageSize: $scope.pageSize,
+          filter: $scope.searchField || undefined
         })
         .$promise.then(function(res) {
           $scope.users = res.results;
@@ -40,5 +42,6 @@ angular.module('elementBoxApp.myadmin.userlist')
         user.active = false;
       });
     };
+
   }
 ]);
