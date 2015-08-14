@@ -22,6 +22,7 @@ angular.module('elementBoxApp', [
   'elementBoxApp.newelement',
   'elementBoxApp.signin',
   'elementBoxApp.signup',
+  'elementBoxApp.signout',
   'elementBoxApp.products',
   'elementBoxApp.myadmin',
   'elementBoxApp.account',
