@@ -17,22 +17,98 @@
   <div ng-if="slides.length" class="col-lg-8">
     <!-- slide, zoom, hexagon, fadeAndSlide -->
     <div class="image-slider-container panel">
+<!--
       <ul rn-carousel class="image-slider center-block" rn-carousel-transition="fadeAndSlide" rn-carousel-controls rn-carousel-buffered="3" rn-carousel-index="slidesIndex">
         <li ng-repeat="slide in slides track by $index">
           <div class="layer">
             <div class="">
-              <!-- <img ng-src="{{slide.url}}" draggable="false" class="img-no-drag"> -->
               <div class="img" style="background-image: url({{slide.url}});"></div>
               <h4 class="img-caption">{{slide.index}}</h4>
             </div>
           </div>
         </li>
       </ul>
-      <div rn-carousel-indicators class="indicators" ng-if="slides.length > 1" slides="slides" rn-carousel-index="slidesIndex"></div>
+ -->
+      <!-- <div rn-carousel-indicators class="indicators" ng-if="slides.length > 1" slides="slides" rn-carousel-index="slidesIndex"></div> -->
+
+      <slick class="slider-for"
+        slides-to-show="1"
+        slides-to-scroll="1"
+        arrows="false"
+        fade="true"
+        as-nav-for=".slider-nav"
+        >
+          <div class="slick-img" ng-repeat="slide in slides track by $index">
+            <img src="{{slide.url}}" alt="{{slide.index}}">
+            <!-- <div class="img" style="background-image: url({{slide.url}});"></div> -->
+            <h4 class="img-caption">{{slide.index}}</h4>
+          </div>
+  <!-- dots="true"
+        infinite="false"
+        speed="300"
+        touch-move="false" -->
+      </slick>
+
+      <slick class="slider-nav"
+        slides-to-show="4"
+        slides-to-scroll="1"
+        as-nav-for=".slider-for"
+        dots="true"
+        center-mode="false"
+        focus-on-select="true"
+        lazy-load="ondemand"
+        center-padding="6px"
+        responsive="[
+          {
+            breakpoint: 768,
+            settings: {
+              arrows: false,
+              centerMode: false,
+              centerPadding: '40px',
+              slidesToShow: 3
+            }
+          }
+        ]"
+        >
+        <!--
+         -->
+          <!-- {
+            breakpoint: 768,
+            settings: {
+              arrows: false,
+              centerMode: true,
+              centerPadding: '40px',
+              slidesToShow: 3
+            }
+          } -->
+
+          <div class="slick-img" ng-repeat="slide in slides track by $index">
+            <img src="{{slide.url}}" alt="{{slide.index}}">
+            <!-- <div class="img" style="background-image: url({{slide.url}});"></div> -->
+            <!-- <h4 class="img-caption">{{slide.index}}</h4> -->
+          </div>
+      </slick>
+
     </div>
   </div>
 
   <div class="col-lg-4 pull-right product-contact">
+    <!-- Categories: -->
+    <div>
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">Categories</h3>
+        </div>
+        <div class="panel-body">
+          <ul class="nav nav-pills">
+            <li ng-repeat="categ in product.categories track by $index" role="presentation" class="">
+              <a ui-sref="main.products.list({categ: categ})">{{categ}}</a>
+            </li>
+          </ul>
+        </div>
+      </div> <!-- Categories. -->
+    </div>
+
     <!-- <div ng-include="'products/product-info/fragments/contact-segment.html'"></div> -->
     <contact></contact>
   </div>
@@ -70,19 +146,6 @@
 
     <hr>
   </div> <!-- Details. -->
-
-
-  <!-- Categories: -->
-  <div class="col-lg-8">
-    <div>
-      <h3>Categories</h3>
-      <ul class="nav nav-pills">
-        <li ng-repeat="categ in product.categories track by $index" role="presentation" class="active">
-          <a ui-sref="main.products.list({categ: categ})">{{categ}}</a>
-        </li>
-      </ul>
-    </div>
-  </div> <!-- Categories. -->
 
   <!-- Comments: -->
   <div ng-include="'products/product-info/fragments/comments.html'"></div>

@@ -95,6 +95,9 @@ angular.module('elementBoxApp.products.productInfo')
       if (!$scope.currentUser || !$scope.product) {
         return false;
       }
+      if (!$scope.currentUser.wishList) {
+        $scope.currentUser.wishList = [];
+      }
       return $scope.currentUser.wishList.indexOf($scope.product._id) >= 0;
     };
 

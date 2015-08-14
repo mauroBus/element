@@ -23,7 +23,10 @@
               <div class="product-rating col-lg-8">
                 <div class="rating rated"
                   ng-class="{'never-rated': product.rating.value == 0}"
-                  popover-animation="false" popover="{{product.rating.value > 0 ? ('Rating: ' + (product.rating.value | number: 2)) : 'Still no rated'}}" popover-placement="right" popover-trigger="mouseenter">
+                  popover="{{product.rating.value > 0 ? ('Rating: ' + (product.rating.value | number: 2)) : 'Still no rated'}}"
+                  popover-placement="right"
+                  popover-animation="true"
+                  popover-trigger="mouseenter">
                   <span ng-class="{rated: product.rating.value >= 5}">☆</span>
                   <span ng-class="{rated: product.rating.value >= 4}">☆</span>
                   <span ng-class="{rated: product.rating.value >= 3}">☆</span>

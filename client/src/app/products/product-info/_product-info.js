@@ -1,5 +1,5 @@
 
-angular.module('elementBoxApp.products.productInfo', ['angular-carousel'])
+angular.module('elementBoxApp.products.productInfo', ['slick'])
 
 .config([ '$stateProvider',
   function($stateProvider) {

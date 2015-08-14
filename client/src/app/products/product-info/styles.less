@@ -1,6 +1,31 @@
 .product-info {
-  @image-height: 400px;
-  @image-width: 615px;
+  @image-width: 700px;
+  @image-height: 450px;
+  @image-md-width: 600px;
+  @image-md-height: 400px;
+  @image-sm-width: 500px;
+  @image-sm-height: 380px;
+  @image-xs-width: 300px;
+  @image-xs-height: 280px;
+
+  .img-size {
+    @media (max-width: @screen-xs-max) {
+      width: @image-xs-width;
+      height: @image-xs-height;
+    }
+    @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+      width: @image-sm-width;
+      height: @image-sm-height;
+    }
+    @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+      width: @image-md-width;
+      height: @image-md-height;
+    }
+    @media (min-width: @screen-lg-min) {
+      width: @image-width;
+      height: @image-height;
+    }
+  }
 
   .product__heading {
     .product-info__title {}
@@ -21,76 +46,139 @@
   }
 
   .image-slider-container {
-    // background-color: #FFF;
-    padding: 20px;
+    slick {
+      &.slider-for {
+        margin: 30px auto;
+
+        .img-size();
+
+        .slick-list {
+          .border-radius(5px);
+        }
+
+        .slick-img {
+          // float: none;
+          // margin: 30px auto;
+        }
+
+        img {
+          .img-size();
+        }
+
+        .img-caption {
+          position: relative;
+          left: 5px;
+          bottom: 30px;
+          color: #FFF;
+          text-shadow: 2px 2px 1px rgb(88, 88, 88);
+        }
+      }
+
+      &.slider-nav {
+        width: 70%;
+        margin: 0 auto 40px auto;
+
+        img {
+          width: 80%;
+          height: @image-height / 6;
+        }
+        .slick-prev,
+        .slick-next {
+            background-color: @gray7;
+            .border-radius(50%);
+        }
+
+        .slick-track {
+          > .slick-active img { // trick to "first-of-class"
+            border: 3px solid @pink1-color;
+            .border-radius(5px);
+          }
+          > .slick-active ~ .slick-active img { // trick to "first-of-class"
+            border: none;
+            .border-radius(0);
+          }
+        }
+      }
+    }
   }
 
-  .image-slider {
-    width: @image-width;
-    height: @image-height;
-    cursor: pointer;
-    border-radius: 4px;
-    .box-shadow(4px 4px 19px -3px @gray4);
+  .slick-dots li button:before {
+    font-size: 12px;
+  }
 
-    .img {
-      width: 100%;
-      height: @image-height;
+  // .image-slider-container {
+  //   // background-color: #FFF;
+  //   padding: 20px;
+  // }
 
-      background-repeat: no-repeat;
-      background-size: 100% @image-height;
+  // .image-slider {
+  //   width: @image-width;
+  //   height: @image-height;
+  //   cursor: pointer;
+  //   border-radius: 4px;
+  //   .box-shadow(4px 4px 19px -3px @gray4);
 
-      -moz-user-select: none;
-      -webkit-user-select: none;
-      -webkit-user-drag: none; /* this will work for QtWebKit in future */
-    }
+  //   .img {
+  //     width: 100%;
+  //     height: @image-height;
 
-    .img-caption {
-      position: relative;
-      bottom: 30px;
-      text-align: center;
-      color: #FFF;
-      text-shadow: 2px 2px 1px rgb(88, 88, 88);
-    }
+  //     background-repeat: no-repeat;
+  //     background-size: 100% @image-height;
 
-    .rn-carousel-control {
-      .transition(opacity 0.2s ease-out);
-      position: absolute;
-      opacity: 0.35;
-      cursor: pointer;
-      height: 100%;
-      width: 15%;
-      top: 0;
+  //     -moz-user-select: none;
+  //     -webkit-user-select: none;
+  //     -webkit-user-drag: none; /* this will work for QtWebKit in future */
+  //   }
 
-      &.rn-carousel-control-next {
-        background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,.0001) 0),color-stop(rgba(0,0,0,.5) 100%));
-        background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
-        background-repeat: repeat-x;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
-        right: 0;
-        &:before {
-          content: '';
-        }
-      }
-      &.rn-carousel-control-prev {
-        background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,.5) 0),color-stop(rgba(0,0,0,.0001) 100%));
-        background-image: linear-gradient(to right,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%);
-        background-repeat: repeat-x;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
-        left: 0;
-        &:before {
-          content: '';
-        }
-      }
+  //   .img-caption {
+  //     position: relative;
+  //     bottom: 30px;
+  //     text-align: center;
+  //     color: #FFF;
+  //     text-shadow: 2px 2px 1px rgb(88, 88, 88);
+  //   }
+  // }
 
-      &:hover {
-        outline: 0;
-        color: #FFF;
-        text-decoration: none;
-        opacity: .9;
-        filter: alpha(opacity=90);
-      }
-    }
-  } // .image-slider
+  // .image-slider-container {
+  //   .rn-carousel-control {
+  //     .transition(opacity 0.2s ease-out);
+  //     position: absolute;
+  //     opacity: 0.35;
+  //     cursor: pointer;
+  //     height: 100%;
+  //     width: 15%;
+  //     top: 0;
+
+  //     &.rn-carousel-control-next {
+  //       background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,.0001) 0),color-stop(rgba(0,0,0,.5) 100%));
+  //       background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+  //       background-repeat: repeat-x;
+  //       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+  //       right: 0;
+  //       &:before {
+  //         content: '';
+  //       }
+  //     }
+  //     &.rn-carousel-control-prev {
+  //       background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,.5) 0),color-stop(rgba(0,0,0,.0001) 100%));
+  //       background-image: linear-gradient(to right,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%);
+  //       background-repeat: repeat-x;
+  //       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+  //       left: 0;
+  //       &:before {
+  //         content: '';
+  //       }
+  //     }
+
+  //     &:hover {
+  //       outline: 0;
+  //       color: #FFF;
+  //       text-decoration: none;
+  //       opacity: .9;
+  //       filter: alpha(opacity=90);
+  //     }
+  //   }
+  // } // .image-slider
 
   .indicators {
     text-align: center;
@@ -211,3 +299,32 @@
     }
   }
 }
+
+/*
+Hola Mauro,
+
+Tal como te comentó Lucia, existe la posibilidad de que estés entrevistando para un nuevo proyecto esta semana.  La entrevista será a través de Google Hangout, iniciando yo la llamada grupal y debiendo de tu lado contar con lo siguiente para poder tener un good performance en la misma:
+
+    Computadora
+    Buena conexión a internet
+    Headsets
+    Camara de video
+    Un espacio tranquilo y sin ruidos de fondo
+
+
+Te envio información sobre el cliente:
+Looking for help in exporting, formatting and sending of data to insurance companies via TradeLink EDI solution partner.  Will help to analyze the output of Maxwell Health’s platform, compare it to previous exports and determine which codes and messages have to be sent to TradeLink. Will be working on ETL-type functionality. 
+
+
+Adjunto además a este correo Interview Best Practices para que puedas repasarlas antes de la entrevista. 
+
+Es importante que podamos tener un Mock-interview de unos 15-20 minutos. Marianela se encontrará coordinandola.
+
+
+IMPORTANT (Recommendation by our Director of Technology):
+One thing that could be useful for the interview would be to catch up on ETL concepts[1]. We assume you are going to be evaluated on problem solving skills... a common problem in this cases is a sorting algorithm[2], which is commonly associated with computational complexity[3]. Please, review this links BEFORE the interview.
+
+[1]: https://en.wikipedia.org/wiki/Extract,_transform,_load
+[2]: https://en.wikipedia.org/wiki/Sorting_algorithm#Efficient_sorts, https://en.wikipedia.org/wiki/Sorting_algorithm#Distribution_sort
+[3]: https://en.wikipedia.org/wiki/Big_O_notation
+ */
