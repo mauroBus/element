@@ -6,12 +6,17 @@ angular.module('elementBoxApp.userdetails')
   function($scope,   $rootScope,   $stateParams,   UserService,   ProductsService) {
     var page = 1;
     var pageSize = 6;
-    $scope.user = UserService.get({ id: $stateParams.id });
+    $rootScope.$emit('title', 'User Details');
+
+    if (!$stateParams.id) {
+      return;
+    }
+
     $scope.ownProducts = [];
     $scope.totalProducts = 0;
     $scope.userReported = false;
 
-    $rootScope.$emit('title', 'User Details');
+    $scope.user = UserService.get({ id: $stateParams.id });
 
     var fetchProducts = function(page, pageSize) {
       ProductsService.get({ userId: $stateParams.id, page: page, pageSize: pageSize }, function(data) {
@@ -44,11 +49,4 @@ angular.module('elementBoxApp.userdetails')
     fetchProducts(page, pageSize);
   }
 ])
-
-// Filter to partialy hide phone number:
-.filter('hidePhone', function() {
-  return function(input) {
-    return input ? new Array(input.length - 2).join('▒') + input.substr(input.length - 2) : '';
-  };
-})
 ;
