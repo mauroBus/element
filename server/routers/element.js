@@ -10,9 +10,13 @@ var elements = require('../controllers/elements'),
  */
 module.exports = function(app) {
   app.param('elementId', elements.elementById);
-  app.get('/api/elements', elements.query);
-  app.post('/api/elements', users.requiresLogin, hasDefaultAuthorization, elements.create);
-  app.get('/api/elements/:elementId', elements.read);
-  app.put('/api/elements/:elementId', users.requiresLogin, hasDefaultAuthorization, elements.hasAuthorization, elements.update);
-  app.del('/api/elements/:elementId', users.requiresLogin, hasDefaultAuthorization, elements.hasAuthorization, elements.delete);
+
+  app.route('/api/elements')
+    .get(elements.query)
+    .post(users.requiresLogin, hasDefaultAuthorization, elements.create);
+
+  app.route('/api/elements/:elementId')
+    .get(elements.read)
+    .put(users.requiresLogin, hasDefaultAuthorization, elements.hasAuthorization, elements.update)
+    .delete(users.requiresLogin, hasDefaultAuthorization, elements.hasAuthorization, elements.delete);
 };

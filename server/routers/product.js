@@ -11,16 +11,22 @@ var products = require('../controllers/products'),
  */
 module.exports = function(app) {
   app.param('productId', products.productById);
-  app.get('/api/products', products.query);
-  app.post('/api/products', users.requiresLogin, hasDefaultAuthorization, products.create);
-  app.get('/api/products/:productId', products.read);
-  app.put('/api/products/:productId', users.requiresLogin, hasDefaultAuthorization, products.hasAuthorization, products.update);
-  app.del('/api/products/:productId', users.requiresLogin, hasDefaultAuthorization, products.hasAuthorization, products.delete);
+
+  app.route('/api/products')
+    .get(products.query)
+    .post(users.requiresLogin, hasDefaultAuthorization, products.create);
+
+  app.route('/api/products/:productId')
+    .get(products.read)
+    .put(users.requiresLogin, hasDefaultAuthorization, products.hasAuthorization, products.update)
+    .delete(users.requiresLogin, hasDefaultAuthorization, products.hasAuthorization, products.delete);
 
   // Comments routes
   app.param('commentId', Comments.commentById);
-  app.post('/api/products/:productId/comments', users.requiresLogin, Comments.create);
-  app.get('/api/products/:productId/comments', Comments.query);
+  app.route('/api/products/:productId/comments')
+    .post(users.requiresLogin, Comments.create)
+    .get(Comments.query);
+
   app.delete('/api/products/:productId/comments/:commentId', users.requiresLogin, Comments.hasDeleteAuthorization, Comments.delete);
 
   // Rating routes:

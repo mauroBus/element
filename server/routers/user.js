@@ -13,14 +13,18 @@ module.exports = function(app) {
   var hasAdminAuthorization = users.hasAuthorization([Roles.admin]);
 
   // Setting up the users profile api
-  app.get('/users/me', users.requiresLogin, users.me);
+  app.route('/me')
+    .get(users.requiresLogin, users.me)
+    .put(users.requiresLogin, users.updateMe);
+
   // app.put('/users', users.update);
   app.get('/users', users.query);
   app.delete('/users/accounts', users.removeOAuthProvider);
 
-  app.put('/users/:userId', users.requiresLogin, hasAdminAuthorization, users.update);
-  app.delete('/users/:userId', users.requiresLogin, hasAdminAuthorization, users.delete);
-  app.get('/users/:userId', users.requiresLogin, users.read);
+  app.route('/users/:userId')
+    .put(users.requiresLogin, hasAdminAuthorization, users.update)
+    .delete(users.requiresLogin, hasAdminAuthorization, users.delete)
+    .get(users.requiresLogin, users.read);
 
   // Setting up the users password api
   app.post('/users/password', users.changePassword);
@@ -62,12 +66,12 @@ module.exports = function(app) {
 
   // Wishlist:
   app.param('wishItemId', WishList.getById);
-  app.get('/users/me/wishlist', users.requiresLogin, WishList.query);
-  app.post('/users/me/wishlist/:productId', users.requiresLogin, WishList.create);
-  app.delete('/users/me/wishlist/:wishItemId', users.requiresLogin, WishList.delete);
+  app.get('/me/wishlist', users.requiresLogin, WishList.query);
+  app.post('/me/wishlist/:productId', users.requiresLogin, WishList.create);
+  app.delete('/me/wishlist/:wishItemId', users.requiresLogin, WishList.delete);
 
   // Finish by binding the user middleware
-  app.param('userId', users.findById);
+  app.param('userId', users.userByID);
   app.param('userEmail', users.userByEmail);
 };
 
@@ -88,4 +92,5 @@ module.exports = function(app) {
  * 5.
  * 6.
  *
+ * KISS (Keep It Simple Stupid)
  */

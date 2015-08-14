@@ -12,8 +12,9 @@ var categories = require('../controllers/categories'),
 module.exports = function(app) {
   // app.param('categoryId', categories.categoryById);
 
-  app.get('/api/categories', categories.query);
-  app.post('/api/categories', users.requiresLogin, hasAdminAuthorization, categories.create);
+  app.route('/api/categories')
+    .get(categories.query)
+    .post(users.requiresLogin, hasAdminAuthorization, categories.create);
 
   // app.get('/api/categories/:categoryId', categories.read);
   // app.put('/api/categories/:categoryId', users.requiresLogin, hasDefaultAuthorization, categories.hasAuthorization, categories.update);
