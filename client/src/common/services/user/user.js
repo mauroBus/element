@@ -44,6 +44,12 @@ angular.module('elementBoxApp.common')
       params: { SILENT_ON_ERROR: true }
     },
 
+    updateMe: {
+      url: Urls.users.me,
+      method: 'PUT',
+      params: { SILENT_ON_ERROR: true }
+    },
+
     // User wish list:
     addToWishList: {
       url: Urls.users.me + '/wishlist/:prodId',
