@@ -36,6 +36,7 @@ angular.module('elementBoxApp.main')
       AuthService.signout($scope.credentials)
         .then(function(res) {
           $rootScope.$broadcast(AUTH_EVENTS.signoutSuccess, res.data.user);
+          $state.go('main.signout');
         });
     };
 

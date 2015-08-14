@@ -121,10 +121,23 @@
           <a ui-sref="main.signin" class="btn btn-sm btn-default btn-sign-in">Sign In</a>
           <a ui-sref="main.signup" class="btn btn-sm btn-default btn-sign-up">Sign Up</a>
         </span>
-        <span ng-show="currentUser.firstName">Welcome, {{currentUser.firstName}}</span>
+        <span ng-show="currentUser.firstName" >
+          <span
+            popover-title="Roles"
+            popover-placement="left"
+            popover-template="main/header/header.admin.role.html"
+            popover-trigger="mouseenter">
+              {{currentUser.firstName}}
+          </span>
+        </span>
         <span ng-show="currentUser.roles.indexOf(userRoles.admin) >= 0"> Admin </span>
         <span ng-show="currentUser.roles.indexOf(userRoles.editor) >= 0"> Editor </span>
-        <button ng-show="currentUser.firstName" class="btn btn-link btn-sm" ng-click="signout()">Sign Out</button>
+        <button
+          ng-show="currentUser.firstName"
+          class="btn btn-link btn-sm"
+          ng-click="signout()">
+            Sign Out
+        </button>
       </div>
       <div>
         <a class="btn btn-sm btn-purple"
