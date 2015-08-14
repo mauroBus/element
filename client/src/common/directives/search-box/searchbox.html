@@ -1,0 +1,21 @@
+<div class="search-box-container clearfix">
+  <div class="container-4">
+
+    <input type="search"
+      class="search-input"
+      placeholder="Search..."
+      ng-model="searchInput"
+      ng-keyup="($event.keyCode == 13) ? search() : null"/>
+
+    <button class="icon" ng-click="search()">
+      <span class="glyphicon glyphicon-search"></span>
+    </button>
+
+    <span class="search-clear"
+      ng-show="searchInput.length"
+      ng-click="clearSearch()">
+      <span class="glyphicon glyphicon-remove text-danger"></span>
+    </span>
+
+  </div>
+</div>

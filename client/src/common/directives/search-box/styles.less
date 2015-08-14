@@ -1,0 +1,199 @@
+
+.search-box-container {
+  // @gray1: @base-font-color;
+  @width: 220px;
+  @height: 40px;
+
+  .search-input {
+    width: @width;
+    height: @height;
+    background: @gray6;
+    font-size: 12pt;
+    border: none;
+    float: left;
+    color: #FFFFFF;
+    // color: #262626;
+
+    &::-webkit-input-placeholder { color: @gray8; }
+    &::-moz-placeholder { color: @gray8; }
+    &:-moz-placeholder { color: @gray8; }
+    &:-ms-input-placeholder { color: @gray8; }
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+
+
+  .search-clear {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+  }
+
+
+  /* Search 1 - expand input width */
+
+  .container-1 {
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .container-1 .search-input {
+    height: @height;
+    padding-left: 45px;
+    .border-radius(5px);
+    .transition(all .55s ease);
+  }
+
+  .container-1 .icon {
+    position: absolute;
+    top: 50%;
+    margin-left: 17px;
+    margin-top: 17px;
+    z-index: 1;
+    color: #4f5b66;
+  }
+
+  /* ANIMATION EFFECTS */
+  .container-1 .search-input:focus,
+  .container-1 .search-input:active {
+    background: #ffffff;
+  }
+
+
+
+
+
+  /* Search 2 - expand input width */
+
+  .container-2 {
+    width: @width;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+  }
+  .container-2 .search-input {
+    width: @height;
+    padding-left: 35px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    .transition(width .55s ease);
+  }
+
+  .container-2 .icon {
+    position: absolute;
+    top: 50%;
+    margin-left: 17px;
+    margin-top: 17px;
+    z-index: 1;
+    color: #4f5b66;
+  }
+
+  .container-2:hover .search-input {
+    outline: none;
+    width: @width;
+  }
+  .container-2:hover .icon {
+    color: #93a2ad;
+  }
+
+
+
+
+
+  /* Search 3 - zoom in looking glass */
+
+  .container-3 {
+    width: @width;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .container-3 .search-input {
+    padding-left: 45px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+
+  .container-3 .icon {
+    position: absolute;
+    top: 50%;
+    margin-left: 17px;
+    margin-top: 17px;
+    z-index: 1;
+    color: #4f5b66;
+    .transition(all .55s ease);
+  }
+
+  .container-3:hover .icon {
+    margin-top: 16px;
+    color: #93a2ad;
+    .transform(scale(1.5));
+  }
+
+
+  /* Search 4 - appear looking glass */
+
+  .container-4 {
+    overflow: hidden;
+    width: @width;
+    vertical-align: middle;
+    white-space: nowrap;
+    /* position: relative; */
+  }
+  .container-4 .search-input {
+    padding-left: 15px;
+    .border-radius(5px);
+    .transition(all .55s ease);
+  }
+
+  .container-4 button.icon {
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: none;
+    background: #232833;
+    height: @height;
+    width: @height;
+    color: #4f5b66;
+    opacity: 0;
+    font-size: 15pt;
+    .transition(all .55s ease);
+  }
+
+  /* ANIMATION EFFECT */
+  .container-4:hover,
+  .container-4:active,
+  .container-4:focus,
+  .container-4 .search-input:focus {
+    button.icon,
+    + button.icon {
+      outline: none;
+      opacity: 1;
+      margin-left: -@height;
+      color: #FFFFFF;
+      background: @pink3-color;
+    }
+
+    .search-input {
+      background: @base-font-color;
+    }
+  }
+
+  .container-4 .search-input:focus {
+    background: @base-font-color;
+  }
+
+  .container-4 button.icon:hover {
+    background: @pink2-color !important;
+  }
+}
