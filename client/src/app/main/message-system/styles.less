@@ -1,0 +1,32 @@
+.message-system-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+
+  .alert-black-msg {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 1;
+    color: #FFFFFF;
+    padding-right: 35px;
+  }
+
+  .alert button.close {
+    display: none;
+  }
+
+  .alert .message-system-close.close {
+    color: #FFFFFF;
+    font-size: 16px;
+    left: 25px;
+    top: initial;
+    bottom: 6px;
+    opacity: 0.6;
+    position: relative;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+}

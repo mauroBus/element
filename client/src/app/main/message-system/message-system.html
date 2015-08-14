@@ -1,0 +1,25 @@
+<section class="message-system-container">
+
+  <div ng-show="displayMsg"
+    class="alert alert-black-msg" role="alert">
+      <div class="close message-system-close"
+        ng-click="close()"
+        ng-show="displayMsg">
+        x
+      </div>
+
+      <div class="text-nowrap">
+        <span class="glyphicon glyphicon-info-sign"></span>
+        {{ msg.txt }}
+      </div>
+
+      <div ng-if="msg.link">
+        <a ui-sref="{{ msg.link.url }}"
+          ui-sref-opts="{ reload:true }"
+          ng-click="close()">
+            {{ msg.link.txt }}
+        </a>
+      </div>
+  </div>
+
+</section>
