@@ -15,7 +15,7 @@
               class="menu__item"
               ng-if="item.displayIf()"
               ng-class="{ 'menu__item--active': menuOpened, 'active': isActive( '{{item.goTo}}' ) }"
-              ng-click="goto( '{{item.goTo}}' )" >
+              ng-click="goto(item)" >
             <div class="menu-item__name {{item.class}}" >
               <span class="glyphicon {{item.icon}}"></span>
               <span class="menu-item__name__txt">{{item.text}}</span>

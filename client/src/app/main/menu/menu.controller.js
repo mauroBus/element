@@ -58,16 +58,12 @@ angular.module('elementBoxApp.main')
       return regExp.test($state.current.name);
     };
 
-    $scope.goto = function(state) {
-      if ($state.current.name !== state) {
-        $state.go(state);
+    $scope.goto = function(item) {
+      if ($state.current.name !== item.goTo) {
+        $state.go(item.goTo);
       }
       $scope.toggleMenu();
     };
 
   }
 ]);
-
-
-
-

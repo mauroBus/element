@@ -6,7 +6,7 @@ angular.module('elementBoxApp.main')
     }
 
     $scope.appTitle = '';
-    $scope.defaultTitle = 'Element SandBox';
+    $scope.defaultTitle = 'SandBox App';
 
     $scope.menuOpened = false;
 
