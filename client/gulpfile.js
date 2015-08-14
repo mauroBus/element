@@ -36,26 +36,32 @@ var config = {
   jsModulesDist: 'dist/js/modules',
   cssDist: 'dist/css',
   fontsDist: 'dist/fonts',
+  slickFontsDist: 'dist/css/fonts',
   serverPort: 8080,
   livereloadPort: 12345
 };
 
 
 var cssVendors = [
-  config.vendor + '/bootstrap/dist/css/bootstrap.css',
+  config.vendor + '/bootstrap/dist/css/bootstrap.min.css',
   config.vendor + '/angular-ui-tree/dist/angular-ui-tree.min.css',
-  config.vendor + '/angular-carousel/dist/angular-carousel.css'
+  // config.vendor + '/angular-carousel/dist/angular-carousel.css'
+  config.vendor + '/slick-carousel/slick/slick.css',
+  config.vendor + '/slick-carousel/slick/slick-theme.css'
 ];
 
 var jsVendors = [
+  config.vendor + '/jquery/dist/jquery.min.js',
   config.vendor + '/angular/angular.js',
   config.vendor + '/angular-ui-router/release/angular-ui-router.min.js',
   config.vendor + '/angular-resource/angular-resource.js',
   config.vendor + '/angular-animate/angular-animate.js',
   config.vendor + '/d3/d3.min.js',
-  config.vendor + '/angular-file-upload/angular-file-upload.js',
+  config.vendor + '/angular-file-upload/dist/angular-file-upload.min.js',
   config.vendor + '/angular-touch/angular-touch.js',
-  config.vendor + '/angular-carousel/dist/angular-carousel.js',
+  // config.vendor + '/angular-carousel/dist/angular-carousel.js',
+  config.vendor + '/slick-carousel/slick/slick.min.js',
+  config.vendor + '/angular-slick/dist/slick.js',
   config.vendor + '/angular-ui-tree/dist/angular-ui-tree.js',
   // config.vendor + '/nvd3/nv.d3.min.js',
   // config.vendor + '/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js'
@@ -186,6 +192,8 @@ gulp.task('copy-static', function() {
     //     .pipe(gulp.dest(config.cssDist)),
     gulp.src(config.vendor + '/bootstrap/fonts/*')
         .pipe(gulp.dest(config.fontsDist)),
+    gulp.src(config.vendor + '/slick-carousel/slick/fonts/*')
+        .pipe(gulp.dest(config.slickFontsDist)),
     gulp.src(['src/assets/**/*.*', '!src/assets/less/*.*'])
         .pipe(gulp.dest(config.dist)),
     merge(
