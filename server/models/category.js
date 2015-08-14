@@ -29,4 +29,7 @@ var CategoyTreeSchema = new Schema({
   // children: String
 });
 
+// indexing by path.
+CategoyTreeSchema.index({ path: 1 });
+
 mongoose.model('CategoryTree', CategoyTreeSchema);
