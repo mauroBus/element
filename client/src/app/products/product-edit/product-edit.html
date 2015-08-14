@@ -3,82 +3,123 @@
   <div class="panel panel-default">
     <div ng-if="!productSaved" class="panel-body">
 
-      <form
-        ng-submit="save(newProductForm.$valid)"
-        role="form"
-        name="newProductForm">
+      <div class="field-set center-block pull-none">
 
-        <div class="form-group"
-          ng-class="{'has-error': (newProductForm.title.$error.required && displayError) || (errors.title)}">
-          <label class="product__title" for="titleId">Title:</label>
-          <input type="text"
-            id="titleId"
-            class="form-control"
-            ng-model="product.title"
-            required
-            name="title">
-        </div>
-
-        <div class="form-group"
-          ng-class="{'has-error': (newProductForm.description.$error.required && displayError) || (errors.description)}">
-          <label class="product__description" for="descriptionId">Description:</label>
-          <textarea
-            ng-model="product.description"
-            id="descriptionId"
-            class="product-new__description form-control"
-            required
-            name="description"
-            ></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="imagesId">Images:</label>
-          <a href class="btn btn-link btn-sm" ng-click="areImgsCollapsed = !areImgsCollapsed">
-            <span ng-show="areImgsCollapsed" class="glyphicon glyphicon-plus-sign"></span>
-            <span ng-show="!areImgsCollapsed" class="glyphicon glyphicon-minus-sign"></span>
-          </a>
-          <div collapse="areImgsCollapsed">
-            <file-upload limit="10" files="product.images"></file-upload>
+        <div class="field-set__item field-set__item--category"> <!-- clearfix -->
+          <div class="field-set__item__heading"
+              ng-class="{ 'bg-danger': error.category }"
+            > <!-- col-md-2 col-lg-2 col-sm-12 col-xs-12 -->
+            <span>Category</span>
+            <h5 class="alert alert-danger"
+              role="alert"
+              ng-show="error.category">
+                <span class="glyphicon glyphicon-alert"></span>
+                Please select a category!
+            </h5>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label for="categoriesId">Categories:</label>
-          <div class="btn-group">
-            <label
-              class="btn btn-default"
-              ng-class="{active: hasCateg(categ)}"
-              ng-repeat="(key, categ) in categories"
-              ng-model="product.categories[key]"
-              btn-radio="'{{categ.name}}'"
-              uncheckable>
-                {{categ.name}}
-            </label>
+          <div class="field-set__item__content"> <!-- col-md-9 col-lg-9 col-sm-12 col-xs-12 -->
+            <categ-selector
+              categ-tree="categories[0]"
+              on-done-cbk="onCategSelected"
+              on-undone-cbk="onCategUnselected">
+            </categ-selector>
           </div>
+        </div> <!-- field-set__item -->
+
+        <div class="field-set__item text-center">
+          <div class="selected-categ" ng-show="selectedCateg">{{selectedCateg.name}}</div>
+          <span ng-show="isCategSelected"
+            class="glyphicon glyphicon-ok-sign categ-selected-icon">
+          </span>
         </div>
 
-        <div class="form-group">
-          <label for="catalogsId">Catalogs:</label>
-          <label
-              class="btn btn-danger"
-              ng-repeat="(key, catalog) in catalogs"
-              ng-model="product.catalogs[key]"
-              btn-radio="'{{catalog.name}}'"
-              uncheckable>
-                {{catalog.name}}
-            </label>
-        </div>
+        <div class="field-set__item field-set__item--title"
+            ng-class="{ 'has-error': error.title }">
+          <div class="field-set__item__heading">
+            <span>Title</span>
+          </div>
 
-        <button type="submit" class="btn btn-lg btn-primary btn-block">Save</button>
-      </form>
+          <div class="field-set__item__content">
+            <input type="text"
+              class="form-control"
+              ng-model="product.title"
+              tooltip="Title is required."
+              tooltip-placement="top"
+              tooltip-trigger="mouseenter"
+              tooltip-enable="error.title && (!product.title || !(product.title.length >= 5 && product.title.length <= 55))"
+              placeholder="Product title">
+          </div>
+        </div> <!-- field-set__item -->
 
-    </div>
+        <div class="field-set__item field-set__item--price"
+          ng-class="{ 'has-error': error.price }">
+          <div class="field-set__item__heading">
+            <span>Price</span>
+          </div>
+
+          <div class="field-set__item__content input-group">
+            <div class="input-group-addon">$</div>
+            <input type="number"
+              class="form-control"
+              ng-model="product.price"
+              tooltip="Price is required."
+              tooltip-placement="top"
+              tooltip-trigger="mouseenter"
+              tooltip-enable="error.price">
+          </div>
+        </div> <!-- field-set__item -->
+
+        <div class="field-set__item field-set__item--description"
+          ng-class="{ 'has-error': error.description }">
+          <div class="field-set__item__heading">
+            <span>Description</span>
+          </div>
+
+          <div class="field-set__item__content">
+            <textarea
+              ng-model="product.description"
+              class="form-control"
+              placeholder="Product description"
+              rows="5"
+              tooltip="Description is required."
+              tooltip-placement="top"
+              tooltip-trigger="mouseenter"
+              tooltip-enable="error.description">
+            </textarea>
+          </div>
+        </div> <!-- field-set__item -->
+
+        <div class="field-set__item field-set__item--images panel panel-info">
+          <div class="field-set__item__heading">
+            <span>Images</span>
+            <a href class="btn btn-link btn-sm" ng-click="areImgsCollapsed = !areImgsCollapsed">
+              <span ng-show="areImgsCollapsed" class="glyphicon glyphicon-plus-sign"></span>
+              <span ng-show="!areImgsCollapsed" class="glyphicon glyphicon-minus-sign"></span>
+            </a>
+          </div>
+
+          <div class="field-set__item__content">
+            <div collapse="areImgsCollapsed">
+              <file-upload limit="10" files="product.images"></file-upload>
+            </div>
+          </div>
+        </div> <!-- field-set__item -->
+
+        <button ng-click="save();" class="btn btn-lg btn-block btn-purple">Publish</button>
+
+      </div> <!-- field-set -->
+    </div> <!-- panel-body -->
+
 
     <div ng-if="productSaved" class="panel-body">
       <div class="jumbotron">
         <h1>Congratulations!!!</h1>
-        <p>Product Successfuly Changed</p>
-        <p><a class="btn btn-primary btn-lg" ui-sref="main.products" role="button">Continue</a></p>
+        <p>Product Successfuly Created</p>
+        <p>
+          <a class="btn btn-default btn-lg pull-left" ui-sref="main.products.info({productId: productSaved._id})" role="button">View</a>
+          <a class="btn btn-primary btn-lg pull-left" ui-sref="main.products" role="button">Continue</a>
+        </p>
       </div>
     </div>
   </div>
