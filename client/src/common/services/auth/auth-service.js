@@ -12,7 +12,8 @@ function($http,   Session,   Urls,   AUTH_EVENTS,   $rootScope) {
     var promise = $http({
       url: Urls.userAuth.signin,
       method: 'POST',
-      data: credentials
+      data: credentials,
+      params: { SILENT_ON_ERROR: true }
     });
 
     promise.then(function(res) { // success cbk
@@ -40,6 +41,7 @@ function($http,   Session,   Urls,   AUTH_EVENTS,   $rootScope) {
   };
 
   authService.signup = function(credentials) {
+    angular.merge(credentials, { SILENT_ON_ERROR: true });
     var promise = $http.post(Urls.userAuth.signup, credentials);
     promise.then(function(res) {
       Session.create(
