@@ -3,7 +3,7 @@
   <div class="panel panel-default">
     <div ng-if="!productCreated" class="panel-body">
 
-      <div class="field-set">
+      <div class="field-set center-block pull-none">
 
         <div class="field-set__item field-set__item--category"> <!-- clearfix -->
           <div class="field-set__item__heading"
@@ -47,7 +47,7 @@
               tooltip="Title is required."
               tooltip-placement="top"
               tooltip-trigger="mouseenter"
-              tooltip-enable="error.title && (!product.title || !(product.title.length >= 10 && product.title.length <= 55))"
+              tooltip-enable="error.title && (!product.title || !(product.title.length >= 5 && product.title.length <= 55))"
               placeholder="Product title">
           </div>
         </div> <!-- field-set__item -->

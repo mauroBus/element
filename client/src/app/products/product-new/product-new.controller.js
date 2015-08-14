@@ -2,8 +2,8 @@
 angular.module('elementBoxApp.products.productNew')
 
 .controller('ProductNewCtrl', [
-          '$scope', '$rootScope', '$stateParams', 'ProductsService', 'Categories',
-  function($scope,   $rootScope,   $stateParams,   ProductsService,   Categories) {
+          '$scope', '$rootScope', '$stateParams', 'ProductsService', 'Categories', 'ProdErrorsService',
+  function($scope,   $rootScope,   $stateParams,   ProductsService,   Categories,   ProdErrorsService) {
     $scope.productCreated = false;
     $scope.areImgsCollapsed = false;
     $scope.isCategSelected = false;
@@ -28,16 +28,8 @@ angular.module('elementBoxApp.products.productNew')
         $scope.categories = res;
       });
 
-    var checkError = function(prod) {
-      $scope.error.category = !$scope.selectedCateg;
-      $scope.error.title = !prod.title || !(prod.title.length >= 10 && prod.title.length <= 55);
-      $scope.error.price = prod.price === '' || prod.price < 0;
-      $scope.error.description = !prod.description;
-      $scope.error.images = !prod.images;
-    };
-
     $scope.save = function() {
-      checkError($scope.product);
+      ProdErrorsService.checkProdErrors($scope.error, $scope.product, $scope.selectedCateg);
 
       if ($scope.error.category || $scope.error.title || $scope.error.price || $scope.error.description || $scope.error.images) {
         // $('.field-set__item--category').scrollIntoView();
