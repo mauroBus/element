@@ -17,12 +17,18 @@
           ng-class="{active: activeState === 'main.account.mywishlist'}"
           ng-click="setState('main.account.mywishlist')">Wish List</a>
       </div>
+      <div class="list-group">
+        <a class="list-group-item"
+          ui-sref="main.account.profile"
+          ng-class="{active: activeState === 'main.account.profile'}"
+          ng-click="setState('main.account.profile')">My Profile</a>
+      </div>
     </div>
   </div>
 
   <div class="col-md-9 panel panel-default main-panel">
     <div class="panel-body">
-      <ui-view />
+      <ui-view class="fadeInOut"/>
     </div>
   </div>
 </section>

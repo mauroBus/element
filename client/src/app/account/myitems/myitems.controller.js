@@ -14,7 +14,7 @@ angular.module('elementBoxApp.account.myitems')
 
     $scope.fetchPage = function() {
       ProductsService.query({
-          'user.ref': $scope.currentUser.id,
+          userId: $scope.currentUser.id,
           page: $scope.page,
           pageSize: $scope.pageSize
         })

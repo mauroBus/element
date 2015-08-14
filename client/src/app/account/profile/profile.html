@@ -1,0 +1,79 @@
+<section class="account-profile">
+
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="row">
+      <div class="col-sm-4 text-center">
+        <div class="media-photo media-photo-block media-round center-block">
+          <img alt="{{user.firstName}}" class="img-responsive" height="225" src="imgs/user_pic-225x225.png" title="{{user.firstName}}" width="225">
+        </div>
+      </div>
+
+      <div class="col-sm-8 col-md-8 col-lg-8">
+        <a ui-sref="main.userdetails({id: user._id})"
+          class="btn btn-link pull-right"
+          >
+            <span class="glyphicon glyphicon-user"></span>
+            <span>Public profile</span>
+        </a>
+      </div>
+
+      <div class="col-sm-8 col-md-8 col-lg-8">
+        <div class="h1">
+          <span ng-show="!edittingNames">{{user.firstName}} {{user.lastName}}</span>
+          <span ng-show="!edittingNames" class="h3">({{user.displayName}})</span>
+          <!-- <h2> -->
+            <input type="text" class="h3"
+              ng-show="edittingNames" ng-model="user.firstName">
+          <!-- </h2> -->
+          <!-- <h2> -->
+            <input type="text" class="h3"
+              ng-show="edittingNames" ng-model="user.lastName">
+          <!-- </h2> -->
+        </div>
+
+        <div class="h5 text-muted">Member since {{user.created | date: 'longDate'}}</div>
+        <!-- <a href="/s/Brasil-" class="link-reset">Brasil</a>· -->
+
+        <div class="edit-profile-container">
+          <button class="btn btn-link"
+            ng-click="toggleEditNames()"
+            popover="Edit Name"
+            popover-trigger="mouseenter"
+            popover-placement="right">
+              <span class="glyphicon glyphicon-pencil reselect-category"></span>
+              <!-- <span class="glyphicon glyphicon-edit"></span> -->
+          </button>
+        </div>
+      </div>
+    </div> <!-- row -->
+
+<!--
+    <div class="flag-controls pull-right">
+      <button></button>
+    </div>
+ -->
+    <div class="short-description">
+      <div class="clearfix">
+        <h2 class="pull-left">Description</h2>
+        <h2>
+          <div class="h5 pull-left col-md-offset-1">
+            <span class=" label label-default">Edit and Save</span>
+          </div>
+        </h2>
+      </div>
+      <textarea class="form-control" cols="30" rows="3"
+        ng-model="user.description">
+      </textarea>
+    </div>
+
+    <h1 class="clearfix">
+      <button class="btn btn-primary btn-block pull-right"
+        ng-disabled="!changed"
+        ng-click="saveUser()">
+        Save
+      </button>
+    </h1>
+
+  </div> <!-- col-lg-9 col-md-8 col-sm-12 -->
+
+</section>
