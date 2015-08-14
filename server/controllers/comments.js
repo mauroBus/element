@@ -12,7 +12,7 @@ exports.commentById = function(req, res, next, id) {
 exports.create = function(req, res) {
   var product = req.product;
   var user = req.user;
-  var commentTxt = req.param('text');
+  var commentTxt = req.body.text;
 
   if (!commentTxt) {
     return res.status(400).json({message: 'Comment is null.'});

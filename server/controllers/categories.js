@@ -108,7 +108,7 @@ exports.query = function(req, res) {
     .sort({ path: 1 })
     .exec(function(err, docs) {
       if (err) { return res.status(400).send(errorHandler.getErrorObject(err)); }
-      if (req.param('flat') && req.param('flat').toLowerCase() === 'true') {
+      if (req.query.flat && (req.query.flat.toLowerCase() === 'true')) {
         res.json(docs);
       } else {
         try {

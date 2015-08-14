@@ -31,8 +31,19 @@ exports.productById = function(req, res, next, id) {
 exports.query = function(req, res) {
   var pagination = Response.pagination(req);
   var categ = (req.query &&  req.query.category) ? req.query.category : '',
-    categPath;
-  var userFilter = req.query['user.ref'] ? { 'user.ref': new ObjectId(req.query['user.ref']) } : {};
+    categPath,
+    userFilter = {};
+
+  if (req.query.filter) {
+    try {
+      userFilter.title = new RegExp(req.query.filter, 'i');
+    } catch(e) {
+      delete userFilter.title;
+    }
+  }
+  if (req.query.userId) {
+    userFilter['user.ref'] = new ObjectId(req.query.userId);
+  }
 
   CategoryTree
     .find({ path: new RegExp(categ) })

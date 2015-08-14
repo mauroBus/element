@@ -8,29 +8,33 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     passport = require('passport'),
     Response = require('../../utils/response/response'),
+    UserAuth = require('./users.authorization'),
     User = mongoose.model('User');
 
-/**
- * Update user details
- */
-exports.update = function(req, res) {
-  // For security measurement we remove some attrs from the req.body object
-  delete req.body.roles;
 
-  var user = req.profile,
-      newUser = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        displayName: req.body.displayName,
-        email: req.body.email,
-        username: req.body.username,
-        active: req.body.active,
-      };
+var updateUser = function(req, res, user) {
+
+  var newUser = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    displayName: req.body.displayName,
+    // email: req.body.email,
+    // username: req.body.username,
+    // active: req.body.active,
+  };
 
   if (user) {
     // Merge existing user
-    user = _.extend(user, newUser);
+    // _.extend(user, newUser);
+    user.firstName = req.body.firstName ? req.body.firstName : user.firstName;
+    user.lastName = req.body.lastName ? req.body.lastName : user.lastName;
+    user.displayName = req.body.displayName ? req.body.displayName : user.displayName;
+    user.displayName = req.body.displayName ? req.body.displayName : user.displayName;
     user.updated = Date.now();
+
+    if (req.body.active && UserAuth.hasAuthorization(req.user.roles)) {
+      user.active = true;
+    }
 
     user.save(function(err) {
       if (err) {
@@ -44,6 +48,17 @@ exports.update = function(req, res) {
       message: 'User is not signed in'
     });
   }
+};
+
+exports.updateMe = function(req, res) {
+  updateUser(req, res, req.user); // loged in user.
+};
+
+/**
+ * Update user details
+ */
+exports.update = function(req, res) {
+  updateUser(req, res, req.profile); // update a given user (filled by getUserByID)
 };
 
 /**
@@ -60,8 +75,19 @@ exports.me = function(req, res) {
 exports.query = function(req, res) {
   var pagination = Response.pagination(req);
 
+  var filter = {};
+  if (req.query.filter) {
+    filter = {
+      $or: [
+        { firstName: new RegExp(req.query.filter) },
+        { lastName: new RegExp(req.query.filter) },
+        { email: new RegExp(req.query.filter) }
+      ]
+    };
+  }
+
   User
-    .find()
+    .find(filter)
     .select('-password -salt -__v')
     .sort('-email')
     .paginate(pagination.page, pagination.pageSize, Response.query(req, res));
@@ -81,7 +107,7 @@ exports.findById = function(req, res, next, id) {
   User.findById(objId, function(err, userById) {
     if (err) return next(err);
     if (!userById) return res.status(404).json({ message: 'Failed to load user with id: ' + id });
-    req.userFoundById = userById;
+    req.profile = userById;
     next();
   });
 };
@@ -90,9 +116,9 @@ exports.findById = function(req, res, next, id) {
  * Get a user data.
  */
 exports.read = function(req, res) {
-  if (req.userFoundById.active) {
-    var omitions = ['__v', 'email', 'password', 'salt', 'provider', 'providerData', 'additionalProvidersData', 'roles', 'resetPasswordToken', 'resetPasswordExpires', 'active'];
-    return res.status(200).json(_.omit(req.userFoundById.toJSON(), omitions));
+  if (req.profile) {
+    var omitions = ['__v', 'email', 'password', 'salt', 'provider', 'providerData', 'additionalProvidersData', 'roles', 'resetPasswordToken', 'resetPasswordExpires'];
+    return res.status(200).json(_.omit(req.profile.toJSON(), omitions));
   } else {
     return res.status(404).json({ message: 'User not found.', error: 'User not found.' });
   }
