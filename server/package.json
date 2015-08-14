@@ -27,7 +27,7 @@
     "crypto": "0.0.3",
     "easyimage": "^1.1.1",
     "ejs": "~0.8.4",
-    "express": "~3.4.3",
+    "express": "^4.13.1",
     "express-session": "~1.9.3",
     "formidable": "^1.0.16",
     "glob": "~4.0.5",

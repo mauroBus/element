@@ -27,9 +27,9 @@ var Response = {
   },
 
   pagination: function(req) {
-    var parsedPageSize = parseInt(req.param('pageSize'));
+    var parsedPageSize = parseInt(req.query.pageSize);
     return {
-      page: parseInt(req.param('page')) || 1,
+      page: parseInt(req.query.page) || 1,
       pageSize: (!isNaN(parsedPageSize) && parsedPageSize < 100) ? parsedPageSize : 10
     };
   },

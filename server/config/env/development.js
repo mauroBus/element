@@ -5,7 +5,9 @@ var privateKeys = require('./private.keys');
 module.exports = {
   env: 'development',
   db: { // mongodb options
-    uri: 'mongodb://localhost/elementbox-dev'
+    uri: 'mongodb://localhost/elementbox-dev',
+    user: '',
+    pass: ''
   },
   mailer: {
     from: privateKeys.mailer.from,
@@ -19,3 +21,4 @@ module.exports = {
   },
   cloudinaryAccounts: privateKeys.cloudinaryAccounts
 };
+// 271687969
