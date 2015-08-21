@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "firstName": "Alice",
+    "lastName": "Cooper",
+    "dni": "33555585",
+    "dob": "16 Ago 1888"
+  },
+  {
+    "id": 2,
+    "firstName": "Alan",
+    "lastName": "Poe",
+    "dni": "30222555",
+    "dob": "5 Ago 1987"
+  },
+  {
+    "id": 3,
+    "firstName": "Mark",
+    "lastName": "Zukemberg",
+    "dni": "25666999",
+    "dob": "11 Ago 1960"
+  },
+  {
+    "id": 4,
+    "firstName": "John",
+    "lastName": "Doe",
+    "dni": "16555888",
+    "dob": "20 Ago 1988"
+  },
+  {
+    "id": 5,
+    "firstName": "Johnny",
+    "lastName": "Daemon",
+    "dni": "16555888",
+    "dob": "20 Ago 1988"
+  }
+]
