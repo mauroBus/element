@@ -450,3 +450,4 @@ section.menu .main-menu-btn:hover{background-color:#8c8c8c;color:#FFF}
 .search-box-container .container-4 .search-input:focus,.search-box-container .container-4 .search-input:focus .search-input,.search-box-container .container-4:active .search-input,.search-box-container .container-4:focus .search-input,.search-box-container .container-4:hover .search-input{background:#565a5c}
 .search-box-container .container-4 button.icon:hover{background:#8d4ba6!important}
 canvas.thumb{-webkit-box-shadow:3px 3px 3px 0 #e3e3e3;-moz-box-shadow:3px 3px 3px 0 #e3e3e3;box-shadow:3px 3px 3px 0 #e3e3e3;border:1px solid #c3c3c3;width:90%;max-width:250px;height:120px;margin-top:6px;padding:5px}
+.alert-modal-container .modal-body{white-space:pre-line}

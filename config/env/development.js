@@ -6,8 +6,12 @@ module.exports = {
   env: 'development',
   db: { // mongodb options
     uri: 'mongodb://localhost/elementbox-dev',
-    user: '',
-    pass: ''
+    // user: '',
+    // pass: ''
+    options: {
+      user: '',
+      pass: ''
+    }
   },
   mailer: {
     from: privateKeys.mailer.from,
