@@ -9,7 +9,14 @@
   </pagination>
 
   <div ng-show="wishList.length" class="list-group">
-    <product-item ng-repeat="wishItem in wishList" product="wishItem" class="list-group-item" remove="true" fetch-method="fetchPage()" remove-method="removeFromWishList(wishItem)"></product-item>
+    <product-item
+      ng-repeat="wishItem in wishList"
+      product="wishItem"
+      class="list-group-item"
+      remove="true"
+      fetch-method="fetchPage()"
+      remove-method="removeFromWishList(wishItem)">
+    </product-item>
   </div>
 <!--       <div class="col-md-12">
         <a href=""
