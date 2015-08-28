@@ -69,9 +69,17 @@ angular.module('elementBoxApp.controller', [])
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
       var substateTo = toState.name.split('.')[1];
       var substateFrom = fromState.name.split('.')[1];
-      if (substateTo !== substateFrom || toState.name === 'main.products.info') {
-        window.scrollTo(0, 0);
+
+      if (window.scrollY > 150 && (substateTo !== substateFrom || toState.name === 'main.products.info')) {
+        angular.element('body').animate({ scrollTop: 0 }, 400);
       }
+
+      // Sending Analytics:
+      // window.ga('set', {
+      //   page: toState.name,
+      //   params: toParams
+      // });
+      window.ga('send', 'pageview', '/' + toState.name);
     });
 
     $rootScope.$on(EVENT_NAMES.addWishList, function(event, product) {

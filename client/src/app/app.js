@@ -3,6 +3,7 @@ angular.module('elementBoxApp', [
   'ui.bootstrap',
   'ui.router',
   'ngAnimate',
+  'ngProgress',
   // 'nvd3ChartDirectives',
   // * template bugs:
   'templates.app', // bag with all the modules html templates
@@ -38,6 +39,35 @@ angular.module('elementBoxApp', [
 .config(['$httpProvider', function ($httpProvider) {
   $httpProvider.interceptors.push('httpInterceptor');
 }])
+
+
+.factory('$exceptionHandler', function() {
+  return function(exception, cause) {
+    // exception.message += ' (caused by "' + cause + '")';
+
+    window.ga('send', 'exception', {
+      exDescription: exception.message,
+      exFatal: true,
+      exception: exception,
+      message: exception.file + '(' + exception.line + ':' + exception.col + '): ' + exception.message
+    });
+  };
+})
+
+
+// .config([function () {
+//   window.onerror = function(message, file, line, col, exception) {
+//     console.log(exception.stack);
+
+//     window.ga('send', 'exception', {
+//       exDescription: exception.message,
+//       exFatal: true,
+//       exception: exception,
+//       message: file + '(' + line + ':' + col + '): ' + message
+//     });
+//   };
+// }])
+
 
 
 // /*** To Refresh URL without reloading the controllers: ***/
