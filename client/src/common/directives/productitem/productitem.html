@@ -12,7 +12,7 @@
     </a>
     <!-- <div class="text-overflow">{{product.description}}</div> -->
     <h5 class="text-muted pull-right">{{product.createdAt | date:'mediumDate'}}</h5>
-    <div class="text-muted pull-left">in {{product.categories | json}}</div>
+    <div class="label label-info" ng-repeat="(key, categ) in product.categories">{{categ}}</div>
 
     <div class="col-md-12" ng-show="remove || edit || info">
       <a ng-show="remove" href=""
