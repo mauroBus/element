@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
     Roles = require('./config/roles'),
     fs = require('fs');
 
-mongoose.connect(config.db.uri);
+mongoose.connect(config.db.uri, config.db.options);
 
 var db = mongoose.connection;
 

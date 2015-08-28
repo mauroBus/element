@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var merge = require('merge-stream');
 var rimraf = require('rimraf');
 var package = require('./package.json');
+var env = require('gulp-env');
 
 // var path = require('path');
 var runSequence = require('run-sequence');
@@ -22,7 +23,7 @@ var config = {
 
 /***** Task: Build Client *****/
 gulp.task('build-client', function() {
-  return shelljs.exec('cd ./client && gulp build && cd ../');
+  return shelljs.exec('cd ./client && gulp build --production && cd ../');
 });
 
 /***** Task: Copy Client *****/
@@ -35,7 +36,16 @@ gulp.task('copy-client', ['build-client'], function() {
 /***** Task: Copy Server *****/
 gulp.task('copy-server', function() {
   return gulp
-    .src(['server/**/*', 'LICENSE'])
+    .src([
+      'server/**/*',
+      'LICENSE',
+      '!server/node_modules/**/*',
+      '!server/uploads/*',
+      '!server/seed-data/*',
+      '!server/seed.js',
+      '!server/access.log',
+      '!server/gulpfile.js'
+    ])
     .pipe(gulp.dest(config.deploy, {mode: 0777}));
 });
 
@@ -46,12 +56,19 @@ gulp.task('clean', function(done) {
 
 /***** Task: Deploy *****/
 gulp.task('deploy', function(cbk) {
-    return runSequence('clean', [
-      'copy-client',
-      'copy-server'
-    ], cbk);
-  }
-);
+  /*env({
+    vars: {
+      NODE_ENV: 'production'
+    }
+  });
+*/
+  process.env.NODE_ENV = 'production';
+
+  return runSequence('clean', [
+    'copy-client',
+    'copy-server'
+  ], cbk);
+});
 
 /***** Task: Default *****/
 gulp.task('default', [
