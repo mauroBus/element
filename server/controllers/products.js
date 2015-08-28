@@ -10,7 +10,11 @@ var mongoose = require('mongoose'),
     errorHandler = require('../utils/response/errors'),
     pagination = require('mongoose-pagination'),
     User = mongoose.model('User'),
-    Cloud = require('../utils/cloud/cloud');
+    Cloud = require('../utils/cloud/cloud'),
+    Mailer = require('../utils/mailer/mailer'),
+    config = require('../config/config'),
+    UsersModel = require('../models/user'),
+    Users = mongoose.model('User');
 
 /**
  * Find product by id
@@ -186,3 +190,60 @@ exports.rate = function(req, res) {
     }
   });
 };
+
+exports.contact = function(req, res) {
+  if (req.product.user.ref.toString() === req.user.id) { // user is the creator.
+    return res.status(403).send({
+      message: 'User is contacting himself',
+      status: 403
+    });
+  }
+
+  if (!req.body.commentText) {
+    return res.status(404).send({
+      message: 'commentText must be present.',
+      status: 404
+    });
+  }
+
+  Users
+    .findById({ _id: req.product.user.ref })
+    .exec(function(error, toUser) {
+      if (error && !toUser) {
+        return res.status(404).send({
+          message: 'Product User does not exist.',
+          status: 404
+        });
+      }
+      Mailer.sendMail({
+        to: toUser.email,
+        replyTo: req.user.email,
+        subject: 'You have been contacted for "' + req.product.title + '".',
+        templateUrl: 'templates/contact-product.html',
+        tplData: {
+          name: req.user.displayName,
+          appName: config.app.title,
+          prod: req.product,
+          checkinDate: req.body.checkinDate || new Date(),
+          checkoutDate: req.body.checkoutDate || new Date(),
+          commentText: req.body.commentText,
+          host: config.ipaddr + (config.port ? (':' + config.port) : '')
+        },
+        cb: function(err, info) {
+          if (err) {
+            res.status(500).json({
+              msg: 'Comment was not sent.',
+              error: err
+            });
+          } else {
+            res.status(200).json({
+              msg: 'Comment Successfuly Sent.'
+            });
+          }
+        }
+      });
+
+    });
+
+};
+

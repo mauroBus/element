@@ -24,7 +24,8 @@ module.exports = {
 
         var mailOptions = {
           to: options.to,
-          from: config.mailer.from,
+          from: options.from || config.mailer.from,
+          replyTo: options.replyTo,
           subject: options.subject,
           html: tpl
         };

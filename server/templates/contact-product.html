@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+  <p>Dear <%= name %>,</p>
+  <p></p>
+  <p>You have received a comment in your product:</p>
+  <a href="http://<%= host %>/#/products/info/<%= prod._id %>">
+      <%= prod.title %>
+  </a>
+  <p>
+    <div class="jumbotron">
+      <div class="pull-left">
+        Checkin Date:
+        <span class="form-control"><%= checkinDate %></span>
+      </div>
+      <div class="pull-left">
+        Checkout Date:
+        <span class="form-control"><%= checkoutDate %></span>
+      </div>
+      <div class="text-overflow panel panel-dark">
+        <%= commentText %>
+      </div>
+    </div>
+  </p>
+  <br>
+  <br>
+  <p>The <%= appName %> Team.</p>
+</body>
+</html>

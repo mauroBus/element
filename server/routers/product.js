@@ -31,6 +31,7 @@ module.exports = function(app) {
 
   // Rating routes:
   app.put('/api/products/:productId/rate', users.requiresLogin, products.rate);
+  app.put('/api/products/:productId/contact', users.requiresLogin, products.contact);
 
   // app.param('categoryId', function(c) {return c;});
   // app.get('/api/products/category/:categoryId', products.queryByCategory);
