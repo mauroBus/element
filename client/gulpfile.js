@@ -37,6 +37,7 @@ var config = {
   cssDist: 'dist/css',
   fontsDist: 'dist/fonts',
   slickFontsDist: 'dist/css/fonts',
+  jsModuleName: 'modules',
   serverPort: 8080,
   livereloadPort: 12345
 };
@@ -47,7 +48,8 @@ var cssVendors = [
   config.vendor + '/angular-ui-tree/dist/angular-ui-tree.min.css',
   // config.vendor + '/angular-carousel/dist/angular-carousel.css'
   config.vendor + '/slick-carousel/slick/slick.css',
-  config.vendor + '/slick-carousel/slick/slick-theme.css'
+  config.vendor + '/slick-carousel/slick/slick-theme.css',
+  config.vendor + '/ngprogress/ngProgress.css',
 ];
 
 var jsVendors = [
@@ -63,6 +65,7 @@ var jsVendors = [
   config.vendor + '/slick-carousel/slick/slick.min.js',
   config.vendor + '/angular-slick/dist/slick.js',
   config.vendor + '/angular-ui-tree/dist/angular-ui-tree.js',
+  config.vendor + '/ngprogress/build/ngprogress.min.js'
   // config.vendor + '/nvd3/nv.d3.min.js',
   // config.vendor + '/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js'
 ];
@@ -71,6 +74,7 @@ var jsVendors = [
 
 /* Returns an array with the app module names */
 var getModules = function() {
+  if (argv.production) { return []; }
   var modules = shelljs.ls(['src/app/']);
   return _.filter(modules, function(entry) { return !entry.match(/\.js$/); });
 };
@@ -101,6 +105,9 @@ gulp.task('build-index', function() {
 gulp.task('build-js-common', function() {
   gulp.src('src/common/**/*.js')
       .pipe(concat('common.js'))
+      .pipe(gulpIf(argv.production, uglify(config.jsName + '.js', {
+        mangle: false
+      })))
       .pipe(gulp.dest(config.jsDist));
 });
 
@@ -110,17 +117,27 @@ gulp.task('build-app-modules', function() {
   var modules = getModules();
   var modulesFull = getFullModules();
 
-  _.forEach(modulesFull, function(module, i) {
-    gulp.src(module + '/**/*.js') // all js file inside the module folder.
-        .pipe(concat(modules[i] + '.js'))
-        .pipe(gulp.dest(config.jsModulesDist));
-  });
+  if (!argv.production) {
+    _.forEach(modulesFull, function(module, i) {
+      gulp.src(module + '/**/*.js') // all js file inside the module folder.
+          .pipe(concat(modules[i] + '.js'))
+          .pipe(gulp.dest(config.jsModulesDist));
+    });
+
+  } else {
+    // Generate only 1 file for modules in case of prod:
+    gulp.src('src/app/*/**/*.js')
+      .pipe(concat(config.jsModuleName + '.js'))
+      .pipe(gulpIf(argv.production, uglify(config.jsModuleName + '.js', {
+        mangle: false
+      })))
+      .pipe(gulp.dest(config.jsDist));
+  }
 });
 
 /***** [Private] Task: Build JS *****/
 gulp.task('build-js', ['build-app-modules', 'build-js-common'], function() {
   var now = new Date();
-
   var htmlMinOpts = {
     collapseWhitespace: true,
     conservativeCollapse: true
@@ -174,7 +191,8 @@ gulp.task('build-css', ['bootstrap-css'], function() {
   return gulp.src([
       './src/assets/less/app.less',
       './src/app/**/*.less',
-      './src/common/directives/**/*.less'
+      './src/common/directives/**/*.less',
+      './src/common/services/**/*.less'
     ])
     .pipe(concat('styles.css'))
     .pipe(less()) // {paths: [ path.join(__dirname, 'less', 'includes') ]}
@@ -196,12 +214,14 @@ gulp.task('copy-static', function() {
         .pipe(gulp.dest(config.slickFontsDist)),
     gulp.src(['src/assets/**/*.*', '!src/assets/less/*.*'])
         .pipe(gulp.dest(config.dist)),
+    gulp.src(['src/assets/imgs/favicon.ico', 'src/assets/imgs/favicon.png', 'src/assets/humans.txt', 'src/assets/robots.txt'])
+        .pipe(gulp.dest(config.dist)),
     merge(
       gulp.src(jsVendors)
         .pipe(gulpIf(argv.production, uglify('angular.js', { mangle: false })))
         .pipe(concat('angular.js')),
       gulp.src(config.vendor + '/angular-bootstrap/ui-bootstrap-tpls.js')
-          .pipe(gulpIf(argv.production, uglify('ui-bootstrap-tpls.js', { mangle: false })))
+        .pipe(gulpIf(argv.production, uglify('ui-bootstrap-tpls.js', { mangle: false })))
     ).pipe(gulp.dest(config.jsDist))
   );
 });
@@ -233,7 +253,8 @@ gulp.task('watch', ['lint', 'build'], function() {
   gulp.watch([
       'src/assets/less/*.less',
       'src/app/**/*.less',
-      'src/common/directives/**/*.less'
+      'src/common/directives/**/*.less',
+      'src/common/services/**/*.less'
     ],
     [
       'build-css'

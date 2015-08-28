@@ -14,7 +14,8 @@
     "angular-file-upload": "~1.2.0",
     "bootstrap": "~3.3.5",
     "angular-ui-tree": "~2.7.0",
-    "angular-slick": "~0.2.1"
+    "angular-slick": "~0.2.1",
+    "ngprogress": "~1.1.2"
   },
   "resolutions": {
     "angular": "~1.4.3"
