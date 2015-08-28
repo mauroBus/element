@@ -25,6 +25,10 @@ angular.module('elementBoxApp.common')
     rate: {
       method: 'PUT',
       url: Urls.products.products + '/:id/rate'
+    },
+    contact: {
+      method: 'PUT',
+      url: Urls.products.products + '/:id/contact'
     }
   });
 

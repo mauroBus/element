@@ -19,11 +19,11 @@ angular.module('elementBoxApp.common')
 
       modalInstance = $modal.open({
         templateUrl: 'services/alert/alert.html',
-        controller: function($scope) {
+        controller: ['$scope', function($scope) {
           $scope.msg = (typeof config.parseMsgCbk === 'function') ? config.parseMsgCbk(config.msg) : config.msg;
           $scope.hasCancel = config.hasCancel;
           $scope.title = config.title;
-        },
+        }],
         size: 'sm',
         backdrop: 'static'
       });

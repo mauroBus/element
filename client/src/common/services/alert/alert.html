@@ -1,10 +1,12 @@
-<div class="modal-header">
-  <h3 class="modal-title">{{title}}</h3>
-</div>
-<div class="modal-body">
-  {{msg}}
-</div>
-<div class="modal-footer">
-  <button class="btn btn-primary" ng-click="$close()">OK</button>
-  <button ng-if="hasCancel" class="btn btn-warning" ng-click="$dismiss()">Cancel</button>
+<div class="alert-modal-container">
+  <div class="modal-header">
+    <h3 class="modal-title">{{title}}</h3>
+  </div>
+  <div class="modal-body">
+    {{msg}}
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="$close()">OK</button>
+    <button ng-if="hasCancel" class="btn btn-warning" ng-click="$dismiss()">Cancel</button>
+  </div>
 </div>
