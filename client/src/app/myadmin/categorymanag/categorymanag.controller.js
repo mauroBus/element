@@ -54,10 +54,12 @@ angular.module('elementBoxApp.myadmin.categorymanag')
       });
     };
 
+
+
     $scope.edit = function(categ) {
+
       var modalInstance = $modal.open({
-        templateUrl: 'myadmin/categorymanag/partials/category-edit.html',
-        controller: function($scope) {
+        controller: ['$scope', function($scope) {
           $scope.categ = angular.copy(categ);
           $scope.applyCategChanges = function(valid, changedCateg) {
             if (valid) {
@@ -68,7 +70,8 @@ angular.module('elementBoxApp.myadmin.categorymanag')
           $scope.cancelEdditing = function() {
             modalInstance.close();
           };
-        },
+        }],
+        templateUrl: 'myadmin/categorymanag/partials/category-edit.html',
         size: 'lg',
         backdrop: 'static'
       });
