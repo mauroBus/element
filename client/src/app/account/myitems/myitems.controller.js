@@ -27,6 +27,20 @@ angular.module('elementBoxApp.account.myitems')
         });
     };
 
+    $scope.removeProduct = function(product, index) {
+      ModalAlert.alert({
+        title: 'Delete product',
+        msg: 'Do you want to delete the product? \n\t"' + product.title + '"',
+        hasCancel: true
+      }).then(function() {
+        // UserService
+        //   .removeFromWishList({ itemId: wishItem._id })
+        product.$remove().$promise.then(function() {
+          $scope.fetchPage();
+        });
+      });
+    };
+
     $scope.$watch('page', function(newVal, oldVal) {
       $scope.fetchPage();
     });

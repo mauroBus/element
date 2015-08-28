@@ -9,7 +9,16 @@
   </pagination>
 
   <div ng-show="products.length" class="list-group">
-    <product-item ng-repeat="product in products" product="product" class="list-group-item" remove="true" edit="true" fetch-method="fetchPage()"></product-item>
+    <product-item
+      ng-repeat="product in products"
+      product="product"
+      class="list-group-item"
+      remove="true"
+      removeFromWishList
+      edit="true"
+      fetch-method="fetchPage()"
+      remove-method="removeProduct(product)">
+    </product-item>
   </div>
 
   <pagination
