@@ -6,13 +6,17 @@ angular.module('elementBoxApp.products.productInfo')
     restrict: 'E',
     templateUrl: 'products/product-info/contact/contact-segment.html',
     transclude: true,
-    scope: {},
-    controller: ['$scope', function($scope) {
+    scope: {
+      product: '='
+    },
+    controller: ['$scope', 'ProductsService', function($scope, ProductsService) {
       $scope.checkinDate = null;
       $scope.checkoutDate = null;
 
       $scope.checkinOpened = false;
       $scope.checkoutOpened = false;
+
+      $scope.contactSent = false;
 
       $scope.checkinMinDate = new Date();
       $scope.checkoutMinDate = new Date();
@@ -20,10 +24,15 @@ angular.module('elementBoxApp.products.productInfo')
       $scope.commentText = '';
 
       $scope.doContact = function() {
-
-        console.log($scope.checkinDate);
-        console.log($scope.checkoutDate);
-        console.log($scope.commentText);
+        ProductsService.contact({
+            _id: $scope.product._id,
+            checkinDate: $scope.checkinDate,
+            checkoutDate: $scope.checkoutDate,
+            commentText: $scope.commentText
+          })
+          .$promise.then(function() {
+            $scope.contactSent = true;
+          });
       };
 
       $scope.openCheckin = function($event) {

@@ -5,7 +5,7 @@
 
   <div class="panel-body">
 
-    <form>
+    <form ng-show="!contactSent">
       <div class="form-group">
         <label for="checkinField">Check In</label>
         <p class="input-group">
@@ -63,6 +63,13 @@
 
       <button type="submit" class="btn btn-primary btn-block pull-left" ng-click="doContact()">Contact</button>
     </form>
+
+    <div ng-show="contactSent">
+      <div class="alert alert-success" role="alert">
+        <span class="glyphicon glyphicon-info-sign"></span>
+        Your message has been sent!
+      </div>
+    </div>
 
   </div> <!-- panel-body -->
 </div>

@@ -24,14 +24,24 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" ng-show="!commentSent">
     <div class="col-md-3"></div>
     <div class="col-md-9 row-space-2 add-review">
       <textarea class="form-control" rows="2" ng-model="newComment" maxlength="700" minlength="2" placeholder="Write a comment">{{comment.text}}</textarea>
       <div class="review-foot clearfix">
         <!-- <div class="pull-left">Add a comment</div> -->
-        <div class="btn btn-info btn-sm pull-right" ng-disabled="newComment.trim() === ''" ng-click="addComment(newComment); newComment = '';">Add Comment</div>
+        <div class="btn btn-info btn-sm pull-right" ng-disabled="newComment.trim() === ''" ng-click="addComment(newComment)">Add Comment</div>
       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-9 row-space-2 add-review">
+      <alert type="success" ng-show="commentSent">
+          <span class="glyphicon glyphicon-ok-sign"></span>
+          <span>Comment Sent!</span>
+      </alert>
     </div>
   </div>
 

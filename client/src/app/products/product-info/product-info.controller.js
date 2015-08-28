@@ -8,6 +8,8 @@ angular.module('elementBoxApp.products.productInfo')
     $scope.slidesIndex = 0;
     $scope.userHasRated = false;
     $scope.rateVal = null;
+    $scope.newComment = '';
+    $scope.commentSent = false;
     var ratingInProcess = false;
 
     $rootScope.$emit('title', 'Product Info');
@@ -26,6 +28,7 @@ angular.module('elementBoxApp.products.productInfo')
 
     // Fetching product:
     $scope.product = ProductsService.get({id: $stateParams.productId}, function(p) {
+      p.images = p.images ? p.images : [];
       p.images.forEach(function(image, index) {
         $scope.slides.push({ url: image.url, index: index+1 });
       });
@@ -48,17 +51,18 @@ angular.module('elementBoxApp.products.productInfo')
     };
 
     $scope.addComment = function(commentTxt) {
-      commentTxt = commentTxt.trim();
-      if (commentTxt) {
-        var newComment = {
-          prodId: $stateParams.productId,
-          text: commentTxt
-        };
-        CommentsService.save(newComment, function(data) {
-          $scope.fetchPage();
-          $rootScope.$emit(EVENT_NAMES.addComment, newComment);
-        });
-      }
+      if (!commentTxt || !commentTxt.trim()) { return; }
+
+      var newComment = {
+        prodId: $stateParams.productId,
+        text: commentTxt
+      };
+      CommentsService.save(newComment, function(data) {
+        $scope.fetchPage();
+        $rootScope.$emit(EVENT_NAMES.addComment, newComment);
+        $scope.newComment = '';
+        $scope.commentSent = true;
+      });
     };
 
     $scope.$watch('commentsData.page', function(newVal, oldVal) {
