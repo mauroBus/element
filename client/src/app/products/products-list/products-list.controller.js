@@ -6,7 +6,7 @@ angular.module('elementBoxApp.products.productList')
   function($scope,   $rootScope,   $state,   $stateParams,   $filter,   $location,   ProductsService,   Categories) {
     $scope.products = [];
     $scope.page = ($stateParams.page) ? parseInt($stateParams.page) : 1; // Setting the current page.
-    $scope.pageSize = 3;
+    $scope.pageSize = 10;
     $scope.totalPages = 0;
     $scope.totalProducts = 0;
     $scope.currentCateg = {};
@@ -70,6 +70,10 @@ angular.module('elementBoxApp.products.productList')
           $scope.totalProducts = res.total;
           $scope.pageSize = res.pageSize;
           $scope.isLoading = false;
+
+          if (window.scrollY > 150) {
+            angular.element('body').animate({scrollTop: 150}, 400);
+          }
         });
     };
 
