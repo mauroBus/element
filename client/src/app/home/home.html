@@ -104,7 +104,7 @@
              ng-class="{'col-lg-8 col-md-8 col-sm-8': categ.large, 'col-lg-4 col-md-4 col-sm-4': !categ.large }"
              ng-show="categ.displayOnHome" >
           <div class="categ-img"
-               style="background-image: url('imgs/categs/{{categ.img}}');" >
+               style="background-image: url('{{categ.img}}');" >
             <a class="categ__link" ui-sref="main.products.list({ categ: categ._id, page: 1 })" >
               <div class="va-container categ__link__bkg">
                 <div class="va-middle text-center">
