@@ -22,7 +22,8 @@
             <categ-selector
               categ-tree="categories[0]"
               on-done-cbk="onCategSelected"
-              on-undone-cbk="onCategUnselected">
+              on-undone-cbk="onCategUnselected"
+              api="categApi">
             </categ-selector>
           </div>
         </div> <!-- field-set__item -->
@@ -113,12 +114,26 @@
 
 
     <div ng-if="productSaved" class="panel-body">
-      <div class="jumbotron">
-        <h1>Congratulations!!!</h1>
-        <p>Product Successfuly Created</p>
+      <div class="jumbotron clearfix">
+        <h1>Done!</h1>
+        <p class="">Product Successfuly Saved</p>
         <p>
-          <a class="btn btn-default btn-lg pull-left" ui-sref="main.products.info({productId: productSaved._id})" role="button">View</a>
-          <a class="btn btn-primary btn-lg pull-left" ui-sref="main.products" role="button">Continue</a>
+          <div class="clearfix product-success col-lg-8 col-md-8 col-sm-10 col-xs-12">
+            <a class="clearfix"
+              ui-sref="main.products.info({productId: productSaved._id})">
+
+              <img class="thumbnail product__image col-lg-2 col-md-2 col-sm-3 col-xs-4" ng-src="{{getProdThumbnail(productSaved)}}" alt="{{productSaved.title}}">
+
+              <div class="col-lg-10 col-md-10 col-sm-9 col-xs-8">
+                <h4 class="text-overflow" title="{{productSaved.title}}">{{productSaved.title}}</h4>
+              </div>
+            </a>
+          </div>
+
+          <a class="btn btn-info btn-lg pull-right"
+            ui-sref="main.products" role="button">
+            Continue
+          </a>
         </p>
       </div>
     </div>
