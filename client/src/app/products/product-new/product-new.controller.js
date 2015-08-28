@@ -2,8 +2,8 @@
 angular.module('elementBoxApp.products.productNew')
 
 .controller('ProductNewCtrl', [
-          '$scope', '$rootScope', '$stateParams', 'ProductsService', 'Categories', 'ProdErrorsService',
-  function($scope,   $rootScope,   $stateParams,   ProductsService,   Categories,   ProdErrorsService) {
+          '$scope', '$rootScope', '$stateParams', 'ngProgressService', 'ProductsService', 'Categories', 'ProdErrorsService',
+  function($scope,   $rootScope,   $stateParams,   ngProgressService,   ProductsService,   Categories,   ProdErrorsService) {
     $scope.productCreated = false;
     $scope.areImgsCollapsed = false;
     $scope.isCategSelected = false;
@@ -33,7 +33,7 @@ angular.module('elementBoxApp.products.productNew')
 
       if ($scope.error.category || $scope.error.title || $scope.error.price || $scope.error.description || $scope.error.images) {
         // $('.field-set__item--category').scrollIntoView();
-        window.scrollTo(0, 150);
+        angular.element('body').animate({ scrollTop: 150 }, 400);
         return;
       }
 
@@ -45,10 +45,13 @@ angular.module('elementBoxApp.products.productNew')
       //   if (p) { catags.push({ name: $scope.catalogs[i].filter }); }
       // });
 
+      ngProgressService.start();
+
       var data = angular.extend({}, $scope.product, { categories: [ $scope.selectedCateg._id ] });
 
       ProductsService.save(data, function(newProduct, headers) {
         $scope.productCreated = newProduct;
+        ngProgressService.complete();
       });
     };
 
