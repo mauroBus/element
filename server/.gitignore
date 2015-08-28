@@ -1,3 +1,4 @@
 npm_debug.log
+npm-debug.log
 node_modules
 config/env/private.keys.js

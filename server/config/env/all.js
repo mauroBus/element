@@ -1,7 +1,6 @@
 'use strict';
 
 var path = require('path');
-
 var rootPath = path.normalize(__dirname + '/../../../client/dist');
 
 module.exports = {
@@ -11,8 +10,8 @@ module.exports = {
     keywords: ''
   },
   root: rootPath,
-  uploadDir: '../client/dist/uploads/',
-  uploadDirTmp: '../client/dist/uploads/imgs-tmp/',
+  uploadDir: process.env.NODE_ENV === 'development' ? '../client/dist/uploads' : 'public/uploads',
+  uploadDirTmp: (process.env.NODE_ENV === 'development' ? '../client/dist/uploads' : 'public/uploads') + '/imgs-tmp/',
   ipaddr: process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
   port: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000,
   templateEngine: 'swig',

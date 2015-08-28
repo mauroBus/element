@@ -9,11 +9,11 @@ module.exports = {
   root: rootPath,
   env: 'production',
   db: { // mongodb options
-    uri: process.env.OPENSHIFT_MONGODB_DB_URL
-    // options: {
-    //   user: process.env.OPENSHIFT_MONGODB_DB_USERNAME
-    //   pass: process.env.OPENSHIFT_MONGODB_DB_PASSWORD
-    // }
+    uri: process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost/elementbox-dev',
+    options: {
+      user: process.env.OPENSHIFT_MONGODB_DB_USERNAME || '',
+      pass: process.env.OPENSHIFT_MONGODB_DB_PASSWORD || ''
+    }
   },
   mailer: {
     from: privateKeys.mailer.from,

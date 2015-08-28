@@ -13,7 +13,7 @@ var init = require('./config/init')(),
  */
 
 // Bootstrap db connection
-var db = mongoose.connect(config.db.uri, function(err) {
+var db = mongoose.connect(config.db.uri, config.db.options, function(err) {
   if (err) {
     console.error(chalk.red('Could not connect to MongoDB!'));
     console.log(chalk.red(err));
@@ -27,7 +27,7 @@ var app = require('./config/express')(db);
 require('./config/passport')();
 
 // Start the app by listening on <port>
-app.listen(config.port);
+app.listen(config.port, config.ipaddr);
 
 // Expose app
 exports = module.exports = app;
