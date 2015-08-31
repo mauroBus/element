@@ -1,6 +1,8 @@
 angular.module('elementBoxApp.common')
 
-.controller('fileUploadController', ['$scope', '$timeout', 'FileUploader', function($scope, $timeout, FileUploader) {
+.controller('fileUploadController', [
+        '$scope', '$timeout', 'FileUploader',
+function($scope,   $timeout,   FileUploader) {
 
   var uploader = $scope.uploader = new FileUploader({
     url: '/upload',
@@ -17,46 +19,83 @@ angular.module('elementBoxApp.common')
     }
   });
 
+  $scope.listeners = $scope.listeners || {};
+
+  $scope.api = {
+    uploader: uploader,
+    uploadAll: uploader.uploadAll,
+    getNotUploadedItems: uploader.getNotUploadedItems,
+    cancelAll: uploader.cancelAll,
+    isUploading: uploader.isUploading,
+    clearQueue: uploader.clearQueue,
+    progress: uploader.progress,
+    queue: uploader.queue,
+    isHTML5: uploader.isHTML5
+  };
+
   // CALLBACKS:
+
   uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
-    // console.info('onWhenAddingFileFailed', item, filter, options);
+    if (angular.isFunction($scope.listeners.onWhenAddingFileFailed)) {
+      $scope.listeners.onWhenAddingFileFailed.apply(arguments);
+    }
   };
   uploader.onAfterAddingFile = function(fileItem) {
     var index = uploader.queue.indexOf(fileItem);
     fileItem.url = '/upload';
     $scope.files[index] = { url: '', isUploaded: false };
-    // console.info('onAfterAddingFile', fileItem);
+    if (angular.isFunction($scope.listeners.onAfterAddingFile)) {
+      $scope.listeners.onAfterAddingFile.apply(arguments);
+    }
   };
   uploader.onAfterAddingAll = function(addedFileItems) {
-    // console.info('onAfterAddingAll', addedFileItems);
+    if (angular.isFunction($scope.listeners.onAfterAddingAll)) {
+      $scope.listeners.onAfterAddingAll.apply(arguments);
+    }
   };
   uploader.onBeforeUploadItem = function(item) {
-    // console.info('onBeforeUploadItem', item);
+    if (angular.isFunction($scope.listeners.onBeforeUploadItem)) {
+      $scope.listeners.onBeforeUploadItem.apply(arguments);
+    }
   };
   uploader.onProgressItem = function(fileItem, progress) {
-    // console.info('onProgressItem', fileItem, progress);
+    if (angular.isFunction($scope.listeners.onProgressItem)) {
+      $scope.listeners.onProgressItem.apply(arguments);
+    }
   };
   uploader.onProgressAll = function(progress) {
-    // console.info('onProgressAll', progress);
+    if (angular.isFunction($scope.listeners.onProgressAll)) {
+      $scope.listeners.onProgressAll.apply(arguments);
+    }
   };
   uploader.onSuccessItem = function(fileItem, response, status, headers) {
-    // console.info('onSuccessItem', fileItem, response, status, headers);
+    if (angular.isFunction($scope.listeners.onSuccessItem)) {
+      $scope.listeners.onSuccessItem.apply(arguments);
+    }
   };
   uploader.onErrorItem = function(fileItem, response, status, headers) {
-    // console.info('onErrorItem', fileItem, response, status, headers);
+    if (angular.isFunction($scope.listeners.onErrorItem)) {
+      $scope.listeners.onErrorItem.apply(arguments);
+    }
   };
   uploader.onCancelItem = function(fileItem, response, status, headers) {
-    // console.info('onCancelItem', fileItem, response, status, headers);
+    if (angular.isFunction($scope.listeners.onCancelItem)) {
+      $scope.listeners.onCancelItem.apply(arguments);
+    }
   };
   uploader.onCompleteItem = function(fileItem, response, status, headers) {
     var index = uploader.queue.indexOf(fileItem);
     $scope.files[index].url = response.path;
     $scope.files[index].isUploaded = true;
     // $scope.files.push({url: response.path});
-    // console.info('onCompleteItem', fileItem, response, status, headers);
+    if (angular.isFunction($scope.listeners.onCompleteItem)) {
+      $scope.listeners.onCompleteItem.apply(arguments);
+    }
   };
   uploader.onCompleteAll = function() {
-    // console.info('onCompleteAll');
+    if (angular.isFunction($scope.listeners.onCompleteAll)) {
+      $scope.listeners.onCompleteAll.apply(arguments);
+    }
   };
 
   var swap = function(array, from, to) {
@@ -67,8 +106,6 @@ angular.module('elementBoxApp.common')
   };
 
   $scope.swapQueue = function(from, to) {
-    console.log(from);
-    console.log(to);
     swap(uploader.queue, from, to);
     swap($scope.files, from, to);
   };
