@@ -15,8 +15,20 @@ angular.module('elementBoxApp.userdetails')
     $scope.ownProducts = [];
     $scope.totalProducts = 0;
     $scope.userReported = false;
+    $scope.isLoading = true;
 
-    $scope.user = UserService.get({ id: $stateParams.id });
+    $scope.user = UserService.get({ id: $stateParams.id, SILENT_ON_ERROR: true });
+    $scope.user.$promise.finally(function() {
+      $scope.isLoading = false;
+      $scope.user.comments.forEach(function(cmnt) {
+        cmnt.user = {
+          ref: $scope.user._id,
+          displayName: $scope.user.displayName,
+          firstName: $scope.user.firstName,
+          lastName: $scope.user.lastName
+        };
+      });
+    });
 
     var fetchProducts = function(page, pageSize) {
       ProductsService.get({ userId: $stateParams.id, page: page, pageSize: pageSize }, function(data) {

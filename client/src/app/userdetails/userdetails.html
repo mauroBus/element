@@ -1,9 +1,13 @@
 <section class="user-details-section">
 
-  <div ng-if="!user._id">
-    <h1 class="text-center">No User</h1>
-    <loading balls-count="5"></loading>
+  <div ng-if="!user._id && !isLoading">
+    <h1 class="text-center">
+      <span class="orange-color glyphicon glyphicon-exclamation-sign"></span>
+      User Not Found
+    </h1>
   </div>
+
+  <loading balls-count="5" ng-show="isLoading"></loading>
 
   <div ng-if="user._id">
 
@@ -44,6 +48,10 @@
       <div class="panel panel-info">
         <div class="panel-heading">About Me</div>
         <div class="panel-body">
+          <dl>
+            <dt>Name</dt>
+            <dd>{{user.firstName}} {{user.lastName}}</dd>
+          </dl>
           <dl>
             <dt>Description</dt>
             <dd>{{user.description}}</dd>
