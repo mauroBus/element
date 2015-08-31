@@ -8,14 +8,16 @@
     next-text="Next">
   </pagination>
 
-  <div ng-show="wishList.length" class="list-group">
+  <div class="list-group">
+    <loading class="list-group-item" ng-show="isLoading" balls-count="4"></loading>
+    <h4 class="empty-categ list-group-item" ng-show="!wishList.length && !isLoading">Empty list.</h4>
     <product-item
       ng-repeat="wishItem in wishList"
       product="wishItem"
       class="list-group-item"
       remove="true"
-      fetch-method="fetchPage()"
-      remove-method="removeFromWishList(wishItem)">
+      fetch-method="fetchPage"
+      remove-method="removeFromWishList">
     </product-item>
   </div>
 <!--       <div class="col-md-12">

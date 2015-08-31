@@ -9,10 +9,12 @@ angular.module('elementBoxApp.account.mywishlist')
     $scope.pageSize = 3;
     $scope.totalPages = 0;
     $scope.totalItems = 0;
+    $scope.isLoading = false;
 
     $scope.$parent.activeState = $state.current.name;
 
     $scope.fetchPage = function() {
+      $scope.isLoading = true;
       UserService.queryWishList({
           page: $scope.page,
           pageSize: $scope.pageSize
@@ -23,10 +25,12 @@ angular.module('elementBoxApp.account.mywishlist')
           $scope.totalPages = res.totalPages;
           $scope.totalItems = res.total;
           $scope.pageSize = res.pageSize;
+          $scope.isLoading = false;
         });
     };
 
     $scope.$watch('page', function(newVal, oldVal) {
+      if ($scope.isLoading) { return; }
       $scope.fetchPage();
     });
 
