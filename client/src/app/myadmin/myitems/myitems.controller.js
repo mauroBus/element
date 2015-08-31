@@ -7,12 +7,15 @@ angular.module('elementBoxApp.myadmin.myitems')
     $scope.pageSize = 3;
     $scope.totalPages = 0;
     $scope.totalProducts = 0;
+    $scope.isLoading = false;
 
     $scope.fetchPage = function() {
       if (!$scope.currentUser || !$scope.currentUser.id) {
         $timeout($scope.fetchPage, 500); // waiting for fetching the user data.
         return;
       }
+      $scope.isLoading = true;
+
       ProductsService.query({
           userId: $scope.currentUser.id,
           page: $scope.page,
@@ -24,10 +27,12 @@ angular.module('elementBoxApp.myadmin.myitems')
           $scope.totalPages = res.totalPages;
           $scope.totalProducts = res.total;
           $scope.pageSize = res.pageSize;
+          $scope.isLoading = false;
         });
     };
 
     $scope.$watch('page', function(newVal, oldVal) {
+      if ($scope.isLoading) { return; }
       $scope.fetchPage();
     });
 
