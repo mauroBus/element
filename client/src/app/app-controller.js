@@ -79,7 +79,9 @@ angular.module('elementBoxApp.controller', [])
       //   page: toState.name,
       //   params: toParams
       // });
-      window.ga('send', 'pageview', '/' + toState.name);
+      if (toState.name) {
+        window.ga('send', 'pageview', '/' + toState.name);
+      }
     });
 
     $rootScope.$on(EVENT_NAMES.addWishList, function(event, product) {
