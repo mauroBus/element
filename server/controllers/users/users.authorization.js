@@ -13,7 +13,9 @@ var _ = require('lodash'),
 exports.userByID = function(req, res, next, id) {
   User.findById(id).exec(function(err, user) {
     if (err) return next(err);
-    if (!user) return next(new Error('Failed to load User ' + id));
+    if (!user) {
+      return res.status(404).json({ msg: 'User with id: "' + id + '" was not found.'});
+    }
     req.profile = user;
     next();
   });

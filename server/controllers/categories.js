@@ -5,8 +5,6 @@ var mongoose = require('mongoose'),
     _ = require('lodash'),
     errorHandler = require('../utils/response/errors'),
     Roles = require('../config/roles');
-    // Response = require('../response/response'),
-    // pagination = require('mongoose-pagination');
 
 // Category Tree example:
 // [
