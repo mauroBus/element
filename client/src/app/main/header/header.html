@@ -141,6 +141,7 @@
       </div>
       <div>
         <a class="btn btn-sm btn-purple"
+          ng-class="{ 'animated bounce': wishListItemAdded, 'animated shake': wishListItemRemoved  }"
           ui-sref="main.account.mywishlist"
           ng-show="currentUser.roles.indexOf(userRoles.user) >= 0 && currentState !== 'main.account.mywishlist'"
           tooltip="Go to Wish List"
