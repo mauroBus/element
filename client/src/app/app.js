@@ -28,7 +28,6 @@ angular.module('elementBoxApp', [
   'elementBoxApp.myadmin',
   'elementBoxApp.account',
   'elementBoxApp.userdetails',
-  'elementBoxApp.animation'
 ])
 
 .config(['$urlRouterProvider', function($urlRouterProvider) {
