@@ -6,7 +6,7 @@ angular.module('elementBoxApp.products.productList')
   function($scope,   $rootScope,   $state,   $stateParams,   $filter,   $location,   ProductsService,   Categories) {
     $scope.products = [];
     $scope.page = ($stateParams.page) ? parseInt($stateParams.page) : 1; // Setting the current page.
-    $scope.pageSize = 10;
+    $scope.pageSize = 3;
     $scope.totalPages = 0;
     $scope.totalProducts = 0;
     $scope.currentCateg = {};
@@ -14,6 +14,7 @@ angular.module('elementBoxApp.products.productList')
     $scope.isLoading = false;
     $scope.categories = [];
     $scope.filter = '';
+    $scope.searchApi = {};
     var fetchingForFirstTime = true;
 
     $rootScope.$emit('title', 'Products');
@@ -148,6 +149,7 @@ angular.module('elementBoxApp.products.productList')
         // For the moment lets comment it.
         $scope.filter = ''; // clearing the filter.
         $scope.fetchPage(categ, 1);
+        $scope.searchApi.clear();
       }
     };
 

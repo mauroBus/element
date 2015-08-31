@@ -57,13 +57,28 @@
         ></pagination>
 
         <div class="pull-left col-lg-6 col-md-6 col-sm-6 col-xs-12 search-box">
-          <search-box class="pull-right" on-search="onSearch"></search-box>
+          <search-box
+            class="pull-right"
+            on-search="onSearch"
+            api="searchApi">
+          </search-box>
         </div>
       </div>
 
       <div class="list-group">
-        <h4 class="empty-categ" ng-show="!products.length && !isLoading">Empty list.</h4>
-        <product-item ng-repeat="product in products" product="product" class="list-group-item"></product-item>
+        <h4 class="empty-categ list-group-item ng-hide"
+          ng-class="{ 'animated pulse': !products.length && !isLoading }"
+          ng-show="!products.length && !isLoading">
+          Empty list.
+        </h4>
+        <product-item
+          ng-repeat="product in products"
+          product="product"
+          class="list-group-item"
+          ng-class="{ 'animated fadeIn': !isLoading }"
+          >
+          <!-- fadeIn pulse bounce bounceIn -->
+        </product-item>
       </div>
 
       <pagination
