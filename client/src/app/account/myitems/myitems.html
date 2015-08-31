@@ -8,16 +8,21 @@
     next-text="Next">
   </pagination>
 
-  <div ng-show="products.length" class="list-group">
+  <div class="list-group">
+    <loading class="list-group-item" ng-show="isLoading" balls-count="4"></loading>
+    <h4 class="empty-categ list-group-item"
+      ng-show="!products.length && !isLoading">
+      <div>Empty list.</div>
+      <button class="btn btn-purple center-block" ui-sref="main.products.new">Create Your First Product!</button>
+    </h4>
     <product-item
       ng-repeat="product in products"
       product="product"
       class="list-group-item"
       remove="true"
-      removeFromWishList
+      remove-method="removeProduct"
       edit="true"
-      fetch-method="fetchPage()"
-      remove-method="removeProduct(product)">
+      fetch-method="fetchPage">
     </product-item>
   </div>
 

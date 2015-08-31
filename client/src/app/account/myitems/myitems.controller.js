@@ -9,10 +9,13 @@ angular.module('elementBoxApp.account.myitems')
     $scope.pageSize = 3;
     $scope.totalPages = 0;
     $scope.totalProducts = 0;
+    $scope.isLoading = false;
 
     $scope.$parent.activeState = $state.current.name;
 
     $scope.fetchPage = function() {
+      $scope.isLoading = true;
+
       ProductsService.query({
           userId: $scope.currentUser.id,
           page: $scope.page,
@@ -24,13 +27,14 @@ angular.module('elementBoxApp.account.myitems')
           $scope.totalPages = res.totalPages;
           $scope.totalProducts = res.total;
           $scope.pageSize = res.pageSize;
+          $scope.isLoading = false;
         });
     };
 
     $scope.removeProduct = function(product, index) {
       ModalAlert.alert({
         title: 'Delete product',
-        msg: 'Do you want to delete the product? \n\t"' + product.title + '"',
+        msg: 'Do you want to delete this product? \n\t"' + product.title + '"',
         hasCancel: true
       }).then(function() {
         // UserService
@@ -42,6 +46,7 @@ angular.module('elementBoxApp.account.myitems')
     };
 
     $scope.$watch('page', function(newVal, oldVal) {
+      if ($scope.isLoading) { return; }
       $scope.fetchPage();
     });
 
