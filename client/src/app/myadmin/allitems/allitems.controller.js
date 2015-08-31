@@ -7,8 +7,11 @@ angular.module('elementBoxApp.myadmin.allitems')
     $scope.pageSize = 3;
     $scope.totalPages = 0;
     $scope.totalProducts = 0;
+    $scope.isLoading = false;
 
     $scope.fetchPage = function() {
+      $scope.isLoading = true;
+
       ProductsService.query({
           page: $scope.page,
           pageSize: $scope.pageSize
@@ -19,10 +22,12 @@ angular.module('elementBoxApp.myadmin.allitems')
           $scope.totalPages = res.totalPages;
           $scope.totalProducts = res.total;
           $scope.pageSize = res.pageSize;
+          $scope.isLoading = false;
         });
     };
 
     $scope.$watch('page', function(newVal, oldVal) {
+      if ($scope.isLoading) { return; }
       $scope.fetchPage();
     });
 
