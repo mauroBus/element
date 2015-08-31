@@ -6,10 +6,17 @@ angular.module('elementBoxApp.common')
     restrict: 'E',
     templateUrl: 'directives/search-box/searchbox.html',
     scope: {
-      onSearch: '='
+      onSearch: '=',
+      api: '='
     },
     controller: ['$scope', function($scope) {
       $scope.searchInput = '';
+
+      $scope.api = $scope.api || {};
+
+      $scope.api.clear = function() {
+        $scope.searchInput = '';
+      };
 
       $scope.search = function() {
         var str = $scope.searchInput.trim();
@@ -22,6 +29,7 @@ angular.module('elementBoxApp.common')
         $scope.searchInput = '';
         $scope.search();
       };
+
     }]
 
   };

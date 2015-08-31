@@ -11,8 +11,8 @@ angular.module('elementBoxApp.common')
       remove: '@',
       edit: '@',
       info: '@',
-      fetchMethod: '&',
-      removeMethod: '&'
+      fetchMethod: '=',
+      removeMethod: '='
     },
     controller: ['$scope', 'ModalAlert', function($scope, ModalAlert) {
 
@@ -22,12 +22,12 @@ angular.module('elementBoxApp.common')
       };
 
       $scope.removeProduct = function(product) {
-        if ($scope.removeMethod) {
-          $scope.removeMethod();
+        if (angular.isFunction($scope.removeMethod)) {
+          $scope.removeMethod(product);
         } else {
           ModalAlert.alert({
-            title: 'Delete!',
-            msg: 'Sure to delete this product?',
+            title: 'Delete Product!',
+            msg: 'Please comfirm to delete this product: \n\n"' + product.title + '"',
             hasCancel: true
           }).then(function() {
             product.$remove().then(function() {
