@@ -56,6 +56,7 @@ angular.module('elementBoxApp.main')
     $scope.isActive = function(state) {
       var regExp = new RegExp('^' + state);
       return regExp.test($state.current.name);
+      // return $state.current.name === state;
     };
 
     $scope.goto = function(item) {

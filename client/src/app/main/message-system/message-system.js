@@ -18,6 +18,9 @@ angular.module('elementBoxApp.main')
               $scope.msg = msg;
               $scope.displayMsg = true;
             });
+            $timeout(function() { // auto close.
+              $scope.close();
+            }, 4000);
           });
         };
 
