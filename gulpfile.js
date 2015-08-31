@@ -6,7 +6,8 @@ var env = require('gulp-env');
 
 // var path = require('path');
 var runSequence = require('run-sequence');
-var shelljs = require('shelljs');
+// var exec = require('child_process').exec;
+var shell = require('gulp-shell');
 
 // to execute the server.
 // var server = require('gulp-express');
@@ -22,9 +23,11 @@ var config = {
 
 
 /***** Task: Build Client *****/
-gulp.task('build-client', function() {
-  return shelljs.exec('cd ./client && gulp build --production && cd ../');
-});
+gulp.task('build-client', shell.task([
+  'cd ./client && \
+  gulp build --production && \
+  cd ../'
+]));
 
 /***** Task: Copy Client *****/
 gulp.task('copy-client', ['build-client'], function() {
@@ -44,7 +47,9 @@ gulp.task('copy-server', function() {
       '!server/seed-data/*',
       '!server/seed.js',
       '!server/access.log',
-      '!server/gulpfile.js'
+      '!server/gulpfile.js',
+      '!server/access.log',
+      '!server/npm-debug.log'
     ])
     .pipe(gulp.dest(config.deploy, {mode: 0777}));
 });
@@ -54,14 +59,8 @@ gulp.task('clean', function(done) {
   return rimraf(config.deploy, done);
 });
 
-/***** Task: Deploy *****/
-gulp.task('deploy', function(cbk) {
-  /*env({
-    vars: {
-      NODE_ENV: 'production'
-    }
-  });
-*/
+/***** Task: Build All *****/
+gulp.task('build', function(cbk) {
   process.env.NODE_ENV = 'production';
 
   return runSequence('clean', [
@@ -70,17 +69,26 @@ gulp.task('deploy', function(cbk) {
   ], cbk);
 });
 
+
+/***** Task: Deploy *****/
+gulp.task('deploy', ['build'], shell.task([
+  'cp -r ./deploy/* ../boxlabs/ && \
+   cd ../boxlabs && \
+   git add .  && \
+   git commit -m "improvement to deploy..." && \
+   git push origin master && \
+   cd ../element-box'
+]));
+
 /***** Task: Default *****/
 gulp.task('default', [
-  'deploy'
+  'build'
 ]);
 
 /***** Task: Watch Client ******/
-gulp.task('watch-client', function() {
-  return shelljs.exec('cd ./client && gulp watch && cd ../');
-});
+gulp.task('watch-client', shell.task([
+  'cd ./client && gulp watch && cd ..'
+]));
 
 /***** Task: Server - To Start the Server App - *****/
-gulp.task('serve', function () {
-  shelljs.exec('cd server && gulp serve');
-});
+gulp.task('serve', shell.task(['cd server && gulp serve']));
