@@ -101,7 +101,12 @@
 
           <div class="field-set__item__content">
             <div collapse="areImgsCollapsed">
-              <file-upload limit="10" files="product.images"></file-upload>
+              <file-upload
+                limit="10"
+                files="product.images"
+                api="uploader.api"
+                listeners="uploader.listeners">
+              </file-upload>
             </div>
           </div>
         </div> <!-- field-set__item -->

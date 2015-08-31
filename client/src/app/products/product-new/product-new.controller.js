@@ -9,6 +9,14 @@ angular.module('elementBoxApp.products.productNew')
     $scope.isCategSelected = false;
     $scope.selectedCateg = null;
     $scope.error = {};
+    $scope.uploader = {
+      api: {},
+      listeners: {
+        onCompleteAll: function(arg) {
+          console.log('onCompleteAll');
+        }
+      }
+    };
 
     $rootScope.$emit('title', 'Create a Product');
 
@@ -28,15 +36,8 @@ angular.module('elementBoxApp.products.productNew')
         $scope.categories = res;
       });
 
-    $scope.save = function() {
-      ProdErrorsService.checkProdErrors($scope.error, $scope.product, $scope.selectedCateg);
 
-      if ($scope.error.category || $scope.error.title || $scope.error.price || $scope.error.description || $scope.error.images) {
-        // $('.field-set__item--category').scrollIntoView();
-        angular.element('body').animate({ scrollTop: 150 }, 400);
-        return;
-      }
-
+    var saveProduct = function() {
       // $scope.product.categories.forEach(function(p, i) {
         // if (p) { categs.push($scope.categories[i]._id); }
       // });
@@ -53,6 +54,25 @@ angular.module('elementBoxApp.products.productNew')
         $scope.productCreated = newProduct;
         ngProgressService.complete();
       });
+    };
+
+    $scope.save = function() {
+      ProdErrorsService.checkProdErrors($scope.error, $scope.product, $scope.selectedCateg);
+
+      // Checking errors:
+      if ($scope.error.category || $scope.error.title || $scope.error.price || $scope.error.description || $scope.error.images) {
+        // $('.field-set__item--category').scrollIntoView();
+        angular.element('body').animate({ scrollTop: 150 }, 400);
+        return;
+      }
+
+      if ($scope.uploader.api.getNotUploadedItems().length > 0) {
+        $scope.uploader.listeners.onCompleteAll = saveProduct.bind(this);
+        $scope.uploader.api.uploadAll();
+      } else {
+        saveProduct();
+      }
+
     };
 
     $scope.onCategSelected = function(path, categName) {
