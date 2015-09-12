@@ -4,6 +4,8 @@ angular.module('elementBoxApp', [
   'ui.router',
   'ngAnimate',
   'ngProgress',
+  'ngCookies',
+  'pascalprecht.translate',
   // 'nvd3ChartDirectives',
   // * template bugs:
   'templates.app', // bag with all the modules html templates
@@ -17,10 +19,8 @@ angular.module('elementBoxApp', [
   // * sub-modules:
   'elementBoxApp.about',
   'elementBoxApp.terms',
-  'elementBoxApp.element',
   'elementBoxApp.error404',
   'elementBoxApp.home',
-  'elementBoxApp.newelement',
   'elementBoxApp.signin',
   'elementBoxApp.signup',
   'elementBoxApp.signout',
@@ -28,6 +28,7 @@ angular.module('elementBoxApp', [
   'elementBoxApp.myadmin',
   'elementBoxApp.account',
   'elementBoxApp.userdetails',
+  'elementBoxApp.password',
 ])
 
 .config(['$urlRouterProvider', function($urlRouterProvider) {
@@ -54,6 +55,17 @@ angular.module('elementBoxApp', [
   };
 })
 
+// Configs for translate plugin:
+.config(['$translateProvider', function ($translateProvider) {
+  $translateProvider.useStaticFilesLoader({
+    prefix: 'locales/locale-',
+    suffix: '.json'
+  });
+
+  $translateProvider.preferredLanguage('es');
+  $translateProvider.useCookieStorage();
+  $translateProvider.useSanitizeValueStrategy('escaped');
+}])
 
 // .config([function () {
 //   window.onerror = function(message, file, line, col, exception) {

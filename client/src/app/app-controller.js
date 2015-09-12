@@ -33,7 +33,7 @@ angular.module('elementBoxApp.controller', [])
     });
 
     $rootScope.$on(AUTH_EVENTS.singinFailed, function() {
-      console.log('Login failed');
+      // console.log('Login failed');
     });
 
     $rootScope.$on(AUTH_EVENTS.signoutSuccess, function(event) {
@@ -59,7 +59,7 @@ angular.module('elementBoxApp.controller', [])
         // Restricting access to My Admin.
         event.preventDefault();
         ModalAlert
-          .alert({msg: 'You are not allowed to access to this page!'})
+          .alert({msg: 'ACCESS_IS_NOT_ALLOWED'})
           .then(function() {
             // $state.go('main.home');
           });
