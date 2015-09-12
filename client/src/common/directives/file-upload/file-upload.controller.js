@@ -33,6 +33,33 @@ function($scope,   $timeout,   FileUploader) {
     isHTML5: uploader.isHTML5
   };
 
+  $scope.trans = {
+    limit: $scope.limit
+  };
+
+  $scope.$watch('files', function(oldVal, newVal) {
+    if ($scope.files && $scope.files.length) {
+      // Array.prototype.push.apply(uploader.queue, $scope.files);
+      var clonedFile;
+
+      $scope.files.forEach(function(fileObj) {
+        clonedFile = angular.copy(fileObj);
+        clonedFile.isUploaded = true;
+        clonedFile.isReady = false;
+        clonedFile.isSuccess = true;
+        clonedFile.progress = 100;
+        clonedFile.isUploading = false;
+        clonedFile.isCancel = false;
+        clonedFile.isError = false;
+        clonedFile.classType = 'existing-image';
+        clonedFile.upload = function() {};
+        uploader.queue.push(clonedFile);
+      });
+      // uploader.queue = uploader.queue.concat($scope.files);
+    }
+  });
+
+
   // CALLBACKS:
 
   uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
@@ -111,8 +138,11 @@ function($scope,   $timeout,   FileUploader) {
   };
 
   $scope.removeItem = function(item, index) {
-    item.remove();
-    // uploader.queue.splice(index, 1);
+    if (item.remove) {
+      item.remove();
+    } else {
+      uploader.queue.splice(index, 1);
+    }
     $scope.files.splice(index, 1);
   };
 
