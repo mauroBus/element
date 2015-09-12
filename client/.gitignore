@@ -1,2 +1,4 @@
 node_modules
 dist/
+src/app/locale/locale-en.json
+src/app/locale/locale-es.json
