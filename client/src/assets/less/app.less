@@ -250,14 +250,24 @@ h2, h3 {
 
 
 
-
 // Button
+// .btn.focus, .btn:focus {
+//   color: #FFFFFF;
+// }
+
 .btn-purple {
   background-color: #6E329D;
   color: #fff;
   &:hover {
     background-color: darken(#6E329D, 10%);
     color: #fff;
+  }
+}
+
+.btn-loader {
+  position: relative;
+  .loader {
+    position: static;
   }
 }
 
@@ -281,11 +291,12 @@ h2, h3 {
 }
 
 .jumbotron {
-  background-color: @gray5;
+  background-color: #C8C8C8;
   color: #FFFFFF !important;
 
   h1 {
-    color: #dfaf55;
+    // color: #dfaf55;
+    color: #FCE2B2;
   }
 
   .product-success {
@@ -296,6 +307,53 @@ h2, h3 {
   }
   .thumbnail {
     margin-bottom: 0;
+  }
+}
+
+
+.pagination {
+  li:last-child,
+  li:first-child {
+    a {
+      font-size: 23px;
+      padding: 0px 7px 0px 7px;
+      // color: @pink2-color;
+    }
+  }
+
+  // >.disabled {
+  //   >a,
+  //   >a:focus,
+  //   >a:hover,
+  //   >span,
+  //   >span:focus,
+  //   >span:hover {
+  //     color: @gray5 !important;
+  //   }
+  // }
+
+  >li>a {
+    color: @pink2-color;
+  }
+
+  >li>a:focus,
+  >li>a:hover,
+  >li>span:focus,
+  >li>span:hover {
+    color: @blue-dark-color;
+  }
+
+ >.active {
+    >a,
+    >a:focus,
+    >a:hover,
+    >span,
+    >span:focus,
+    >span:hover {
+      background-color: #A99FDF;
+      border-color: #8F7630;
+      // border-color: @orange-color;
+    }
   }
 }
 
