@@ -17,7 +17,7 @@ angular.module('elementBoxApp.products.productList')
     $scope.searchApi = {};
     var fetchingForFirstTime = true;
 
-    $rootScope.$emit('title', 'Products');
+    $rootScope.$emit('title', 'TITLE_PRODUCTS');
 
     var init = function() {
       var CategoryRsr = Categories.getCategoriesTree();

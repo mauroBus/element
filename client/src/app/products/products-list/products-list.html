@@ -2,13 +2,13 @@
 
   <div class="col-md-12 publish-btn-container clearfix">
     <!-- <button ng-click="addDefaultProduct()" class="btn btn-default pull-right">addProduct</button> -->
-    <a class="btn btn-lg btn-purple pull-right" ui-sref="main.products.new">Publish!</a>
+    <a class="btn btn-lg btn-purple pull-right" ui-sref="main.products.new">{{ 'PRODUCTS.PUBLISH' | translate }}</a>
   </div>
 
   <div class="col-md-3 menu">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h3 class="panel-title">Categories</h3>
+        <h3 class="panel-title">{{ 'PRODUCTS.CATEGORIES' | translate }}</h3>
       </div>
 
       <!-- <div ui-tree id="tree-root" ng-show="categories.length" data-drag-enabled="false">
@@ -52,8 +52,8 @@
           items-per-page="pageSize"
           total-items="totalProducts"
           max-size="10"
-          previous-text="Prev"
-          next-text="Next"
+          previous-text="⇦"
+          next-text="⇨"
         ></pagination>
 
         <div class="pull-left col-lg-6 col-md-6 col-sm-6 col-xs-12 search-box">
@@ -69,7 +69,7 @@
         <h4 class="empty-categ list-group-item ng-hide"
           ng-class="{ 'animated pulse': !products.length && !isLoading }"
           ng-show="!products.length && !isLoading">
-          Empty list.
+          {{ 'EMPTY_LIST' | translate }}
         </h4>
         <product-item
           ng-repeat="product in products"
@@ -86,8 +86,8 @@
         items-per-page="pageSize"
         total-items="totalProducts"
         max-size="10"
-        previous-text="Prev"
-        next-text="Next"
+        previous-text="⇦"
+        next-text="⇨"
       ></pagination>
     </div>
   </div> <!-- panel -->
