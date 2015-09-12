@@ -6,7 +6,7 @@ angular.module('elementBoxApp.terms', [])
       url: '/terms',
       templateUrl: 'terms/terms.html',
       controller: ['$rootScope', function($rootScope) {
-        $rootScope.$emit('title', 'Terms of Service');
+        $rootScope.$emit('title', 'TITLE_TERMS_OF_SERVICE');
       }]
     });
   }
