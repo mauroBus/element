@@ -53,7 +53,7 @@ var cssVendors = [
 ];
 
 var jsVendors = [
-  config.vendor + '/jquery/dist/jquery.min.js',
+  config.vendor + '/jquery/dist/jquery.js',
   config.vendor + '/angular/angular.js',
   config.vendor + '/angular-ui-router/release/angular-ui-router.min.js',
   config.vendor + '/angular-resource/angular-resource.js',
@@ -65,18 +65,24 @@ var jsVendors = [
   config.vendor + '/slick-carousel/slick/slick.min.js',
   config.vendor + '/angular-slick/dist/slick.js',
   config.vendor + '/angular-ui-tree/dist/angular-ui-tree.js',
-  config.vendor + '/ngprogress/build/ngprogress.min.js'
+  config.vendor + '/ngprogress/build/ngprogress.min.js',
+  config.vendor + '/angular-cookies/angular-cookies.js',
+  config.vendor + '/angular-translate/angular-translate.min.js',
+  config.vendor + '/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
+  config.vendor + '/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js',
+  config.vendor + '/angular-translate-storage-local/angular-translate-storage-local.min.js'
   // config.vendor + '/nvd3/nv.d3.min.js',
   // config.vendor + '/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js'
 ];
 
+var localesSupport = ['en', 'es'];
 
 
 /* Returns an array with the app module names */
 var getModules = function() {
   if (argv.production) { return []; }
   var modules = shelljs.ls(['src/app/']);
-  return _.filter(modules, function(entry) { return !entry.match(/\.js$/); });
+  return _.filter(modules, function(entry) { return !entry.match(/\.js$/) && !entry.match(/locale.js$/); });
 };
 /* Returns an array with the app full module names */
 var getFullModules = function() {
@@ -134,6 +140,25 @@ gulp.task('build-app-modules', function() {
       .pipe(gulp.dest(config.jsDist));
   }
 });
+
+
+
+/***** [Private] Task: Build Locales *****/
+gulp.task('build-locale', function() {
+
+  localesSupport.forEach(function(lang) {
+    gulp.src([
+        'src/app/locale/locale.start.json',
+        'src/app/**/locale-' + lang + '.json',
+        'src/common/**/locale-' + lang + '.json',
+        'src/app/locale/locale.end.json'
+      ])
+      .pipe(concat('locale-' + lang + '.json'))
+      .pipe(gulp.dest(config.dist + '/locales'));
+  });
+
+});
+
 
 /***** [Private] Task: Build JS *****/
 gulp.task('build-js', ['build-app-modules', 'build-js-common'], function() {
@@ -250,6 +275,7 @@ gulp.task('watch', ['lint', 'build'], function() {
   gulp.watch(['src/**/*.html', '!src/index.html'], ['build-js']);
   gulp.watch('src/index.ejs', ['build-index']);
   gulp.watch(['src/assets/**/*.*', '!src/assets/less/*.less'], ['copy-static']);
+  gulp.watch(['src/app/**/locale*.json', 'src/common/**/locale*.json'], ['build-locale']);
   gulp.watch([
       'src/assets/less/*.less',
       'src/app/**/*.less',
@@ -269,6 +295,7 @@ gulp.task('build', function(cbk) {
     'copy-static',
     'build-index',
     'build-js',
+    'build-locale',
     'build-css'
   ],
   cbk);
