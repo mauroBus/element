@@ -6,7 +6,7 @@ angular.module('elementBoxApp.about', [])
       url: '/about',
       templateUrl: 'about/about.html',
       controller: ['$rootScope', function($rootScope) {
-        $rootScope.$emit('title', 'About');
+        $rootScope.$emit('title', 'TITLE_ABOUT');
       }]
     });
   }
