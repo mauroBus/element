@@ -8,8 +8,8 @@
     total-items="totalElements"
     ng-change="fetchPage()"
     max-size="10"
-    previous-text="Prev"
-    next-text="Next"
+    previous-text="⇦"
+    next-text="⇨"
   ></pagination>
 
   <ul ng-show="elements.length" class="list-unstyled list-group">
@@ -87,10 +87,10 @@
       </div>
 
       <div class="section-intro text-center col-lg-9 col-md-9 col-sm-7 col-xs-7">
-        <h2 class="pull-left">Explore Categories</h2>
+        <h2 class="pull-left">{{ 'HOME.EXPLORE_CATEGORIES' | translate }}</h2>
         <h2 class="pull-left">
           <div class="h5">
-            <span class=" label label-default">See what people are looking</span>
+            <span class=" label label-default">{{ 'HOME.WHAT_PEOPLE_LOOKING' | translate }}</span>
           </div>
         </h2>
         <!-- <code>See what people are looking</code> -->
