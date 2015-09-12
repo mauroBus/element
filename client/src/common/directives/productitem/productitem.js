@@ -12,7 +12,8 @@ angular.module('elementBoxApp.common')
       edit: '@',
       info: '@',
       fetchMethod: '=',
-      removeMethod: '='
+      removeMethod: '=',
+      postRemoveMethod: '='
     },
     controller: ['$scope', 'ModalAlert', function($scope, ModalAlert) {
 
@@ -32,6 +33,9 @@ angular.module('elementBoxApp.common')
           }).then(function() {
             product.$remove().then(function() {
               $scope.fetchMethod();
+              if (angular.isFunction($scope.postRemoveMethod)) {
+                $scope.postRemoveMethod(product);
+              }
             });
           });
         }

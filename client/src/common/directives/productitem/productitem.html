@@ -16,18 +16,18 @@
 
     <div class="col-md-12" ng-show="remove || edit || info">
       <a ng-show="remove" href=""
-        popover="Remove" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
+        popover="{{'REMOVE' | translate}}" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
         class="product__remove-btn pull-right btn btn-link"
         ng-click="removeProduct(product)">
           <span class="glyphicon glyphicon-remove"></span>
       </a>
       <a ng-show="edit" ui-sref="main.products.edit({productId: product._id})"
-        popover="Edit" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
+        popover="{{'EDIT' | translate}}" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
         class="products__edit-btn pull-right btn btn-link">
           <span class="glyphicon glyphicon-edit"></span>
       </a>
       <a ng-show="info" ui-sref="main.products.info({productId: product._id})"
-        popover="View" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
+        popover="{{'VIEW' | translate}}" popover-trigger="mouseenter" popover-placement="top" Popover-animation="false"
         class="products__details-btn pull-right btn btn-link">
           <span class="glyphicon glyphicon-link"></span>
       </a>
@@ -38,7 +38,7 @@
 
   <div class="text-muted product__price">
     <span class="currency" ng-show="{{product.price > 0}}">$</span>
-    <span class="price">{{(product.price > 0) ? (product.price | number:0) : 'No Price'}}</span>
+    <span class="price">{{((product.price > 0) ? (product.price | number:0) : 'PRODUCTS.NO_PRICE') | translate }}</span>
   </div>
 
 </div>
