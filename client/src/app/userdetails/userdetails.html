@@ -3,7 +3,7 @@
   <div ng-if="!user._id && !isLoading">
     <h1 class="text-center">
       <span class="orange-color glyphicon glyphicon-exclamation-sign"></span>
-      User Not Found
+      {{ 'USERDETAILS.USER_NOT_FOUND' | translate }}
     </h1>
   </div>
 
@@ -16,28 +16,28 @@
       <img class="user-lg-img center-block" alt="{{user.firstName}}" ng-src="imgs/user_pic-225x225.png" title="{{user.firstName}}" width="225" height="225">
 
       <div class="panel panel-info verifications">
-        <div class="panel-heading">Verifications</div>
+        <div class="panel-heading">{{ 'USERDETAILS.VERIFICATIONS' | translate }}</div>
         <div class="panel-body">
           <ul class="list-unstyled">
             <li class="media">
               <span class="glyphicon glyphicon-check pull-left"></span>
               <div class="media-body">
-                <strong>Email Address</strong>
-                <div class="text-muted">Verified</div>
+                <strong>{{ 'USERDETAILS.EMAIL_ADDRESS' | translate }}</strong>
+                <div class="text-muted">{{ 'USERDETAILS.VERIFIED' | translate }}</div>
               </div>
             </li>
             <li class="media">
               <span class="glyphicon glyphicon-check pull-left"></span>
               <div class="media-body">
-                <strong>Phone Number</strong>
+                <strong>{{ 'USERDETAILS.PHONE_NUMBER' | translate }}</strong>
                 <div class="text-muted">{{user.phone | hidePhone}}</div>
               </div>
             </li>
             <li class="media">
               <span class="glyphicon glyphicon-check pull-left"></span>
               <div class="media-body">
-                <strong>Comments</strong>
-                <div class="text-muted">{{user.comments.length}} Comments</div>
+                <strong>{{ 'USERDETAILS.ONLY_COMMENTS' | translate }}</strong>
+                <div class="text-muted">{{user.comments.length}} {{ 'USERDETAILS.ONLY_COMMENTS' | translate }}</div>
               </div>
             </li>
           </ul>
@@ -46,14 +46,14 @@
       </div>
 
       <div class="panel panel-info">
-        <div class="panel-heading">About Me</div>
+        <div class="panel-heading">{{ 'USERDETAILS.ABOUT_ME' | translate }}</div>
         <div class="panel-body">
           <dl>
-            <dt>Name</dt>
+            <dt>{{ 'NAME' | translate }}</dt>
             <dd>{{user.firstName}} {{user.lastName}}</dd>
           </dl>
           <dl>
-            <dt>Description</dt>
+            <dt>{{ 'USERDETAILS.DESCRIPTION' | translate }}</dt>
             <dd>{{user.description}}</dd>
           </dl>
         </div>
@@ -70,15 +70,15 @@
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <div class="h1" ng-class="{ 'text-danger': !user.active }">{{user.firstName}}'s Profile</div>
+          <div class="h1" ng-class="{ 'text-danger': !user.active }">{{ 'USERDETAILS.PROFILE' | translate:username }}</div>
           <div class="h5 text-muted"
             ng-class="{ 'col-lg-8 col-md-8 col-sm-8 col-xs-12': !user.active }">
-              Member since {{user.created | date: 'longDate'}}
+              {{ 'USERDETAILS.MEMBER_SINCE' | translate }} {{user.created | date: 'longDate'}}
           </div>
           <div ng-show="!user.active"
             class="alert alert-danger col-lg-4 col-md-4 col-sm-4 col-xs-12" role="alert">
               <span class="glyphicon glyphicon-ban-circle"></span>
-              <strong>User Deactivated !</strong>
+              <strong>{{ 'USERDETAILS.USER_DEACTIVATED' | translate }} !</strong>
           </div>
             <!-- <a href="/s/Brasil-" class="link-reset">Brasil</a>· -->
           <!-- <div class="edit-profile-container "></div> -->
@@ -87,12 +87,12 @@
 
       <div class="flag-controls pull-right">
         <button class="btn btn-link report-user" ng-click="reportUser()" ng-show="!userReported">
-          Report this user
+          {{ 'USERDETAILS.REPORT_THIS_USER' | translate:username }}
           <span class="glyphicon glyphicon-warning-sign text-danger pull-left"></span>
         </button>
         <div class="already-flagged text-muted" ng-show="userReported">
-          You have reported this user.
-          <button class="btn btn-link" class="undo-flag text-muted" ng-click="undoReportUser()">Undo?</button>
+          {{ 'USERDETAILS.YOU_REPORTED_USER' | translate:username }}.
+          <button class="btn btn-link" class="undo-flag text-muted" ng-click="undoReportUser()">{{ 'USERDETAILS.UNDO' | translate }}?</button>
         </div>
       </div>
 
@@ -101,7 +101,7 @@
       </div>
 
       <div class="listings clearfix">
-        <h2>Products <span class="badge">{{totalProducts}}</span></h2>
+        <h2>{{ 'USERDETAILS.PRODUCTS' | translate }} <span class="badge">{{totalProducts}}</span></h2>
 
         <ul class="products-container list-unstyled clearfix">
           <li class="product col-sm-6 col-md-4" ng-repeat="(key, product) in ownProducts">
@@ -119,7 +119,7 @@
         <button class="btn btn-link col-md-12 col-sm-12 col-lg-12"
           ng-click="showMoreProducts()"
           ng-hide="ownProducts.length === totalProducts">
-          <strong>More&nbsp;»</strong>
+          <strong>{{ 'MORE' | translate }}&nbsp;»</strong>
         </button>
       </div>
 
@@ -127,22 +127,33 @@
 
       <div class="social-connections">
         <div class="reviews">
-          <h2>{{user.firstName}}'s Comments <span class="badge">{{user.comments.length || 0}}</span></h2>
+          <h2>{{ 'USERDETAILS.COMMENTS' | translate:username }} <span class="badge">{{user.comments.length || 0}}</span></h2>
           <!-- <h4 class="">Reviews From Guests</h4> -->
+          <div ng-show="user.comments.length">
+            <pagination
+              ng-model="commentsData.page"
+              items-per-page="commentsData.pageSize"
+              total-items="commentsData.totalComments"
+              max-size="10"
+              previous-text="⇦"
+              next-text="⇨">
+            </pagination>
+          </div>
+
           <div ng-show="user.comments.length" class="comment clearfix"
-            ng-repeat="(key, comment) in user.comments track by $index"
+            ng-repeat="(key, comment) in commentsData.comments track by $index"
             ng-init="expanded = false;">
-              <comment comment="comment" separator="key !== user.comments.length-1" >
-                <strong>Comment on product: </strong>
-                <a class="btn btn-link" ui-sref="main.products.info({productId: comment.product})">link</a>
+              <comment
+                comment="comment"
+                separator="key !== commentsData.comments.length-1"
+                class="animated fadeIn">
+                  <div class="pull-right">
+                    <strong>{{ 'USERDETAILS.COMMENT_ON_PRODUCT' | translate }}: </strong>
+                    <a class="btn btn-link" ui-sref="main.products.info({productId: comment.product})">{{ 'USERDETAILS.LINK' | translate }}</a>
+                  </div>
               </comment>
           </div>
 
-          <!--
-          <div class="pull-right">
-            <a href="javascript:void(0)" class="load-more">See more</a>
-          </div>
-          -->
         </div>
       </div>
 
