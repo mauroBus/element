@@ -19,14 +19,21 @@
   <div class="col-sm-12 footer__menu">
     <ul class="list-inline text-center h5">
       <li>
-        <button ui-sref="main.about" class="btn btn-link footer__menu__item">About</button>
+        <button ui-sref="main.about" class="btn btn-link footer__menu__item">{{ 'FOOTER.ABOUT' | translate }}</button>
       </li>
       <li>
-        <button ui-sref="main.terms" class="btn btn-link footer__menu__item">Terms &amp; Privacy</button>
+        <button ui-sref="main.terms" class="btn btn-link footer__menu__item">{{ 'FOOTER.TERMS_PRIVACY' | translate }}</button>
       </li>
       <!-- <li>
         <button ui-sref="main.terms" class="btn btn-link footer__menu__item">Contact</button>
       </li> -->
+      <li class="pull-right">
+        <select class="form-control"
+          ng-options="lang as (lang.name | translate) for lang in supportedLangs track by lang.key"
+          ng-change="onChangeLang(langSelected)"
+          ng-model="langSelected">
+        </select>
+      </li>
     </ul>
   </div>
 

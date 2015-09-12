@@ -1,18 +1,32 @@
 
 angular.module('elementBoxApp.main')
 
-.controller('FooterCtrl', [
-          '$scope', '$state', '$stateParams', '$location', 'Statistics',
-  function($scope,   $state,   $stateParams,   $location,   Statistics) {
-    // $scope.$state = $state;
-    // $scope.$location = $location;
-    // $scope.$stateParams = $stateParams;
+.controller('FooterCtrl', ['$scope', '$translate', '$timeout', function($scope, $translate, $timeout) {
 
-    // $scope.statistics = Statistics.getData();
-    // $scope.xFunction = Statistics.xFunction;
-    // $scope.yFunction = Statistics.yFunction;
+  $scope.supportedLangs = [
+    {
+      name: 'FOOTER.SPANISH',
+      key: 'es'
+    },
+    {
+      name: 'FOOTER.ENGLISH',
+      key: 'en'
+    }
+  ];
 
-    // $scope.donut = true;
-    // $scope.description = Statistics.description;
-  }
-]);
+  var langHash = {
+    'es': $scope.supportedLangs[0],
+    'en': $scope.supportedLangs[1],
+  };
+
+  var setCurrentLang = function() {
+    $scope.langSelected = langHash[$translate.use()];
+  };
+
+  $scope.onChangeLang = function(lang) {
+    $translate.use(lang.key);
+  };
+
+  $timeout(setCurrentLang, 500);
+
+}]);
