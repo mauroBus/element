@@ -3,33 +3,44 @@
   <div class="col-md-3 menu">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h3 class="panel-title">Management</h3>
+        <h3 class="panel-title">{{ 'MYADMIN.MANAGEMENT' | translate }}</h3>
       </div>
       <div class="list-group">
         <a class="list-group-item"
           ui-sref="main.myadmin.categorymanag"
           ng-class="{active: activeState === 'main.myadmin.categorymanag' || activeState === 'main.myadmin'}"
-          ng-click="setState('main.myadmin.categorymanag')">Categories</a>
+          ng-click="setState('main.myadmin.categorymanag')">{{ 'MYADMIN.CATEGORIES' | translate }}
+        </a>
         <a class="list-group-item"
           ui-sref="main.myadmin.userlist"
           ng-class="{active: activeState === 'main.myadmin.userlist'}"
-          ng-click="setState('main.myadmin.userlist')">Users</a>
+          ng-click="setState('main.myadmin.userlist')">{{ 'MYADMIN.USERS' | translate }}
+        </a>
         <a class="list-group-item"
           ui-sref="main.myadmin.myitems"
           ng-class="{active: activeState === 'main.myadmin.myitems'}"
-          ng-click="setState('main.myadmin.myitems')">My Items</a>
+          ng-click="setState('main.myadmin.myitems')">{{ 'ACCOUNT.MY_ITEMS' | translate }}
+        </a>
         <a class="list-group-item"
           ui-sref="main.myadmin.allitems"
           ng-class="{active: activeState === 'main.myadmin.allitems'}"
-          ng-click="setState('main.myadmin.allitems')">All Items</a>
+          ng-click="setState('main.myadmin.allitems')">{{ 'MYADMIN.ALL_ITEMS' | translate }}
+        </a>
         <a class="list-group-item"
           ui-sref="main.myadmin.mywishlist"
           ng-class="{active: activeState === 'main.myadmin.mywishlist'}"
-          ng-click="setState('main.myadmin.mywishlist')">Wish List</a>
+          ng-click="setState('main.myadmin.mywishlist')">{{ 'WISH_LIST' | translate }}
+        </a>
         <a class="list-group-item"
           ui-sref="main.myadmin.profile"
           ng-class="{active: activeState === 'main.myadmin.profile'}"
-          ng-click="setState('main.myadmin.profile')">My Profile</a>
+          ng-click="setState('main.myadmin.profile')">{{ 'ACCOUNT.MY_PROFILE' | translate }}
+        </a>
+        <a class="list-group-item"
+          ui-sref="main.myadmin.settings"
+          ng-class="{active: activeState === 'main.myadmin.settings'}"
+          ng-click="setState('main.myadmin.settings')">{{ 'ACCOUNT.SETTINGS' | translate }}
+        </a>
       </div>
     </div>
   </div>

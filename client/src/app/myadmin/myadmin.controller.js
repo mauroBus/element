@@ -5,7 +5,7 @@ angular.module('elementBoxApp.myadmin')
                     function($scope,   $rootScope,   $state,   $stateParams) {
   $scope.activeState = $state.current.name;
 
-  $rootScope.$emit('title', 'My Admin');
+  $rootScope.$emit('title', 'TITLE_MY_ADMIN');
 
   if ($state.current.name === 'main.myadmin') {
     $state.go('main.myadmin.categorymanag');

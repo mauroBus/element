@@ -31,6 +31,13 @@ angular.module('elementBoxApp.myadmin.myitems')
         });
     };
 
+    $scope.onRemoveProduct = function(product) {
+      var index = $scope.currentUser.wishList.indexOf(product._id);
+      if ( index >= 0 ) {
+        $scope.currentUser.wishList.splice(index, 1);
+      }
+    };
+
     $scope.$watch('page', function(newVal, oldVal) {
       if ($scope.isLoading) { return; }
       $scope.fetchPage();

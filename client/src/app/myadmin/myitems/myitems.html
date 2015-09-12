@@ -3,8 +3,8 @@
   items-per-page="pageSize"
   total-items="totalProducts"
   max-size="10"
-  previous-text="Prev"
-  next-text="Next">
+  previous-text="⇦"
+  next-text="⇨">
 </pagination>
 
 <!-- <div ng-show="products.length" class="list-group">
@@ -17,14 +17,15 @@
 
 <div class="list-group">
   <loading class="list-group-item" ng-show="isLoading" balls-count="4"></loading>
-  <h4 class="empty-categ list-group-item" ng-show="!products.length && !isLoading">Empty list.</h4>
+  <h4 class="empty-categ list-group-item" ng-show="!products.length && !isLoading">{{ 'EMPTY_LIST' | translate }}</h4>
   <product-item
     ng-repeat="product in products"
     product="product"
     class="list-group-item"
     remove="true"
     edit="true"
-    fetch-method="fetchPage">
+    fetch-method="fetchPage"
+    post-remove-method="onRemoveProduct">
   </product-item>
 </div>
 
@@ -33,6 +34,6 @@
   items-per-page="pageSize"
   total-items="totalProducts"
   max-size="10"
-  previous-text="Prev"
-  next-text="Next">
+  previous-text="⇦"
+  next-text="⇨">
 </pagination>
