@@ -1,13 +1,13 @@
 <div class="panel panel-info">
   <div class="panel-heading">
-    <h3 class="panel-title">Contact</h3>
+    <h3 class="panel-title">{{ 'PRODUCTS.CONTACT' | translate }}</h3>
   </div>
 
   <div class="panel-body">
 
     <form ng-show="!contactSent">
       <div class="form-group">
-        <label for="checkinField">Check In</label>
+        <label for="checkinField">{{ 'PRODUCTS.CHECKIN' | translate }}</label>
         <p class="input-group">
           <input type="text" class="form-control"
             id="checkinField" placeholder="Enter date"
@@ -28,7 +28,7 @@
       </div>
 
       <div class="form-group">
-        <label for="checkoutField">Check Out</label>
+        <label for="checkoutField">{{ 'PRODUCTS.CHECKOUT' | translate }}</label>
         <p class="input-group">
           <input type="text" class="form-control"
             id="checkoutField" placeholder="Enter date"
@@ -49,7 +49,7 @@
       </div>
 
       <div class="form-group">
-        <label for="guestsField">Guests</label>
+        <label for="guestsField">{{ 'PRODUCTS.GUESTS' | translate }}</label>
         <select id="guestsField" class="form-control">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -57,17 +57,17 @@
       </div>
 
       <div class="form-group">
-        <p class="help-block">Write a comment:</p>
+        <p class="help-block">{{ 'PRODUCTS.WRITE_A_COMMENT' | translate }}:</p>
         <textarea ng-model="commentText" class="form-control" rows="3" ng-required="true"></textarea>
       </div>
 
-      <button type="submit" class="btn btn-primary btn-block pull-left" ng-click="doContact()">Contact</button>
+      <button type="submit" class="btn btn-primary btn-block pull-left" ng-click="doContact()">{{ 'PRODUCTS.CONTACT' | translate }}</button>
     </form>
 
     <div ng-show="contactSent">
       <div class="alert alert-success" role="alert">
         <span class="glyphicon glyphicon-info-sign"></span>
-        Your message has been sent!
+        {{ 'PRODUCTS.MESSAGE_SENT' | translate }}!
       </div>
     </div>
 

@@ -97,7 +97,7 @@
     <div>
       <div class="panel panel-info">
         <div class="panel-heading">
-          <h3 class="panel-title">Categories</h3>
+          <h3 class="panel-title">{{ 'PRODUCTS.CATEGORIES' | translate }}</h3>
         </div>
         <div class="panel-body">
           <ul class="nav nav-pills">
@@ -117,7 +117,7 @@
   <!-- Details: -->
   <div class="col-lg-8">
     <div>
-      <h3>Details</h3>
+      <h3>{{ 'PRODUCTS.DETAILS' | translate }}</h3>
       <div class="product-info__description text-overflow panel panel-dark">
         <div class="panel-body">{{product.description}}</div>
       </div>
@@ -127,17 +127,17 @@
 
     <div class="row">
       <div class="col-md-3">
-        <div class="text-muted">Prices</div>
+        <div class="text-muted">{{ 'PRODUCTS.PRICES' | translate }}</div>
       </div>
       <div class="col-md-9">
         <div class="row">
           <div class="col-md-6">
-            <div>Price:<strong>{{ product.price | currency:$:0 }}</strong></div>
-            <div>Deposit:<strong>{{ product.deposit }}%</strong></div>
+            <div>{{ 'PRODUCTS.PRICE' | translate }}:<strong>{{ product.price | currency:$:0 }}</strong></div>
+            <div>{{ 'PRODUCTS.DEPOSIT' | translate }}:<strong>{{ product.deposit }}%</strong></div>
           </div>
           <div class="col-md-6">
             <div>
-              Cancellation: <strong><a ui-sref="#/cancelation-policies">{{product.cancelation}}</a></strong>
+              {{ 'PRODUCTS.CANCELATION' | translate }}: <strong><a ui-sref="#/cancelation-policies">{{product.cancelation}}</a></strong>
             </div>
           </div>
         </div>
@@ -157,14 +157,34 @@
       <div class="col-md-9">
         <div class="row">
           <div class="col-md-3">
-            <h4 class="text-muted">Rate:</h4>
+            <h4 class="text-muted">{{ 'PRODUCTS.RATE' | translate }}:</h4>
           </div>
           <div class="rating col-md-9" ng-class="{ unrated: !userHasRated, rated: userHasRated }">
-            <span ng-click="rate(5)" ng-class="{rated: rateVal >= 5}">☆</span>
-            <span ng-click="rate(4)" ng-class="{rated: rateVal >= 4}">☆</span>
-            <span ng-click="rate(3)" ng-class="{rated: rateVal >= 3}">☆</span>
-            <span ng-click="rate(2)" ng-class="{rated: rateVal >= 2}">☆</span>
-            <span ng-click="rate(1)" ng-class="{rated: rateVal >= 1}">☆</span>
+            <span ng-click="rate(5)"
+              tooltip="5"
+              ng-class="{rated: rateVal >= 5}">
+              ☆
+            </span>
+            <span ng-click="rate(4)"
+              tooltip="4"
+              ng-class="{rated: rateVal >= 4}">
+              ☆
+            </span>
+            <span ng-click="rate(3)"
+              tooltip="3"
+              ng-class="{rated: rateVal >= 3}">
+              ☆
+            </span>
+            <span ng-click="rate(2)"
+              tooltip="2"
+              ng-class="{rated: rateVal >= 2}">
+              ☆
+            </span>
+            <span ng-click="rate(1)"
+              tooltip="1"
+              ng-class="{rated: rateVal >= 1}">
+              ☆
+            </span>
           </div>
         </div>
       </div>

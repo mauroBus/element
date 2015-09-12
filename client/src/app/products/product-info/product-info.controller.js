@@ -2,8 +2,8 @@
 angular.module('elementBoxApp.products.productInfo')
 
 .controller('ProductInfoCtrl', [
-          '$scope', '$rootScope', '$stateParams', '$timeout', 'ProductsService', 'UserService', 'CommentsService', 'EVENT_NAMES',
-  function($scope,   $rootScope,   $stateParams,   $timeout,   ProductsService,   UserService,   CommentsService,   EVENT_NAMES) {
+          '$scope', '$rootScope', '$state', '$stateParams', '$timeout', 'ProductsService', 'UserService', 'CommentsService', 'EVENT_NAMES',
+  function($scope,   $rootScope,   $state,   $stateParams,   $timeout,   ProductsService,   UserService,   CommentsService,   EVENT_NAMES) {
     $scope.slides = [];
     $scope.slidesIndex = 0;
     $scope.userHasRated = false;
@@ -12,7 +12,7 @@ angular.module('elementBoxApp.products.productInfo')
     $scope.commentSent = false;
     var ratingInProcess = false;
 
-    $rootScope.$emit('title', 'Product Info');
+    $rootScope.$emit('title', 'TITLE_MY_PRODUCT_INFO');
 
     // Comments pagination:
     $scope.comments = [];
@@ -27,13 +27,18 @@ angular.module('elementBoxApp.products.productInfo')
     // $scope.slides2 = [];
 
     // Fetching product:
-    $scope.product = ProductsService.get({id: $stateParams.productId}, function(p) {
-      p.images = p.images ? p.images : [];
-      p.images.forEach(function(image, index) {
-        $scope.slides.push({ url: image.url, index: index+1 });
+    $scope.product = ProductsService.get({
+        id: $stateParams.productId
+      }, function(p) { // success cbk.
+        p.images = p.images ? p.images : [];
+        p.images.forEach(function(image, index) {
+          $scope.slides.push({ url: image.url, index: index+1 });
+        });
+        // p.rating.value = parseInt(p.rating.value);
+
+      }, function(err) { // error cbk.
+        $state.go('main.products.info-404');
       });
-      // p.rating.value = parseInt(p.rating.value);
-    });
 
     $scope.fetchPage = function() {
       CommentsService.query({

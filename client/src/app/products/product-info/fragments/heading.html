@@ -23,7 +23,8 @@
               <div class="product-rating col-lg-8">
                 <div class="rating rated"
                   ng-class="{'never-rated': product.rating.value == 0}"
-                  popover="{{product.rating.value > 0 ? ('Rating: ' + (product.rating.value | number: 2)) : 'Still no rated'}}"
+                  popover="{{ (( product.rating.value > 0 ? 'PRODUCTS.RATING' : 'PRODUCTS.STILL_NO_RATED') | translate )
+                  + (product.rating.value > 0 ? ': ' + (product.rating.value | number: 2) : '') }}"
                   popover-placement="right"
                   popover-animation="true"
                   popover-trigger="mouseenter">
@@ -70,29 +71,29 @@
 
       <div class="col-lg-4">
         <div class="h3 product__price" ng-show="product.price != 0">{{ product.price | currency:'$':0 }}</div>
-        <div class="h3 product__price" ng-show="product.price == 0">No price</div>
+        <div class="h3 product__price" ng-show="product.price == 0">{{ 'PRODUCTS.NO_PRICE' | translate }}</div>
 
         <div class="row">
           <div
             ng-hide="hasWishListedProduct()"
             class="btn btn-link pull-right add-to-wishlist"
-            popover="Add product to Wish List" popover-trigger="mouseenter" popover-placement="bottom" Popover-animation="false"
+            popover="{{ 'PRODUCTS.ADD_PRODUCT_TO_WISH_LIST' | translate }}" popover-trigger="mouseenter" popover-placement="bottom" Popover-animation="false"
             ng-click="addToWishList()">
               <span class="glyphicon glyphicon-heart"></span>
-              Add to My Wish List
+              {{ 'PRODUCTS.ADD_TO_WISH_LIST' | translate }}
           </div>
 
           <div ng-show="hasWishListedProduct()" class="pull-right on-wishlist">
             <!-- <span popover="Product is on Wish List" popover-trigger="mouseenter" popover-placement="top" > -->
             <span class="glyphicon glyphicon-ok-sign"></span>
-            On My Wish List!
+            {{ 'PRODUCTS.ON_MY_WISH_LIST' | translate }}!
             <!-- </span> -->
             <span
               class="btn btn-link remove-from-wishlist"
-              popover="Remove from Wish List" popover-trigger="mouseenter" popover-placement="bottom" Popover-animation="false"
+              popover="{{ 'PRODUCTS.REMOVE_FROM_WISH_LIST' | translate }}" popover-trigger="mouseenter" popover-placement="bottom" Popover-animation="false"
               ng-click="removeFromWishList()">
                 <!-- <span class="glyphicon glyphicon-heart-empty"></span> -->
-                (Remove)
+                ({{ 'REMOVE' | translate }})
             </span>
           </div>
         </div>
