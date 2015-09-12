@@ -7,16 +7,19 @@ var cloudinary = require('cloudinary'),
     config = require('../../config/config');
 
 
-var setCloudAccount = function(accNbr) {
-  var accountNbr = accNbr || Math.floor(Math.random() * config.cloudinaryAccounts.length);
+var setupCloudAccount = function(accNbr) {
+  var accountNbr = (accNbr === undefined || accNbr === null) ? Math.floor(Math.random() * config.cloudinaryAccounts.length) : accNbr;
   cloudinary.config(config.cloudinaryAccounts[accountNbr]);
   return accountNbr;
 };
 
-exports.uploadImgs = function(files, cb) {
+exports.uploadImgs = function(files, accountNbr, cb) {
+  cb = (typeof accountNbr === 'function') ? accountNbr : cb;
+  accountNbr = (typeof accountNbr === 'function') ? undefined : accountNbr;
+
   var filesUploaded = [],
       parallelUploads = [],
-      cloudAcc = setCloudAccount();
+      cloudAcc = setupCloudAccount(accountNbr);
 
   _.each(files, function(imgPath) {
     parallelUploads.push(function(callback) {
@@ -38,10 +41,17 @@ exports.uploadImgs = function(files, cb) {
   });
 };
 
-exports.removeImgs = function(cloudImgs, cloudAcc, cb) {
-  setCloudAccount(cloudAcc);
+exports.removeImgs = function(prodImgs, cloudAcc, cb) {
+  setupCloudAccount(cloudAcc);
+  var cloudImgs = _.pluck(prodImgs, 'publicId');
+
+  if (!cloudImgs.length) {
+    cb(null, {});
+    return;
+  }
+
   cloudinary.api.delete_resources(cloudImgs, function(result) {
-    cb(result.error, result);
+    cb(null, result);
   });
 };
 

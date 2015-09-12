@@ -38,7 +38,10 @@ exports.delete = function(req, res) {
     if (err) {
       res.status(400).json({message: 'Could not remove product from wish list.'});
     } else {
-      res.status(200).json({message: 'Product removed from wish list.'});
+      res.status(200).json({
+        message: 'Product removed from wish list.',
+        wishList: req.user.wishList
+      });
     }
   });
 };

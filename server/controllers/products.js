@@ -118,11 +118,61 @@ exports.create = function(req, res) {
 
 };
 
+
+var updateImages = function(prodImgs, originalProd, cb) {
+  var toUpload = _.filter(prodImgs, function(img) { return !img._id; });
+  var toRemove = _.filter(originalProd.images, function(img) {
+    return img._id && !_.find(prodImgs, { _id: img._id.toString() });
+  });
+  var intactImgs = _.filter(originalProd.images, function(img) {
+    return img._id && _.find(prodImgs, { _id: img._id.toString() });
+  });
+  var finalRes = {
+    images: intactImgs,
+    // cloudImgAccountNbr: null
+  };
+
+  if (toUpload.length) {
+    Cloud.uploadImgs(_.pluck(toUpload, 'url'), originalProd.cloudImgAccountNbr, function(err, result) {
+      if (!err) {
+        _.each(result.images, function(img) {
+          finalRes.images.push({
+            url: img.url,
+            publicId: img.public_id,
+            width: img.width,
+            height: img.height
+          });
+        });
+
+        // finalRes.cloudImgAccountNbr = result.cloudAccNbr;
+        cb(null, finalRes);
+      } else {
+        cb(err);
+      }
+    });
+  } else {
+    cb(null, finalRes);
+  }
+
+  if (toRemove.length) {
+    Cloud.removeImgs(toRemove, originalProd.cloudImgAccountNbr, function(err, result) {
+      if (err) {
+        console.log(' [ERROR] on removing product image: ' + err);
+      }
+    });
+  }
+
+  // TODO: remove old local files.
+};
+
+
 /**
  * Update a product
  */
 exports.update = function(req, res) {
   var product = req.product;
+  var imgsToUpload = [];
+
   product = _.extend(product, {
     title: req.body.title,
     description: req.body.description,
@@ -132,29 +182,55 @@ exports.update = function(req, res) {
     modifiedAt: new Date()
   });
 
-  product.save(function(err) {
-    if (err) {
-      return res.status(400).send(errorHandler.getErrorObject(err));
-    } else {
-      res.status(200).json(product);
+  updateImages(req.body.images, product.toJSON(), function(err, newImagesData) {
+    if (!err) {
+      product.images = newImagesData.images;
+      // product.cloudImgAccountNbr = newImagesData.cloudImgAccountNbr;
+      product.save(function(err) {
+        if (err) {
+          return res.status(400).send(errorHandler.getErrorObject(err));
+        } else {
+          res.status(200).json(product);
+        }
+      });
     }
   });
+
 };
+
 
 /**
  * Delete a product
  */
 exports.delete = function(req, res) {
   var product = req.product;
-
   var cloudImgs = product.images;
 
-  Cloud.removeImgs(cloudImgs, product.cloudImgAccountNbr, function(result) {});
+  Cloud.removeImgs(cloudImgs, product.cloudImgAccountNbr, function(result) {
+    if (!result || !result.deleted) { return; }
+    for (var i in result.deleted) {
+      if (result.deleted[i] !== 'deleted') {
+        console.log('[Deletting image ERROR] - public_id: ' + i);
+      }
+    }
+  });
 
   product.remove(function(err) {
     if (err) return res.status(500).json(err);
     res.status(200).json(product);
   });
+
+  // Remove product from all wishlists:
+  Users.find({ wishList: req.product._id })
+    .exec(function(error, users) {
+      _.each(users, function(user) {
+        _.remove(user.wishList, function(wishItem) {
+          return wishItem.equals(req.product._id);
+        });
+        user.markModified('wishList');
+        user.save();
+      });
+    });
 };
 
 /**

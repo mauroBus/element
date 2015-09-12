@@ -132,7 +132,7 @@ exports.create = function(req, res) {
   var categ, treeObjs = [], tree;
 
   try {
-    tree = JSON.parse(req.param('tree'));
+    tree = JSON.parse(req.params('tree'));
     denormalizeTree(_.isArray(tree) ? tree[0] : tree, ',', treeObjs);
 
     CategoryTree.remove().exec(function(error) {
