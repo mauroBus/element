@@ -3,7 +3,7 @@
     role="alert">
   <button ng-show="closeable" type="button" class="close" ng-click="closeAlert()">
     <span aria-hidden="true">&times;</span>
-    <span class="sr-only">Close</span>
+    <span class="sr-only">{{ 'CLOSE' | translate }}</span>
   </button>
   <div ng-transclude></div>
 </div>

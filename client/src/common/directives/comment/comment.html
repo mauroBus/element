@@ -17,12 +17,12 @@
     <a class="expandable-trigger text-muted pull-left"
       ng-hide="expanded"
       ng-click="expanded = true;">
-      <strong>+ More</strong>
+      <strong>+ {{ 'MORE' | translate }}</strong>
     </a>
     <a class="expandable-trigger text-muted pull-left"
       ng-show="expanded"
       ng-click="expanded = false;">
-      <strong>- Less</strong>
+      <strong>- {{ 'LESS' | translate }}</strong>
     </a>
     <div class="text-muted review-subtext pull-right">
       <div class="date">{{comment.createdAt | date:'mediumDate'}}</div>
