@@ -1,0 +1,80 @@
+<section class="account-settings">
+
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="row">
+      <h3>{{ 'ACCOUNT.CHANGE_PASSWORD' | translate }}</h3>
+
+      <alert type="danger"
+        ng-show="showErrorMsg"
+        close="showErrorMsg=false">
+          <span class="glyphicon glyphicon-exclamation-sign"></span>
+          <span>{{ 'SIGN.OH_SNAP' | translate }}!</span>
+          <div>{{ 'ACCOUNT.PASS_DONT_MATCH' | translate }}.</div>
+      </alert>
+
+      <alert type="success"
+        ng-show="showSuccessMsg"
+        close="showSuccessMsg=false">
+          <span class="glyphicon glyphicon-ok-sign"></span>
+          <span>{{ 'ACCOUNT.PASSWORD_SUCCESSFULLY_CHANGED' | translate }}!</span>
+      </alert>
+
+
+
+      <form class="form-horizontal"
+        ng-submit="changePass(passForm.$valid)"
+        role="form"
+        name="passForm" >
+
+        <div class="form-group"
+          ng-class="{'has-error': passForm.currentPassword.$error.required && showErrors }">
+          <label class="col-lg-4 col-md-4 col-sm-4 control-label" for="currentPasswordField">{{ 'ACCOUNT.ENTER_CURRENT_PASSWORD' | translate }}:</label>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <input type="password"
+              id="currentPasswordField"
+              ng-model="currentPassword"
+              class="form-control"
+              required
+              name="currentPassword">
+          </div>
+        </div>
+
+        <div class="form-group"
+          ng-class="{'has-error': passForm.newPassword.$error.required && showErrors }">
+          <label class="col-lg-4 col-md-4 col-sm-4 control-label" for="newPasswordField">{{ 'ACCOUNT.ENTER_NEW_PASSWORD' | translate }}:</label>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <input type="password"
+              id="newPasswordField"
+              ng-model="newPassword"
+              class="form-control"
+              required
+              name="newPassword">
+          </div>
+        </div>
+
+        <div class="form-group"
+          ng-class="{'has-error': passForm.verifyPassword.$error.required && showErrors }">
+          <label class="col-lg-4 col-md-4 col-sm-4 control-label" for="verifyPasswordField">{{ 'ACCOUNT.VERIFY_PASSWORD' | translate }}:</label>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <input type="password"
+              id="verifyPasswordField"
+              ng-model="verifyPassword"
+              class="form-control"
+              required
+              name="verifyPassword">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-4 col-sm-6">
+            <button type="submit" class="btn btn-block btn-purple" ng-disabled="success || (!currentPassword || !newPassword || !verifyPassword)">
+              {{ 'CHANGE' | translate }}
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</section>

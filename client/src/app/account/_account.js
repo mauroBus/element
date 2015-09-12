@@ -2,7 +2,8 @@
 angular.module('elementBoxApp.account', [
   'elementBoxApp.account.myitems',
   'elementBoxApp.account.mywishlist',
-  'elementBoxApp.account.profile'
+  'elementBoxApp.account.profile',
+  'elementBoxApp.account.settings'
 ])
 
 .config([ '$stateProvider',

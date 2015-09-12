@@ -13,12 +13,12 @@
           class="btn btn-link pull-right"
           >
             <span class="glyphicon glyphicon-user"></span>
-            <span>Public profile</span>
+            <span>{{ 'ACCOUNT.PUBLIC_PROFILE' | translate }}</span>
         </a>
       </div>
 
       <div class="col-sm-8 col-md-8 col-lg-8">
-        <div class="h1">
+        <div class="h1 user__names">
           <span ng-show="!edittingNames">{{user.firstName}} {{user.lastName}}</span>
           <span ng-show="!edittingNames" class="h3">({{user.displayName}})</span>
           <!-- <h2> -->
@@ -31,7 +31,7 @@
           <!-- </h2> -->
         </div>
 
-        <div class="h5 text-muted">Member since {{user.created | date: 'longDate'}}</div>
+        <div class="h5 text-muted">{{ 'ACCOUNT.MEMBER_SINCE' | translate }} {{user.created | date: 'longDate'}}</div>
         <!-- <a href="/s/Brasil-" class="link-reset">Brasil</a>· -->
 
         <div class="edit-profile-container">
@@ -54,10 +54,10 @@
  -->
     <div class="short-description">
       <div class="clearfix">
-        <h2 class="pull-left">Description</h2>
+        <h2 class="pull-left">{{ 'ACCOUNT.DESCRIPTION' | translate }}</h2>
         <h2>
           <div class="h5 pull-left col-md-offset-1">
-            <span class=" label label-default">Edit and Save</span>
+            <span class=" label label-default">{{ 'ACCOUNT.EDIT_N_SAVE' | translate }}</span>
           </div>
         </h2>
       </div>
@@ -70,7 +70,7 @@
       <button class="btn btn-primary btn-block pull-right"
         ng-disabled="!changed"
         ng-click="saveUser()">
-        Save
+        {{ 'SAVE' | translate }}
       </button>
     </h1>
 

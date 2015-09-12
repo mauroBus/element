@@ -3,25 +3,31 @@
   <div class="col-md-3 menu">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h3 class="panel-title">Management</h3>
+        <h3 class="panel-title">{{ 'ACCOUNT.MANAGEMENT' | translate }}</h3>
       </div>
       <div class="list-group">
         <a class="list-group-item"
           ui-sref="main.account.myitems"
           ng-class="{active: activeState === 'main.account.myitems' || activeState === 'main.account'}"
-          ng-click="setState('main.account.myitems')">My items</a>
+          ng-click="setState('main.account.myitems')">{{ 'ACCOUNT.MY_ITEMS' | translate }}</a>
       </div>
       <div class="list-group">
         <a class="list-group-item"
           ui-sref="main.account.mywishlist"
           ng-class="{active: activeState === 'main.account.mywishlist'}"
-          ng-click="setState('main.account.mywishlist')">Wish List</a>
+          ng-click="setState('main.account.mywishlist')">{{ 'WISH_LIST' | translate }}</a>
       </div>
       <div class="list-group">
         <a class="list-group-item"
           ui-sref="main.account.profile"
           ng-class="{active: activeState === 'main.account.profile'}"
-          ng-click="setState('main.account.profile')">My Profile</a>
+          ng-click="setState('main.account.profile')">{{ 'ACCOUNT.MY_PROFILE' | translate }}</a>
+      </div>
+      <div class="list-group">
+        <a class="list-group-item"
+          ui-sref="main.account.settings"
+          ng-class="{active: activeState === 'main.account.settings'}"
+          ng-click="setState('main.account.settings')">{{ 'ACCOUNT.SETTINGS' | translate }}</a>
       </div>
     </div>
   </div>

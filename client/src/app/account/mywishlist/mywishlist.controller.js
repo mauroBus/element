@@ -36,22 +36,24 @@ angular.module('elementBoxApp.account.mywishlist')
 
     $scope.removeFromWishList = function(wishItem, index) {
       ModalAlert.alert({
-        title: 'Delete Wish List item',
-        msg: 'Do you want to delete it from Wish List?',
+        title: 'ACCOUNT.DELETE_WISH_LIST_ITEM_Q',
+        msg: 'ACCOUNT.DELETE_WISH_LIST_ITEM_CONFIRM',
         hasCancel: true
       }).then(function() {
         UserService
           .removeFromWishList({ itemId: wishItem._id })
-          .$promise.then(function() {
+          .$promise.then(function(data) {
             $scope.fetchPage();
+            $scope.currentUser.wishList = data.wishList;
           });
       });
     };
 
     if (!$scope.currentUser || angular.equals({}, $scope.currentUser)) { // no current user.
-      $rootScope.$on(AUTH_EVENTS.singinSuccess, function(event, options) {
-        $scope.fetchPage();
-      });
+      // I dont get the idea of this line!!!
+      // $rootScope.$on(AUTH_EVENTS.singinSuccess, function(event, options) {
+      //   $scope.fetchPage();
+      // });
     } else {
       $scope.fetchPage();
     }

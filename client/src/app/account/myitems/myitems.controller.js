@@ -37,11 +37,14 @@ angular.module('elementBoxApp.account.myitems')
         msg: 'Do you want to delete this product? \n\t"' + product.title + '"',
         hasCancel: true
       }).then(function() {
-        // UserService
-        //   .removeFromWishList({ itemId: wishItem._id })
-        product.$remove().$promise.then(function() {
-          $scope.fetchPage();
-        });
+        ProductsService.remove({ id: product._id })
+          .$promise.then(function(data) {
+            $scope.fetchPage();
+            var index = $scope.currentUser.wishList.indexOf(product._id);
+            if ( index >= 0 ) {
+              $scope.currentUser.wishList.splice(index, 1);
+            }
+          });
       });
     };
 
