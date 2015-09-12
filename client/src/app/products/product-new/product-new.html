@@ -9,12 +9,12 @@
           <div class="field-set__item__heading"
               ng-class="{ 'bg-danger': error.category }"
             > <!-- col-md-2 col-lg-2 col-sm-12 col-xs-12 -->
-            <span>Category</span>
+            <span>{{ 'CATEGORY' | translate }}</span>
             <h5 class="alert alert-danger"
               role="alert"
               ng-show="error.category">
                 <span class="glyphicon glyphicon-alert"></span>
-                Please select a category!
+                {{ 'PRODUCTS.PLEASE_SELECT_CATEGORY' | translate }}!
             </h5>
           </div>
 
@@ -37,25 +37,25 @@
         <div class="field-set__item field-set__item--title"
             ng-class="{ 'has-error': error.title }">
           <div class="field-set__item__heading">
-            <span>Title</span>
+            <span>{{ 'PRODUCTS.TITLE' | translate }}</span>
           </div>
 
           <div class="field-set__item__content">
             <input type="text"
               class="form-control"
               ng-model="product.title"
-              tooltip="Title is required."
+              tooltip="{{ 'PRODUCTS.REQUIRED_TITLE' | translate }}"
               tooltip-placement="top"
               tooltip-trigger="mouseenter"
               tooltip-enable="error.title && (!product.title || !(product.title.length >= 5 && product.title.length <= 55))"
-              placeholder="Product title">
+              placeholder="{{ 'PRODUCTS.PRODUCT_TITLE' | translate }}">
           </div>
         </div> <!-- field-set__item -->
 
         <div class="field-set__item field-set__item--price"
           ng-class="{ 'has-error': error.price }">
           <div class="field-set__item__heading">
-            <span>Price</span>
+            <span>{{ 'PRODUCTS.PRICE' | translate }}</span>
           </div>
 
           <div class="field-set__item__content input-group">
@@ -63,7 +63,7 @@
             <input type="number"
               class="form-control"
               ng-model="product.price"
-              tooltip="Price is required."
+              tooltip="{{ 'PRODUCTS.REQUIRED_PRICE' | translate }}."
               tooltip-placement="top"
               tooltip-trigger="mouseenter"
               tooltip-enable="error.price">
@@ -73,16 +73,16 @@
         <div class="field-set__item field-set__item--description"
           ng-class="{ 'has-error': error.description }">
           <div class="field-set__item__heading">
-            <span>Description</span>
+            <span>{{ 'PRODUCTS.DESCRIPTION' | translate }}</span>
           </div>
 
           <div class="field-set__item__content">
             <textarea
               ng-model="product.description"
               class="form-control"
-              placeholder="Product description"
+              placeholder="{{ 'PRODUCTS.PRODUCT_DESCRIPTION' | translate }}"
               rows="5"
-              tooltip="Description is required."
+              tooltip="{{ 'PRODUCTS.REQUIRED_DESCRIPTION' | translate }}."
               tooltip-placement="top"
               tooltip-trigger="mouseenter"
               tooltip-enable="error.description">
@@ -92,7 +92,7 @@
 
         <div class="field-set__item field-set__item--images panel panel-info">
           <div class="field-set__item__heading">
-            <span>Images</span>
+            <span>{{ 'PRODUCTS.IMAGES' | translate }}</span>
             <a href class="btn btn-link btn-sm" ng-click="areImgsCollapsed = !areImgsCollapsed">
               <span ng-show="areImgsCollapsed" class="glyphicon glyphicon-plus-sign"></span>
               <span ng-show="!areImgsCollapsed" class="glyphicon glyphicon-minus-sign"></span>
@@ -111,22 +111,46 @@
           </div>
         </div> <!-- field-set__item -->
 
-        <button ng-click="save();" class="btn btn-lg btn-block btn-purple">Publish</button>
+        <button class="btn btn-lg btn-block btn-purple"
+          ng-show="!inProgress"
+          ng-click="save();">
+            {{ 'PUBLISH' | translate }}
+        </button>
+
+        <button class="btn btn-lg btn-block btn-purple btn-loader" ng-show="inProgress" disabled="disabled">
+            <span class="loader"></span>
+            {{ 'PRODUCTS.WAITING_TO_CREATE' | translate }}
+        </button>
 
       </div> <!-- field-set -->
     </div> <!-- panel-body -->
 
-
     <div ng-if="productCreated" class="panel-body">
-      <div class="jumbotron">
-        <h1>Congratulations!!!</h1>
-        <p>Product Successfuly Created</p>
+      <div class="jumbotron clearfix">
+        <h1>{{ 'PRODUCTS.CONGRATULATIONS' | translate }}!</h1>
+        <p class="">{{ 'PRODUCTS.PRODUCT_CREATED' | translate }}</p>
         <p>
-          <a class="btn btn-default btn-lg pull-left" ui-sref="main.products.info({productId: productCreated._id})" role="button">View</a>
-          <a class="btn btn-primary btn-lg pull-left" ui-sref="main.products" role="button">Continue</a>
+          <div class="clearfix product-success col-lg-8 col-md-8 col-sm-10 col-xs-12">
+            <a class="clearfix"
+              ui-sref="main.products.info({productId: productCreated._id})">
+
+              <img class="thumbnail product__image col-lg-2 col-md-2 col-sm-3 col-xs-4" ng-src="{{getProdThumbnail(productCreated)}}" alt="{{productCreated.title}}">
+
+              <div class="col-lg-10 col-md-10 col-sm-9 col-xs-8">
+                <h4 class="text-overflow" title="{{productCreated.title}}">{{productCreated.title}}</h4>
+              </div>
+            </a>
+          </div>
+
+          <a class="btn btn-info btn-lg pull-right"
+            ui-sref="main.products" role="button">
+            {{ 'PRODUCTS.CONTINUE' | translate }}
+          </a>
         </p>
       </div>
     </div>
+
+
   </div>
 
 </section>

@@ -8,6 +8,7 @@ angular.module('elementBoxApp.products.productNew')
     $scope.areImgsCollapsed = false;
     $scope.isCategSelected = false;
     $scope.selectedCateg = null;
+    $scope.inProgress = false;
     $scope.error = {};
     $scope.uploader = {
       api: {},
@@ -18,7 +19,7 @@ angular.module('elementBoxApp.products.productNew')
       }
     };
 
-    $rootScope.$emit('title', 'Create a Product');
+    $rootScope.$emit('title', 'TITLE_CREATE_PRODUCT');
 
     $scope.product = {
       title: '',
@@ -47,12 +48,14 @@ angular.module('elementBoxApp.products.productNew')
       // });
 
       ngProgressService.start();
+      $scope.inProgress = true;
 
       var data = angular.extend({}, $scope.product, { categories: [ $scope.selectedCateg._id ] });
 
       ProductsService.save(data, function(newProduct, headers) {
         $scope.productCreated = newProduct;
         ngProgressService.complete();
+        $scope.inProgress = false;
       });
     };
 
@@ -84,6 +87,11 @@ angular.module('elementBoxApp.products.productNew')
     $scope.onCategUnselected = function(path, categName) {
       $scope.isCategSelected = false;
       $scope.selectedCateg = null;
+    };
+
+    $scope.getProdThumbnail = function(product) {
+      var url = product.images.length ? product.images[0].url : 'imgs/no-picture-medium.png';
+      return url.replace('image/upload', 'image/upload/c_fill,h_140,w_210');
     };
 
   }
