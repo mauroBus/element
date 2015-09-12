@@ -29,6 +29,15 @@ angular.module('elementBoxApp.common')
     contact: {
       method: 'PUT',
       url: Urls.products.products + '/:id/contact'
+    },
+    remove: {
+      method: 'DELETE',
+      url: Urls.products.products + '/:id',
+      params: { id: '@_id' }
+    },
+    get: {
+      method: 'GET',
+      params: { SILENT_ON_ERROR: true }
     }
   });
 

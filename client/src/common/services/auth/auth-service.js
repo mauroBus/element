@@ -12,8 +12,9 @@ function($http,   Session,   Urls,   AUTH_EVENTS,   $rootScope) {
     var promise = $http({
       url: Urls.userAuth.signin,
       method: 'POST',
-      data: credentials,
-      params: { SILENT_ON_ERROR: true }
+      // data: credentials,
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      params: angular.merge(credentials, { SILENT_ON_ERROR: true })
     });
 
     promise.then(function(res) { // success cbk
@@ -41,8 +42,15 @@ function($http,   Session,   Urls,   AUTH_EVENTS,   $rootScope) {
   };
 
   authService.signup = function(credentials) {
-    angular.merge(credentials, { SILENT_ON_ERROR: true });
-    var promise = $http.post(Urls.userAuth.signup, credentials);
+
+    var promise = $http({
+      url: Urls.userAuth.signup,
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      data: window.$.param(angular.merge(credentials, { SILENT_ON_ERROR: true }))
+      // params: angular.merge(credentials, { SILENT_ON_ERROR: true })
+    });
+
     promise.then(function(res) {
       Session.create(
         res.data.sessionId,

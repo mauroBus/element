@@ -24,7 +24,7 @@ angular.module('elementBoxApp.common')
           // Users password api:
           changePass: '/users/password',
           forgotPass: '/auth/forgot',
-          resetPass: '/auth/reset/:token'
+          resetPass: '/api/auth/reset/:token'
         },
         userAuth: { // Setting up the users authentication api
           signup: '/auth/signup',

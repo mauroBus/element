@@ -36,7 +36,20 @@ angular.module('elementBoxApp.common')
       method: 'DELETE',
       transformResponse: function(data, headersGetter) {} // do not allowing to reset the user object data (happens by default).
     },
-    // changePass: {},
+    changePass: {
+      url: Urls.users.changePass,
+      method: 'POST'
+    },
+    forgotPass: {
+      url: Urls.users.forgotPass,
+      method: 'POST',
+      params: { SILENT_ON_ERROR: true }
+    },
+    resetPass: {
+      url: Urls.users.resetPass,
+      method: 'POST',
+      params: { token: '@token', SILENT_ON_ERROR: true }
+    },
 
     me: {
       url: Urls.users.me,
