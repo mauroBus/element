@@ -20,7 +20,8 @@ angular.module('elementBoxApp.products')
           jsonData.results = [];
         }
         return jsonData;
-      }
+      },
+      params: { SILENT_ON_ERROR: true }
     }
   });
 

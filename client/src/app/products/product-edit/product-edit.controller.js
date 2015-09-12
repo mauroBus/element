@@ -9,16 +9,25 @@ angular.module('elementBoxApp.products.productEdit')
     $scope.categories = [];
     $scope.productSaved = false;
     $scope.isCategSelected = false;
+    $scope.inProgress = false;
     $scope.selectedCateg = null;
     $scope.error = {};
     $scope.categApi = {};
+    $scope.uploader = {
+      api: {},
+      listeners: {
+        onCompleteAll: function(arg) {
+          console.log('onCompleteAll');
+        }
+      }
+    };
 
     // $scope.areImgsCollapsed = false;
 
     var prodDfd = $q.defer(),
       categDfd = $q.defer();
 
-    $rootScope.$emit('title', 'Edit Product');
+    $rootScope.$emit('title', 'TITLE_MY_EDIT_PRODUCT');
 
     // Fetching product:
     $scope.product = ProductsService.get({ id: $stateParams.productId }, function(p) {
@@ -55,11 +64,51 @@ angular.module('elementBoxApp.products.productEdit')
       return false;
     };
 
-    $scope.save = function() {
-      var categs = [], catags = [];
+    // $scope.save = function() {
+    //   var categs = [], catags = [];
 
+    //   ProdErrorsService.checkProdErrors($scope.error, $scope.product, $scope.selectedCateg);
+
+    //   if ($scope.error.category || $scope.error.title || $scope.error.price || $scope.error.description || $scope.error.images) {
+    //     // $('.field-set__item--category').scrollIntoView();
+    //     angular.element('body').animate({ scrollTop: 150 }, 400);
+    //     return;
+    //   }
+
+    //   ngProgressService.start();
+
+    //   $scope.product.categories[0] = $scope.selectedCateg._id;
+    //   // var data = angular.extend({}, $scope.product, {
+    //   //   categories: [ $scope.selectedCateg._id ]
+    //   // });
+
+    //   $scope.product.$update(function() {
+    //     $scope.productSaved = $scope.product;
+    //     ngProgressService.complete();
+    //     angular.element('body').animate({ scrollTop: 0 }, 400);
+    //   });
+    // };
+
+
+    var saveProduct = function() {
+      ngProgressService.start();
+      $scope.inProgress = true;
+
+      var data = angular.extend({}, $scope.product, { categories: [ $scope.selectedCateg._id ] });
+
+      $scope.product.$update(function() {
+        $scope.productSaved = $scope.product;
+        ngProgressService.complete();
+        angular.element('body').animate({ scrollTop: 0 }, 400);
+        $scope.inProgress = false;
+      });
+    };
+
+
+    $scope.save = function() {
       ProdErrorsService.checkProdErrors($scope.error, $scope.product, $scope.selectedCateg);
 
+      // Checking errors:
       if ($scope.error.category || $scope.error.title || $scope.error.price || $scope.error.description || $scope.error.images) {
         // $('.field-set__item--category').scrollIntoView();
         angular.element('body').animate({ scrollTop: 150 }, 400);
@@ -68,16 +117,13 @@ angular.module('elementBoxApp.products.productEdit')
 
       ngProgressService.start();
 
-      $scope.product.categories[0] = $scope.selectedCateg._id;
-      // var data = angular.extend({}, $scope.product, {
-      //   categories: [ $scope.selectedCateg._id ]
-      // });
+      if ($scope.uploader.api.getNotUploadedItems().length > 0) {
+        $scope.uploader.listeners.onCompleteAll = saveProduct.bind(this);
+        $scope.uploader.api.uploadAll();
+      } else {
+        saveProduct();
+      }
 
-      $scope.product.$update(function() {
-        $scope.productSaved = $scope.product;
-        ngProgressService.complete();
-        angular.element('body').animate({ scrollTop: 0 }, 400);
-      });
     };
 
     $scope.onCategSelected = function(path, categName) {
