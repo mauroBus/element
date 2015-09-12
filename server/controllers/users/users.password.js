@@ -26,15 +26,15 @@ exports.forgot = function(req, res, next) {
         done(err, token);
       });
     },
-    // Lookup user by username
+    // Lookup user by email
     function(token, done) {
-      if (req.body.username) {
+      if (req.body.email) {
         User.findOne({
-          username: req.body.username
+          email: req.body.email
         }, '-salt -password', function(err, user) {
           if (!user) {
             return res.status(400).send({
-              message: 'No account with that username has been found'
+              message: 'No account with that email has been found'
             });
           } else if (user.provider !== 'local') {
             return res.status(400).send({
@@ -51,7 +51,7 @@ exports.forgot = function(req, res, next) {
         });
       } else {
         return res.status(400).send({
-          message: 'Username field must not be blank'
+          message: 'Email field must not be blank'
         });
       }
     },
@@ -60,8 +60,14 @@ exports.forgot = function(req, res, next) {
         to: user.email,
         subject: 'Password Reset',
         templateUrl: 'templates/reset-password-email.html',
-        tplData: { name: user.displayName, appName: config.app.title, url: 'http://' + req.headers.host + '/auth/reset/' + token },
-        cb: function(err) { done(err, user); }
+        tplData: {
+          name: user.firstName + ' ' + user.lastName,
+          appName: config.app.title,
+          url: 'http://' + req.headers.host + '/api/auth/reset/' + token // -> validateResetToken
+        },
+        cb: function(err, info) {
+          done(null, err, user);
+        }
       });
     },
     // If valid email, send reset email using service
@@ -91,13 +97,15 @@ exports.validateResetToken = function(req, res) {
     }
   }, function(err, user) {
     if (!user) {
-      return res.redirect('/#!/password/reset/invalid');
+      return res.redirect('/#/password/reset-invalid');
     }
 
-    res.redirect('/#!/password/reset/' + req.params.token);
+    res.redirect('/#/password/reset/' + req.params.token);
   });
 };
 
+
+// http://www.peliculasflv.co/2015/05/tomorrowland-2015-online.html
 /**
  * Reset password POST from email token
  */
@@ -106,7 +114,6 @@ exports.reset = function(req, res, next) {
   var passwordDetails = req.body;
 
   async.waterfall([
-
     function(done) {
       User.findOne({
         resetPasswordToken: req.params.token,
@@ -128,7 +135,7 @@ exports.reset = function(req, res, next) {
                   if (err) {
                     res.status(400).send(err);
                   } else {
-                    // Return authenticated user 
+                    // Return authenticated user
                     res.json(user);
 
                     done(err, user);
@@ -142,7 +149,7 @@ exports.reset = function(req, res, next) {
             });
           }
         } else {
-          return res.status(400).send({
+          return res.status(405).send({
             message: 'Password reset token is invalid or has expired.'
           });
         }
@@ -153,7 +160,10 @@ exports.reset = function(req, res, next) {
         to: user.email,
         subject: 'Your password has been changed',
         templateUrl: 'templates/reset-password-confirm-email.html',
-        tplData: { name: user.displayName, appName: config.app.title },
+        tplData: {
+          name: user.firstName + ' ' + user.lastName,
+          appName: config.app.title
+        },
         cb: function(err) { done(err, 'done'); }
       });
     }
@@ -185,7 +195,7 @@ exports.changePassword = function(req, res) {
                     if (err) {
                       res.status(400).send(err);
                     } else {
-                      res.send({
+                      res.status(200).json({
                         message: 'Password changed successfully'
                       });
                     }
