@@ -1,0 +1,80 @@
+<section class="forgot-pass">
+
+  <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
+    <div class="row">
+
+      <form class="form-horizontal"
+        ng-class="{ 'has-error': askForReset }"
+        ng-submit="resetPass(passForm.$valid)"
+        role="form"
+        name="passForm" >
+
+        <!-- <h3>{{ 'ACCOUNT.CHANGE_PASSWORD' | translate }}</h3> -->
+        <alert type="danger" class="text-center"
+          ng-show="showErrorMsg"
+          close="showErrorMsg=false">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span>{{ 'SIGN.OH_SNAP' | translate }}!</span>
+            <div>{{ (error || 'SIGN.EMAIL_PASS_DONT_MATCH') | translate }}.</div>
+
+            <div class="text-center" ng-show="askForReset">
+              <a ui-sref="main.password.forgot" class="btn btn-link">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                {{ 'PASSWORD.ASK_FOR_PASSWORD_RESET' | translate }}
+              </a>
+            </div>
+        </alert>
+
+        <alert type="success" class="text-center" ng-show="showSuccessMsg">
+          <span class="glyphicon glyphicon-ok-sign"></span>
+          <span>{{ 'ACCOUNT.PASSWORD_SUCCESSFULLY_CHANGED' | translate }}!</span>
+
+          <div class="text-center">
+            <a ui-sref="main.signin" class="btn btn-block">{{ 'SIGN.SIGN_IN' | translate }}</a>
+          </div>
+        </alert>
+
+        <div class="form-group"
+          ng-class="{'has-error': passForm.newPassword.$error.required && showErrors }">
+          <label class="col-lg-4 col-md-4 col-sm-4 control-label" for="newPasswordField">{{ 'ACCOUNT.ENTER_NEW_PASSWORD' | translate }}:</label>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <input type="password"
+              id="newPasswordField"
+              ng-model="newPassword"
+              class="form-control"
+              required
+              name="newPassword"
+              ng-disabled="askForReset">
+          </div>
+        </div>
+
+        <div class="form-group"
+          ng-class="{'has-error': passForm.verifyPassword.$error.required && showErrors }">
+          <label class="col-lg-4 col-md-4 col-sm-4 control-label" for="verifyPasswordField">{{ 'ACCOUNT.VERIFY_PASSWORD' | translate }}:</label>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <input type="password"
+              id="verifyPasswordField"
+              ng-model="verifyPassword"
+              class="form-control"
+              required
+              name="verifyPassword"
+              ng-disabled="askForReset">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-4 col-sm-6">
+            <button type="submit" class="btn btn-block btn-purple"
+              ng-disabled="success || !newPassword || !verifyPassword || inProgress || askForReset">
+                {{ 'CHANGE' | translate }}
+                <span ng-class="{ loader: inProgress }" style="position: static;"></span>
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</section>
