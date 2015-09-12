@@ -18,7 +18,7 @@
               ng-click="goto(item)" >
             <div class="menu-item__name {{item.class}}" >
               <span class="glyphicon {{item.icon}}"></span>
-              <span class="menu-item__name__txt">{{item.text}}</span>
+              <span class="menu-item__name__txt">{{item.text | translate}}</span>
             </div>
           </li>
         </ul>

@@ -113,13 +113,13 @@
 
     </div> <!-- col-md-2 -->
 
-    <h1 class="col-md-6 page-header__title">{{appTitle}}</h1>
+    <h1 class="col-md-6 page-header__title">{{ appTitle | translate }}</h1>
 
     <div class="pull-right col-md-4 page-header__user">
       <div>
         <span ng-if="!currentUser.firstName">
-          <a ui-sref="main.signin" class="btn btn-sm btn-default btn-sign-in">Sign In</a>
-          <a ui-sref="main.signup" class="btn btn-sm btn-default btn-sign-up">Sign Up</a>
+          <a ui-sref="main.signin" class="btn btn-sm btn-default btn-sign-in">{{'SIGN_IN' | translate}}</a>
+          <a ui-sref="main.signup" class="btn btn-sm btn-default btn-sign-up">{{'SIGN_UP' | translate}}</a>
         </span>
         <span ng-show="currentUser.firstName" >
           <span
@@ -130,13 +130,19 @@
               {{currentUser.firstName}}
           </span>
         </span>
-        <span ng-show="currentUser.roles.indexOf(userRoles.admin) >= 0"> Admin </span>
-        <span ng-show="currentUser.roles.indexOf(userRoles.editor) >= 0"> Editor </span>
+        <span class="label label-info"
+          ng-show="currentUser.roles.indexOf(userRoles.admin) >= 0">
+            {{ 'ADMIN' | translate }}
+        </span>
+        <span class="label label-info"
+          ng-show="currentUser.roles.indexOf(userRoles.editor) >= 0">
+            {{ 'EDITOR' | translate }}
+        </span>
         <button
           ng-show="currentUser.firstName"
           class="btn btn-link btn-sm"
           ng-click="signout()">
-            Sign Out
+            {{'SIGN_OUT' | translate}}
         </button>
       </div>
       <div>
@@ -144,10 +150,11 @@
           ng-class="{ 'animated bounce': wishListItemAdded, 'animated shake': wishListItemRemoved  }"
           ui-sref="main.account.mywishlist"
           ng-show="currentUser.roles.indexOf(userRoles.user) >= 0 && currentState !== 'main.account.mywishlist'"
-          tooltip="Go to Wish List"
+          tooltip="{{ 'HEADER.GO_TO_WISHLIST' | translate }}"
           tooltip-placement="left"
           tooltip-trigger="mouseenter">
             <span class="glyphicon glyphicon-shopping-cart"></span>
+            <span class="badge">{{currentUser.wishList.length}}</span>
         </a>
       </div>
     </div>

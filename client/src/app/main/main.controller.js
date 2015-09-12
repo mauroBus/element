@@ -1,12 +1,17 @@
 angular.module('elementBoxApp.main')
 
-.controller('MainCtrl', ['$state', '$scope', '$rootScope', '$timeout', function($state, $scope, $rootScope, $timeout) {
+.controller('MainCtrl', ['$state', '$scope', '$rootScope', '$timeout', '$translate', function($state, $scope, $rootScope, $timeout, $translate) {
     if ($state.current.name === 'main') {
       $state.go('main.home');
     }
 
     $scope.appTitle = '';
-    $scope.defaultTitle = 'SandBox App';
+    $scope.defaultTitle = 'TITLE_DEFAULT';
+    $scope.defaultTitleTransl = '';
+
+    $translate('TITLE_DEFAULT').then(function (title) {
+      $scope.defaultTitleTransl = title;
+    });
 
     $scope.menuOpened = false;
     var $title = window.$('head title');
@@ -20,7 +25,9 @@ angular.module('elementBoxApp.main')
       $scope.appTitle = title;
 
       $timeout(function() { // waiting 500ms for updating the router url before the page title (browser nav issue).
-        $title.text($scope.defaultTitle + ' - ' + title);
+        $translate(title).then(function (titleTr) {
+          $title.text($scope.defaultTitleTransl + ' - ' + titleTr);
+        });
       }, 500);
     });
 

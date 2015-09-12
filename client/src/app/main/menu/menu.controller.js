@@ -6,35 +6,35 @@ angular.module('elementBoxApp.main')
 
     $scope.menuItems = [
       {
-        text: 'Home',
+        text: 'HOME',
         goTo: 'main.home',
         icon: 'glyphicon-home',
         class: 'menu-home',
         displayIf: function() { return $scope.showLink('main.home'); },
       },
       {
-        text: 'Products',
+        text: 'PRODUCTS',
         goTo: 'main.products',
         icon: 'glyphicon-th-list',
         class: 'menu-products',
         displayIf: function() { return $scope.showLink('main.products'); },
       },
       {
-        text: 'Publish',
+        text: 'PUBLISH',
         goTo: 'main.products.new',
         icon: 'glyphicon-plus',
         class: 'menu-new',
         displayIf: function() { return $scope.showLink('main.newelement'); },
       },
       {
-        text: 'My Admin',
+        text: 'MY_ADMIN',
         goTo: 'main.myadmin',
         icon: 'glyphicon-cog',
         class: 'menu-myadmin',
         displayIf: function() { return $scope.showLink('main.myadmin', Roles.admin); },
       },
       {
-        text: 'Account',
+        text: 'ACCOUNT',
         goTo: 'main.account',
         icon: 'glyphicon-cog',
         class: 'menu-account',
