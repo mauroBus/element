@@ -10,7 +10,7 @@ angular.module('elementBoxApp.signin')
       return;
     }
 
-    $rootScope.$emit('title', 'Sign In');
+    $rootScope.$emit('title', 'TITLE_SIGN_IN');
 
     $scope.displayError = false;
     $scope.invalidCredentials = false;

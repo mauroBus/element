@@ -14,8 +14,8 @@
               ng-show="invalidCredentials && showCredAlert"
               close="showCredAlert=false">
                 <span class="glyphicon glyphicon-exclamation-sign"></span>
-                <span>Oh snap!</span>
-                <div>The email and password you entered don't match.</div>
+                <span>{{ 'SIGN.OH_SNAP' | translate }}!</span>
+                <div>{{ 'SIGN.EMAIL_PASS_DONT_MATCH' | translate }}.</div>
                 <!-- <div>Change a few things up and try submitting again.</div> -->
             </alert>
           </div>
@@ -38,7 +38,7 @@
               <input
                 type="password"
                 class="form-control"
-                placeholder="Password"
+                placeholder="{{ 'PASSWORD' | translate }}"
                 required
                 name="password"
                 ng-model="credentials.password" />
@@ -48,18 +48,18 @@
                 type="checkbox"
                 value="remember-me"
                 ng-model="keepMeSigned" />
-              Keep me signed in
+              {{ 'SIGN.KEEP_ME_SIGNEDIN' | translate }}
             </label>
 
-            <button class="btn btn-lg btn-block btn-purple">Sign In</button>
+            <button class="btn btn-lg btn-block btn-purple">{{ 'SIGN.SIGN_IN' | translate }}</button>
           </form>
 
           <div class="forgot-link">
-            <a ui-sref="main.forgetPassword">I can't access my account</a>
+            <a ui-sref="main.password.forgot">{{ 'SIGN.I_CANT_ACCESS_ACCOUNT' | translate }}</a>
           </div>
 
           <div class="or-box">
-            <span class="or">OR</span>
+            <span class="or">{{ 'SIGN.OR' | translate }}</span>
             <div class="clearfix">
               <div class="col-md-6">
                 <a ui-sref="#" class="btn btn-facebook btn-block">Facebook</a>
@@ -73,7 +73,7 @@
           <div class="or-box">
             <!-- <div class="row"> -->
               <div class="col-md-12">
-                <a ui-sref="main.signup" class="btn btn-info btn-block">Create New Account</a>
+                <a ui-sref="main.signup" class="btn btn-info btn-block">{{ 'SIGN.CREATE_NEW_ACCOUNT' | translate }}</a>
               </div>
             <!-- </div> -->
           </div>
