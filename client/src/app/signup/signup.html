@@ -24,36 +24,37 @@
             name="signupForm">
             <div class="form-group"
               ng-class="{'has-error': (signupForm.firstName.$error.required && displayError) || (errors.firstName)}">
-              <span ng-show="errors.firstName" class="pull-right text-warning">{{errors.firstName.message}}</span>
+              <span ng-show="errors.firstName" class="pull-right text-warning">{{ errors.firstName.message | translate }}</span>
               <input
                 type="text"
                 class="form-control"
-                placeholder="First Name"
+                placeholder="{{ 'SIGN.FIRST_NAME' | translate }}"
                 required autofocus
                 name="firstName"
                 ng-model="credentials.firstName" />
             </div>
             <div class="form-group" ng-class="{'has-error': (signupForm.lastName.$error.required && displayError) || (errors.lastName)}">
-              <span ng-show="errors.lastName" class="pull-right text-warning">{{errors.lastName.message}}</span>
+              <span ng-show="errors.lastName" class="pull-right text-warning">{{ errors.lastName.message | translate}}</span>
               <input
                 type="text"
                 class="form-control"
-                placeholder="Last Name"
+                placeholder="{{ 'SIGN.LAST_NAME' | translate }}"
                 required autofocus
                 name="lastName"
                 ng-model="credentials.lastName" />
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-error': (errors.username.message && displayError)}">
+              <span ng-show="errors.username" class="pull-right text-warning" >{{ errors.username.message | translate}}</span>
               <input
                 type="text"
                 class="form-control"
-                placeholder="User Name"
+                placeholder="{{ 'SIGN.USER_NAME' | translate }}"
                 autofocus
                 ng-model="credentials.username" />
             </div>
             <div class="form-group" ng-class="{'has-error': (signupForm.email.$error.required && displayError) || (signupForm.email.$error.email && displayError) || (errors.email)}">
-              <label class="pull-right text-danger" ng-show="signupForm.email.$error.email">Email not valid</label>
-              <span ng-show="errors.email" class="pull-right text-warning">{{errors.email.message}}</span>
+              <label class="pull-right text-danger" ng-show="signupForm.email.$error.email">{{ 'SIGNUP.EMAIL_NOT_VALID' | translate }}</label>
+              <span ng-show="errors.email" class="pull-right text-warning">{{ errors.email.message | translate }}</span>
               <input
                 type="email"
                 class="form-control"
@@ -64,28 +65,27 @@
                 ng-model="credentials.email" />
             </div>
             <div class="form-group" ng-class="{'has-error': (signupForm.password.$error.required && displayError) || (errors.password)}">
-              <span ng-show="errors.password" class="pull-right text-warning">{{errors.password.message}}</span>
+              <span ng-show="errors.password" class="pull-right text-warning">{{ errors.password.message | translate }}</span>
               <input
                 type="password"
                 class="form-control"
-                placeholder="Password"
+                placeholder="{{ 'PASSWORD' | translate }}"
                 required
                 name="password"
                 ng-model="credentials.password" />
             </div>
 
-            <button
-              class="btn btn-lg btn-block btn-purple"
-              type="submit">
-                Sign Up
+            <button class="btn btn-lg btn-block btn-purple btn-loader" type="submit" ng-disabled="inProgress">
+              <span class="loader" ng-show="inProgress"></span>
+              {{ 'SIGN_UP' | translate }}
             </button>
           </form>
 
           <div class="or-box">
-            <span class="or">OR</span>
+            <span class="or">{{ 'SIGN.OR' | translate }}</span>
             <div class="row">
               <div class="col-md-12 row-block">
-                <a ui-sref="main.signin" class="btn btn-block">Sign In</a>
+                <a ui-sref="main.signin" class="btn btn-block">{{ 'SIGN.SIGN_IN' | translate }}</a>
               </div>
             </div>
           </div>
