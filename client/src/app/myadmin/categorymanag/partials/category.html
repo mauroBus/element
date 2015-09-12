@@ -1,9 +1,12 @@
 <div class="tree-node">
   <div class="pull-left tree-handle" ui-tree-handle>
-    <span class="glyphicon glyphicon-list"></span>
+    <span class="glyphicon glyphicon-move"></span>
   </div>
   <div class="tree-node-content">
-    <a ng-if="node.children && node.children.length > 0" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)">
+    <a ng-if="node.children && node.children.length > 0"
+      class="btn btn-purple btn-xs"
+      data-nodrag
+      ng-click="toggle(this)">
       <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
     </a>
     <div class="tree-node-content__name">{{node.name}}</div>
@@ -12,14 +15,28 @@
     <!-- <input type="text" ng-model="node.thumb" ng-show="edditing" class="form-control" placeholder="Thumb"> -->
 
     <div class="pull-right controllers">
-      <a class="btn btn-info btn-xs edit" data-nodrag ng-click="edit(node);">
-        <span class="glyphicon glyphicon-edit"></span>
+      <a class="btn btn-info btn-xs edit"
+        data-nodrag ng-click="edit(node);"
+        tooltip="{{ 'EDIT' | translate }}"
+        tooltip-trigger="mouseenter"
+        tooltip-placement="bottom">
+          <span class="glyphicon glyphicon-pencil"></span>
       </a>
-      <a class="btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;">
-        <span class="glyphicon glyphicon-plus"></span>
+      <a class="btn btn-primary btn-xs"
+        data-nodrag ng-click="newSubItem(this)"
+        style="margin-right: 8px;"
+        tooltip="{{ 'CREATE' | translate }}"
+        tooltip-trigger="mouseenter"
+        tooltip-placement="bottom">
+          <span class="glyphicon glyphicon-plus"></span>
       </a>
-      <a class="btn btn-danger btn-xs" data-nodrag ng-click="remove(this)">
-        <span class="glyphicon glyphicon-remove"></span>
+      <a class="btn btn-danger btn-xs"
+        data-nodrag
+        ng-click="remove(this)"
+        tooltip="{{ 'REMOVE' | translate }}"
+        tooltip-trigger="mouseenter"
+        tooltip-placement="bottom">
+          <span class="glyphicon glyphicon-remove"></span>
       </a>
     </div>
   </div>

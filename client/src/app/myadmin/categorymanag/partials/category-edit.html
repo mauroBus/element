@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h3 class="modal-title">Edit Category</h3>
+  <h3 class="modal-title">{{ 'MYADMIN.EDIT_CATEGORY' | translate }}</h3>
 </div>
 <div class="modal-body category-edit">
   <!-- '_id', 'name', '///path', 'thumb', 'img', 'large', 'displayOnHome' -->
@@ -10,7 +10,7 @@
 
     <div class="form-group"
       ng-class="{'has-error': categForm.Id.$error.required }">
-      <label class="col-lg-2 col-md-2 col-sm-2" for="idField">Id:</label>
+      <label class="col-lg-2 col-md-2 col-sm-2" for="idField">{{ 'MYADMIN.ID' | translate }}:</label>
       <div class="col-lg-10 col-md-10 col-sm-10">
         <input type="text"
           id="idField"
@@ -23,7 +23,7 @@
 
     <div class="form-group"
       ng-class="{'has-error': categForm.name.$error.required }">
-      <label class="categ__name col-lg-2 col-md-2 col-sm-2" for="nameField">Name:</label>
+      <label class="categ__name col-lg-2 col-md-2 col-sm-2" for="nameField">{{ 'NAME' | translate }}:</label>
       <div class="col-lg-10 col-md-10 col-sm-10">
         <input type="text"
           id="nameField"
@@ -36,7 +36,7 @@
 
     <div class="form-group"
       ng-class="{'has-error': categForm.thumb.$error.required }">
-      <label class="categ__thumb col-lg-2 col-md-2 col-sm-2" for="thumbField">Thumb:</label>
+      <label class="categ__thumb col-lg-2 col-md-2 col-sm-2" for="thumbField">{{ 'MYADMIN.THUMB' | translate }}:</label>
       <div class="col-lg-10 col-md-10 col-sm-10">
         <input type="text"
           id="thumbField"
@@ -49,7 +49,7 @@
 
     <div class="form-group">
       <!-- ng-class="{'has-error': categForm.img.$error.required }"> -->
-      <label class="categ__img col-lg-2 col-md-2 col-sm-2" for="imgField">Image:</label>
+      <label class="categ__img col-lg-2 col-md-2 col-sm-2" for="imgField">{{ 'MYADMIN.IMAGE' | translate }}:</label>
       <div class="col-lg-10 col-md-10 col-sm-10">
         <input type="text"
           id="imgField"
@@ -60,7 +60,7 @@
     </div>
 
     <div class="form-group">
-      <label class="categ__large col-lg-2 col-md-2 col-sm-2" for="largeField">Is large:</label>
+      <label class="categ__large col-lg-2 col-md-2 col-sm-2" for="largeField">{{ 'MYADMIN.IS_LARGE' | translate }}:</label>
       <div class="col-lg-10 col-md-10 col-sm-10">
         <div class="form-control">
           <input
@@ -72,7 +72,7 @@
     </div>
 
     <div class="form-group">
-      <label class="categ__displayOnHome col-lg-2 col-md-2 col-sm-2" for="displayOnHomeField">Display On Home:</label>
+      <label class="categ__displayOnHome col-lg-2 col-md-2 col-sm-2" for="displayOnHomeField">{{ 'MYADMIN.DISPLAY_ON_HOME' | translate }}:</label>
       <div class="col-lg-10 col-md-10 col-sm-10">
         <div class="form-control">
           <input
@@ -83,8 +83,8 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block">Save</button>
-    <button class="btn btn-warning btn-block" ng-click="cancelEdditing()">Cancel</button>
+    <button type="submit" class="btn btn-primary btn-block">{{ 'SAVE' | translate }}</button>
+    <button class="btn btn-warning btn-block" ng-click="cancelEdditing()">{{ 'CANCEL' | translate }}</button>
   </form>
 
 </div>

@@ -2,11 +2,12 @@
 
   .tree-node {
     border: 1px solid #dae2ea;
-    background: #f8faff;
+    background: #EDE7FF;
     color: #7c9eb2;
 
     &:hover {
-      background-color: #E2E3E7;
+      // background-color: lighten(@pink1-color, 10%);
+      background-color: @gray8;
     }
   }
   .tree-node-content {
@@ -23,6 +24,7 @@
     &__name {
       display: inline-block;
       margin: 5px;
+      color: @blue-dark-color;
     }
 
     .controllers {
@@ -37,13 +39,13 @@
   }
   .tree-handle {
     padding: 10px;
-    background: #428bca;
+    background: @gray4;
     color: #FFF;
     margin-right: 10px;
   }
 
   .angular-ui-tree-handle:hover {
-
+    background: @gray3;
   }
 
   .angular-ui-tree-placeholder {

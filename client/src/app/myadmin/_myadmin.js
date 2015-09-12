@@ -28,5 +28,10 @@ angular.module('elementBoxApp.myadmin', [
       // reloadOnSearch: false
     });
 
+    $stateProvider.state('main.myadmin.settings', {
+      url: '/settings',
+      templateUrl: 'account/settings/settings.html',
+      controller: 'MyAccountSettingsCtrl'
+    });
   }
 ]);
