@@ -10,15 +10,15 @@
     </button>
 
     <span class="glyphicon glyphicon-info-sign"></span>
-    You are logged out.
+    {{ 'YOU_ARE_LOGGED_OUT' | translate }}
   </div>
 
   <div class="scene clearfix">
-    <h1>Thanks for being part of us!</h1>
+    <h1>{{ 'SIGNOUT.LOGGED_OUT_MSG' | translate }}</h1>
     <div class="magic"></div>
 
     <div class="text-center col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <a ui-sref="main.home" class="btn btn-purple btn-lg">Home</a>
+      <a ui-sref="main.home" class="btn btn-purple btn-lg">{{ 'HOME' | translate }}</a>
     </div>
 
     <h3 class="pull-right">© BoxLabs Studios 2015</h3>

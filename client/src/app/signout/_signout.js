@@ -13,7 +13,7 @@ angular.module('elementBoxApp.signout', [])
 .controller('signoutCtrl', [
         '$scope', '$rootScope', '$state', 'Session',
 function($scope,   $rootScope,   $state,   Session) {
-  $rootScope.$emit('title', 'Sign Out');
+  $rootScope.$emit('title', 'TITLE_SIGN_OUT');
 
   if (Session.getSession() && Session.getSession().user) {
     $state.go('main.home');
@@ -22,7 +22,7 @@ function($scope,   $rootScope,   $state,   Session) {
 
   var mouseBinding;
 
-  $rootScope.$emit('app-msg', { txt: 'You are logged out!' });
+  $rootScope.$emit('app-msg', { txt: 'YOU_ARE_LOGGED_OUT' });
 
   var mouse = function() {
     var $scene = window.$('.scene'),
