@@ -33,5 +33,11 @@ angular.module('elementBoxApp.myadmin', [
       templateUrl: 'account/settings/settings.html',
       controller: 'MyAccountSettingsCtrl'
     });
+
+    $stateProvider.state('main.myadmin.charts', {
+      url: '/charts',
+      templateUrl: 'account/charts/charts.html',
+      controller: 'MyAccountChartsCtrl'
+    });
   }
 ]);

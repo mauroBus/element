@@ -9,37 +9,58 @@
         <a class="list-group-item"
           ui-sref="main.myadmin.categorymanag"
           ng-class="{active: activeState === 'main.myadmin.categorymanag' || activeState === 'main.myadmin'}"
-          ng-click="setState('main.myadmin.categorymanag')">{{ 'MYADMIN.CATEGORIES' | translate }}
+          ng-click="setState('main.myadmin.categorymanag')">
+            <span class="glyphicon glyphicon-tags hi-icon"></span>
+            {{ 'MYADMIN.CATEGORIES' | translate }}
         </a>
         <a class="list-group-item"
           ui-sref="main.myadmin.userlist"
           ng-class="{active: activeState === 'main.myadmin.userlist'}"
-          ng-click="setState('main.myadmin.userlist')">{{ 'MYADMIN.USERS' | translate }}
+          ng-click="setState('main.myadmin.userlist')">
+            <span class="glyphicon glyphicon-sunglasses hi-icon"></span>
+            {{ 'MYADMIN.USERS' | translate }}
         </a>
         <a class="list-group-item"
           ui-sref="main.myadmin.myitems"
           ng-class="{active: activeState === 'main.myadmin.myitems'}"
-          ng-click="setState('main.myadmin.myitems')">{{ 'ACCOUNT.MY_ITEMS' | translate }}
+          ng-click="setState('main.myadmin.myitems')">
+            <span class="glyphicon glyphicon-list-alt hi-icon"></span>
+            {{ 'ACCOUNT.MY_ITEMS' | translate }}
+        </a>
+        <a class="list-group-item"
+          ui-sref="main.myadmin.charts"
+          ng-class="{active: activeState === 'main.myadmin.charts'}"
+          ng-click="setState('main.myadmin.charts')">
+            <span class="glyphicon glyphicon-signal hi-icon"></span>
+            {{ 'ACCOUNT.CHARTS' | translate }}
         </a>
         <a class="list-group-item"
           ui-sref="main.myadmin.allitems"
           ng-class="{active: activeState === 'main.myadmin.allitems'}"
-          ng-click="setState('main.myadmin.allitems')">{{ 'MYADMIN.ALL_ITEMS' | translate }}
+          ng-click="setState('main.myadmin.allitems')">
+            <span class="glyphicon glyphicon-list hi-icon"></span>
+            {{ 'MYADMIN.ALL_ITEMS' | translate }}
         </a>
         <a class="list-group-item"
           ui-sref="main.myadmin.mywishlist"
           ng-class="{active: activeState === 'main.myadmin.mywishlist'}"
-          ng-click="setState('main.myadmin.mywishlist')">{{ 'WISH_LIST' | translate }}
+          ng-click="setState('main.myadmin.mywishlist')">
+            <span class="glyphicon glyphicon-star hi-icon"></span>
+            {{ 'WISH_LIST' | translate }}
         </a>
         <a class="list-group-item"
           ui-sref="main.myadmin.profile"
           ng-class="{active: activeState === 'main.myadmin.profile'}"
-          ng-click="setState('main.myadmin.profile')">{{ 'ACCOUNT.MY_PROFILE' | translate }}
+          ng-click="setState('main.myadmin.profile')">
+            <span class="glyphicon glyphicon-user hi-icon"></span>
+            {{ 'ACCOUNT.MY_PROFILE' | translate }}
         </a>
         <a class="list-group-item"
           ui-sref="main.myadmin.settings"
           ng-class="{active: activeState === 'main.myadmin.settings'}"
-          ng-click="setState('main.myadmin.settings')">{{ 'ACCOUNT.SETTINGS' | translate }}
+          ng-click="setState('main.myadmin.settings')">
+            <span class="glyphicon glyphicon-wrench hi-icon"></span>
+            {{ 'ACCOUNT.SETTINGS' | translate }}
         </a>
       </div>
     </div>
