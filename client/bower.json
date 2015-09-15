@@ -18,9 +18,10 @@
     "ngprogress": "~1.1.2",
     "angular-translate": "~2.7.2",
     "angular-translate-loader-static-files": "~2.7.2",
-    "angular-translate-storage-local": "~2.7.2"
+    "angular-translate-storage-local": "~2.7.2",
+    "angular-google-chart": "~0.0.11"
   },
   "resolutions": {
-    "angular": "1.4.5"
+    "angular": "~1.4.3"
   }
 }

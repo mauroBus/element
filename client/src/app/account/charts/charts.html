@@ -1,0 +1,14 @@
+<section class="account-charts">
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <h3>{{ 'ACCOUNT.MY_PRODUCTS_STATISTICS' | translate }}</h3>
+    <button class="btn btn-sm btn-purple"
+      ng-click="setType('bar')">
+      {{ 'ACCOUNT.BAR_CHART' | translate }}
+    </button>
+    <button class="btn btn-sm btn-info"
+      ng-click="setType('pie')">
+      {{ 'ACCOUNT.PIE_CHART' | translate }}
+    </button>
+    <chart data="chartData" type="chartType"></chart>
+  </div>
+</section>
