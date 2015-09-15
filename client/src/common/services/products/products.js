@@ -38,6 +38,11 @@ angular.module('elementBoxApp.common')
     get: {
       method: 'GET',
       params: { SILENT_ON_ERROR: true }
+    },
+    statistics: {
+      url: Urls.products.statistics,
+      method: 'GET',
+      isArray: true
     }
   });
 

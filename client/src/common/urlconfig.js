@@ -52,7 +52,8 @@ angular.module('elementBoxApp.common')
           cbk: '/auth/github/callback'
         },
         products: {
-          products: 'api/products'
+          products: 'api/products',
+          statistics: 'api/products/statistics'
         },
         categories: {
           url: 'api/categories'
