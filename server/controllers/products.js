@@ -66,11 +66,25 @@ exports.query = function(req, res) {
     });
 };
 
+
+/**
+ * Product statistics
+ */
+exports.statistics = function(req, res) {
+  Product
+    .find({ 'user.ref': req.user._id }, { _id: 1, views: 1, title: 1 })
+    .exec(function(err, result) {
+      res.json(result);
+    });
+};
+
+
 /**
  * Show a product
  */
 exports.read = function(req, res) {
   res.status(200).json(_.omit(req.product, ['__v', 'comments']));
+  req.product.update({ $inc: { 'views': 1 } }, function() {});
 };
 
 /**

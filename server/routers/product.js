@@ -16,6 +16,9 @@ module.exports = function(app) {
     .get(products.query)
     .post(users.requiresLogin, hasDefaultAuthorization, products.create);
 
+  app.route('/api/products/statistics')
+    .get(users.requiresLogin, products.statistics);
+
   app.route('/api/products/:productId')
     .get(products.read)
     .put(users.requiresLogin, hasDefaultAuthorization, products.hasAuthorization, products.update)

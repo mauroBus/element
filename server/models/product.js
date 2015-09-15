@@ -140,6 +140,10 @@ var Product = new Schema({
   cloudImgAccountNbr: {
     type: Number,
     default: 0
+  },
+  views: {
+    type: Number,
+    default: 0
   }
 });
 
