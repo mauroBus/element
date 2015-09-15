@@ -1,0 +1,88 @@
+<section class="product-mini-view clearfix">
+
+  <div class="clearfix">
+    <div class="col-md-2 col-md-offset-1 text-center">
+      <a ui-sref="main.userdetails({id: product.user.ref})" class="media-photo media-round text-center user-link">
+        <img alt="{{product.user.firstName}}" class="lazy" src="imgs/user_pic-68x68.png">
+      </a>
+      <div class="name">
+        <a ui-sref="main.userdetails({id: product.user.ref})" class="text-muted user-link">{{product.user.displayName || product.user.firstName}}</a>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <a class="text-overflow h3 col-lg-12" ui-sref="main.products.info({productId: product._id})">
+        {{product.title}}
+      </a>
+      <div class="product-rating col-lg-12">
+        <div class="rating rated pull-left" ng-class="{ 'never-rated': product.rating.value == 0 }">
+          <span ng-class="{ rated: product.rating.value >= 5 }">☆</span>
+          <span ng-class="{ rated: product.rating.value >= 4 }">☆</span>
+          <span ng-class="{ rated: product.rating.value >= 3 }">☆</span>
+          <span ng-class="{ rated: product.rating.value >= 2 }">☆</span>
+          <span ng-class="{ rated: product.rating.value >= 1 }">☆</span>
+        </div>
+        <a class="btn btn-link pull-right"
+          ui-sref="main.products.info({ productId: product._id })"
+          tooltip="{{ 'VIEW' | translate }}">
+          <span class="glyphicon glyphicon-link"></span>
+        </a>
+      </div>
+
+      <div class="row row-condensed text-muted text-center">
+        <div class="col-sm-3">
+          <i class="icon icon-entire-place"></i>
+        </div>
+        <div class="col-sm-3">
+          <i class="icon icon-group"></i>
+        </div>
+        <div class="col-sm-3">
+          <i class="icon icon-rooms"></i>
+        </div>
+        <div class="col-sm-3">
+          <i class="icon icon-double-bed"></i>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div ng-if="product.images.length" class="clearfix">
+    <div class="image-slider-container panel col-lg-6 col-md-6 col-sm-10 col-xs-10 col-lg-offset-3 col-md-offset-3 col-sm-offset-1 col-xs-offset-1">
+      <slick
+        lazy-load="ondemand"
+        slides-to-show="1"
+        slides-to-scroll="1"
+        dots="true"
+        responsive="[
+          {
+            settings: {
+              arrows: true,
+            }
+          }
+        ]"
+        >
+
+        <div class="slick-img" ng-repeat="slide in product.images track by $index">
+          <img src="{{slide.url}}" alt="{{slide.index}}">
+        </div>
+      </slick>
+
+    </div>
+  </div>
+
+<!--
+  <ul class="clearfix">
+    <li ng-repeat="categ in product.categories track by $index" role="presentation" class="">
+      <a ui-sref="main.products.list({categ: categ})">{{categ}}</a>
+    </li>
+  </ul>
+ -->
+
+  <div class="product-info__description text-overflow panel panel-dark">
+    <div class="panel-body">{{product.description}}</div>
+  </div>
+
+  <ng-transclude />
+
+</section>

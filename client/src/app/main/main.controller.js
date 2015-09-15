@@ -31,7 +31,39 @@ angular.module('elementBoxApp.main')
       }, 500);
     });
 
-    $rootScope.$on('title', function(event, title) {
+    $rootScope.$on('title', function(event, title) {});
+
+    $scope.showMiniView = false;
+    $scope.miniViewProduct = {};
+    $scope.animateInMiniProd = false;
+    // $scope.animateOutMiniProd = false;
+
+    $rootScope.$on('ev:prod-mini-view', function(ev, prod) {
+      if ($scope.showMiniView) {
+        $scope.hideMiniView();
+      }
+      // $timeout(function() {
+      $scope.showMiniView = true;
+      $scope.miniViewProduct = prod;
+      $scope.animateInMiniProd = true;
+      // });
+
+      $timeout(function() {
+        $scope.animateInMiniProd = false;
+      }, 1000);
+    });
+
+    $scope.hideMiniView = function() {
+      // $scope.animateOutMiniProd = true;
+      $scope.showMiniView = false;
+      $scope.miniViewProduct = {};
+      $scope.animateInMiniProd = false;
+      // $timeout(function() {
+      // }, 1000);
+    };
+
+    $rootScope.$on('$stateChangeSuccess', function() {
+      $scope.hideMiniView();
     });
 
   }

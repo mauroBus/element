@@ -15,7 +15,7 @@ angular.module('elementBoxApp.common')
       removeMethod: '=',
       postRemoveMethod: '='
     },
-    controller: ['$scope', 'ModalAlert', function($scope, ModalAlert) {
+    controller: ['$scope', '$rootScope', 'ModalAlert', function($scope, $rootScope, ModalAlert) {
 
       $scope.getProdThumbnail = function(product) {
         var url = product.images.length ? product.images[0].url : 'imgs/no-picture-medium.png';
@@ -40,6 +40,11 @@ angular.module('elementBoxApp.common')
           });
         }
       };
+
+      $scope.showMoreInfo = function() {
+        $rootScope.$emit('ev:prod-mini-view', $scope.product);
+      };
+
     }]
 
   };

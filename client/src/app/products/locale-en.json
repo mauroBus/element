@@ -41,3 +41,5 @@
 "PRODUCTS.WAITING_TO_CREATE": "Creating Product...",
 "PRODUCTS.WAS_NOT_FOUND": "The product was not found",
 "PRODUCTS.WAS_NOT_FOUND_SRRY": "Sorry, but the product you were trying to view does not exist anymore",
+"PRODUCTS.MORE_INFO": "Quick Info",
+"PRODUCTS.MINI_VIEW": "Mini Vista",
