@@ -12,4 +12,32 @@
 <!-- Main menu: -->
 <div ng-include="'main/menu/menu.html'"></div>
 
+<!--
+bounce
+shake
+pulse
+fadeIn
+fadeInRight
+zoomInRight
+bounceInDown
+bounceInRight
+slideInRight
+rubberBand
+swing
+rotateInDownRight
+rotateInUpRight
+-->
+<div class="mini-product-overlay" ng-if="showMiniView" ng-click="hideMiniView()"></div>
+<div class="col-lg-6 col-md-6 col-sm-8 col-xs-10 mini-product"
+  ng-if="showMiniView"
+  ng-class="{
+    'animated bounceInDown': animateInMiniProd
+  }">
+  <product-mini-view product="miniViewProduct" ng-if="showMiniView">
+    <button class="btn btn-close-mini-view" ng-click="hideMiniView()">
+      <span class="glyphicon glyphicon-remove text-danger"></span>
+    </button>
+  </product-mini-view>
+</div>
+
 <div id="progress-back"></div>

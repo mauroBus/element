@@ -9,25 +9,39 @@
         <a class="list-group-item"
           ui-sref="main.account.myitems"
           ng-class="{active: activeState === 'main.account.myitems' || activeState === 'main.account'}"
-          ng-click="setState('main.account.myitems')">{{ 'ACCOUNT.MY_ITEMS' | translate }}</a>
-      </div>
-      <div class="list-group">
+          ng-click="setState('main.account.myitems')">
+            <span class="glyphicon glyphicon-list-alt hi-icon"></span>
+            {{ 'ACCOUNT.MY_ITEMS' | translate }}
+        </a>
+        <a class="list-group-item"
+          ui-sref="main.account.charts"
+          ng-class="{active: activeState === 'main.account.charts'}"
+          ng-click="setState('main.account.charts')">
+            <span class="glyphicon glyphicon-signal hi-icon"></span>
+            {{ 'ACCOUNT.CHARTS' | translate }}
+        </a>
         <a class="list-group-item"
           ui-sref="main.account.mywishlist"
           ng-class="{active: activeState === 'main.account.mywishlist'}"
-          ng-click="setState('main.account.mywishlist')">{{ 'WISH_LIST' | translate }}</a>
-      </div>
-      <div class="list-group">
+          ng-click="setState('main.account.mywishlist')">
+            <span class="glyphicon glyphicon-star hi-icon"></span>
+            {{ 'WISH_LIST' | translate }}
+        </a>
         <a class="list-group-item"
           ui-sref="main.account.profile"
           ng-class="{active: activeState === 'main.account.profile'}"
-          ng-click="setState('main.account.profile')">{{ 'ACCOUNT.MY_PROFILE' | translate }}</a>
-      </div>
-      <div class="list-group">
+          ng-click="setState('main.account.profile')">
+            <span class="glyphicon glyphicon-user hi-icon"></span>
+            {{ 'ACCOUNT.MY_PROFILE' | translate }}
+        </a>
         <a class="list-group-item"
           ui-sref="main.account.settings"
           ng-class="{active: activeState === 'main.account.settings'}"
-          ng-click="setState('main.account.settings')">{{ 'ACCOUNT.SETTINGS' | translate }}</a>
+          ng-click="setState('main.account.settings')">
+            <span class="glyphicon glyphicon-wrench hi-icon"></span>
+            <!-- <span class="glyphicon glyphicon-cog hi-icon"></span> -->
+            {{ 'ACCOUNT.SETTINGS' | translate }}
+        </a>
       </div>
     </div>
   </div>
