@@ -30,10 +30,11 @@ angular.module('elementBoxApp.userdetails')
       $scope.isLoading = false;
       $scope.user.comments.forEach(function(cmnt) {
         cmnt.user = {
-          ref: $scope.user._id,
+          _id: $scope.user._id,
           displayName: $scope.user.displayName,
           firstName: $scope.user.firstName,
-          lastName: $scope.user.lastName
+          lastName: $scope.user.lastName,
+          image: $scope.user.image
         };
       });
 

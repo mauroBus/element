@@ -13,7 +13,7 @@
 
     <div class="col-lg-3 col-md-3 col-sm-5 hidden-xs">
       <!-- <img alt="{{user.firstName}}" ng-src="{{user.image}}" title="{{user.firstName}}" width="225" height="225"> -->
-      <img class="user-lg-img center-block" alt="{{user.firstName}}" ng-src="imgs/user_pic-225x225.png" title="{{user.firstName}}" width="225" height="225">
+      <img class="user-lg-img center-block" alt="{{user.firstName}}" ng-src="{{user.image.url}}" title="{{user.firstName}}" width="225" height="225">
 
       <div class="panel panel-info verifications">
         <div class="panel-heading">{{ 'USERDETAILS.VERIFICATIONS' | translate }}</div>
@@ -66,10 +66,15 @@
       <div class="row">
         <div class="col-sm-4 visible-xs text-center">
           <div class="media-photo media-photo-block media-round">
-            <img alt="{{user.firstName}}" class="img-responsive" height="225" src="imgs/user_pic-225x225.png" title="{{user.firstName}}" width="225">
+            <img alt="{{user.firstName}}" class="img-responsive" height="225" ng-src="{{user.image.url}}" title="{{user.firstName}}" width="225">
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <a class="btn btn-sm btn-default pull-right"
+            ui-sref="main.account.profile"
+            ng-show="currentUser.id === user._id">
+            {{ 'USERDETAILS.EDIT_MY_PROFILE' | translate }}
+          </a>
           <div class="h1" ng-class="{ 'text-danger': !user.active }">{{ 'USERDETAILS.PROFILE' | translate:username }}</div>
           <div class="h5 text-muted"
             ng-class="{ 'col-lg-8 col-md-8 col-sm-8 col-xs-12': !user.active }">
@@ -86,7 +91,7 @@
       </div> <!-- row -->
 
       <div class="flag-controls pull-right">
-        <button class="btn btn-link report-user" ng-click="reportUser()" ng-show="!userReported">
+        <button class="btn btn-link report-user" ng-click="reportUser()" ng-show="!userReported && currentUser.id !== user._id">
           {{ 'USERDETAILS.REPORT_THIS_USER' | translate:username }}
           <span class="glyphicon glyphicon-warning-sign text-danger pull-left"></span>
         </button>

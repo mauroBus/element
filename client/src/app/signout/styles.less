@@ -1,4 +1,5 @@
 .signout {
+  margin: 0 10%;
 
   .scene {
     // position: relative;
@@ -30,4 +31,73 @@
     // background-size: contain;
     border-radius: 50%;
   }
+
+
+  parallax {
+    position: relative;
+    #parallax_wrapper {
+      position: relative;
+      z-index: 0;
+      transition: all 0.25s ease-in 0s;
+    }
+    #parallax_field {
+      overflow: hidden;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      height: 400px;
+      width: 100%;
+    }
+
+    #shell {
+      display: block;
+      position: relative;
+      margin: 0 auto;
+      // width: 318px;
+      width: 100%;
+      height: 400px;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    img {
+      position: absolute;
+      &.parallax_bg {
+        // top: -20px;
+        // left: -20px;
+        width: 110%;
+        height: 425px;
+        z-index: 1;
+      }
+      &.plax-logo {
+        // left: 290px;
+        // top: 70px;
+        top: 20%;
+        left: 63%;
+        z-index: 3;
+      }
+      &.plax-sphere-1 {
+        z-index: 4;
+        // top: 180px;
+        // left: 220px;
+        top: 51%;
+        left: 58%;
+      }
+      &.plax-sphere-2 {
+        z-index: 2;
+        // top: 140px;
+        // left: 0px;
+        top: 5%;
+        left: 10%;
+        z-index: 6;
+      }
+      &.plax-sphere-3 {
+        top: 0;
+        left: 25%;
+        z-index: 1;
+      }
+    }
+  }
+
 }
+

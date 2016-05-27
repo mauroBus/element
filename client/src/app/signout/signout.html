@@ -1,4 +1,4 @@
-<section class="simple-container signout" ng-init="showMsg = true;">
+<section class="signout" ng-init="showMsg = true;">
 
   <div class="alert alert-info" role="alert" ng-show="showMsg">
     <button type="button"
@@ -13,7 +13,7 @@
     {{ 'YOU_ARE_LOGGED_OUT' | translate }}
   </div>
 
-  <div class="scene clearfix">
+  <!-- <div class="scene clearfix">
     <h1>{{ 'SIGNOUT.LOGGED_OUT_MSG' | translate }}</h1>
     <div class="magic"></div>
 
@@ -22,9 +22,34 @@
     </div>
 
     <h3 class="pull-right">© BoxLabs Studios 2015</h3>
-  </div>
+  </div> -->
   <!-- <h3 class="pull-left">
     <strong class="">Thanks for being part of us!</strong>
   </h3> -->
+  <parallax class="clearfix" elements="['.plax-sphere-1', '.plax-logo', '.plax-sphere-2', '.plax-sphere-3', '.parallax_bg']">
+    <div id="parallax_field">
+      <img alt="" class="js-plaxify parallax_bg" data-invert="true" data-xrange="0" data-yrange="20" src="imgs/logout-back.jpg" >
+    </div>
+
+    <div id="shell">
+      <!-- <img src="imgs/.png" width="100%" height="500" data-xrange="40" data-yrange="40"
+        class="plax-logo"/> -->
+      <!-- <img src="http://sitmobel.com.mx/images/thumb/294/294/paletas-producto/16231d0efb.png" width="250" height="300" data-xrange="40" data-yrange="40" class="plax-logo"/> -->
+      <!-- <img src="imgs/logo2.png" width="93" height="92" data-xrange="100" data-yrange="100" class="plax-sphere-1"/> -->
+      <!-- <img src="imgs/user_pic-68x68.png" width="93" height="92" data-xrange="80" data-yrange="80" data-invert="true" class="plax-sphere-3"/> -->
+      <!-- <img src="http://www.clker.com/cliparts/1/3/8/8/1197119407495870296egonpin_Sol_2.svg.med.png" width="260" height="260" data-xrange="40" data-yrange="40" data-invert="true" class="plax-sphere-3"/> -->
+      <!-- <img src="imgs/no-picture-small.png" width="215" height="215" data-xrange="20" data-yrange="20" class="plax-sphere-2"/> -->
+
+      <img src="imgs/sun.png" width="200" height="200" data-xrange="110" data-yrange="30" data-invert="true" class="plax-sphere-3"/>
+      <img src="imgs/umbrella.png" width="210" height="230" data-xrange="105" data-yrange="50" class="plax-logo"/>
+      <img src="imgs/deckchair.png" width="180" height="180" data-xrange="60" data-yrange="15" class="plax-sphere-1"/>
+      <img src="imgs/palm.png" width="280" height="400" data-xrange="100" data-yrange="10" class="plax-sphere-2"/>
+    </div>
+  </parallax>
+
+  <h3 class="text-center col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <a ui-sref="main.home" class="btn btn-purple btn-lg">{{ 'HOME' | translate }}</a>
+    <a ui-sref="main.signin" class="btn btn-info btn-lg">{{ 'SIGN.SIGN_IN' | translate }}</a>
+  </h3>
 
 </section>
