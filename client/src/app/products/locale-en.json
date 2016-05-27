@@ -42,4 +42,6 @@
 "PRODUCTS.WAS_NOT_FOUND": "The product was not found",
 "PRODUCTS.WAS_NOT_FOUND_SRRY": "Sorry, but the product you were trying to view does not exist anymore",
 "PRODUCTS.MORE_INFO": "Quick Info",
-"PRODUCTS.MINI_VIEW": "Mini Vista",
+"PRODUCTS.MINI_VIEW": "Mini View",
+"PRODUCTS.PLEASE_SIGNIN": "Please Sing In",
+"PRODUCTS.PLEASE_SIGNIN_TO_ACCESS": "You need to sign in with your account to have access to this functionality.",

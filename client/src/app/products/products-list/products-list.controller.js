@@ -19,15 +19,15 @@ angular.module('elementBoxApp.products.productList')
 
     $rootScope.$emit('title', 'TITLE_PRODUCTS');
 
-    var init = function() {
-      var CategoryRsr = Categories.getCategoriesTree();
-
-      CategoryRsr
-        .query({flat: false})
-        .$promise.then(function(res) {
-          $scope.categories = res;
-          setup();
+    var parseFlatCategs = function(categ) {
+      var res = [];
+      res.push(categ);
+      if (categ.children) {
+        categ.children.forEach(function(child) {
+          res.push.apply(res, parseFlatCategs(child));
         });
+      }
+      return res;
     };
 
     var setup = function() {
@@ -48,6 +48,17 @@ angular.module('elementBoxApp.products.productList')
       });
 
       $scope.fetchPage($scope.currentCateg, $scope.page); // fetching the first time.
+    };
+
+    var init = function() {
+      var CategoryRsr = Categories.getCategoriesTree();
+
+      CategoryRsr
+        .query({flat: false})
+        .$promise.then(function(res) {
+          $scope.categories = res;
+          setup();
+        });
     };
 
     $scope.fetchPage = function(categ, toPage) {
@@ -76,17 +87,6 @@ angular.module('elementBoxApp.products.productList')
             angular.element('body').animate({scrollTop: 150}, 400);
           }
         });
-    };
-
-    var parseFlatCategs = function(categ) {
-      var res = [];
-      res.push(categ);
-      if (categ.children) {
-        categ.children.forEach(function(child) {
-          res.push.apply(res, parseFlatCategs(child));
-        });
-      }
-      return res;
     };
 
     var getRootNodesScope = function() {

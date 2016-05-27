@@ -9,13 +9,19 @@ angular.module('elementBoxApp.common')
     scope: {
       product: '='
     },
-    // controller: ['$scope', function($scope) {
-    //   $scope.slides = [];
+    controller: ['$scope', 'UserService', function($scope, UserService) {
 
-    //   $scope.product.images.forEach(function(image, index) {
-    //     $scope.slides.push({ url: image.url, index: index+1 });
-    //   });
+      if ($scope.product.owner._id) { return; }
 
-    // }]
+      UserService.get({ id: $scope.product.owner })
+        .$promise.then(function(data) {
+          $scope.product.owner = data;
+        });
+
+      // $scope.slides = [];
+      // $scope.product.images.forEach(function(image, index) {
+      //   $scope.slides.push({ url: image.url, index: index+1 });
+      // });
+    }]
   };
 });

@@ -2,8 +2,8 @@
 angular.module('elementBoxApp.products.productInfo')
 
 .controller('ProductInfoCtrl', [
-          '$scope', '$rootScope', '$state', '$stateParams', '$timeout', 'ProductsService', 'UserService', 'CommentsService', 'EVENT_NAMES',
-  function($scope,   $rootScope,   $state,   $stateParams,   $timeout,   ProductsService,   UserService,   CommentsService,   EVENT_NAMES) {
+          '$scope', '$rootScope', '$state', '$stateParams', '$timeout', 'ModalAlert', 'ProductsService', 'UserService', 'CommentsService', 'EVENT_NAMES',
+  function($scope,   $rootScope,   $state,   $stateParams,   $timeout,   ModalAlert,   ProductsService,   UserService,   CommentsService,   EVENT_NAMES) {
     $scope.slides = [];
     $scope.slidesIndex = 0;
     $scope.userHasRated = false;
@@ -21,6 +21,13 @@ angular.module('elementBoxApp.products.productInfo')
       pageSize: 3,
       totalPages: 0,
       totalComments: 0
+    };
+
+    var onNeedToLogin = function() {
+      ModalAlert.alert({
+        title: 'PRODUCTS.PLEASE_SIGNIN',
+        msg: 'PRODUCTS.PLEASE_SIGNIN_TO_ACCESS'
+      });
     };
 
     // $scope.myInterval = 5000;
@@ -58,6 +65,11 @@ angular.module('elementBoxApp.products.productInfo')
     $scope.addComment = function(commentTxt) {
       if (!commentTxt || !commentTxt.trim()) { return; }
 
+      if (!$scope.currentUser || !$scope.currentUser.id) {
+        onNeedToLogin();
+        return;
+      }
+
       var newComment = {
         prodId: $stateParams.productId,
         text: commentTxt
@@ -77,6 +89,11 @@ angular.module('elementBoxApp.products.productInfo')
     $scope.rate = function(val) {
       if ($scope.rateVal || ratingInProcess) { return; }
 
+      if (!$scope.currentUser || !$scope.currentUser.id) {
+        onNeedToLogin();
+        return;
+      }
+
       ratingInProcess = true;
 
       ProductsService.rate({_id: $scope.product._id, rating: val}, function() { // success cbk.
@@ -89,6 +106,10 @@ angular.module('elementBoxApp.products.productInfo')
     };
 
     $scope.addToWishList = function() {
+      if (!$scope.currentUser || !$scope.currentUser.id) {
+        return onNeedToLogin();
+      }
+
       UserService.addToWishList({ prodId: $scope.product._id }, function() {
         $rootScope.$emit(EVENT_NAMES.addWishList, $scope.product);
       });

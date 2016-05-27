@@ -32,7 +32,7 @@
 
       <div class="col-md-3 text-center clearfix">
         <a ui-sref="main.userdetails({id: user._id})" class="media-photo media-round text-center user-link">
-          <img alt="" class="lazy" src="imgs/user_pic-68x68.png">
+          <img alt="" class="lazy" src="{{user.image.url}}" width="68" height="68">
         </a>
         <div class="name">
           <a ui-sref="main.userdetails({id: user._id})" class="text-muted user-link">{{user.firstName}}</a>

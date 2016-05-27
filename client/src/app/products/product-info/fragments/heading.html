@@ -7,11 +7,11 @@
           <div class="row">
 
             <div class="col-md-3 text-center">
-              <a ui-sref="main.userdetails({id: product.user.ref})" class="media-photo media-round text-center user-link">
-                <img alt="{{product.user.firstName}}" class="lazy" src="imgs/user_pic-68x68.png">
+              <a ui-sref="main.userdetails({id: product.owner._id})" class="media-photo media-round text-center user-link">
+                <img alt="{{product.owner.firstName}}" class="lazy" ng-src="{{product.owner.image.url}}" width="68" height="68">
               </a>
               <div class="name">
-                <a ui-sref="main.userdetails({id: product.user.ref})" class="text-muted user-link">{{product.user.displayName || product.user.firstName}}</a>
+                <a ui-sref="main.userdetails({id: product.owner._id})" class="text-muted user-link">{{product.owner.displayName || product.owner.firstName}}</a>
               </div>
             </div>
 
@@ -58,10 +58,13 @@
             <div class="col-md-3"></div>
             <div class="col-md-9">
               <div class="row row-condensed text-muted text-center">
-                <div class="col-sm-3">Entire home/apt</div>
-                <div class="col-sm-3">2 Guests</div>
-                <div class="col-sm-3">1 Bedroom</div>
-                <div class="col-sm-3">1 Bed</div>
+                <div class="col-sm-3">
+                  {{ 'VIEWS' | translate }}
+                  <span class="badge">{{product.views}}</span>
+                </div>
+                <div class="col-sm-3">Attr 2</div>
+                <div class="col-sm-3">Attr 3</div>
+                <div class="col-sm-3">Attr 4</div>
               </div>
             </div>
           </div>

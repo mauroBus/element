@@ -2,11 +2,11 @@
 
   <div class="clearfix">
     <div class="col-md-2 col-md-offset-1 text-center">
-      <a ui-sref="main.userdetails({id: product.user.ref})" class="media-photo media-round text-center user-link">
-        <img alt="{{product.user.firstName}}" class="lazy" src="imgs/user_pic-68x68.png">
+      <a ui-sref="main.userdetails({id: product.owner._id})" class="media-photo media-round text-center user-link">
+        <img alt="{{product.owner.firstName}}" class="lazy" ng-src="{{product.owner.image.url}}" width="68" height="68">
       </a>
       <div class="name">
-        <a ui-sref="main.userdetails({id: product.user.ref})" class="text-muted user-link">{{product.user.displayName || product.user.firstName}}</a>
+        <a ui-sref="main.userdetails({id: product.owner._id})" class="text-muted user-link">{{product.owner.displayName || product.owner.firstName}}</a>
       </div>
     </div>
 
