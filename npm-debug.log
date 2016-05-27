@@ -1,0 +1,107 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/mauro/.nvm/versions/node/v4.4.4/bin/node',
+1 verbose cli   '/home/mauro/.nvm/versions/node/v4.4.4/bin/npm',
+1 verbose cli   'install' ]
+2 info using npm@2.15.1
+3 info using node@v4.4.4
+4 verbose readDependencies loading dependencies from /home/mauro/my-projects/element-box/package.json
+5 warn package.json element-box@0.1.0 No repository field.
+6 warn package.json element-box@0.1.0 No README data
+7 verbose install where, deps [ '/home/mauro/my-projects/element-box',
+7 verbose install   [ 'gulp',
+7 verbose install     'gulp-env',
+7 verbose install     'gulp-exec',
+7 verbose install     'gulp-nodemon',
+7 verbose install     'gulp-shell',
+7 verbose install     'merge-stream',
+7 verbose install     'rimraf',
+7 verbose install     'run-sequence',
+7 verbose install     'gulp-express' ] ]
+8 verbose install where, peers [ '/home/mauro/my-projects/element-box', [] ]
+9 verbose installManyTop reading for lifecycle /home/mauro/my-projects/element-box/package.json
+10 info preinstall element-box@0.1.0
+11 verbose installManyTop reading scoped package data from /home/mauro/my-projects/element-box/node_modules/gulp/package.json
+12 verbose installManyTop reading scoped package data from /home/mauro/my-projects/element-box/node_modules/gulp-env/package.json
+13 verbose installManyTop reading scoped package data from /home/mauro/my-projects/element-box/node_modules/gulp-exec/package.json
+14 verbose installManyTop reading scoped package data from /home/mauro/my-projects/element-box/node_modules/gulp-express/package.json
+15 verbose installManyTop reading scoped package data from /home/mauro/my-projects/element-box/node_modules/gulp-nodemon/package.json
+16 verbose installManyTop reading scoped package data from /home/mauro/my-projects/element-box/node_modules/gulp-shell/package.json
+17 verbose installManyTop reading scoped package data from /home/mauro/my-projects/element-box/node_modules/merge-stream/package.json
+18 verbose installManyTop reading scoped package data from /home/mauro/my-projects/element-box/node_modules/rimraf/package.json
+19 verbose installManyTop reading scoped package data from /home/mauro/my-projects/element-box/node_modules/run-sequence/package.json
+20 info package.json gulp@3.8.8 No license field.
+21 info package.json run-sequence@1.0.1 No license field.
+22 info package.json rimraf@2.2.8 license should be a valid SPDX license expression
+23 info package.json gulp-exec@2.1.1 No license field.
+24 verbose readDependencies loading dependencies from /home/mauro/my-projects/element-box/package.json
+25 verbose targetResolver reading package data from /home/mauro/my-projects/element-box/node_modules/gulp/package.json
+26 verbose targetResolver reading package data from /home/mauro/my-projects/element-box/node_modules/gulp-env/package.json
+27 verbose targetResolver reading package data from /home/mauro/my-projects/element-box/node_modules/gulp-exec/package.json
+28 verbose targetResolver reading package data from /home/mauro/my-projects/element-box/node_modules/gulp-express/package.json
+29 verbose targetResolver reading package data from /home/mauro/my-projects/element-box/node_modules/gulp-nodemon/package.json
+30 verbose targetResolver reading package data from /home/mauro/my-projects/element-box/node_modules/gulp-shell/package.json
+31 verbose targetResolver reading package data from /home/mauro/my-projects/element-box/node_modules/merge-stream/package.json
+32 verbose targetResolver reading package data from /home/mauro/my-projects/element-box/node_modules/rimraf/package.json
+33 verbose targetResolver reading package data from /home/mauro/my-projects/element-box/node_modules/run-sequence/package.json
+34 verbose targetResolver reading package data from /home/mauro/my-projects/element-box/node_modules/.bin/gulp/package.json
+35 verbose targetResolver reading package data from /home/mauro/my-projects/element-box/node_modules/.bin/rimraf/package.json
+36 verbose already installed skipping gulp-exec@^2.1.1 /home/mauro/my-projects/element-box
+37 verbose already installed skipping gulp-nodemon@^1.0.4 /home/mauro/my-projects/element-box
+38 verbose already installed skipping gulp-shell@^0.4.3 /home/mauro/my-projects/element-box
+39 verbose already installed skipping merge-stream@^0.1.6 /home/mauro/my-projects/element-box
+40 verbose already installed skipping rimraf@^2.2.8 /home/mauro/my-projects/element-box
+41 verbose already installed skipping run-sequence@^1.0.1 /home/mauro/my-projects/element-box
+42 verbose already installed skipping gulp-express@^0.1.0 /home/mauro/my-projects/element-box
+43 verbose already installed skipping gulp@^3.8.8 /home/mauro/my-projects/element-box
+44 verbose already installed skipping gulp-env@^0.2.0 /home/mauro/my-projects/element-box
+45 silly install resolved []
+46 info build /home/mauro/my-projects/element-box
+47 info linkStuff element-box@0.1.0
+48 silly linkStuff element-box@0.1.0 has /home/mauro/my-projects as its parent node_modules
+49 verbose linkBins element-box@0.1.0
+50 verbose linkMans element-box@0.1.0
+51 verbose rebuildBundles element-box@0.1.0
+52 verbose rebuildBundles [ '.bin',
+52 verbose rebuildBundles   'gulp',
+52 verbose rebuildBundles   'gulp-env',
+52 verbose rebuildBundles   'gulp-exec',
+52 verbose rebuildBundles   'gulp-express',
+52 verbose rebuildBundles   'gulp-nodemon',
+52 verbose rebuildBundles   'gulp-shell',
+52 verbose rebuildBundles   'merge-stream',
+52 verbose rebuildBundles   'rimraf',
+52 verbose rebuildBundles   'run-sequence' ]
+53 info install element-box@0.1.0
+54 verbose unsafe-perm in lifecycle true
+55 info element-box@0.1.0 Failed to exec install script
+56 verbose stack Error: element-box@0.1.0 install: `cd client && npm install && bower install && gulp build && cd ../server && npm install`
+56 verbose stack spawn ENOENT
+56 verbose stack     at ChildProcess.<anonymous> (/home/mauro/.nvm/versions/node/v4.4.4/lib/node_modules/npm/lib/utils/spawn.js:17:16)
+56 verbose stack     at emitTwo (events.js:87:13)
+56 verbose stack     at ChildProcess.emit (events.js:172:7)
+56 verbose stack     at maybeClose (internal/child_process.js:827:16)
+56 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+57 verbose pkgid element-box@0.1.0
+58 verbose cwd /home/mauro/my-projects/element-box
+59 error Linux 3.19.0-59-generic
+60 error argv "/home/mauro/.nvm/versions/node/v4.4.4/bin/node" "/home/mauro/.nvm/versions/node/v4.4.4/bin/npm" "install"
+61 error node v4.4.4
+62 error npm  v2.15.1
+63 error file sh
+64 error code ELIFECYCLE
+65 error errno ENOENT
+66 error syscall spawn
+67 error element-box@0.1.0 install: `cd client && npm install && bower install && gulp build && cd ../server && npm install`
+67 error spawn ENOENT
+68 error Failed at the element-box@0.1.0 install script 'cd client && npm install && bower install && gulp build && cd ../server && npm install'.
+68 error This is most likely a problem with the element-box package,
+68 error not with npm itself.
+68 error Tell the author that this fails on your system:
+68 error     cd client && npm install && bower install && gulp build && cd ../server && npm install
+68 error You can get information on how to open an issue for this project with:
+68 error     npm bugs element-box
+68 error Or if that isn't available, you can get their info via:
+68 error
+68 error     npm owner ls element-box
+68 error There is likely additional logging output above.
+69 verbose exit [ 1, true ]

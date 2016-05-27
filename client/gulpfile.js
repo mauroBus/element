@@ -70,7 +70,8 @@ var jsVendors = [
   config.vendor + '/angular-translate/angular-translate.min.js',
   config.vendor + '/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
   config.vendor + '/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js',
-  config.vendor + '/angular-translate-storage-local/angular-translate-storage-local.min.js'
+  config.vendor + '/angular-translate-storage-local/angular-translate-storage-local.min.js',
+  config.vendor + '/plax/js/plax.js',
   // config.vendor + '/nvd3/nv.d3.min.js',
   // config.vendor + '/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js'
 ];
