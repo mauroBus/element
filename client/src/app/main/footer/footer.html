@@ -27,20 +27,23 @@
       <!-- <li>
         <button ui-sref="main.terms" class="btn btn-link footer__menu__item">Contact</button>
       </li> -->
-      <li class="pull-right">
-        <select class="form-control"
-          ng-options="lang as (lang.name | translate) for lang in supportedLangs track by lang.key"
-          ng-change="onChangeLang(langSelected)"
-          ng-model="langSelected">
-        </select>
-      </li>
     </ul>
   </div>
 
 
   <hr class="footer-divider col-md-12 col-lg-12">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="pull-right">
+      <select class="form-control"
+        ng-options="lang as (lang.name | translate) for lang in supportedLangs track by lang.key"
+        ng-change="onChangeLang(langSelected)"
+        ng-model="langSelected">
+      </select>
+    </div>
+  </div>
+
   <div class="social-media text-center">
-    <ul class="list-layout list-inline" itemscope="" itemtype="http://schema.org/Organization">
+    <!-- <ul class="list-layout list-inline">
       <li>
         <a href="https://www.facebook.com/boxlabs" class="footer-icon-container" target="_blank">
           <span class="glyphicon glyphicon-fire icon-facebook"></span>
@@ -79,7 +82,7 @@
           <span class="glyphicon glyphicon-fire icon-instagram"></span>
         </a>
       </li>
-    </ul>
+    </ul> -->
 
     <h5 class="copyright">© BoxLabs</h5>
   </div>

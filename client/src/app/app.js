@@ -62,7 +62,7 @@ angular.module('elementBoxApp', [
     suffix: '.json'
   });
 
-  $translateProvider.preferredLanguage('es');
+  $translateProvider.preferredLanguage('en');
   $translateProvider.useCookieStorage();
   $translateProvider.useSanitizeValueStrategy('escaped');
 }])
