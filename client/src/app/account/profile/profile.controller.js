@@ -3,11 +3,34 @@ angular.module('elementBoxApp.account.profile')
 
 .controller('MyAccountProfileCtrl', [
           '$scope', '$rootScope', '$timeout', 'UserService', 'Session',
-  function($scope,   $rootScope,   $timeout,   UserService, Session) {
+  function($scope,   $rootScope,   $timeout,   UserService,   Session) {
 
     $scope.user = {};
     $scope.edittingNames = false;
     $scope.changed = false;
+    $scope.loadingAvatar = false;
+    // Urls.users.myImage;
+
+    $scope.onSuccessItem = function(fileItem, response, status, headers) {
+      // console.log('onSuccessItem: ', arguments);
+
+      UserService.uploadImg({ image: fileItem.url })
+        .$promise
+        .then(function(res) {
+          $scope.user.image = res.image;
+        })
+        .finally(function() {
+          $scope.loadingAvatar = false;
+        });
+    };
+    $scope.onAfterAddingFile = function() {
+      $scope.loadingAvatar = true;
+      console.log('onAfterAddingFile: ', arguments);
+    };
+
+    // $scope.onCompleteItem = function(fileItem, response, status, headers) {
+    //   console.log('onCompleteItem: ', arguments);
+    // };
 
     var getUser = function() {
       UserService

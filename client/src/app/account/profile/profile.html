@@ -3,17 +3,23 @@
   <div class="col-lg-12 col-md-12 col-sm-12">
     <div class="row">
       <div class="col-sm-4 text-center">
+
         <div class="media-photo media-photo-block media-round center-block">
-          <img alt="{{user.firstName}}" class="img-responsive" height="225" src="imgs/user_pic-225x225.png" title="{{user.firstName}}" width="225">
+          <img alt="{{user.firstName}}" class="img-responsive avatar-img" ng-src="{{user.image.url}}" title="{{user.firstName}}" width="225">
         </div>
+        <simple-uploader url="fileUploadUrl"
+          on-success-item="onSuccessItem"
+          on-after-adding-file="onAfterAddingFile">
+        </simple-uploader>
+        <loading class="list-group-item" ng-show="loadingAvatar" balls-count="3"></loading>
+        <!-- <span ng-show="loadingAvatar" class="loader"></span> -->
       </div>
 
       <div class="col-sm-8 col-md-8 col-lg-8">
         <a ui-sref="main.userdetails({id: user._id})"
-          class="btn btn-link pull-right"
-          >
-            <span class="glyphicon glyphicon-user"></span>
-            <span>{{ 'ACCOUNT.PUBLIC_PROFILE' | translate }}</span>
+          class="btn btn-link pull-right">
+          <span class="glyphicon glyphicon-user"></span>
+          <span>{{ 'ACCOUNT.PUBLIC_PROFILE' | translate }}</span>
         </a>
       </div>
 

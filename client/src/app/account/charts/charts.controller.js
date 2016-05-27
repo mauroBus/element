@@ -6,7 +6,7 @@ angular.module('elementBoxApp.account.charts')
   function($scope,   $translate,   ProductsService) {
 
     $scope.chartData = null;
-    $scope.chartType = 'bar';
+    $scope.chartType = 'pie';
 
     var setUpChart = function(locales, data) {
       $scope.chartData = {
