@@ -94,13 +94,17 @@ var Product = new Schema({
     type: Date,
     default: Date.now
   },
-  user: {
-    ref: {
-      type: Schema.ObjectId,
-      ref: 'User'
-    },
-    firstName: String,
-    lastName: String
+  // user: {
+  //   ref: {
+  //     type: Schema.ObjectId,
+  //     ref: 'User'
+  //   },
+  //   firstName: String,
+  //   lastName: String
+  // },
+  owner: {
+    type: Schema.ObjectId,
+    ref: 'User'
   },
   price: {
     type: Number,
@@ -112,14 +116,9 @@ var Product = new Schema({
       required: true,
     },
     user: {
-      ref: {
-        type: Schema.ObjectId,
-        ref: 'User',
-        required: true
-      },
-      displayName: String,
-      firstName: String,
-      lastName: String
+      type: Schema.ObjectId,
+      ref: 'User',
+      required: true
     },
     createdAt: {
       type: Date,
@@ -161,21 +160,22 @@ Product.path('description').validate(function (v) {
 
 Product.methods = {
   addComment: function(currentUser, comment, cb) {
-    var prodUser = this.user,
+    var prodUser = this.owner,
         prodId = this._id,
         prodTitle = this.title;
 
     this.comments.push({
       text: comment,
-      user: {
-        ref: currentUser._id,
-        firstName: currentUser.firstName,
-        lastName: currentUser.lastName,
-        displayName: currentUser.displayName
-      }
+      user: currentUser._id
+      // user: {
+      //   ref: currentUser._id,
+      //   firstName: currentUser.firstName,
+      //   lastName: currentUser.lastName,
+      //   displayName: currentUser.displayName
+      // }
     });
 
-    User.findById(prodUser.ref, function(err, fullProdUser) {
+    User.findById(prodUser, function(err, fullProdUser) {
       if (err || !fullProdUser) {
         return cb('Could not find the product user.');
       }

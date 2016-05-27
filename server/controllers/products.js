@@ -20,13 +20,15 @@ var mongoose = require('mongoose'),
  * Find product by id
  */
 exports.productById = function(req, res, next, id) {
-  Product.findById(id, function(err, product) {
-    if (err) return next(err);
-    // if (!product) return next(new Error('Failed to load product ' + id));
-    if (!product) return res.status(404).json({ message: 'Failed to load product with id: ' + id });
-    req.product = product;
-    next();
-  });
+  Product.findById(id)
+    .populate('owner', '_id displayName firstName lastName image.url')
+    .exec(function(err, product) {
+      if (err) return next(err);
+      // if (!product) return next(new Error('Failed to load product ' + id));
+      if (!product) return res.status(404).json({ message: 'Failed to load product with id: ' + id });
+      req.product = product;
+      next();
+    });
 };
 
 /**
@@ -46,7 +48,7 @@ exports.query = function(req, res) {
     }
   }
   if (req.query.userId) {
-    userFilter['user.ref'] = new ObjectId(req.query.userId);
+    userFilter.owner = new ObjectId(req.query.userId);
   }
 
   CategoryTree
@@ -72,7 +74,7 @@ exports.query = function(req, res) {
  */
 exports.statistics = function(req, res) {
   Product
-    .find({ 'user.ref': req.user._id }, { _id: 1, views: 1, title: 1 })
+    .find({ 'owner': req.user._id }, { _id: 1, views: 1, title: 1 })
     .exec(function(err, result) {
       res.json(result);
     });
@@ -96,11 +98,12 @@ exports.create = function(req, res) {
     description: req.body.description,
     images: [], // empty!
     categories: req.body.categories,
-    user: {
-      ref: req.user._id,
-      firstName: req.user.firstName,
-      lastName: req.user.lastName
-    },
+    // user: {
+    //   ref: req.user._id,
+    //   firstName: req.user.firstName,
+    //   lastName: req.user.lastName
+    // },
+    owner: req.user._id,
     price: req.body.price,
   });
 
@@ -255,8 +258,7 @@ exports.hasAuthorization = function(req, res, next) {
     next();
     return;
   }
-
-  if (req.product.user.ref.toString() !== req.user.id) { // user is not the creator.
+  if (!req.product.owner._id.equals(req.user._id)) { // user is not the creator.
     return res.status(403).send({
       message: 'User is not authorized',
       status: 403
@@ -266,7 +268,7 @@ exports.hasAuthorization = function(req, res, next) {
 };
 
 exports.rate = function(req, res) {
-  if (req.product.user.ref.toString() === req.user.id) { // user is the creator.
+  if (req.product.owner._id.equals(req.user._id)) { // user is the creator.
     return res.status(403).send({
       message: 'User is not authorized to rate its own product',
       status: 403
@@ -282,7 +284,7 @@ exports.rate = function(req, res) {
 };
 
 exports.contact = function(req, res) {
-  if (req.product.user.ref.toString() === req.user.id) { // user is the creator.
+  if (req.product.owner._id.toString() === req.user.id) { // user is the creator.
     return res.status(403).send({
       message: 'User is contacting himself',
       status: 403
@@ -297,7 +299,7 @@ exports.contact = function(req, res) {
   }
 
   Users
-    .findById({ _id: req.product.user.ref })
+    .findById({ _id: req.product.owner._id })
     .exec(function(error, toUser) {
       if (error && !toUser) {
         return res.status(404).send({

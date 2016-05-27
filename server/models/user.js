@@ -43,6 +43,16 @@ var validateUniqueEmail = function(email, respond) {
  * User Schema
  */
 var UserSchema = new Schema({
+  image: {
+    publicId: {
+      type: String
+    },
+    url: {
+      type: String,
+      trim: true,
+      default: 'imgs/user_pic-225x225.png'
+    }
+  },
   firstName: {
     type: String,
     trim: true,

@@ -17,6 +17,10 @@ module.exports = function(app) {
     .get(users.requiresLogin, users.me)
     .put(users.requiresLogin, users.updateMe);
 
+  app.route('/me/image')
+    .post(users.requiresLogin, users.uploadImage)
+    .delete(users.requiresLogin, users.deleteImage);
+
   // app.put('/users', users.update);
   app.get('/users', users.query);
   app.delete('/users/accounts', users.removeOAuthProvider);
@@ -24,7 +28,8 @@ module.exports = function(app) {
   app.route('/users/:userId')
     .put(users.requiresLogin, hasAdminAuthorization, users.update)
     .delete(users.requiresLogin, hasAdminAuthorization, users.delete)
-    .get(users.requiresLogin, users.read);
+    // .get(users.requiresLogin, users.read);
+    .get(users.read);
 
   // Setting up the users password api
   app.post('/users/password', users.changePassword);

@@ -47,7 +47,7 @@ exports.delete = function(req, res) {
 };
 
 // exports.hasDeleteAuthorization = function(req, res, next) {
-//   if (req.comment.user.ref.toString() === req.user._id.toString()) {
+//   if (req.comment.user.toString() === req.user._id.toString()) {
 //     next();
 //   } else {
 //     res.status(401).json({message: 'User not allowed.'});

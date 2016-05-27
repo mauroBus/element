@@ -9,7 +9,8 @@ var _ = require('lodash'),
     passport = require('passport'),
     Response = require('../../utils/response/response'),
     UserAuth = require('./users.authorization'),
-    User = mongoose.model('User');
+    User = mongoose.model('User'),
+    Cloud = require('../../utils/cloud/cloud');
 
 
 var updateUser = function(req, res, user) {
@@ -122,4 +123,36 @@ exports.read = function(req, res) {
   } else {
     return res.status(404).json({ message: 'User not found.', error: 'User not found.' });
   }
+};
+
+
+// var fileUpload = require('../controllers/fileUpload');
+exports.uploadImage = function(req, res) {
+  if (!req.body.image) {
+    res.status(400).json({ error: '"image" attr is required' });
+    return;
+  }
+
+  var cb = function(err, result) {
+    if (err) { res.status(400).json({ error: err }); }
+    else {
+      req.user.image = {
+        publicId: result.images[0].publicId,
+        url: result.images[0].url
+      };
+      req.user.save(function(err) {
+        if (err) { res.status(400).json({ error: err }); }
+        else {
+          res.json({ image: req.user.image });
+        }
+      });
+    }
+  };
+
+  Cloud.uploadImgs([req.body.image], cb, { width: 221, height: 221 });
+
+};
+
+exports.deleteImage = function(req, res) {
+
 };

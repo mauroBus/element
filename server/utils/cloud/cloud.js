@@ -13,21 +13,23 @@ var setupCloudAccount = function(accNbr) {
   return accountNbr;
 };
 
-exports.uploadImgs = function(files, accountNbr, cb) {
+exports.uploadImgs = function(files, accountNbr, cb, options) {
   cb = (typeof accountNbr === 'function') ? accountNbr : cb;
   accountNbr = (typeof accountNbr === 'function') ? undefined : accountNbr;
 
   var filesUploaded = [],
       parallelUploads = [],
-      cloudAcc = setupCloudAccount(accountNbr);
+      cloudAcc = setupCloudAccount(accountNbr),
+      imgDefOpts = _.extend({}, { crop: 'limit', width: 600, height: 400 }, options || {});
 
   _.each(files, function(imgPath) {
     parallelUploads.push(function(callback) {
       var imgFullPath = path.join(process.env.PWD, config.uploadDir, '../', imgPath);
-      cloudinary.uploader.upload(imgFullPath,
-        function(result) { callback(result.error, result); }, {
-          crop: 'limit', width: 600, height: 400
-      }); // cloudinary.
+      cloudinary.uploader.upload(
+        imgFullPath,
+        function(result) { callback(result.error, result); },
+        imgDefOpts
+      ); // cloudinary.
     });
   }); // each.
 

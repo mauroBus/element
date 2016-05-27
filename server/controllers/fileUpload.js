@@ -45,7 +45,7 @@ exports.upload = function(req, res) {
   }); // form.parse
 
   form.on('error', function(err) {
-    res.json(400, errorHandler.getErrorObject(err));
+    res.status(400).json(errorHandler.getErrorObject(err));
   });
 
 };

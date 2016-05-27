@@ -32,7 +32,7 @@ exports.signup = function(req, res) {
     username: req.body.username,
     password: req.body.password,
     provider: 'local',
-    roles: req.body.roles,
+    // roles: req.body.roles,
     updated: new Date(),
     wishList: []
   });
@@ -74,7 +74,7 @@ exports.signup = function(req, res) {
       ], function(err, msg) {
         // if (!err) {
           res.json({
-            user: user,
+            user: req.user ? _.omit(req.user, ['password', 'salt', '__v']) : user,
             sessionId: req.sessionID,
             message: msg
           });

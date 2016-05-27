@@ -1,6 +1,10 @@
 
 var _ = require('lodash'),
-    Response = require('../utils/response/response');
+    Response = require('../utils/response/response'),
+    async = require('async'),
+    mongoose = require('mongoose'),
+    UsersModel = require('../models/user'),
+    Users = mongoose.model('User');
 
 exports.commentById = function(req, res, next, id) {
   var comment = _.findWhere(req.product.comments, { _id: id });
@@ -38,7 +42,7 @@ exports.delete = function(req, res) {
 };
 
 exports.hasDeleteAuthorization = function(req, res, next) {
-  if (req.comment.user.ref.toString() === req.user._id.toString()) {
+  if (req.comment.user.toString() === req.user._id.toString()) {
     next();
   } else {
     res.status(401).json({message: 'User not allowed.'});
@@ -51,7 +55,22 @@ exports.query = function(req, res) {
     from = (pagination.page - 1) * pagination.pageSize,
     comments = product.comments.slice(from, from + pagination.pageSize);
 
-  res
-    .status(200)
-    .json(Response.getSuccessResponse(comments, product.comments.length, pagination.page, pagination.pageSize));
+  async.map(comments, function(item, callback) {
+    // console.log(item);
+    Users.findById({ _id: item.user }, {
+      _id: true,
+      firstName: true,
+      lastName: true,
+      displayName: true,
+      image: true
+    }, function(err, usr) {
+      callback(err, _.extend({}, item.toJSON(), { user: usr.toJSON() }));
+    });
+  },
+  function(err, results) {
+    res
+      .status(200)
+      .json(Response.getSuccessResponse(results, product.comments.length, pagination.page, pagination.pageSize));
+  });
+
 };
