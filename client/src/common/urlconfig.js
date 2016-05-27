@@ -20,6 +20,7 @@ angular.module('elementBoxApp.common')
         users: {
           users: '/users', // to update.
           me: '/me',
+          myImage: '/me/image',
           remove: '/users/accounts', // to delete.
           // Users password api:
           changePass: '/users/password',

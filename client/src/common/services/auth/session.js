@@ -5,7 +5,7 @@ angular.module('elementBoxApp.common')
   var Session = {},
       isActive = false,
       data = { id: null, user: {} },
-      attrs = ['_id', 'firstName', 'lastName', 'username', 'displayName', 'description', 'email', 'roles'];
+      attrs = ['_id', 'firstName', 'lastName', 'username', 'displayName', 'description', 'email', 'roles', 'image'];
 
   Session.create = function(sessionId, user, role) {
     data.id = sessionId;

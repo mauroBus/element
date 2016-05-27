@@ -1,11 +1,11 @@
 <!-- User data: -->
 <section class="comment">
   <div class="col-md-3 text-center">
-    <a ui-sref="main.userdetails({id: comment.user.ref})" class="media-photo media-round text-center user-link">
-      <img alt="" class="lazy" src="imgs/user_pic-68x68.png">
+    <a ui-sref="main.userdetails({id: comment.user._id})" class="media-photo media-round text-center user-link">
+      <img alt="" class="lazy" ng-src="{{comment.user.image.url}}" width="68" height="68">
     </a>
     <div class="name">
-      <a ui-sref="main.userdetails({id: comment.user.ref})" class="text-muted user-link">{{comment.user.displayName || comment.user.firstName}}</a>
+      <a ui-sref="main.userdetails({id: comment.user._id})" class="text-muted user-link">{{comment.user.displayName || comment.user.firstName}}</a>
     </div>
   </div>
   <!-- Comment data: -->

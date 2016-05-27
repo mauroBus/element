@@ -75,6 +75,10 @@ angular.module('elementBoxApp.common')
     queryWishList: {
       url: Urls.users.me + '/wishlist',
       method: 'GET',
+    },
+    uploadImg: {
+      url: Urls.users.myImage,
+      method: 'POST'
     }
   });
 
